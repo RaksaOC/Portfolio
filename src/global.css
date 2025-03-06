@@ -1,0 +1,89 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&family=Keania+One&family=Lexend+Giga:wght@100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+
+/* Universal styles */
+
+:root {
+  /* Fonts */
+  --poppins: "Poppins", sans-serif;
+  --inter: "Inter", sans-serif;
+  
+/* Font Sizes */
+--XXXL: 8rem;  /* 128px */
+--XXL: 6rem;   /* 96px */
+--XL: 4rem;    /* 64px */
+--L: 2.5rem;   /* 40px */
+--M: 1.5rem;   /* 24px */
+--S: 1rem;     /* 16px */
+--XS: 0.875rem;/* 14px */
+
+  
+  /* Spacing */
+  --space-xxl: 4rem;
+  --space-xl: 3rem;
+  --space-l: 2rem;
+  --space-m: 1.5rem;
+  --space-s: 1rem;
+  --space-xs: 0.5rem;
+
+  /* Colors */
+
+  --primary: #3498db; /* Blue */
+  --secondary: #2ecc71; /* Green */
+  --accent: #e74c3c; /* Red */
+  --bg-dark: #0e0e0e; /* Dark */
+  --bg-light: #f5f5f5; /* Light Gray */
+  --light: #ffffff;
+  --gray-dark: #303030;
+  --gray-light: #a0a0a0;
+  --black: #000000;
+
+  /* Border Radius */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 16px;
+
+  /* Shadows */
+  --shadow-sm: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  --shadow-lg: 0px 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  transition: all 0.05s ease;
+  scroll-behavior: smooth;
+}
+
+html, body {
+  font-family: 'Arial', sans-serif;
+  font-size: 16px;
+  z-index: 0;
+}
+
+body{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Make sure the root div takes full viewport height */
+#app {
+  position: relative;
+  max-width: 1200px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+canvas {
+  background-color: #0e0e0e;
+}
+
