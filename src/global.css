@@ -56,6 +56,12 @@
   box-sizing: border-box;
   transition: all 0.05s ease;
   scroll-behavior: smooth;
+  cursor: crosshair;
+}
+
+::selection {
+  color: rgb(0, 0, 0);
+  background: rgb(244, 244, 244);
 }
 
 html, body {
@@ -64,12 +70,21 @@ html, body {
   z-index: 0;
 }
 
+p{
+  cursor: auto;
+}
+
+a{
+  cursor: pointer;
+}
+
 body{
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   min-height: 100vh;
+  /* overflow: hidden; */
 }
 
 /* Make sure the root div takes full viewport height */
@@ -81,9 +96,5 @@ body{
   flex-direction: column;
   justify-content: center;
   align-items: center;
-}
-
-canvas {
-  background-color: #0e0e0e;
 }
 

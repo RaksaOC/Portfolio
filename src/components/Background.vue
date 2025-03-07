@@ -4,7 +4,6 @@
 
 <script setup>
 import * as THREE from 'three'
-import { sinc } from 'three/tsl';
 import { onMounted } from 'vue'
 
 
@@ -126,7 +125,7 @@ onMounted(() => {
 </script>
 
 <style>
-canvas {
+#canvas {
   background: #0e0e0e;
   position: fixed;
   top: 0;

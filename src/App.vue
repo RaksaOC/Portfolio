@@ -1,8 +1,12 @@
 <script setup>
 import Welcome from './pages/Welcome.vue'
 import Background from './components/Background.vue'
-import Hero from './pages/Hero.vue'
 import NavBar from './components/NavBar.vue'
+import Hero from './pages/Hero.vue'
+import About from './pages/About.vue'
+import Skills from './pages/Skills.vue'
+import PlaceHolder from './pages/PlaceHolder.vue'
+
 
 // Slow down scrolling
 import Lenis from 'lenis'
@@ -28,17 +32,21 @@ requestAnimationFrame(raf)
   <NavBar />
   <div class="content">
     <Hero />
+    <About />
+    <Skills />
+    <!-- <PlaceHolder /> -->
+    
   </div>
 </template>
 
 <style scoped>
-  .content{
-    position: relative;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    min-height: 50vh;
-  }
+.content {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  min-height: 50vh;
+}
 </style>

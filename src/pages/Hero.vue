@@ -1,5 +1,5 @@
 <template>
-    <div class="hero">
+    <div class="hero" id="home">
         <p>Hi, I'm Raksa, <br>  <span>computer science</span> student</p>
         <p class="hero-desc">Turning caffeine and code  into  cool, creative solutions!</p>
     </div>
@@ -45,6 +45,12 @@ span{
     }
     .hero-desc{
         font-size: var(--S);
+    }
+}
+
+@media screen and (max-width: 638px) {
+    p{
+        font-size: var(--M);
     }
 }
 </style>

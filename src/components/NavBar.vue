@@ -1,4 +1,3 @@
-<!-- NavBar.vue -->
 <template>
     <ul class="nav-bar" ref="navBar">
         <div class="logo">
@@ -34,7 +33,6 @@
     </ul>
 </template>
 
-
 <script setup>
 import { ref, onMounted } from 'vue';
 const navBar = ref(null);
@@ -54,7 +52,6 @@ onMounted(() => {
         }
     })
 })
-
 </script>
 
 <style scoped>
@@ -74,6 +71,17 @@ onMounted(() => {
     transition: opacity 0.3s ease, transform 0.3s ease;
     transform: translateY(-50px);
     z-index: 100;
+
+    /* Glassmorphism Effect */
+    background: rgba(255, 255, 255, 0.1);
+    /* Light transparent background */
+    backdrop-filter: blur(5px);
+    /* Blurry effect */
+    -webkit-backdrop-filter: blur(5px);
+    /* Safari support */
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    /* Subtle border */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .links-theme {
