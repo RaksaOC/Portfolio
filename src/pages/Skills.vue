@@ -1,6 +1,6 @@
 <template>
     <div class="skills">
-        <SkillsBackground />
+        <Avatar :imagePath="'/image.png'" />
         <div class="skills-content" ref="skillContentRef" id="skills">
             <p class="skill-head">Techstack</p>
             <div class="skill-img-wrapper">
@@ -16,13 +16,15 @@
 <script>
 import SkillsBackground from '../components/SkillsBackground.vue';
 import Skill from '../components/Skill.vue';
+import Avatar from '../components/Avatar.vue';
 import { ref, onMounted } from 'vue';
 
 export default {
     name: "skills",
     components: {
         SkillsBackground,
-        Skill
+        Skill,
+        Avatar
     },
     setup() {
         // Declare skillsMap here
@@ -91,10 +93,11 @@ export default {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    z-index: 1;
 }
 
 .skill-head {
-    font-size: var(--L);
+    font-size: var(--M);
     margin-bottom: 60px;
 }
 
@@ -151,7 +154,7 @@ export default {
     justify-content: center;
 }
 
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1000px) {
     .skills-content {
         width: 90vw;
     }

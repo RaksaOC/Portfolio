@@ -1,6 +1,6 @@
 <template>
     <div class="about">
-        <AboutBackground />
+        <Avatar :imagePath="'/image.png'"/>
         <div class="about-content" id="about">
             <div class="about-me" ref="aboutMeCard">
                 <p class="about-me-head">About Me</p>
@@ -43,11 +43,13 @@
 <script>
 import { ref, onMounted } from 'vue';
 import AboutBackground from '../components/AboutBackground.vue';
+import Avatar from '../components/Avatar.vue';
 
 export default {
     name: 'About',
     components: {
         AboutBackground,
+        Avatar
     },
     setup() {
         const aboutMeCard = ref(null);
@@ -85,10 +87,10 @@ export default {
 
 
 <style scoped>
-
-#about{
+#about {
     scroll-margin-top: 300px;
 }
+
 .about {
     position: relative;
     display: flex;
@@ -109,7 +111,7 @@ export default {
     gap: 20px;
     font-family: var(--poppins);
     color: var(--light);
-    font-size: var(--L);
+    font-size: var(--M);
     /* flex-wrap: wrap; */
 }
 
@@ -189,7 +191,7 @@ export default {
     transition: opacity 500ms;
 }
 
-span{
+span {
     color: var(--gray-light);
 }
 
@@ -204,10 +206,11 @@ span{
     width: 100%;
 }
 
-@media screen and (max-width: 1200px) {
-    /* .about{
-        min-height: 100vh;
-    } */
+@media screen and (max-width: 1000px) {
+    #about {
+        scroll-margin-top: 150px;
+    }
+
     .about-content {
         flex-wrap: wrap;
     }
@@ -220,9 +223,19 @@ span{
     }
 }
 
+
 @media screen and (max-width: 628px) {
-    .about-content{
-        /* top: calc(100vh); */
+
+    .about-me,
+    .hobby,
+    .location {
+        font-size: var(--M);
+    }
+
+    .about-me-desc,
+    .hobby-desc,
+    .location-desc {
+        font-size: var(--XS);
     }
 
 }

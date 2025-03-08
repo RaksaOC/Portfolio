@@ -10,6 +10,9 @@ import PlaceHolder from './pages/PlaceHolder.vue'
 
 // Slow down scrolling
 import Lenis from 'lenis'
+import Projects from './pages/Projects.vue'
+import Contact from './pages/Contact.vue'
+import Footer from './pages/Footer.vue'
 
 const lenis = new Lenis({
   duration: 1.5, // Slows down scroll
@@ -34,8 +37,9 @@ requestAnimationFrame(raf)
     <Hero />
     <About />
     <Skills />
-    <!-- <PlaceHolder /> -->
-    
+    <Projects />
+    <Contact />
+    <Footer />
   </div>
 </template>
 

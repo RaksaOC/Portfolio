@@ -54,11 +54,11 @@ onMounted(() => {
 
         const skillItem = new THREE.Mesh(skillItemGeo, skillItemMat);
         skillItem.position.set(x, y, z);
-        skillItem.scale.x = 2;
-        skillItem.scale.y = 2;
-        skillItem.scale.z = 2;
 
-
+        skillItem.scale.x = 1.5;
+        skillItem.scale.y = 1.5;
+        skillItem.scale.z = 1.5;
+        
         skillItems.push(skillItem);
         scene.add(skillItem);
     }
@@ -75,13 +75,14 @@ onMounted(() => {
     }
     skillItem(0, 0, 0, '/image.png');
     
+    animate();
+
     window.addEventListener('resize', () => {
         camera.aspect = window.innerWidth / window.innerHeight;
         camera.updateProjectionMatrix();
         renderer.setSize(window.innerWidth, window.innerHeight);
     });
 
-    animate();
 
 
 });
