@@ -5,21 +5,11 @@
         </div>
         <div class="links-theme">
             <div class="links">
-                <a href="#home">
-                    <li class="nav-link">Home</li>
-                </a>
-                <a href="#about">
-                    <li class="nav-link">About</li>
-                </a>
-                <a href="#skills">
-                    <li class="nav-link">Skills</li>
-                </a>
-                <a href="#projects">
-                    <li class="nav-link">Projects</li>
-                </a>
-                <a href="#contact">
-                    <li class="nav-link">Contact</li>
-                </a>
+                <a href="#home" class="nav-link">Home</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#skills" class="nav-link">Skills</a>
+                <a href="#projects" class="nav-link">Projects</a>
+                <a href="#contact" class="nav-link">Contact</a>
             </div>
             <div class="theme">
                 <img src="../assets/dark-icon.png" alt="darkTheme">
@@ -102,6 +92,23 @@ onMounted(() => {
     color: var(--light);
     text-decoration: none;
     font-size: var(--S);
+    position: relative;
+}
+
+.links a:before {
+    content: "";
+    position: absolute;
+    bottom: -5px;
+    height: 2px;
+    width: 100%;
+    background: var(--gray-light);
+    border-radius: 50px;
+    transform: scaleX(0);
+    transition: transform 0.2s linear;
+}
+
+.links a:hover::before {
+    transform: scaleX(1);
 }
 
 .theme {
@@ -114,6 +121,7 @@ onMounted(() => {
     color: var(--light);
     font-size: var(--M);
     font-family: var(--poppins);
+    user-select: none;
 }
 
 .theme img {

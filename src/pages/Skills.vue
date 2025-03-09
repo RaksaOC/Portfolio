@@ -1,14 +1,24 @@
 <template>
     <div class="skills">
         <Avatar :imagePath="'/image.png'" />
-        <div class="skills-content" ref="skillContentRef" id="skills">
+        <div class="skills-content" ref="skillContentRef" id="skills" data-aos="zoom-in-up">
             <p class="skill-head">Techstack</p>
             <div class="skill-img-wrapper">
                 <div v-for="(value, key) in skillsMap" :key="key">
                     <Skill :image="value" :name="key" />
                 </div>
             </div>
-
+        </div>
+        <div class="learning" ref="learningRef" data-aos="zoom-out-up">
+            <p class="learning-head">Currently Learning</p>
+            <div class="learning-slide-wrapper">
+                <div class="learning-slide">
+                    <Skill v-for="(value, key) in learnings" :key="key" :image="value" :name="key" />
+                </div>
+                <div class="learning-slide">
+                    <Skill v-for="(value, key) in learnings" :key="key" :image="value" :name="key" />
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -48,14 +58,29 @@ export default {
             "Linux": "/skills-img/linux.png",
             "Figma": "/skills-img/figma.png"
         };
+        const learnings = {
+            "Flutter": "/skills-img/flutter.png",
+            "Kotlin": "/skills-img/kotlin.png",
+            "Dart": "/skills-img/dart.png",
+            "Angular": "/skills-img/angular.png",
+            "Firebase": "/skills-img/firebase.png",
+            "PHP": "skills-img/php.png",
+            "Laravel": "skills-img/laravel.png",
+            "Node.js": "/skills-img/nodejs.png",
+            "Next.js": "/skills-img/nextjs.png",
+            "C#": "/skills-img/csharp.png"
+        };
+
 
         const skillContentRef = ref(null);
+        const learningRef = ref(null);
 
         onMounted(() => {
             const skillContent = skillContentRef.value;
+            const learning = learningRef.value;
 
             // Check if the ref is initialized correctly
-            if (!skillContent) {
+            if (!skillContent || !learning) {
                 console.log("skillContentRef is not found!");
                 return;
             }
@@ -71,12 +96,15 @@ export default {
             };
 
             skillContent.addEventListener("mousemove", handleOnMouseMove);
+            learning.addEventListener("mousemove", handleOnMouseMove);
         });
 
         // Return both skillsMap and skillContentRef so they can be used in the template
         return {
             skillsMap,
-            skillContentRef
+            skillContentRef,
+            learnings,
+            learningRef
         }
     }
 }
@@ -94,6 +122,7 @@ export default {
     justify-content: center;
     align-items: center;
     z-index: 1;
+    gap: 20px;
 }
 
 .skill-head {
@@ -103,31 +132,22 @@ export default {
 
 .skills-content {
     border-radius: 5px;
-    /* Glassmorphism Effect */
     background: rgba(255, 255, 255, 0.1);
-    /* Light transparent background */
     backdrop-filter: blur(5px);
-    /* Blurry effect */
     -webkit-backdrop-filter: blur(5px);
-    /* Safari support */
     border: 1px solid rgba(255, 255, 255, 0.2);
-    /* Subtle border */
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    /* Soft shadow */
     display: flex;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
     padding: 20px;
     width: 100%;
+    scroll-margin-top: 200px;
 }
 
-.skills-content:hover::before {
-    opacity: 1;
-    cursor: crosshair;
-}
-
-.skills-content::before {
+.skills-content::before,
+.learning::before {
     background: radial-gradient(800px circle at var(--mouse-x) var(--mouse-y),
             rgba(255, 255, 255, 0.1),
             transparent 40%);
@@ -144,8 +164,10 @@ export default {
     transition: opacity 500ms;
 }
 
-.skill-item img {
-    width: 150px;
+.skills-content:hover::before,
+.learning:hover::before {
+    opacity: 1;
+    cursor: crosshair;
 }
 
 .skill-img-wrapper {
@@ -154,9 +176,64 @@ export default {
     justify-content: center;
 }
 
+
+
+@keyframes slide {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-100%);
+    }
+}
+
+.learning {
+    overflow: hidden;
+    padding: 20px;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    white-space: nowrap;
+    position: relative;
+    width: 100%;
+}
+
+.learning-head {
+    font-size: var(--M);
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.learning-slide-wrapper {
+    display: flex;
+    width: 200%;
+}
+
+.learning:hover .learning-slide {
+    animation-play-state: paused;
+}
+
+.learning-slide {
+    display: flex;
+    animation: slide 15s linear infinite;
+}
+
+.learning-slide img {
+    width: 100px;
+    margin: 0 20px;
+}
+
 @media screen and (max-width: 1000px) {
     .skills-content {
         width: 90vw;
     }
+    .learning{
+        width: 90vw;
+    }
 }
+
 </style>

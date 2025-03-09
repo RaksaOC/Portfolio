@@ -1,7 +1,7 @@
 <template>
-    <div class="projects">
+    <div class="projects" >
         <Avatar :imagePath="'/my-pic.png'" />
-        <div class="projects-wrapper">
+        <div class="projects-wrapper" id="projects">
             <ProjectCard2 v-for="project in projects" :project="project" :key="project.number" />
         </div>
     </div>
@@ -96,6 +96,7 @@ const projects = [
     align-items: center;
     justify-content: center;
     gap: 20px;
+    scroll-margin-top: 200px;
 }
 
 @media screen and (max-width: 1000px){

@@ -1,15 +1,16 @@
 <template>
-    <footer class="footer">
+    <footer class="footer" data-aos="fade-down">
         <div class="footer-content">
             <div class="footer-left">
                 <span class="logo">ChanRaksa</span>
                 <span class="copyright">© 2023 ChanRaksa. All rights reserved.</span>
             </div>
             <nav class="footer-nav">
-                <router-link to="/">Home</router-link>
-                <router-link to="/about">About</router-link>
-                <router-link to="/services">Services</router-link>
-                <router-link to="/contact">Contact</router-link>
+                <a href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#skills">Skills</a>
+                <a href="#projects">Projects</a>
+                <a href="#contact">Contact</a>
             </nav>
         </div>
     </footer>
@@ -36,7 +37,7 @@ export default {
     align-items: center;
     max-width: 1000px;
     margin: 0 auto;
-    
+
     gap: 20px;
 }
 
@@ -58,7 +59,7 @@ export default {
     color: var(--light);
 }
 
-.footer-nav{
+.footer-nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -67,24 +68,23 @@ export default {
     font-size: var(--S);
 }
 
-.footer-nav router-link {
+.footer-nav a {
     text-decoration: none;
     color: var(--light);
 }
 
 @media screen and (max-width: 1000px) {
-    .footer{
+    .footer {
         width: 90vw;
         text-align: center;
     }
 }
 
 @media screen and (max-width: 638px) {
-    .footer-content{
+    .footer-content {
         flex-wrap: wrap-reverse;
-        justify-content: center;        
+        justify-content: center;
         gap: 50px;
     }
 }
-
 </style>

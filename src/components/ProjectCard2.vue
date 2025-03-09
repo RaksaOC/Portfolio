@@ -1,5 +1,5 @@
 <template>
-    <div class="project-card" ref="cardRef">
+    <div class="project-card" ref="cardRef" data-aos="zoom-in-down">
         <div class="top">
             <div class="text-wrapper">
                 <div class="num" ref="numRef">
@@ -86,11 +86,13 @@ onMounted(() => {
     // Show image on hover
     const showImage = () => {
         projectImage.style.opacity = "0.7";
+        projectImage.style.transform = "translateY(-5px)";
         projectImage.style.visibility = "visible";;
     };
 
     const hideImage = () => {
         projectImage.style.opacity = "0";
+        projectImage.style.transform = "translateY(10px)";
         projectImage.style.visibility = "hidden";
     };
 
@@ -239,11 +241,11 @@ onMounted(() => {
     visibility: hidden;
     transition: all 0.3s ease-in-out;
     border-radius: 10px;
+    transform: translateY(10px);
 }
 
 .project-image:hover {
     opacity: 1;
-    transform: scale(1.05);
 }
 
 .num {

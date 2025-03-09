@@ -1,8 +1,8 @@
 <template>
     <div class="contact">
         <Avatar :imagePath="'/image.png'" />
-        <div class="form-social">
-            <div class="form" ref="formRef" id="form">
+        <div class="form-social" id="contact" >
+            <div class="form" ref="formRef" id="form" data-aos="fade-right">
                 <div class="email">
                     <p class="email-label">Email</p>
                     <input type="email" name="" id="">
@@ -27,12 +27,12 @@
                     </button>
                 </div>
             </div>
-            <div class="social" ref="socialRef">
+            <div class="social" ref="socialRef" data-aos="fade-left">
                 <a href=""><img src="/github.png" alt="social-pic"></a>
-                <a href=""><img src="/youtube.png" alt="social-pic"></a>
+                <a href=""><img src="/linkedin.png" alt="social-pic"></a>
                 <a href=""><img src="/facebook.png" alt="social-pic"></a>
                 <a href=""><img src="/instagram.png" alt="social-pic"></a>
-                <a href=""><img src="/x.png" alt="social-pic"></a>
+                <a href=""><img src="/youtube.png" alt="social-pic"></a>
                 <a href=""><img src="/telegram.png" alt="social-pic"></a>
                 <!-- <a href=""><img src="/facebook.png" alt="social-pic"></a>
                 <a href=""><img src="/instagram.png" alt="social-pic"></a>
@@ -73,13 +73,15 @@ export default {
     setup() {
 
         const formRef = ref(null);
+        const socialRef = ref(null);
 
         onMounted(() => {
-            const skillContent = formRef.value;
+            const form = formRef.value;
+            const social = socialRef.value;
 
             // Check if the ref is initialized correctly
-            if (!skillContent) {
-                console.log("skillContentRef is not found!");
+            if (!form || !social) {
+                console.log("Ref is not found!");
                 return;
             }
 
@@ -93,12 +95,14 @@ export default {
                 target.style.setProperty("--mouse-y", `${y}px`);
             };
 
-            skillContent.addEventListener("mousemove", handleOnMouseMove);
+            form.addEventListener("mousemove", handleOnMouseMove);
+            social.addEventListener("mousemove", handleOnMouseMove);
         });
 
         // Return both skillsMap and skillContentRef so they can be used in the template
         return {
-            formRef
+            formRef,
+            socialRef
         }
     }
 }
@@ -124,6 +128,7 @@ export default {
     justify-content: space-between;
     gap: 20px;
     width: 100%;
+    scroll-margin-top: 460px;
 }
 
 .form {
@@ -146,6 +151,30 @@ export default {
     /* Subtle border */
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     /* Soft shadow */
+}
+
+.form::before,
+.social::before {
+    background: radial-gradient(800px circle at var(--mouse-x) var(--mouse-y),
+            rgba(255, 255, 255, 0.1),
+            transparent 40%);
+    content: "";
+    height: 100%;
+    width: 100%;
+    border-radius: inherit;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 500ms;
+}
+
+.form:hover::before,
+.social::before {
+    opacity: 1;
+    cursor: crosshair;
 }
 
 .email,
@@ -364,7 +393,7 @@ export default {
         justify-content: center;
     }
 
-    .form{
+    .form {
         width: 100%;
     }
 

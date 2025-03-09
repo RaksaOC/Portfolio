@@ -1,38 +1,62 @@
 <template>
     <div class="about">
-        <Avatar :imagePath="'/image.png'"/>
+        <Avatar :imagePath="'/image.png'" />
         <div class="about-content" id="about">
-            <div class="about-me" ref="aboutMeCard">
+            <div class="about-me" ref="aboutMeCard" data-aos="fade-right">
                 <p class="about-me-head">About Me</p>
                 <br>
                 <div class="about-me-desc">
-                    <p><span>1</span> Hey there! 👋 I’m a tech enthusiast and creative thinker who loves building cool
-                        stuff. 💻</p>
-                    <p><span>2</span> Always learning, always experimenting—whether it's coding, design, or something
-                        new. 🤖</p>
-                    <p><span>3</span> When I’m not at my desk, I’m probably lost in a sci-fi movie 🎬 or planning my
-                        next trip 🌍.</p>
+                    <p><span>1</span> Hey there! 👋 I’m a problem-solver and tech enthusiast who loves turning ideas
+                        into reality. 💻</p>
+                    <p><span>2</span> Learning, building, and growing from Phnom Penh, Cambodia 🇰🇭, always seeking new
+                        challenges. </p>
+                    <p><span>3</span> Passionate about full-stack development, algorithms, and creating
+                        scalable systems. ⚙️</p>
+                    <p><span>4</span> Driven by curiosity, continuous learning, and a love for impactful technology.
+                        Let’s build something amazing! ⚡</p>
                 </div>
+
             </div>
 
-            <div class="hobby-location">
-                <div class="hobby" ref="hobbyCard">
+            <div class="hobby-accolades">
+                <div class="hobby" ref="hobbyCard" data-aos="fade-left">
                     <p class="hobby-head">Hobbies</p>
                     <br>
                     <div class="hobby-desc">
-                        <p><span>1</span> Coding, of course! 🖥️</p>
-                        <p><span>2</span> Photography—capturing moments, one shot at a time 📸.</p>
-                        <p><span>3</span> Hiking in nature 🌲 and getting lost in new places 🗺️.</p>
-                        <p><span>4</span> Gaming 🎮—because why not, right?</p>
+                        <p><span>1</span> Coding—where creativity meets logic. 💻</p>
+                        <p><span>2</span> Riding motorcycles—nothing beats the thrill of the open road. 🏍️</p>
+                        <p><span>3</span> Gaming—competitive, strategic, and just fun. 🎮</p>
+                        <p><span>4</span> Sports—staying active and pushing limits. ⚽</p>
                     </div>
+
+
                 </div>
-                <div class="location" ref="locationCard">
-                    <p class="location-head">Where Am I?</p>
+
+                <!-- <div class="accolades" ref="accoladesCard">
+                    <p class="accolades-head">Achievements</p>
                     <br>
-                    <div class="location-desc">
+                    <div class="accolades-desc">
                         <p><span>1</span> Based in the heart of the city 🌆.</p>
                         <p><span>2</span> Always exploring new spots around the world 🌍.</p>
                         <p><span>3</span> Currently, you can find me coding away in my cozy home office 🏠💻.</p>
+                    </div>
+                </div> -->
+                <div class="accolades" ref="accoladesCard" data-aos="fade-up">
+                    <p class="accolades-head">Accolades</p>
+                    <br>
+                    <div class="accolades-desc">
+                        <div class="commits">
+                            <p class="commits-head">Commits</p>
+                            <p class="commits-num">180+</p>
+                        </div>
+                        <div class="projects">
+                            <p class="projects-head">Projects</p>
+                            <p class="projects-num">5+</p>
+                        </div>
+                        <div class="pr-merged">
+                            <p class="pr-head">Code Lines</p>
+                            <p class="pr-num">20K+</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -54,10 +78,10 @@ export default {
     setup() {
         const aboutMeCard = ref(null);
         const hobbyCard = ref(null);
-        const locationCard = ref(null);
+        const accoladesCard = ref(null);
 
         onMounted(() => {
-            const cards = [aboutMeCard.value, hobbyCard.value, locationCard.value];
+            const cards = [aboutMeCard.value, hobbyCard.value, accoladesCard.value];
 
             const handleOnMouseMove = (e) => {
                 const { currentTarget: target } = e;
@@ -79,7 +103,7 @@ export default {
         return {
             aboutMeCard,
             hobbyCard,
-            locationCard,
+            accoladesCard,
         };
     }
 };
@@ -88,7 +112,7 @@ export default {
 
 <style scoped>
 #about {
-    scroll-margin-top: 300px;
+    scroll-margin-top: 420px;
 }
 
 .about {
@@ -121,7 +145,7 @@ export default {
     justify-content: start;
 }
 
-.hobby-location {
+.hobby-accolades {
     width: 50%;
     display: flex;
     justify-content: space-between;
@@ -136,14 +160,14 @@ export default {
     height: 50%;
 }
 
-.location {
+.accolades {
     width: 100%;
     height: 50%;
 }
 
 .about-me,
 .hobby,
-.location {
+.accolades {
     border-radius: 5px;
     /* Glassmorphism Effect */
     background: rgba(255, 255, 255, 0.1);
@@ -166,7 +190,7 @@ export default {
 
 .about-me:hover::before,
 .hobby:hover::before,
-.location:hover::before {
+.accolades:hover::before {
     opacity: 1;
     cursor: crosshair;
 }
@@ -174,7 +198,7 @@ export default {
 
 .about-me::before,
 .hobby::before,
-.location::before {
+.accolades::before {
     background: radial-gradient(800px circle at var(--mouse-x) var(--mouse-y),
             rgba(255, 255, 255, 0.1),
             transparent 40%);
@@ -196,14 +220,48 @@ span {
 }
 
 .about-me-desc,
-.hobby-desc,
-.location-desc {
+.hobby-desc {
     display: flex;
     flex-direction: column;
     gap: 20px;
     font-size: var(--S);
     padding: 10px;
     width: 100%;
+}
+
+.accolades {
+    width: 100%;
+}
+
+.accolades-desc {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.accolades-desc div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 33%;
+    padding: 5px;
+    gap: 10px;
+}
+
+.commits {
+    border-right: 2px solid var(--gray-light) !important;
+}
+
+.pr-merged {
+    border-left: 2px solid var(--gray-light) !important;
+}
+
+.commits-head,
+.projects-head,
+.pr-head {
+    font-size: var(--S);
 }
 
 @media screen and (max-width: 1000px) {
@@ -217,8 +275,8 @@ span {
 
     .about-me,
     .hobby,
-    .location,
-    .hobby-location {
+    .accolades,
+    .hobby-accolades {
         width: 90vw;
     }
 }
@@ -228,14 +286,18 @@ span {
 
     .about-me,
     .hobby,
-    .location {
+    .accolades {
         font-size: var(--M);
     }
 
     .about-me-desc,
     .hobby-desc,
-    .location-desc {
+    .accolades-desc {
         font-size: var(--XS);
+    }
+
+    .pr-head {
+        text-align: center;
     }
 
 }
