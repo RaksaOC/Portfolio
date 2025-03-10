@@ -37,7 +37,7 @@
                         alt="social-pic"></a>
                 <a href="https://www.youtube.com/@raksa7276" target="_blank"><img src="/youtube.png"
                         alt="social-pic"></a>
-                <a href="https://t.me/ORY Chanraksa" target="_blank"><img src="/telegram.png" alt="social-pic"></a>
+                <a href="https://t.me/chanraksaOry" target="_blank"><img src="/telegram.png" alt="social-pic"></a>
 
             </div>
         </div>
