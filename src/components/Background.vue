@@ -135,6 +135,7 @@ onMounted(() => {
   z-index: -1;
   animation: fade-background 0.2s ease forwards;
   opacity: 0;
+  overflow: hidden;
 }
 
 @keyframes fade-background {

@@ -52,5 +52,6 @@ requestAnimationFrame(raf)
   align-items: center;
   flex-direction: column;
   min-height: 50vh;
+  overflow: hidden;
 }
 </style>
