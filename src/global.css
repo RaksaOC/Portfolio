@@ -84,11 +84,10 @@ body{
   align-items: center;
   flex-direction: column;
   min-height: 100vh;
-  /* overflow: hidden; */
+  overflow-x: hidden;
 }
 
 #app {
-  padding: 5px;
   position: relative;
   max-width: 1000px;
   height: 100%;
@@ -96,6 +95,6 @@ body{
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  overflow: hidden;
+  overflow-x: hidden;
 }
 
