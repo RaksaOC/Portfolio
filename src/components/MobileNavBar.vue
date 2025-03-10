@@ -17,23 +17,33 @@
                 </p>
                 <img src="/close.png" alt="" ref="closeRef">
             </div>
-            <ul class="nav-links">
-                <a href="#home" @click="hideContent">
-                    <li>Home</li>
-                </a>
-                <a href="#about" @click="hideContent">
-                    <li>About</li>
-                </a>
-                <a href="#skills" @click="hideContent">
-                    <li>Skills</li>
-                </a>
-                <a href="#projects" @click="hideContent">
-                    <li>Projects</li>
-                </a>
-                <a href="#contact" @click="hideContent">
-                    <li>Contact</li>
-                </a>
-            </ul>
+            <div class="nav-links-wrapper">
+                <ul class="nav-links">
+                    <a href="#home" @click="hideContent">
+                        <li>Home</li>
+                    </a>
+                    <a href="#about" @click="hideContent">
+                        <li>About</li>
+                    </a>
+                    <a href="#skills" @click="hideContent">
+                        <li>Skills</li>
+                    </a>
+                    <a href="#projects" @click="hideContent">
+                        <li>Projects</li>
+                    </a>
+                    <a href="#contact" @click="hideContent">
+                        <li>Contact</li>
+                    </a>
+                    <div class="theme">
+                        <img src="../assets/dark-icon.png" alt="darkTheme">
+                        <div class="switch">
+                            <input type="checkbox" id="checkboxInput" @click="toggleTheme">
+                            <span class="toggleSwitch"></span>
+                        </div>
+                        <img src="../assets/light-icon.png" alt="lightTheme">
+                    </div>
+                </ul>
+            </div>
         </div>
     </div>
 </template>
@@ -49,6 +59,23 @@ const contentRef = ref(null);
 const hideContent = () => {
     barRef.value.style.display = "flex";
     contentRef.value.style.display = "none";
+};
+
+const theme = ref(localStorage.getItem("theme") || "dark");  // Default to dark if no saved theme
+
+// Function to toggle between light and dark
+const isLight = ref(true);
+const toggleTheme = () => {
+    isLight.value = !isLight.value;
+    if (isLight.value) {
+        theme.value = "dark";
+    }
+    else {
+        theme.value = "light";
+    }
+    document.documentElement.setAttribute("data-theme", theme.value);  // Update the theme on the root element
+    localStorage.setItem("theme", theme.value);  // Save the selected theme
+    console.log("theme switched to:", theme.value);
 };
 
 
@@ -144,29 +171,98 @@ onMounted(() => {
     left: 0;
     width: 100vw;
     height: 100vh;
-    background: rgba(16, 16, 16, 0.96);
+    background: rgba(16, 16, 16, 0.6);
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(100px);
     padding: 20px;
     display: none;
     flex-direction: column;
+    justify-content: space-between;
     z-index: 60;
 }
 
+.nav-links-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+}
+
 .nav-links {
-    margin-top: 80%;
-    padding-left: 20px;
-    list-style: none;
     display: flex;
     flex-direction: column;
     gap: 20px;
+    padding-left: 20px;
+    list-style: none;
     font-family: var(--poppins);
     font-size: var(--M);
 }
 
 .nav-links a {
-    color: var(--light);
+    color: var(--light) !important;
     text-decoration: none;
 
+}
+
+.theme{
+    display: flex;
+    justify-content: space-between;
+    max-width: 20%;
+    gap: 10px;
+}
+
+.theme img{
+    width: 30px;
+}
+
+.switch {
+    position: relative;
+}
+
+#checkboxInput {
+    opacity: 0;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    z-index: 100;
+}
+
+.toggleSwitch {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 50px;
+    height: 30px;
+    background-color: rgb(82, 82, 82);
+    border-radius: 20px;
+    cursor: pointer;
+    transition-duration: .2s;
+}
+
+.toggleSwitch::after {
+    content: "";
+    position: absolute;
+    height: 10px;
+    width: 10px;
+    left: 5px;
+    background-color: transparent;
+    border-radius: 50%;
+    transition-duration: .2s;
+    box-shadow: 5px 2px 7px rgba(123, 123, 123, 0.26);
+    border: 5px solid var(--dark);
+}
+
+#checkboxInput:checked+.toggleSwitch::after {
+    transform: translateX(100%);
+    transition-duration: .2s;
+    background-color: var(--light);
+}
+
+/* Switch background change */
+#checkboxInput:checked+.toggleSwitch {
+    background-color: var(--light);
+    transition-duration: .2s;
 }
 </style>

@@ -4,8 +4,27 @@
 
 <script setup>
 import * as THREE from 'three'
-import { onMounted } from 'vue'
+import { ref, onMounted } from 'vue'
 
+const theme = ref(localStorage.getItem("theme") || "dark");
+// function updateThemeColors(theme, arr) {
+//   // Loop through all objects and change their material based on the theme
+//   arr.forEach(({s, c}) => {
+//     if (object.material) {
+//       if (theme === "dark") {
+//         s.material.color.set(0xf9f1f1); // Light color for dark theme
+//         s.material.opacity = 0.1;
+//         c.material.color.set(0xf9f1f1); // Light color for dark theme
+//         c.material.opacity = 0.1;
+//       } else {
+//         s.material.color.set(0x000000); // Dark color for light theme
+//         s.material.opacity = 0.1;
+//         c.material.color.set(0x000000); // Dark color for light theme
+//         c.material.opacity = 0.1;
+//       }
+//     }
+//   });
+// }
 
 onMounted(() => {
   // Setup ------------------------------------------------------------------------------------------------
@@ -57,13 +76,30 @@ onMounted(() => {
     let sphereSize = sizeFactor / 2; // Keep the sphere proportional
 
     const cubeGeo = new THREE.BoxGeometry(sizeFactor, sizeFactor, sizeFactor);
-    const cubeMat = new THREE.MeshBasicMaterial({ color: 0xf9f1f1, wireframe: true, transparent: true, opacity: 0.1 });
+
+    let cubeMat;
+
+    if (theme.value === "dark") {
+      cubeMat = new THREE.MeshBasicMaterial({ color: 0xf9f1f1, wireframe: true, transparent: true, opacity: 0.1 });
+    }
+    else {
+      cubeMat = new THREE.MeshBasicMaterial({ color: 0x000000, wireframe: true, transparent: true, opacity: 0.1 });
+    }
+
     const cube = new THREE.Mesh(cubeGeo, cubeMat);
     cube.position.set(x, y, z);
     scene.add(cube);
 
     const sphereGeo = new THREE.SphereGeometry(sphereSize);
-    const sphereMat = new THREE.MeshBasicMaterial({ color: 0xf9f1f1, wireframe: true, transparent: true, opacity: 0.1 });
+
+    let sphereMat;
+
+    if (theme.value === "dark") {
+      sphereMat = new THREE.MeshBasicMaterial({ color: 0xf9f1f1, wireframe: true, transparent: true, opacity: 0.1 });
+    }
+    else {
+      sphereMat = new THREE.MeshBasicMaterial({ color: 0x000000, wireframe: true, transparent: true, opacity: 0.1 });
+    }
     const sphere = new THREE.Mesh(sphereGeo, sphereMat);
     sphere.position.set(x, y, z);
     scene.add(sphere);
@@ -90,8 +126,8 @@ onMounted(() => {
   // Camera move back on scroll -------------------------------------------------------------------------------
   window.addEventListener("scroll", () => {
     let scrollPosition = window.scrollY;
-    if(scrollPosition < 300){
-      camera.position.z =  5  + scrollPosition * 0.09;  // Example adjustment based on scroll
+    if (scrollPosition < 300) {
+      camera.position.z = 5 + scrollPosition * 0.09;  // Example adjustment based on scroll
     }
     // else{
     //   // camera.position.y =  -1 * (scrollPosition * 0.05);  // Example adjustment based on scroll
@@ -117,16 +153,14 @@ onMounted(() => {
   sphereInCube(-40, 25, 0);
   // sphereInCube(-75, -5, 20);
 
-  // About
-
-  // ....
+  // updateThemeColors(theme.value, sphereInCubes);
 })
 
 </script>
 
 <style>
 #canvas {
-  background: #0e0e0e;
+  background: var(--dark);
   position: fixed;
   top: 0;
   left: 0;

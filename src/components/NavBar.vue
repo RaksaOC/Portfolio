@@ -14,24 +14,42 @@
             <div class="theme">
                 <img src="../assets/dark-icon.png" alt="darkTheme">
                 <div class="switch">
-                    <input type="checkbox" id="checkboxInput">
-                    <label for="checkboxInput" class="toggleSwitch"></label>
+                    <input type="checkbox" id="checkboxInput" @click="toggleTheme">
+                    <span class="toggleSwitch"></span>
                 </div>
                 <img src="../assets/light-icon.png" alt="lightTheme">
             </div>
         </div>
     </ul>
-    <MobileNavBar class="mobile-nav"/>
+    <MobileNavBar class="mobile-nav" />
 </template>
+
 
 <script setup>
 import { ref, onMounted } from 'vue';
 import MobileNavBar from './MobileNavBar.vue';
 
 const navBar = ref(null);
+const theme = ref(localStorage.getItem("theme") || "dark");  // Default to dark if no saved theme
+
+// Function to toggle between light and dark
+const isLight = ref(true);
+const toggleTheme = () => {
+    isLight.value = !isLight.value;
+    if (isLight.value) {
+        theme.value = "dark";
+    }
+    else {
+        theme.value = "light";
+    }
+    document.documentElement.setAttribute("data-theme", theme.value);  // Update the theme on the root element
+    localStorage.setItem("theme", theme.value);  // Save the selected theme
+    console.log("theme switched to:", theme.value);
+};
 
 onMounted(() => {
-
+    // Ensure the theme is set correctly on page load
+    document.documentElement.setAttribute("data-theme", theme.value);  // Apply saved theme from localStorage
     window.addEventListener("scroll", () => {
         const scrollY = window.scrollY;
         const welcomePageHeight = 200;
@@ -50,6 +68,8 @@ onMounted(() => {
     });
 });
 </script>
+
+
 
 
 <style scoped>
@@ -138,8 +158,17 @@ onMounted(() => {
 
 /* From Uiverse.io by vinodjangid07 */
 /* To hide the checkbox */
+.switch {
+    position: relative;
+}
+
 #checkboxInput {
-    display: none;
+    opacity: 0;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    z-index: 100;
 }
 
 .toggleSwitch {
@@ -164,8 +193,8 @@ onMounted(() => {
     background-color: transparent;
     border-radius: 50%;
     transition-duration: .2s;
-    box-shadow: 5px 2px 7px rgba(8, 8, 8, 0.26);
-    border: 5px solid rgb(0, 0, 0);
+    box-shadow: 5px 2px 7px rgba(123, 123, 123, 0.26);
+    border: 5px solid var(--dark);
 }
 
 #checkboxInput:checked+.toggleSwitch::after {

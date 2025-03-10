@@ -31,11 +31,11 @@ defineProps({
 }
 
 .name-wrapper {
-  background-color: rgba(0, 0, 0, 0);
+  background-color: transparent;
   position: relative;
   font-size: var(--XXXL);
   font-family: var(--poppins);
-  color: white;
+  color: var(--light);
   user-select: none;
   opacity: 1; /* Ensure it's visible */
   padding: 20px;

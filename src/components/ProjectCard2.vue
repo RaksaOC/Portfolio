@@ -157,7 +157,7 @@ onMounted(() => {
     width: 100%;
     min-height: 20%;
     font-family: var(--poppins);
-    color: white;
+    color: var(--light);
     transition: all 0.5s;
     position: relative;
     gap: 20px;

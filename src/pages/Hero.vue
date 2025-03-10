@@ -36,7 +36,7 @@
 <style scoped>
 .hero {
     position: relative;
-    color: white;
+    color: var(--light);
     display: flex;
     flex-direction: column;
     justify-content: center;
