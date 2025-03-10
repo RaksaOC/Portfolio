@@ -1,5 +1,5 @@
 <template>
-    <div class="project-card" ref="cardRef" data-aos="zoom-in-down">
+    <div class="project-card" ref="cardRef" data-aos="zoom-in-down" data-aos-offset="0">
         <div class="top">
             <div class="text-wrapper">
                 <div class="num" ref="numRef">
@@ -16,7 +16,7 @@
             </div>
             <div class="project-img-year ">
                 <div class="project-img-link">
-                    <img :src="project.image" alt="" ref="projectImageRef" class="project-image">
+                    <img :src="project.mainImage" alt="" ref="projectImageRef" class="project-image">
                 </div>
                 <p class="year">{{ project.year }}</p>
             </div>
@@ -25,12 +25,41 @@
             <img src="/arrow-down.png" alt="see more arrow">
         </div>
         <div class="bottom" ref="bottomRef">
+            <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active" data-bs-interval="2000">
+                        <img :src="project.image[0]" class="d-block w-100" alt="...">
+                    </div>
+                    <div class="carousel-item" data-bs-interval="2000">
+                        <img :src="project.image[1]" class="d-block w-100" alt="...">
+                    </div>
+                    <div class="carousel-item" data-bs-interval="2000">
+                        <img :src="project.image[2]" class=" d-block w-100" alt="...">
+                    </div>
+                    <div class="carousel-item" data-bs-interval="2000">
+                        <img :src="project.image[3]" class="d-block w-100" alt="...">
+                    </div>
+                    <div class="carousel-item" data-bs-interval="2000">
+                        <img :src="project.image[4]" class="d-block w-100" alt="...">
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval"
+                    data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true" @click="notifyClick"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval"
+                    data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true" @click="notifyClick"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
             <div class="description">
                 <p>{{ project.description }}</p>
             </div>
             <div class="project-links" ref="projectLinksRef">
                 <a :href="project.githubLink">
-                <img src="/github.png" alt="">
+                    <img src="/github.png" alt="">
                     GitHub
                 </a>
                 <a :href="project.ytLink">
@@ -55,6 +84,9 @@ const projectLinksRef = ref(null);
 const projectImageRef = ref(null);
 const arrowRef = ref(null);
 const bottomRef = ref(null);
+const notifyClick = () => {
+    console.log("is pressed");
+}
 
 const isExtraVisible = ref(true);
 
@@ -97,15 +129,20 @@ onMounted(() => {
     };
 
     const showNum = () => {
-        num.style.transform = "translateX(0)";  // Reset to original position
-        desc.style.transform = "translateX(0)"
-        num.classList.remove('hidden');
+        if (window.innerWidth > 638) {
+            num.style.transform = "translateX(0)";  // Reset to original position
+            desc.style.transform = "translateX(0)"
+            num.classList.remove('hidden');
+        }
     };
 
     const hideNum = () => {
-        num.style.transform = "translateX(-100%)";  // Move it out to the left
-        desc.style.transform = "translateX(calc(-15%))"
-        num.classList.add('hidden');
+        if (window.innerWidth > 638) {
+            num.style.transform = "translateX(-100%)";  // Move it out to the left
+            desc.style.transform = "translateX(calc(-12%))"
+            num.classList.add('hidden');
+        }
+
     };
 
     // Toggle description
@@ -135,7 +172,9 @@ onMounted(() => {
     })
 
     card.addEventListener("mouseleave", () => {
-        arrow.style.opacity = "0"
+        if (isExtraVisible.value) {
+            arrow.style.opacity = "0"
+        }
     })
 });
 </script>
@@ -222,6 +261,10 @@ onMounted(() => {
     transition: all 0.3s ease-in-out;
 }
 
+.stack-item p {
+    margin: 0;
+}
+
 .stack-item:hover {
     background: rgba(255, 255, 255, 0.05);
 }
@@ -260,7 +303,7 @@ onMounted(() => {
 }
 
 .num p {
-    margin-top: 3px;
+    margin-bottom: 9px;
     color: var(--gray-light);
     font-size: var(--S);
     visibility: visible;
@@ -314,6 +357,7 @@ onMounted(() => {
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
+    width: 100%;
 }
 
 .bottom {
@@ -351,5 +395,94 @@ onMounted(() => {
 
 .bottom p {
     text-align: center;
+}
+
+.carousel {
+    width: 300px;
+    overflow-x: hidden;
+}
+
+.carousel-item img {
+    width: 300px !important;
+    aspect-ratio: 16/9;
+}
+
+.carousel-control-prev-icon {
+    margin-right: 50%;
+}
+
+.carousel-control-next-icon {
+    margin-left: 50%;
+}
+
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    display: none;
+    filter: invert();
+    cursor: pointer;
+}
+
+@media screen and (max-width: 1000px) {
+
+    .text-wrapper {
+        max-width: 60%;
+    }
+
+    .project-img-link img {
+        display: none;
+    }
+
+    .arrow {
+        opacity: 1 !important;
+    }
+
+    .project-links {
+        width: 100%;
+        justify-content: center;
+        gap: 20px;
+    }
+
+    /* .num {
+        opacity: 0;
+    } */
+}
+
+@media screen and (max-width: 638px) {
+    .top {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .bottom {
+        max-width: 100%;
+    }
+
+    .text-wrapper {
+
+        max-width: 80%;
+        gap: 0;
+    }
+
+    .desc {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .num {
+        display: none;
+    }
+
+    .title {
+        text-align: center;
+    }
+
+    .project-img-year {
+        gap: 0;
+    }
 }
 </style>

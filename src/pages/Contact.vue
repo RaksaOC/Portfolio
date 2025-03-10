@@ -1,7 +1,7 @@
 <template>
     <div class="contact">
         <Avatar :imagePath="'/contact.png'" />
-        <div class="form-social" id="contact" >
+        <div class="form-social" id="contact">
             <div class="form" ref="formRef" id="form" data-aos="fade-right">
                 <div class="email">
                     <p class="email-label">Email</p>
@@ -28,16 +28,17 @@
                 </div>
             </div>
             <div class="social" ref="socialRef" data-aos="fade-left">
-                <a href=""><img src="/github.png" alt="social-pic"></a>
-                <a href=""><img src="/linkedin.png" alt="social-pic"></a>
-                <a href=""><img src="/facebook.png" alt="social-pic"></a>
-                <a href=""><img src="/instagram.png" alt="social-pic"></a>
-                <a href=""><img src="/youtube.png" alt="social-pic"></a>
-                <a href=""><img src="/telegram.png" alt="social-pic"></a>
-                <!-- <a href=""><img src="/facebook.png" alt="social-pic"></a>
-                <a href=""><img src="/instagram.png" alt="social-pic"></a>
-                <a href=""><img src="/yt.png" alt="social-pic"></a>
-                <a href=""><img src="/telegram.png" alt="social-pic"></a> -->
+                <a href="https://github.com/RaksaOC" target="_blank"><img src="/github.png" alt="social-pic"></a>
+                <a href="https://www.linkedin.com/in/ory-chanraksa-1702b6263/" target="_blank"><img src="/linkedin.png"
+                        alt="social-pic"></a>
+                <a href="https://www.facebook.com/ory.chanraksa/" target="_blank"><img src="/facebook.png"
+                        alt="social-pic"></a>
+                <a href="https://www.instagram.com/_chan_raksa/?__pwa=1" target="_blank"><img src="/instagram.png"
+                        alt="social-pic"></a>
+                <a href="https://www.youtube.com/@raksa7276" target="_blank"><img src="/youtube.png"
+                        alt="social-pic"></a>
+                <a href="https://t.me/ORY Chanraksa" target="_blank"><img src="/telegram.png" alt="social-pic"></a>
+
             </div>
         </div>
         <div class="download-cv" ref="cvRef">
@@ -402,8 +403,9 @@ export default {
         width: 100%;
     }
 }
-@media screen and (max-width: 638px){
-    .form-social{
+
+@media screen and (max-width: 638px) {
+    .form-social {
         scroll-margin-top: 120px;
     }
 }
