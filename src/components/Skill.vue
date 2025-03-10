@@ -48,8 +48,8 @@ p {
 
 @media screen and (max-width: 638px){
     img{
-        width: 80px;
-        height: 80px;
+        width: 60px;
+        height: 60px;
     }
 }
 </style>

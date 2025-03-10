@@ -1,6 +1,6 @@
 <template>
     <div class="contact">
-        <Avatar :imagePath="'/image.png'" />
+        <Avatar :imagePath="'/contact.png'" />
         <div class="form-social" id="contact" >
             <div class="form" ref="formRef" id="form" data-aos="fade-right">
                 <div class="email">
@@ -400,6 +400,11 @@ export default {
     .social {
         flex-direction: row;
         width: 100%;
+    }
+}
+@media screen and (max-width: 638px){
+    .form-social{
+        scroll-margin-top: 120px;
     }
 }
 </style>

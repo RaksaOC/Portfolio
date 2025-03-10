@@ -1,6 +1,6 @@
 <template>
     <div class="skills">
-        <Avatar :imagePath="'/image.png'" />
+        <Avatar :imagePath="'/skills5.png'" />
         <div class="skills-content" ref="skillContentRef" id="skills" data-aos="zoom-in-up">
             <p class="skill-head">Techstack</p>
             <div class="skill-img-wrapper">
@@ -231,9 +231,19 @@ export default {
     .skills-content {
         width: 90vw;
     }
-    .learning{
+
+    .skill-img-wrapper{
+        justify-content: space-around;
+    }
+
+    .learning {
         width: 90vw;
     }
 }
 
+@media screen and (max-width: 638px){
+    .skills-content{
+        scroll-margin-top: 100px;
+    }
+}
 </style>

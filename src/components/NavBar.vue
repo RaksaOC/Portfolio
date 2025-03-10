@@ -21,28 +21,36 @@
             </div>
         </div>
     </ul>
+    <MobileNavBar class="mobile-nav"/>
 </template>
 
 <script setup>
 import { ref, onMounted } from 'vue';
+import MobileNavBar from './MobileNavBar.vue';
+
 const navBar = ref(null);
+
 onMounted(() => {
+
     window.addEventListener("scroll", () => {
         const scrollY = window.scrollY;
         const welcomePageHeight = 200;
+
+        const nav = navBar.value;
+
         if (navBar.value) {
             if (scrollY > welcomePageHeight) {
-                navBar.value.style.opacity = '1';
-                navBar.value.style.transform = 'translateY(0)'
-            }
-            else {
-                navBar.value.style.opacity = '0';
-                navBar.value.style.transform = 'translateY(-50px)'
+                nav.style.opacity = '1';
+                nav.style.transform = 'translateY(0)';
+            } else {
+                nav.style.opacity = '0';
+                nav.style.transform = 'translateY(-50px)';
             }
         }
-    })
-})
+    });
+});
 </script>
+
 
 <style scoped>
 .nav-bar {
@@ -170,5 +178,23 @@ onMounted(() => {
 #checkboxInput:checked+.toggleSwitch {
     background-color: var(--light);
     transition-duration: .2s;
+}
+
+.mobile-nav {
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    transform: translateY(-50px);
+    pointer-events: none;
+}
+
+
+@media screen and (max-width: 1000px) {
+    .mobile-nav {
+        display: flex;
+    }
+
+    .nav-bar {
+        display: none;
+    }
 }
 </style>

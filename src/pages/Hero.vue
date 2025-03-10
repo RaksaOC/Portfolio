@@ -225,5 +225,8 @@ span {
     p {
         font-size: var(--M);
     }
+    .hero{
+        scroll-margin-top: 40px;
+    }
 }
 </style>

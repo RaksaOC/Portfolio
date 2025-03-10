@@ -1,6 +1,6 @@
 <template>
     <div class="projects" >
-        <Avatar :imagePath="'/my-pic.png'" />
+        <Avatar :imagePath="'/project2.png'" />
         <div class="projects-wrapper" id="projects">
             <ProjectCard2 v-for="project in projects" :project="project" :key="project.number" />
         </div>
