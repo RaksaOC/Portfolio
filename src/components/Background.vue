@@ -76,30 +76,32 @@ onMounted(() => {
     let sphereSize = sizeFactor / 2; // Keep the sphere proportional
 
     const cubeGeo = new THREE.BoxGeometry(sizeFactor, sizeFactor, sizeFactor);
+    const cubeMat = new THREE.MeshBasicMaterial({ color: 0xf9f1f1, wireframe: true, transparent: true, opacity: 0.1 });
+    // let cubeMat;
 
-    let cubeMat;
+    // if (theme.value === "dark") {
+    //   cubeMat = new THREE.MeshBasicMaterial({ color: 0xf9f1f1, wireframe: true, transparent: true, opacity: 0.1 });
+    // }
+    // else {
+    //   cubeMat = new THREE.MeshBasicMaterial({ color: 0x000000, wireframe: true, transparent: true, opacity: 0.1 });
+    // }
 
-    if (theme.value === "dark") {
-      cubeMat = new THREE.MeshBasicMaterial({ color: 0xf9f1f1, wireframe: true, transparent: true, opacity: 0.1 });
-    }
-    else {
-      cubeMat = new THREE.MeshBasicMaterial({ color: 0x000000, wireframe: true, transparent: true, opacity: 0.1 });
-    }
 
     const cube = new THREE.Mesh(cubeGeo, cubeMat);
     cube.position.set(x, y, z);
     scene.add(cube);
 
     const sphereGeo = new THREE.SphereGeometry(sphereSize);
+    const sphereMat = new THREE.MeshBasicMaterial({ color: 0xf9f1f1, wireframe: true, transparent: true, opacity: 0.1 });
 
-    let sphereMat;
+    // let sphereMat;
 
-    if (theme.value === "dark") {
-      sphereMat = new THREE.MeshBasicMaterial({ color: 0xf9f1f1, wireframe: true, transparent: true, opacity: 0.1 });
-    }
-    else {
-      sphereMat = new THREE.MeshBasicMaterial({ color: 0x000000, wireframe: true, transparent: true, opacity: 0.1 });
-    }
+    // if (theme.value === "dark") {
+    //   sphereMat = new THREE.MeshBasicMaterial({ color: 0xf9f1f1, wireframe: true, transparent: true, opacity: 0.1 });
+    // }
+    // else {
+    //   sphereMat = new THREE.MeshBasicMaterial({ color: 0x000000, wireframe: true, transparent: true, opacity: 0.1 });
+    // }
     const sphere = new THREE.Mesh(sphereGeo, sphereMat);
     sphere.position.set(x, y, z);
     scene.add(sphere);
