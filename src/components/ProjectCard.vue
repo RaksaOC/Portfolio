@@ -58,11 +58,11 @@
                 <p>{{ project.description }}</p>
             </div>
             <div class="project-links" ref="projectLinksRef">
-                <a :href="project.githubLink">
+                <a :href="project.githubLink" target="_blank">
                     <img src="/contact-img/github.png" alt="">
                     GitHub
                 </a>
-                <a :href="project.ytLink">
+                <a :href="project.ytLink" target="_blank">
                     <img src="/contact-img/yt.png" alt="">
                     Demo
                 </a>

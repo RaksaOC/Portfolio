@@ -1,6 +1,6 @@
 <template>
     <div class="about">
-        <Avatar :imagePath="'/x image.png'" />
+        <Avatar :imagePath="'/image.png'" />
         <div class="about-content" id="about">
             <div class="about-me" ref="aboutMeCard" data-aos="fade-right">
                 <p class="about-me-head">About Me</p>

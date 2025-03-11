@@ -28,7 +28,7 @@ const projects = [
         techStack: ["Vue.js", "Three.js", "Bootstrap"],
         description: "A modern and visually stunning 3D personal portfolio website that takes you on an interactive journey through my projects and skills 🌟. Built with Vue.js for seamless reactivity and Three.js to bring in some impressive 3D animations, this project features a sleek, responsive design powered by Bootstrap. Perfect for showing off creativity and technical skills! 🔥",
         githubLink: "https://github.com/RaksaOC/Portfolio.git",
-        ytLink: "https://github.com/RaksaOC/Portfolio.git"
+        ytLink: "#projects"
     },
     {
         number: 2,
@@ -44,8 +44,8 @@ const projects = [
         ],
         techStack: ["Java", "JavaFX", "MySQL"],
         description: "A feature-rich Learning Management System (LMS) that makes managing courses, student enrollments, and teacher assignments a breeze 🎓. Built with Java and JavaFX for a smooth desktop interface, while MySQL powers the backend for efficient data storage. The admin app controls everything, from managing users to overseeing the entire database 📊, while the teacher and student apps focus on assignments and quizzes. A solid tool for creating an engaging educational experience!",
-        githubLink: "https://github.com/RaksaOC/Portfolio.git",
-        ytLink: "https://github.com/RaksaOC/Portfolio.git"
+        githubLink: "https://github.com/RaksaOC/Learning-Management-System",
+        ytLink: "#projects"
     },
     {
         number: 3,
@@ -61,8 +61,8 @@ const projects = [
         ],
         techStack: ["HTML", "CSS", "JavaScript"],
         description: "An interactive quiz app that lets you test your knowledge on various topics 🧠. Built with plain old HTML, CSS, and Vanilla JavaScript, Quizzard offers two modes: 'play' to test your skills and 'make' to create your own quizzes 🤓. A fun, educational tool for both learning and teaching, with real-time score tracking and a smooth user experience!",
-        githubLink: "https://github.com/RaksaOC/Portfolio.git",
-        ytLink: "https://github.com/RaksaOC/Portfolio.git"
+        githubLink: "https://github.com/RaksaOC/Y2-T2-Fronend-Development/tree/85c19cb6e225d62784576bef88cd370434dff96c/Practice/Vanilla-JS-Projects/Quizzard",
+        ytLink: "#projects"
     },
     {
         number: 4,
@@ -78,8 +78,8 @@ const projects = [
         ],
         techStack: ["C++", "JSON"],
         description: "A simple yet efficient C++-based CLI bus reservation system 🚌. Users can easily book and refund seats, as well as view their reservation history. Admins can manage buses, add new ones, delete old ones, and even manage other admins 👨‍💼. Data is stored in JSON, keeping it lightweight and portable. It's a perfect example of making practical use of C++ and JSON for a useful, real-world application.",
-        githubLink: "https://github.com/RaksaOC/Portfolio.git",
-        ytLink: "https://github.com/RaksaOC/Portfolio.git"
+        githubLink: "https://github.com/RaksaOC/Bus-Management-System.git",
+        ytLink: "#projects"
     },
     {
         number: 5,
@@ -95,8 +95,8 @@ const projects = [
         ],
         techStack: ["HTML", "CSS", "Bootstrap"],
         description: "A replica of McDonald's official website 🍔, built using basic HTML, CSS, and a bit of Bootstrap for responsiveness. This project is a great demonstration of how you can recreate a professional website with simple front-end technologies. It’s a fun and practical exercise in web design and UI replication, proving that with just the basics, you can build a polished product 👌.",
-        githubLink: "https://github.com/RaksaOC/Portfolio.git",
-        ytLink: "https://github.com/RaksaOC/Portfolio.git"
+        githubLink: "https://github.com/RaksaOC/McDonald-Clone.git",
+        ytLink: "#projects"
     },
     {
         number: 6,
@@ -112,8 +112,8 @@ const projects = [
         ],
         techStack: ["React"],
         description: "A static personal portfolio website built with React 🌐. This project marked my first step into the world of React, showcasing my skills in front-end development. Featuring a homepage, about section, project showcase, and contact page, it highlights my journey in web development and my ability to create clean and organized web experiences. It was a stepping stone toward more complex projects 💪.",
-        githubLink: "https://github.com/RaksaOC/Portfolio.git",
-        ytLink: "https://github.com/RaksaOC/Portfolio.git"
+        githubLink: "https://github.com/RaksaOC/RaksaOC-Portfolio.git",
+        ytLink: "#projects"
     }
 ];
 

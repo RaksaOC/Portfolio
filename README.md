@@ -1,7 +1,3 @@
-Here's a README for your 3D Portfolio project that you can use. Feel free to adjust the tone and sections as needed:
-
----
-
 # 3D Personal Portfolio
 
 Welcome to my 3D Personal Portfolio! This project showcases my web development skills in a visually stunning and interactive 3D environment. The portfolio is designed to highlight my work, skills, and experience in an engaging and modern way.
