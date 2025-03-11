@@ -1,6 +1,6 @@
 <template>
     <div class="skills">
-        <Avatar :imagePath="'/skills5.png'" />
+        <Avatar :imagePath="'/skills-img/skills-avatar.png'" />
         <div class="skills-content" ref="skillContentRef" id="skills" data-aos="zoom-in-up">
             <p class="skill-head">Techstack</p>
             <div class="skill-img-wrapper">
@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import SkillsBackground from '../components/SkillsBackground.vue';
+
 import Skill from '../components/Skill.vue';
 import Avatar from '../components/Avatar.vue';
 import { ref, onMounted } from 'vue';
@@ -32,7 +32,6 @@ import { ref, onMounted } from 'vue';
 export default {
     name: "skills",
     components: {
-        SkillsBackground,
         Skill,
         Avatar
     },

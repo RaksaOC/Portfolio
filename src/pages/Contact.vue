@@ -1,6 +1,6 @@
 <template>
     <div class="contact">
-        <Avatar :imagePath="'/contact.png'" />
+        <Avatar :imagePath="'/contact-img/contact-avatar.png'" />
         <div class="form-social" id="contact">
             <div class="form" ref="formRef" id="form" data-aos="fade-right">
                 <div class="email">
@@ -28,23 +28,24 @@
                 </div>
             </div>
             <div class="social" ref="socialRef" data-aos="fade-left">
-                <a href="https://github.com/RaksaOC" target="_blank"><img src="/github.png" alt="social-pic"></a>
-                <a href="https://www.linkedin.com/in/ory-chanraksa-1702b6263/" target="_blank"><img src="/linkedin.png"
+                <a href="https://github.com/RaksaOC" target="_blank"><img src="/contact-img/github.png"
                         alt="social-pic"></a>
-                <a href="https://www.facebook.com/ory.chanraksa/" target="_blank"><img src="/facebook.png"
+                <a href="https://www.linkedin.com/in/ory-chanraksa-1702b6263/" target="_blank"><img
+                        src="/contact-img/linkedin.png" alt="social-pic"></a>
+                <a href="https://www.facebook.com/ory.chanraksa/" target="_blank"><img src="/contact-img/facebook.png"
                         alt="social-pic"></a>
-                <a href="https://www.instagram.com/_chan_raksa/?__pwa=1" target="_blank"><img src="/instagram.png"
+                <a href="https://www.instagram.com/_chan_raksa/?__pwa=1" target="_blank"><img
+                        src="/contact-img/instagram.png" alt="social-pic"></a>
+                <a href="https://www.youtube.com/@raksa7276" target="_blank"><img src="/contact-img/youtube.png"
                         alt="social-pic"></a>
-                <a href="https://www.youtube.com/@raksa7276" target="_blank"><img src="/youtube.png"
+                <a href="https://t.me/chanraksaOry" target="_blank"><img src="/contact-img/telegram.png"
                         alt="social-pic"></a>
-                <a href="https://t.me/chanraksaOry" target="_blank"><img src="/telegram.png" alt="social-pic"></a>
-
             </div>
         </div>
         <div class="download-cv" ref="cvRef">
             <button class="button">
                 <p class="text">
-                    Download CV
+                    Download Resume
                 </p>
                 <div class="svg">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="white" class="bi bi-download" viewBox="0 0 16 16">
@@ -317,7 +318,7 @@ export default {
 }
 
 .button {
-    padding: 0.8rem 4rem;
+    padding: 0.8rem 5rem;
     font-size: 1.3rem;
     border-radius: 10px;
     /* Glassmorphism Effect */
@@ -340,8 +341,8 @@ export default {
 
 .button .text {
     position: absolute;
-    left: 1.7rem;
-    top: 1.4rem;
+    left: 1.3rem;
+    top: 1.1rem;
     transition: 0.4s ease-in-out;
     color: var(--light);
     font-size: var(--S);

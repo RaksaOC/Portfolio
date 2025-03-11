@@ -198,7 +198,7 @@ onMounted(() => {
 }
 
 #checkboxInput:checked+.toggleSwitch::after {
-    transform: translateX(100%);
+    transform: translateX(300%);
     transition-duration: .2s;
     background-color: var(--light);
 }

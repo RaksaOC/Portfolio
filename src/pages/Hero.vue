@@ -4,9 +4,9 @@
         <p>Hi, I'm Raksa, sophmore <br> <span>computer science</span> student</p>
         <p class="hero-desc">Turning caffeine and code into cool, creative solutions!</p>
         <div class="links">
-            <a href="https://github.com/RaksaOC" target="_blank"><img src="/github.png" alt=""></a>
-            <a href="https://www.linkedin.com/in/ory-chanraksa-1702b6263/" target="_blank"><img src="/linkedin.png"
-                    alt=""></a>
+            <a href="https://github.com/RaksaOC" target="_blank"><img src="/contact-img/github.png" alt=""></a>
+            <a href="https://www.linkedin.com/in/ory-chanraksa-1702b6263/" target="_blank"><img
+                    src="/contact-img/linkedin.png" alt=""></a>
             <div class="download-cv" ref="cvRef">
                 <button class="button">
                     <p class="text">

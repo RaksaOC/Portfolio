@@ -1,6 +1,6 @@
 <template>
     <div class="about">
-        <Avatar :imagePath="'/image.png'" />
+        <Avatar :imagePath="'/x image.png'" />
         <div class="about-content" id="about">
             <div class="about-me" ref="aboutMeCard" data-aos="fade-right">
                 <p class="about-me-head">About Me</p>
@@ -66,13 +66,11 @@
 
 <script>
 import { ref, onMounted } from 'vue';
-import AboutBackground from '../components/AboutBackground.vue';
 import Avatar from '../components/Avatar.vue';
 
 export default {
     name: 'About',
     components: {
-        AboutBackground,
         Avatar
     },
     setup() {

@@ -9,7 +9,6 @@ import Skills from './pages/Skills.vue'
 import Projects from './pages/Projects.vue'
 import Contact from './pages/Contact.vue'
 import Footer from './pages/Footer.vue'
-import PlaceHolder from './pages/PlaceHolder.vue'
 
 const theme = ref(localStorage.getItem('theme') || 'dark'); // Default to dark theme
 
