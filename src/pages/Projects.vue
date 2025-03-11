@@ -66,7 +66,7 @@ const projects = [
     },
     {
         number: 4,
-        title: "Bus Reservation System",
+        title: "Bus Management System",
         year: 2024,
         mainImage: "/projects-img/bus-reserve/1.png",
         image: [
