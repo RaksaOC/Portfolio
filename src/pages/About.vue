@@ -299,4 +299,32 @@ span {
     }
 
 }
+
+@media screen and (max-width: 398px) {
+  .accolades-desc{
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .commits {
+    border-right: none !important;
+    border-bottom: 2px solid var(--gray-light) !important;
+    gap: 20px;
+    padding-bottom: 20px !important;
+  }
+
+  .projects{
+    border-bottom: 2px solid var(--gray-light) !important;
+    gap: 20px;
+    padding-bottom: 20px !important;
+  }
+
+  .pr-merged {
+    border-left: none !important;
+    gap: 20px;
+    padding-bottom: 20px !important;
+  }
+}
 </style>

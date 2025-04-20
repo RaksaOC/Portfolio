@@ -78,6 +78,12 @@ export default {
         width: 90vw;
         text-align: center;
     }
+
+  .footer-nav{
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+  }
 }
 
 @media screen and (max-width: 638px) {

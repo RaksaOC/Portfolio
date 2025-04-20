@@ -181,6 +181,22 @@ span {
     color: var(--gray-light);
 }
 
+.svg{
+  margin-bottom: 50%;
+}
+
+.text{
+  margin: 0;
+}
+
+svg,
+path,
+.bi-download,
+.text,
+.svg-wrapper {
+  cursor: pointer;
+}
+
 @keyframes fly-1 {
     from {
         transform: translateY(0.1em);
@@ -230,5 +246,13 @@ span {
     .hero {
         scroll-margin-top: 40px;
     }
+
+    .links{
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+    }
 }
+
+
 </style>
