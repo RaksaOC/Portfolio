@@ -58,6 +58,9 @@
   --dark: #6988cc;       /* Inverted to light */
 }
 
+html{
+  scroll-behavior: smooth;
+}
 
 /* Apply theme */
 body {
