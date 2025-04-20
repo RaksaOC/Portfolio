@@ -47,15 +47,15 @@
                     <div class="accolades-desc">
                         <div class="commits">
                             <p class="commits-head">Commits</p>
-                            <p class="commits-num">180+</p>
+                            <p class="commits-num">320+</p>
                         </div>
                         <div class="projects">
                             <p class="projects-head">Projects</p>
-                            <p class="projects-num">5+</p>
+                            <p class="projects-num">7+</p>
                         </div>
                         <div class="pr-merged">
                             <p class="pr-head">Code Lines</p>
-                            <p class="pr-num">20K+</p>
+                            <p class="pr-num">50K+</p>
                         </div>
                     </div>
                 </div>
