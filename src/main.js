@@ -8,9 +8,9 @@ import "aos/dist/aos.css"; // Import AOS CSS
 createApp(App).mount("#app");
 
 AOS.init({
-  duration: 800,
+  duration: 600,
   easing: "ease-in-out",
-  once: true,
+  once: false,
   mirror: false,
   // offset: 100,
 });

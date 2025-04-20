@@ -53,7 +53,7 @@ export default {
       "React": "/skills-img/react.png",
       "Vue": "/skills-img/vue.svg",
       "Three.js": "/skills-img/threejs.png",
-      "Tailwind": "/skills-img/tailwind.svg",
+      "Tailwind": "/skills-img/tailwind.png",
       "Bootstrap": "/skills-img/bootstrap.png",
       "MySQL": "/skills-img/mysql.png",
       "Git": "/skills-img/git.png",

@@ -1,5 +1,5 @@
 <template>
-    <div class="project-card" ref="cardRef" data-aos="zoom-in-down" data-aos-offset="0">
+    <div class="project-card" ref="cardRef" data-aos="zoom-in-down">
         <div class="top">
             <div class="text-wrapper">
                 <div class="num" ref="numRef">
