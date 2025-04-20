@@ -89,4 +89,10 @@ defineProps({
     font-size: var(--XL);
   }
 }
+
+@media screen and (max-width: 398px) {
+  .name-wrapper {
+    font-size: var(--L);
+  }
+}
 </style>

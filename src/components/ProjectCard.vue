@@ -455,13 +455,18 @@ onMounted(() => {
         gap: 20px;
     }
 
+  .tech-stack {
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+  }
+
     .bottom {
         max-width: 100%;
     }
 
     .text-wrapper {
-
-        max-width: 80%;
+        max-width: 100%;
         gap: 0;
     }
 
@@ -470,6 +475,10 @@ onMounted(() => {
         flex-direction: column;
         justify-content: center;
         align-items: center;
+    }
+
+    .description{
+      font-size: var(--XS);
     }
 
     .num {

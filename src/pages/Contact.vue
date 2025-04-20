@@ -356,6 +356,14 @@ export default {
     cursor: pointer !important;
 }
 
+svg,
+path,
+.bi-download,
+.text,
+.svg-wrapper{
+  cursor: pointer;
+}
+
 .button:hover {
     background-color: rgb(50, 50, 50);
 }
