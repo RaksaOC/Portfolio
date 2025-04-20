@@ -28,7 +28,6 @@ defineProps(
 
 img {
   width: 90%;
-  min-height: 90%;
 }
 
 p {
@@ -55,7 +54,6 @@ p {
 
   img{
     width: 65%;
-    height: 65%;
   }
 
   p {
