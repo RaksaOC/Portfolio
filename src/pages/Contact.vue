@@ -2,17 +2,17 @@
   <div class="contact">
     <Avatar :imagePath="'/contact-img/contact-avatar.png'"/>
     <div class="form-social" id="contact">
-      <div class="form" ref="formRef" id="form" data-aos="fade-right">
+      <form class="form" ref="formRef" id="form" data-aos="fade-right" action="https://formspree.io/f/xqaqpjpn" method="POST">
         <div class="email">
           <p class="email-label">Email</p>
-          <input type="email" name="" id="">
+          <input type="email" name="email" id="email" required>
         </div>
         <div class="message">
           <p class="message-label">Message</p>
-          <textarea name="" id=""></textarea>
+          <textarea name="message" id="message" required></textarea>
         </div>
         <div class="send">
-          <button class="send-btn">
+          <button type="submit" class="send-btn">
             <div class="svg-wrapper-1">
               <div class="svg-wrapper">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
@@ -26,7 +26,8 @@
             <span>Send</span>
           </button>
         </div>
-      </div>
+      </form>
+
       <div class="social" ref="socialRef" data-aos="fade-left">
         <a href="https://github.com/RaksaOC" target="_blank"><img src="/contact-img/github.png"
                                                                   alt="social-pic"></a>
@@ -42,7 +43,7 @@
                                                                  alt="social-pic"></a>
       </div>
     </div>
-    <div class="download-cv" ref="cvRef">
+    <div class="download-cv" ref="cvRef" @click="downloadResume">
       <button class="button">
         <p class="text">
           Download Resume
@@ -60,12 +61,13 @@
       </button>
     </div>
   </div>
+  <div v-show="showPopup" class="popup">Message sent successfully!</div>
 </template>
 
 <script>
 
 import Avatar from '../components/Avatar.vue';
-import {ref, onMounted} from 'vue';
+import { ref, onMounted } from 'vue';
 
 export default {
   name: "skills",
@@ -73,22 +75,47 @@ export default {
     Avatar
   },
   setup() {
-
     const formRef = ref(null);
     const socialRef = ref(null);
+    const showPopup = ref(false);
+
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+      const form = formRef.value;
+      const formData = new FormData(form);
+
+      try {
+        const response = await fetch("https://formspree.io/f/xqaqpjpn", {
+          method: "POST",
+          body: formData,
+          headers: {
+            Accept: "application/json"
+          }
+        });
+
+        if (response.ok) {
+          form.reset();
+          showPopup.value = true;
+          setTimeout(() => (showPopup.value = false), 3000);
+        }
+      } catch (error) {
+        console.error("Form submission failed", error);
+      }
+    };
 
     onMounted(() => {
       const form = formRef.value;
       const social = socialRef.value;
 
-      // Check if the ref is initialized correctly
       if (!form || !social) {
         console.log("Ref is not found!");
         return;
       }
 
+      form.addEventListener("submit", handleSubmit);
+
       const handleOnMouseMove = (e) => {
-        const {currentTarget: target} = e;
+        const { currentTarget: target } = e;
         const rect = target.getBoundingClientRect();
         const x = e.clientX - rect.left;
         const y = e.clientY - rect.top;
@@ -101,13 +128,22 @@ export default {
       social.addEventListener("mousemove", handleOnMouseMove);
     });
 
-    // Return both skillsMap and skillContentRef so they can be used in the template
     return {
       formRef,
-      socialRef
+      socialRef,
+      showPopup
+    };
+  },
+  methods: {
+    downloadResume() {
+      const link = document.createElement('a');
+      link.href = '/resume.pdf';
+      link.download = 'OryChanraksa-Resume.pdf';
+      link.click();
     }
   }
-}
+};
+
 </script>
 
 <style scoped>
@@ -402,4 +438,38 @@ path,
     scroll-margin-top: 120px;
   }
 }
+
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #a6e3a1; /* Softer green */
+  color: #1a3e1a;
+  padding: 16px 24px;
+  border-radius: 10px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  animation: fadeInOut 3s ease-in-out forwards;
+  z-index: 9999;
+  font-weight: 500;
+}
+
+/* Animation */
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -55%);
+  }
+  10%, 90% {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -45%);
+  }
+}
 </style>
+
+
