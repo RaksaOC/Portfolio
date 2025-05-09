@@ -402,6 +402,10 @@ path,
   scale: 0.97;
 }
 
+.text{
+  margin-top: 1px;
+}
+
 @keyframes fly-1 {
   from {
     transform: translateY(0.1em);
