@@ -1,5 +1,5 @@
 <template>
-  <div class="contact">
+  <div class="contact" data-aos-delay="500">
     <Avatar :imagePath="'/contact-img/contact-avatar.png'"/>
     <div class="form-social" id="contact">
       <form class="form" ref="formRef" id="form" data-aos="fade-right" action="https://formspree.io/f/xqaqpjpn" method="POST">
@@ -33,10 +33,10 @@
                                                                   alt="social-pic"></a>
         <a href="https://www.linkedin.com/in/ory-chanraksa-1702b6263/" target="_blank"><img
             src="/contact-img/linkedin.png" alt="social-pic"></a>
+        <a href="https://www.upwork.com/freelancers/~0193c96741cd57f0f1?mp_source=share" target="_blank"><img
+            src="/contact-img/upwork.png" alt="social-pic"></a>
         <a href="https://www.facebook.com/ory.chanraksa/" target="_blank"><img src="/contact-img/facebook.png"
                                                                                alt="social-pic"></a>
-        <a href="https://www.instagram.com/_chan_raksa/?__pwa=1" target="_blank"><img
-            src="/contact-img/instagram.png" alt="social-pic"></a>
         <a href="https://www.youtube.com/@raksa7276" target="_blank"><img src="/contact-img/youtube.png"
                                                                           alt="social-pic"></a>
         <a href="https://t.me/chanraksaOry" target="_blank"><img src="/contact-img/telegram.png"

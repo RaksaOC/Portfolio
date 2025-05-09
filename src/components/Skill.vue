@@ -28,6 +28,7 @@ defineProps(
 
 img {
   width: 90%;
+  aspect-ratio: 1/1;
 }
 
 p {
@@ -49,11 +50,11 @@ p {
 
 @media screen and (max-width: 638px) {
   .skill {
-    margin: 5px;
+    margin: 0px;
   }
 
   img{
-    width: 65%;
+    width: 50%;
   }
 
   p {

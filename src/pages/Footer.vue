@@ -3,7 +3,7 @@
         <div class="footer-content">
             <div class="footer-left">
                 <span class="logo">ChanRaksa</span>
-                <span class="copyright">© 2023 ChanRaksa. All rights reserved.</span>
+                <span class="copyright">Hire me! You won't regret it i swear.</span>
             </div>
             <nav class="footer-nav">
                 <a href="#home">Home</a>
@@ -69,8 +69,25 @@ export default {
 }
 
 .footer-nav a {
+  position: relative;
     text-decoration: none;
     color: var(--light);
+}
+
+.footer-nav a:before {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  height: 2px;
+  width: 100%;
+  background: var(--gray-light);
+  border-radius: 50px;
+  transform: scaleX(0);
+  transition: transform 0.2s linear;
+}
+
+.footer-nav a:hover::before {
+  transform: scaleX(1);
 }
 
 @media screen and (max-width: 1000px) {

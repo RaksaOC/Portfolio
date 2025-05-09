@@ -1,5 +1,5 @@
 <template>
-  <div class="projects">
+  <div class="projects" data-aos-delay="500">
     <Avatar :imagePath="'/projects-img/projects-avatar.png'"/>
     <div class="projects-wrapper" id="projects">
       <ProjectCard v-for="project in projects" :project="project" :key="project.number"/>
@@ -83,23 +83,6 @@ const projects = [
   },
   {
     number: 5,
-    title: "Quizzard",
-    year: 2025,
-    mainImage: "/projects-img/quizzard/1.png",
-    image: [
-      "/projects-img/quizzard/1.png",
-      "/projects-img/quizzard/2.png",
-      "/projects-img/quizzard/1.png",
-      "/projects-img/quizzard/2.png",
-      "/projects-img/quizzard/1.png"
-    ],
-    techStack: ["HTML", "CSS", "JavaScript"],
-    description: "A quiz application that allows users to test their knowledge on various topics. Built with HTML, CSS, and JavaScript, it offers two modes: one to play quizzes and another to create them. Features real-time score tracking and a user-friendly interface.",
-    githubLink: "https://github.com/RaksaOC/Y2-T2-Fronend-Development/tree/85c19cb6e225d62784576bef88cd370434dff96c/Practice/Vanilla-JS-Projects/Quizzard",
-    ytLink: "#projects"
-  },
-  {
-    number: 6,
     title: "Bus Management System",
     year: 2024,
     mainImage: "/projects-img/bus-reserve/1.png",
@@ -116,16 +99,16 @@ const projects = [
     ytLink: "#projects"
   },
   {
-    number: 7,
+    number: 6,
     title: "McDonald's Clone",
     year: 2024,
-    mainImage: "/projects-img/mcdonald/1.png",
+    mainImage: "/projects-img/mcdonald/1.jpg",
     image: [
-      "/projects-img/mcdonald/1.png",
-      "/projects-img/mcdonald/2.png",
-      "/projects-img/mcdonald/3.png",
-      "/projects-img/mcdonald/4.png",
-      "/projects-img/mcdonald/5.png"
+      "/projects-img/mcdonald/1.jpg",
+      "/projects-img/mcdonald/2.jpg",
+      "/projects-img/mcdonald/3.jpg",
+      "/projects-img/mcdonald/4.jpg",
+      "/projects-img/mcdonald/5.jpg"
     ],
     techStack: ["HTML", "CSS", "Bootstrap"],
     description: "A front-end replica of the official McDonald's website. Built using HTML, CSS, and Bootstrap, the project demonstrates the ability to recreate a professional website layout and responsive UI using fundamental web technologies.",
@@ -133,7 +116,7 @@ const projects = [
     ytLink: "#projects"
   },
   {
-    number: 8,
+    number: 7,
     title: "Previous Portfolio",
     year: 2024,
     mainImage: "/projects-img/prev-port/1.png",

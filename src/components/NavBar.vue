@@ -169,6 +169,7 @@ onMounted(() => {
     height: 100%;
     top: 0;
     z-index: 100;
+  cursor: pointer;
 }
 
 .toggleSwitch {
@@ -187,8 +188,8 @@ onMounted(() => {
 .toggleSwitch::after {
     content: "";
     position: absolute;
-    height: 10px;
-    width: 10px;
+    height: 15px;
+    width: 15px;
     left: 5px;
     background-color: transparent;
     border-radius: 50%;
@@ -198,7 +199,7 @@ onMounted(() => {
 }
 
 #checkboxInput:checked+.toggleSwitch::after {
-    transform: translateX(300%);
+    transform: translateX(160%);
     transition-duration: .2s;
     background-color: var(--light);
 }
