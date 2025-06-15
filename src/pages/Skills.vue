@@ -49,6 +49,7 @@ export default {
       "JavaFX": "/skills-img/javafx.png",
       "HTML": "/skills-img/html.png",
       "CSS": "/skills-img/css.png",
+      "Next.js": "/skills-img/nextjs.png",
       "React": "/skills-img/react.png",
       "Vue": "/skills-img/vue.svg",
       "Three.js": "/skills-img/threejs.png",
@@ -72,7 +73,6 @@ export default {
       "Angular": "/skills-img/angular.png",
       "PHP": "skills-img/php.png",
       "Laravel": "skills-img/laravel.png",
-      "Next.js": "/skills-img/nextjs.png",
       "C#": "/skills-img/csharp.png",
       ".NET": "/skills-img/dotnet.svg"
     };
