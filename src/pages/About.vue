@@ -6,14 +6,13 @@
                 <p class="about-me-head">About Me</p>
                 <br>
                 <div class="about-me-desc">
-                    <p><span>1</span> Hey there! 👋 I’m a problem-solver and tech enthusiast who loves turning ideas
-                        into reality. 💻</p>
+                    <p><span>1</span> Hey!  I’m a problem-solver and tech enthusiast.I love turning ideas
+                        into reality.</p>
                     <p><span>2</span> Learning, building, and growing from Phnom Penh, Cambodia 🇰🇭, always seeking new
                         challenges. </p>
                     <p><span>3</span> Passionate about full-stack development, algorithms, and creating
-                        scalable systems. ⚙️</p>
-                    <p><span>4</span> Driven by curiosity, continuous learning, and a love for impactful technology.
-                        Let’s build something amazing! ⚡</p>
+                        scalable systems.</p>
+                    <p><span>4</span> Driven by curiosity, continuous learning, and a love for impactful technology.</p>
                 </div>
 
             </div>
@@ -23,10 +22,9 @@
                     <p class="hobby-head">Hobbies</p>
                     <br>
                     <div class="hobby-desc">
-                        <p><span>1</span> Coding—where creativity meets logic. 💻</p>
-                        <p><span>2</span> Riding motorcycles—nothing beats the thrill of the open road. 🏍️</p>
-                        <p><span>3</span> Gaming—competitive, strategic, and just fun. 🎮</p>
-                        <p><span>4</span> Sports—staying active and pushing limits. ⚽</p>
+                        <p><span>1</span> Coding—bringing innovative ideas to life.</p>
+                        <p><span>2</span> Riding motorcycles—can't beat the thrill of the open road. </p>
+                        <p><span>3</span> Gaming—taking time off to rejuvenate.</p>
                     </div>
 
 
@@ -46,12 +44,12 @@
                     <br>
                     <div class="accolades-desc">
                         <div class="commits">
-                            <p class="commits-head">Commits</p>
-                            <p class="commits-num">380+</p>
+                            <p class="commits-head">Contributions</p>
+                            <p class="commits-num">2.3K+</p>
                         </div>
                         <div class="projects">
                             <p class="projects-head">Projects</p>
-                            <p class="projects-num">7+</p>
+                            <p class="projects-num">12+</p>
                         </div>
                         <div class="pr-merged">
                             <p class="pr-head">Skills</p>

@@ -12,7 +12,7 @@
         />
       </div>
     </div>
-    <div class="learning" ref="learningRef" data-aos="zoom-out-up">
+    <!-- <div class="learning" ref="learningRef" data-aos="zoom-out-up">
       <p class="learning-head">Currently Learning</p>
       <div class="learning-slide-wrapper">
         <div class="learning-slide">
@@ -22,7 +22,7 @@
           <Skill v-for="(value, key) in learnings" :key="key" :image="value" :name="key"/>
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 

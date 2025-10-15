@@ -3,7 +3,7 @@
         <div class="footer-content">
             <div class="footer-left">
                 <span class="logo">ChanRaksa</span>
-                <span class="copyright">Hire me! You won't regret it i swear.</span>
+                <!-- <span class="copyright"></span> -->
             </div>
             <nav class="footer-nav">
                 <a href="#home">Home</a>

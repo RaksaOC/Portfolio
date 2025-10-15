@@ -1,5 +1,5 @@
 <script setup>
-import {ref, provide, onMounted} from 'vue'
+import { ref, provide, onMounted } from 'vue'
 import Background from './components/Background.vue'
 import Welcome from './pages/Welcome.vue'
 import NavBar from './components/NavBar.vue'

@@ -1,8 +1,9 @@
 <template>
   <div class="hero" id="home" data-aos="fade-up" data-aos-delay="30" data-aos-anchor-placement="center-bottom">
     <p class="based-in">Based in Phnom Penh, Cambodia</p>
-    <p>Hi, I'm Raksa, sophmore <br> <span>computer science</span> student</p>
-    <p class="hero-desc">Turning caffeine and code into cool, creative solutions!</p>
+    <p>Hi, I'm Raksa,  a <br> <span></span> </p>
+    <p>  <span>software engineer</span> </p>
+    <p class="hero-desc">Innovating creative solutions through code</p>
     <div class="links">
       <a href="https://github.com/RaksaOC" target="_blank"><img src="/contact-img/github.png" alt=""></a>
       <a href="https://www.linkedin.com/in/ory-chanraksa-1702b6263/" target="_blank"><img
@@ -15,10 +16,10 @@
           <div class="svg">
             <svg xmlns="http://www.w3.org/2000/svg" fill="white" class="bi bi-download" viewBox="0 0 16 16">
               <path
-                  d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z">
+                d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z">
               </path>
               <path
-                  d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z">
+                d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z">
               </path>
             </svg>
           </div>
@@ -262,6 +263,4 @@ path,
     align-items: center;
   }
 }
-
-
 </style>
