@@ -4,27 +4,41 @@
 
 <script setup>
 import * as THREE from 'three'
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 
 const theme = ref(localStorage.getItem("theme") || "dark");
-// function updateThemeColors(theme, arr) {
-//   // Loop through all objects and change their material based on the theme
-//   arr.forEach(({s, c}) => {
-//     if (object.material) {
-//       if (theme === "dark") {
-//         s.material.color.set(0xf9f1f1); // Light color for dark theme
-//         s.material.opacity = 0.1;
-//         c.material.color.set(0xf9f1f1); // Light color for dark theme
-//         c.material.opacity = 0.1;
-//       } else {
-//         s.material.color.set(0x000000); // Dark color for light theme
-//         s.material.opacity = 0.1;
-//         c.material.color.set(0x000000); // Dark color for light theme
-//         c.material.opacity = 0.1;
-//       }
-//     }
-//   });
-// }
+
+// Store references for cleanup
+let themeObserver = null;
+let themeCheckInterval = null;
+let storageEventListener = null;
+
+// Helper function to get wireframe color based on theme
+function getWireframeColor(currentTheme) {
+  return currentTheme === "dark" ? 0xf9f1f1 : 0x000000; // White for dark theme, black for light theme
+}
+
+// Function to update theme colors for all wireframe objects
+function updateThemeColors(currentTheme, sphereInCubes, planes) {
+  const wireframeColor = getWireframeColor(currentTheme);
+
+  // Update sphere and cube materials
+  sphereInCubes.forEach(({ sphere, cube }) => {
+    if (sphere.material) {
+      sphere.material.color.set(wireframeColor);
+    }
+    if (cube.material) {
+      cube.material.color.set(wireframeColor);
+    }
+  });
+
+  // Update plane materials
+  planes.forEach(plane => {
+    if (plane.material) {
+      plane.material.color.set(wireframeColor);
+    }
+  });
+}
 
 onMounted(() => {
   // Setup ------------------------------------------------------------------------------------------------
@@ -70,38 +84,99 @@ onMounted(() => {
   // Objects ------------------------------------------------------------------------------------------------
 
   let sphereInCubes = [];
+  let planes = [];
+
+  function infiniteGroundGrid() {
+    const PLANE_WIDTH = 600;
+    const PLANE_LENGTH = 600;
+    const SEGMENTS = 40;
+    const SPEED = 0.2;
+
+    const geometry = new THREE.PlaneGeometry(
+      PLANE_WIDTH,
+      PLANE_LENGTH,
+      SEGMENTS,
+      SEGMENTS
+    );
+
+    const wireframeColor = getWireframeColor(theme.value);
+    const material = new THREE.MeshBasicMaterial({
+      color: wireframeColor,
+      wireframe: true,
+      transparent: true,
+      opacity: 0.1,
+    });
+
+    const plane1 = new THREE.Mesh(geometry, material);
+    const plane2 = new THREE.Mesh(geometry, material);
+
+    // orientation
+    plane1.rotation.x = -Math.PI / 2;
+    plane2.rotation.x = -Math.PI / 2;
+
+    // vertical placement
+    plane1.position.y = -40;
+    plane2.position.y = -40;
+
+    // depth spacing
+    plane1.position.z = 0;
+    plane2.position.z = -PLANE_LENGTH;
+
+    scene.add(plane1, plane2);
+    planes.push(plane1, plane2);
+
+    // Update fog based on theme
+    scene.fog = new THREE.Fog(theme.value === "dark" ? 0x0e0e0e : 0xafafaf, 100, 300);
+
+
+    function animate() {
+      requestAnimationFrame(animate);
+
+      plane1.position.z += SPEED;
+      plane2.position.z += SPEED;
+
+      // 🔁 leapfrog logic
+      if (plane1.position.z > PLANE_LENGTH) {
+        plane1.position.z = plane2.position.z - PLANE_LENGTH;
+      }
+
+      if (plane2.position.z > PLANE_LENGTH) {
+        plane2.position.z = plane1.position.z - PLANE_LENGTH;
+      }
+
+      renderer.render(scene, camera);
+    }
+
+    animate();
+  }
+
+
 
   function sphereInCube(x, y, z) {
     let sizeFactor = window.innerWidth < 978 ? 7 : 10; // Smaller sizes for small screens
     let sphereSize = sizeFactor / 2; // Keep the sphere proportional
 
+    const wireframeColor = getWireframeColor(theme.value);
     const cubeGeo = new THREE.BoxGeometry(sizeFactor, sizeFactor, sizeFactor);
-    const cubeMat = new THREE.MeshBasicMaterial({ color: 0xf9f1f1, wireframe: true, transparent: true, opacity: 0.1 });
-    // let cubeMat;
-
-    // if (theme.value === "dark") {
-    //   cubeMat = new THREE.MeshBasicMaterial({ color: 0xf9f1f1, wireframe: true, transparent: true, opacity: 0.1 });
-    // }
-    // else {
-    //   cubeMat = new THREE.MeshBasicMaterial({ color: 0x000000, wireframe: true, transparent: true, opacity: 0.1 });
-    // }
-
+    const cubeMat = new THREE.MeshBasicMaterial({
+      color: wireframeColor,
+      wireframe: true,
+      transparent: true,
+      opacity: 0.1
+    });
 
     const cube = new THREE.Mesh(cubeGeo, cubeMat);
     cube.position.set(x, y, z);
     scene.add(cube);
 
     const sphereGeo = new THREE.SphereGeometry(sphereSize);
-    const sphereMat = new THREE.MeshBasicMaterial({ color: 0xf9f1f1, wireframe: true, transparent: true, opacity: 0.1 });
+    const sphereMat = new THREE.MeshBasicMaterial({
+      color: wireframeColor,
+      wireframe: true,
+      transparent: true,
+      opacity: 0.1
+    });
 
-    // let sphereMat;
-
-    // if (theme.value === "dark") {
-    //   sphereMat = new THREE.MeshBasicMaterial({ color: 0xf9f1f1, wireframe: true, transparent: true, opacity: 0.1 });
-    // }
-    // else {
-    //   sphereMat = new THREE.MeshBasicMaterial({ color: 0x000000, wireframe: true, transparent: true, opacity: 0.1 });
-    // }
     const sphere = new THREE.Mesh(sphereGeo, sphereMat);
     sphere.position.set(x, y, z);
     scene.add(sphere);
@@ -148,14 +223,59 @@ onMounted(() => {
   // Object Placement ------------------------------------------------------------------------------------------
 
   // Welcome Screen
-  sphereInCube(0, 0, -10);
+  sphereInCube(0, 0, -20);
 
   // Hero
   sphereInCube(40, 25, 0);
   sphereInCube(-40, 25, 0);
+  infiniteGroundGrid();
   // sphereInCube(-75, -5, 20);
 
-  // updateThemeColors(theme.value, sphereInCubes);
+  // Listen for theme changes
+  function handleThemeChange() {
+    const newTheme = localStorage.getItem("theme") || "dark";
+    if (newTheme !== theme.value) {
+      theme.value = newTheme;
+      updateThemeColors(theme.value, sphereInCubes, planes);
+
+      // Update fog color
+      scene.fog = new THREE.Fog(theme.value === "dark" ? 0x0e0e0e : 0xcacaca, 100, 300);
+    }
+  }
+
+  // Listen for storage events (when theme changes in other tabs/windows)
+  storageEventListener = handleThemeChange;
+  window.addEventListener("storage", storageEventListener);
+
+  // Also listen for custom events or check periodically (for same-tab changes)
+  // Since localStorage.setItem in the same tab doesn't trigger storage event,
+  // we'll use a MutationObserver on the data-theme attribute
+  themeObserver = new MutationObserver(() => {
+    handleThemeChange();
+  });
+
+  themeObserver.observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ['data-theme']
+  });
+
+  // Also check on interval as a fallback (for same-tab localStorage changes)
+  themeCheckInterval = setInterval(() => {
+    handleThemeChange();
+  }, 100);
+})
+
+onUnmounted(() => {
+  // Clean up event listeners
+  if (storageEventListener) {
+    window.removeEventListener("storage", storageEventListener);
+  }
+  if (themeObserver) {
+    themeObserver.disconnect();
+  }
+  if (themeCheckInterval) {
+    clearInterval(themeCheckInterval);
+  }
 })
 
 </script>

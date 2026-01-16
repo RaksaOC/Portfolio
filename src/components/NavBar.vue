@@ -143,6 +143,7 @@ onMounted(() => {
     display: flex;
     align-items: center;
     gap: 10px;
+    margin: 0;
 }
 
 .logo-text {
@@ -169,7 +170,7 @@ onMounted(() => {
     height: 100%;
     top: 0;
     z-index: 100;
-  cursor: pointer;
+    cursor: pointer;
 }
 
 .toggleSwitch {

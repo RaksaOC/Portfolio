@@ -55,7 +55,7 @@
   /* --dark: linear-gradient(135deg, #6988cc, #e0eaff);   Celestial Glow - Fades from Blue to White 
 **/
 
-  --dark: #6988cc;       /* Inverted to light */
+  --dark: #afafaf;       /* Inverted to light */
 }
 
 html{

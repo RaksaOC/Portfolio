@@ -1,8 +1,10 @@
 <template>
   <div class="hero" id="home" data-aos="fade-up" data-aos-delay="30" data-aos-anchor-placement="center-bottom">
     <p class="based-in">Based in Phnom Penh, Cambodia</p>
-    <p>Hi, I'm Raksa,  a <br> <span></span> </p>
-    <p>  <span>software engineer</span> </p>
+    <div class="hero-text">
+      <p class="hero-text-1">Hello, I'm Raksa a <span></span> </p>
+      <p class="hero-text-2">  <span>software engineer</span> </p>
+    </div>
     <p class="hero-desc">Innovating creative solutions through code</p>
     <div class="links">
       <a href="https://github.com/RaksaOC" target="_blank"><img src="/contact-img/github.png" alt=""></a>
@@ -55,6 +57,27 @@ export default {
   width: 100%;
   height: 100vh;
   padding: 10px;
+}
+
+.hero-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-text-1 {
+  font-size: var(--XL);
+  margin-top: 20px;
+  font-family: var(--poppins);
+  text-align: center;
+}
+
+.hero-text-2 {
+  font-size: var(--XL);
+  margin-top: 0px;
+  font-family: var(--poppins);
+  text-align: center;
 }
 
 p {
@@ -111,7 +134,7 @@ span {
   -webkit-backdrop-filter: blur(5px);
   border: 1px solid rgba(255, 255, 255, 0.2);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  border-radius: 30px;
+  border-radius: 50%;
   transition: all 0.3s ease;
 }
 
@@ -131,7 +154,7 @@ span {
 .button {
   padding: 0.8rem 5rem 0 5rem;
   font-size: 1.3rem;
-  border-radius: 10px;
+  border-radius: 60px;
   /* Glassmorphism Effect */
   background: rgba(255, 255, 255, 0.1);
   /* Light transparent background */
@@ -239,7 +262,7 @@ path,
 }
 
 @media screen and (max-width: 968px) {
-  p {
+  .hero-text-1, .hero-text-2 {
     font-size: var(--L);
   }
 
@@ -249,8 +272,8 @@ path,
 }
 
 @media screen and (max-width: 638px) {
-  p {
-    font-size: var(--M);
+  .hero-text-1, .hero-text-2 {
+    font-size: var(--L);
   }
 
   .hero {

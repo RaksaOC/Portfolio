@@ -1,17 +1,12 @@
 <template>
   <div class="skills">
-    <Avatar :imagePath="'/skills-img/skills-avatar.png'"/>
-    <div class="skills-content" ref="skillContentRef" id="skills" data-aos="zoom-in-up">
-      <p class="skill-head">Techstack</p>
-      <div class="skill-img-wrapper">
-        <Skill
-            v-for="(value, key) in skillsMap"
-            :key="key"
-            :image="value"
-            :name="key"
-        />
-      </div>
+    <Avatar :imagePath="'/skills-img/skills-avatar.png'" />
+    <!-- <div class="skills-content" ref="skillContentRef" id="skills" > -->
+    <!-- <p class="skill-head">Techstack</p> -->
+    <div class="skill-img-wrapper">
+      <Skill v-for="(value, key) in skillsMap" :key="key" :image="value" :name="key" />
     </div>
+    <!-- </div> -->
     <!-- <div class="learning" ref="learningRef" data-aos="zoom-out-up">
       <p class="learning-head">Currently Learning</p>
       <div class="learning-slide-wrapper">
@@ -30,7 +25,7 @@
 
 import Skill from '../components/Skill.vue';
 import Avatar from '../components/Avatar.vue';
-import {ref, onMounted} from 'vue';
+import { ref, onMounted } from 'vue';
 
 export default {
   name: "skills",
@@ -41,41 +36,67 @@ export default {
   setup() {
     // Declare skillsMap here
     const skillsMap = {
-      "C": "/skills-img/c.png",
-      "C++": "/skills-img/c++.png",
+      // Core Languages
       "Java": "/skills-img/java.png",
+      "C++": "/skills-img/c++.png",
       "Python": "/skills-img/python.png",
       "JavaScript": "/skills-img/javascript.png",
-      "JavaFX": "/skills-img/javafx.png",
+      "TypeScript": "/skills-img/typescript.png",
+      "Dart": "/skills-img/dart.png",
+      "C#": "/skills-img/csharp.png",
+
+      // Web Fundamentals
       "HTML": "/skills-img/html.png",
       "CSS": "/skills-img/css.png",
-      "Next.js": "/skills-img/nextjs.png",
-      "React": "/skills-img/react.png",
-      "Vue": "/skills-img/vue.svg",
-      "Three.js": "/skills-img/threejs.png",
       "Tailwind CSS": "/skills-img/tailwind.png",
       "Bootstrap": "/skills-img/bootstrap.png",
+
+      // Frontend Frameworks/Libraries & Engines
+      "React": "/skills-img/react.png",
+      "Next.js": "/skills-img/nextjs.png",
+      "Vue": "/skills-img/vue.svg",
+      "Three.js": "/skills-img/threejs.png",
+      "Flutter": "/skills-img/flutter.png",
+      "Expo": "/skills-img/expo.png", // Expo (commonly used with React Native)
+      "JavaFX": "/skills-img/javafx.png",
+      "Unity": "/skills-img/unity.png", // Moved Unity here, with frameworks/engines
+      
+      // Backend Frameworks/Platforms
       "Node.js": "/skills-img/nodejs.png",
-      "Express": "/skills-img/express.png",
-      "Spring Boot": "/skills-img/spring.png",
+      "Express.js": "/skills-img/express.png",
+      "FastAPI": "/skills-img/fastapi.png", // Added FastAPI
+      "Spring Boot": "/skills-img/spring.png", // added as "Spring Boot" (use your spring.png if available)
+      
+      // Databases & Cloud
       "MySQL": "/skills-img/mysql.png",
       "PostgreSQL": "/skills-img/postgre.png",
       "MongoDB": "/skills-img/mongodb.svg",
+      "Redis": "/skills-img/redis.png",
       "Firebase": "/skills-img/firebase.png",
-      "Git": "/skills-img/git.png",
+      
+      // Analytics
+      
+      // DevOps & Deployment
+      "Cloudflare": "/skills-img/cloudflare.png", // Added Cloudflare
+      "Vercel": "/skills-img/vercel.png",
+      "Railway": "/skills-img/railway.png",
+      "Docker": "/skills-img/docker.png",
       "Linux": "/skills-img/linux.png",
-      "Figma": "/skills-img/figma.png"
+      "Google Analytics": "/skills-img/ga.png", // Added Google Analytics
+      
+      // Collaboration & Tools
+      "Git": "/skills-img/git.png",
+      "Postman": "/skills-img/postman.png",
+      "Figma": "/skills-img/figma.png",
+      "Spline": "/skills-img/spline.png", // Added Spline
     };
-    const learnings = {
-      "Flutter": "/skills-img/flutter.png",
-      "Dart": "/skills-img/dart.png",
-      "Kotlin": "/skills-img/kotlin.png",
-      "Angular": "/skills-img/angular.png",
-      "PHP": "skills-img/php.png",
-      "Laravel": "skills-img/laravel.png",
-      "C#": "/skills-img/csharp.png",
-      ".NET": "/skills-img/dotnet.svg"
-    };
+    // const learnings = {
+    //   "Kotlin": "/skills-img/kotlin.png",
+    //   "Angular": "/skills-img/angular.png",
+    //   "PHP": "skills-img/php.png",
+    //   "Laravel": "skills-img/laravel.png",
+    //   ".NET": "/skills-img/dotnet.svg"
+    // };
 
 
     const skillContentRef = ref(null);
@@ -92,7 +113,7 @@ export default {
       }
 
       const handleOnMouseMove = (e) => {
-        const {currentTarget: target} = e;
+        const { currentTarget: target } = e;
         const rect = target.getBoundingClientRect();
         const x = e.clientX - rect.left;
         const y = e.clientY - rect.top;
@@ -109,7 +130,7 @@ export default {
     return {
       skillsMap,
       skillContentRef,
-      learnings,
+      // learnings,
       learningRef
     }
   }
@@ -131,12 +152,7 @@ export default {
   gap: 20px;
 }
 
-.skill-head {
-  font-size: var(--M);
-  margin-bottom: 60px;
-}
-
-.skills-content {
+/* .skills-content {
   border-radius: 5px;
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(5px);
@@ -150,13 +166,13 @@ export default {
   padding: 20px;
   width: 100%;
   scroll-margin-top: 200px;
-}
+} */
 
-.skills-content::before,
+/* .skills-content::before,
 .learning::before {
   background: radial-gradient(800px circle at var(--mouse-x) var(--mouse-y),
-  rgba(255, 255, 255, 0.1),
-  transparent 40%);
+      rgba(255, 255, 255, 0.1),
+      transparent 40%);
   content: "";
   height: 100%;
   width: 100%;
@@ -174,6 +190,10 @@ export default {
 .learning:hover::before {
   opacity: 1;
   cursor: crosshair;
+} */
+.skill-head {
+  font-size: var(--M);
+  margin-bottom: 60px;
 }
 
 .skill-img-wrapper {
@@ -233,9 +253,9 @@ export default {
 }
 
 @media screen and (max-width: 1000px) {
-  .skills-content {
+  /* .skills-content {
     width: 90vw;
-  }
+  } */
 
   .skill-img-wrapper {
     justify-content: space-around;
@@ -247,8 +267,8 @@ export default {
 }
 
 @media screen and (max-width: 638px) {
-  .skills-content {
+  /* .skills-content {
     scroll-margin-top: 100px;
-  }
+  } */
 }
 </style>

@@ -119,7 +119,7 @@ onMounted(() => {
 <style>
 .mobile-nav {
   position: fixed;
-  top: 5px;
+  top: 0px;
   display: none;
   width: 100%;
   height: 80px;
@@ -132,7 +132,7 @@ onMounted(() => {
   justify-content: space-between;
   align-items: center;
   border-radius: 40px;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(119, 118, 118, 0.1);
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(5px);
   border: 1px solid rgba(255, 255, 255, 0.2);
@@ -149,7 +149,7 @@ onMounted(() => {
 }
 
 .menu img {
-  width: 40px;
+  width: 30px;
   filter: invert(100);
 }
 
@@ -172,7 +172,7 @@ onMounted(() => {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(16, 16, 16, 0.6);
+  background: rgba(146, 146, 146, 0.6);
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(100px);
   padding: 20px;

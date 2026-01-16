@@ -1,8 +1,8 @@
 <template>
   <div class="welcome">
     <div class="name-wrapper">
-      <p class="name lName">{{ lName }}</p>
-      <p class="name fName">{{ fName }}</p>
+      <p class="name lName">Ory</p>
+      <p class="name fName">Chanraksa</p>
     </div>
   </div>
 </template>

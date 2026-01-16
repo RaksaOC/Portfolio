@@ -137,7 +137,7 @@ onMounted(() => {
     const hideNum = () => {
         if (window.innerWidth > 638) {
             num.style.transform = "translateX(-100%)";  // Move it out to the left
-            desc.style.transform = "translateX(calc(-12%))"
+            desc.style.transform = "translateX(calc(-15%))"
             num.classList.add('hidden');
         }
 
@@ -179,7 +179,7 @@ onMounted(() => {
 
 <style scoped>
 .project-card {
-    border-radius: 5px;
+    border-radius: 0px;
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
@@ -205,6 +205,7 @@ onMounted(() => {
     opacity: 1;
     cursor: crosshair;
 }
+
 
 .project-card::before {
     background: radial-gradient(800px circle at var(--mouse-x) var(--mouse-y),
@@ -251,10 +252,10 @@ onMounted(() => {
 }
 
 .stack-item {
-    font-size: var(--S);
-    border-radius: 30px;
+    font-size: var(--XS);
+    border-radius: 40px;
     border: 1px solid rgba(255, 255, 255, 0.2);
-    padding: 5px 10px;
+    padding: 5px 12px;
     user-select: none;
     transition: all 0.3s ease-in-out;
 }
@@ -271,12 +272,13 @@ onMounted(() => {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 20px;
+    gap: 10px;
     max-width: 50%;
+    margin-right: 20px;
 }
 
 .project-image {
-    width: 65%;
+    width:55%;
     aspect-ratio: 16/9;
     opacity: 0;
     visibility: hidden;
@@ -344,6 +346,7 @@ onMounted(() => {
 
 .project-links>a>img {
     width: 20px;
+    filter: invert();
 }
 
 .project-links a:hover {
@@ -491,6 +494,7 @@ onMounted(() => {
 
     .project-img-year {
         gap: 0;
+        margin-right: 0px;
     }
 }
 </style>

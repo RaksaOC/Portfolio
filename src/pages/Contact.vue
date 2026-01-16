@@ -37,7 +37,7 @@
             src="/contact-img/upwork.png" alt="social-pic"></a>
         <a href="https://www.facebook.com/ory.chanraksa/" target="_blank"><img src="/contact-img/facebook.png"
                                                                                alt="social-pic"></a>
-        <a href="https://www.youtube.com/@raksa7276" target="_blank"><img src="/contact-img/youtube.png"
+        <a href="https://www.youtube.com/@raksa7276" target="_blank"><img src="/contact-img/yt.png"
                                                                           alt="social-pic"></a>
         <a href="https://t.me/chanraksaOry" target="_blank"><img src="/contact-img/telegram.png"
                                                                  alt="social-pic"></a>
@@ -177,7 +177,7 @@ export default {
   align-items: center;
   gap: 20px;
   width: 80%;
-  border-radius: 5px;
+  border-radius: 0px;
   /* Glassmorphism Effect */
   background: rgba(255, 255, 255, 0.1);
   /* Light transparent background */
@@ -199,7 +199,7 @@ export default {
   content: "";
   height: 100%;
   width: 100%;
-  border-radius: inherit;
+  border-radius: 0px;
   position: absolute;
   top: 0;
   left: 0;
@@ -227,7 +227,7 @@ export default {
 .message textarea {
   cursor: text;
   padding: 10px;
-  border-radius: 10px;
+  border-radius: 0px;
   background: rgba(255, 255, 255, 0.1) !important;
   border: 1px solid rgba(255, 255, 255, 0.2);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
@@ -239,6 +239,7 @@ export default {
 
 .message textarea {
   min-height: 200px;
+  max-height: 200px;
   display: flex;
   align-items: flex-start;
   /* Aligns text to the top */
@@ -275,7 +276,7 @@ export default {
   width: 20%;
   padding: 20px;
   gap: 20px;
-  border-radius: 10px;
+  border-radius: 0px;
 }
 
 .social img {
@@ -299,7 +300,7 @@ export default {
   padding: 0.7em 1em 0.7em 0.9em;
   display: flex;
   align-items: center;
-  border-radius: 10px;
+  border-radius: 60px;
   overflow: hidden;
   transition: all 0.2s;
   cursor: pointer;
@@ -340,7 +341,7 @@ export default {
 .button {
   padding: 0.8rem 5rem;
   font-size: 1.3rem;
-  border-radius: 10px;
+  border-radius: 80px;
   /* Glassmorphism Effect */
   background: rgba(255, 255, 255, 0.1);
   /* Light transparent background */
@@ -362,7 +363,7 @@ export default {
 .button .text {
   position: absolute;
   left: 1.3rem;
-  top: 1.1rem;
+  top: 1rem;
   transition: 0.4s ease-in-out;
   color: var(--light);
   font-size: var(--S);

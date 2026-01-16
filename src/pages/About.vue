@@ -1,59 +1,55 @@
 <template>
-    <div class="about">
-        <Avatar :imagePath="'/my-real-pic.jpeg'" />
-        <div class="about-content" id="about">
-            <div class="about-me" ref="aboutMeCard" data-aos="fade-right">
-                <p class="about-me-head">About Me</p>
+    <div class="about-section">
+        <Avatar :imagePath="'/MY_PIC2.png'" />
+        <div class="about-layout" id="about">
+            <div class="bio-card" ref="aboutMeCard" data-aos="fade-right">
+                <p class="bio-title">About Me</p>
                 <br>
-                <div class="about-me-desc">
-                    <p><span>1</span> Hey!  I’m a problem-solver and tech enthusiast.I love turning ideas
+                <div class="bio-details">
+                    <p><span>1</span> Hey! I’m a software engineer. I love to solve problems and turn ideas
                         into reality.</p>
-                    <p><span>2</span> Learning, building, and growing from Phnom Penh, Cambodia 🇰🇭, always seeking new
-                        challenges. </p>
-                    <p><span>3</span> Passionate about full-stack development, algorithms, and creating
-                        scalable systems.</p>
-                    <p><span>4</span> Driven by curiosity, continuous learning, and a love for impactful technology.</p>
+                    <p><span>2</span> Experienced in full-stack and mobile development using modern, production-ready
+                        technologies.</p>
+                    <p><span>3</span> With many sophisticated projects under my belt, I value thoughtful system design,
+                        performance and clean
+                        architecture. </p>
                 </div>
-
             </div>
 
-            <div class="hobby-accolades">
-                <div class="hobby" ref="hobbyCard" data-aos="fade-left">
-                    <p class="hobby-head">Hobbies</p>
+            <div class="side-cards-wrapper">
+
+                <div class="stats-card" ref="accoladesCard" data-aos="fade-left">
+                    <p class="stats-title">Statistics</p>
                     <br>
-                    <div class="hobby-desc">
-                        <p><span>1</span> Coding—bringing innovative ideas to life.</p>
-                        <p><span>2</span> Riding motorcycles—can't beat the thrill of the open road. </p>
-                        <p><span>3</span> Gaming—taking time off to rejuvenate.</p>
+                    <div class="stats-content">
+                        <div class="stat-commits">
+                            <p class="stat-label">Contributions</p>
+                            <p class="stat-number">3.3K+</p>
+                        </div>
+                        <div class="stat-projects">
+                            <p class="stat-label">Projects</p>
+                            <p class="stat-number">15+</p>
+                        </div>
+                        <div class="stat-experience">
+                            <p class="stat-label">Y.O.Exp</p>
+                            <p class="stat-number">3+</p>
+                        </div>
                     </div>
-
-
                 </div>
-
-                <!-- <div class="accolades" ref="accoladesCard">
-                    <p class="accolades-head">Achievements</p>
+                <div class="tech-card" ref="favoriteTechCard" data-aos="fade-up">
+                    <p class="tech-title">Primary Technologies</p>
                     <br>
-                    <div class="accolades-desc">
-                        <p><span>1</span> Based in the heart of the city 🌆.</p>
-                        <p><span>2</span> Always exploring new spots around the world 🌍.</p>
-                        <p><span>3</span> Currently, you can find me coding away in my cozy home office 🏠💻.</p>
-                    </div>
-                </div> -->
-                <div class="accolades" ref="accoladesCard" data-aos="fade-up">
-                    <p class="accolades-head">Accolades</p>
-                    <br>
-                    <div class="accolades-desc">
-                        <div class="commits">
-                            <p class="commits-head">Contributions</p>
-                            <p class="commits-num">2.3K+</p>
-                        </div>
-                        <div class="projects">
-                            <p class="projects-head">Projects</p>
-                            <p class="projects-num">12+</p>
-                        </div>
-                        <div class="pr-merged">
-                            <p class="pr-head">Skills</p>
-                            <p class="pr-num">20+</p>
+                    <div class="tech-slider-wrapper">
+                        <div class="tech-slider">
+                            <div v-for="(item, key) in favoriteTech" :key="key" class="tech-slider-item">
+                                <img :src="item.image" :alt="key" />
+                                <p>{{ key }}</p>
+                            </div>
+                            <!-- duplicate for seamless loop -->
+                            <div v-for="(item, key) in favoriteTech" :key="key + '_dup'" class="tech-slider-item">
+                                <img :src="item.image" :alt="key" />
+                                <p>{{ key }}</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -73,11 +69,26 @@ export default {
     },
     setup() {
         const aboutMeCard = ref(null);
-        const hobbyCard = ref(null);
+        const favoriteTechCard = ref(null);
         const accoladesCard = ref(null);
 
+        // List of favorite tech (can customize)
+        const favoriteTech = {
+            "TypeScript": { image: "/skills-img/typescript.png" },
+            "Next.js": { image: "/skills-img/nextjs.png" },
+            "Tailwind CSS": { image: "/skills-img/tailwind.png" },
+            "Flutter": { image: "/skills-img/flutter.png" },
+            "Expo": { image: "/skills-img/expo.png" },
+            "Express.js": { image: "/skills-img/express.png" },
+            "Python": { image: "/skills-img/python.png" },
+            "Redis": { image: "/skills-img/redis.png" },
+            "PostgreSQL": { image: "/skills-img/postgre.png" },
+            "Firebase": { image: "/skills-img/firebase.png" },
+            "Docker": { image: "/skills-img/docker.png" },
+        };
+
         onMounted(() => {
-            const cards = [aboutMeCard.value, hobbyCard.value, accoladesCard.value];
+            const cards = [aboutMeCard.value, favoriteTechCard.value, accoladesCard.value];
 
             const handleOnMouseMove = (e) => {
                 const { currentTarget: target } = e;
@@ -98,20 +109,20 @@ export default {
 
         return {
             aboutMeCard,
-            hobbyCard,
+            favoriteTechCard,
             accoladesCard,
+            favoriteTech,
         };
     }
 };
 </script>
-
 
 <style scoped>
 #about {
     scroll-margin-top: 420px;
 }
 
-.about {
+.about-section {
     position: relative;
     display: flex;
     flex-direction: column;
@@ -122,7 +133,7 @@ export default {
     min-height: 100vh;
 }
 
-.about-content {
+.about-layout {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -135,13 +146,13 @@ export default {
     /* flex-wrap: wrap; */
 }
 
-.about-me {
+.bio-card {
     height: 100%;
     width: 50%;
     justify-content: start;
 }
 
-.hobby-accolades {
+.side-cards-wrapper {
     width: 50%;
     display: flex;
     justify-content: space-between;
@@ -151,20 +162,72 @@ export default {
     height: 100%;
 }
 
-.hobby {
+/* .hobby {
+    width: 100%;
+    height: 50%;
+} */
+
+.tech-card {
+    width: 100%;
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.tech-slider-wrapper {
+    overflow: hidden;
+    padding: 10px 0;
+    width: 100%;
+}
+
+.tech-slider {
+    display: flex;
+    align-items: center;
+    width: max-content;
+    animation: favorite-slide 18s linear infinite;
+}
+
+.tech-slider-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 20px;
+    gap: 10px;
+}
+
+.tech-slider-item img {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+}
+
+.tech-slider-item p {
+    color: var(--light);
+    font-size: var(--XS);
+    font-family: var(--poppins);
+    text-align: center;
+}
+
+@keyframes favorite-slide {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-50%);
+    }
+}
+
+.stats-card {
     width: 100%;
     height: 50%;
 }
 
-.accolades {
-    width: 100%;
-    height: 50%;
-}
-
-.about-me,
-.hobby,
-.accolades {
-    border-radius: 5px;
+.bio-card,
+.tech-card,
+.stats-card {
+    border-radius: 0px;
     /* Glassmorphism Effect */
     background: rgba(255, 255, 255, 0.1);
     /* Light transparent background */
@@ -184,17 +247,16 @@ export default {
     position: relative;
 }
 
-.about-me:hover::before,
-.hobby:hover::before,
-.accolades:hover::before {
+.bio-card:hover::before,
+.tech-card:hover::before,
+.stats-card:hover::before {
     opacity: 1;
     cursor: crosshair;
 }
 
-
-.about-me::before,
-.hobby::before,
-.accolades::before {
+.bio-card::before,
+.tech-card::before,
+.stats-card::before {
     background: radial-gradient(800px circle at var(--mouse-x) var(--mouse-y),
             rgba(255, 255, 255, 0.1),
             transparent 40%);
@@ -215,7 +277,7 @@ span {
     color: var(--gray-light);
 }
 
-.about-me-desc,
+.bio-details,
 .hobby-desc {
     display: flex;
     flex-direction: column;
@@ -225,18 +287,18 @@ span {
     width: 100%;
 }
 
-.accolades {
+.stats-card {
     width: 100%;
 }
 
-.accolades-desc {
+.stats-content {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
 }
 
-.accolades-desc div {
+.stats-content div {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -246,17 +308,15 @@ span {
     gap: 10px;
 }
 
-.commits {
+.stat-commits {
     border-right: 2px solid var(--gray-light) !important;
 }
 
-.pr-merged {
+.stat-experience {
     border-left: 2px solid var(--gray-light) !important;
 }
 
-.commits-head,
-.projects-head,
-.pr-head {
+.stat-label {
     font-size: var(--S);
 }
 
@@ -265,14 +325,14 @@ span {
         scroll-margin-top: 150px;
     }
 
-    .about-content {
+    .about-layout {
         flex-wrap: wrap;
     }
 
-    .about-me,
-    .hobby,
-    .accolades,
-    .hobby-accolades {
+    .bio-card,
+    .tech-card,
+    .stats-card,
+    .side-cards-wrapper {
         width: 90vw;
     }
 }
@@ -280,50 +340,49 @@ span {
 
 @media screen and (max-width: 628px) {
 
-    .about-me,
-    .hobby,
-    .accolades {
+    .bio-card,
+    .tech-card,
+    .stats-card {
         font-size: var(--M);
     }
 
-    .about-me-desc,
+    .bio-details,
     .hobby-desc,
-    .accolades-desc {
+    .stats-content {
         font-size: var(--XS);
     }
 
-    .pr-head {
+    .stat-label {
         text-align: center;
     }
 
 }
 
 @media screen and (max-width: 398px) {
-  .accolades-desc{
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-  }
+    .stats-content {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+    }
 
-  .commits {
-    border-right: none !important;
-    border-bottom: 2px solid var(--gray-light) !important;
-    gap: 20px;
-    padding-bottom: 20px !important;
-  }
+    .stat-commits {
+        border-right: none !important;
+        border-bottom: 2px solid var(--gray-light) !important;
+        gap: 20px;
+        padding-bottom: 20px !important;
+    }
 
-  .projects{
-    border-bottom: 2px solid var(--gray-light) !important;
-    gap: 20px;
-    padding-bottom: 20px !important;
-  }
+    .stat-projects {
+        border-bottom: 2px solid var(--gray-light) !important;
+        gap: 20px;
+        padding-bottom: 20px !important;
+    }
 
-  .pr-merged {
-    border-left: none !important;
-    gap: 20px;
-    padding-bottom: 20px !important;
-  }
+    .stat-experience {
+        border-left: none !important;
+        gap: 20px;
+        padding-bottom: 20px !important;
+    }
 }
-
 </style>
