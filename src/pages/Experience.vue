@@ -1,6 +1,6 @@
 <template>
     <div class="experience" id="experience">
-        <Avatar :imagePath="'/projects-img/projects-avatar.png'" />
+        <Avatar :imagePath="'/exp-avatar.png'" />
 
         <!-- Desktop Version -->
         <div class="experience-wrapper desktop-version">
