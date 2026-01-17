@@ -119,7 +119,7 @@ onMounted(() => {
 <style>
 .mobile-nav {
   position: fixed;
-  top: 0px;
+  top: 5px;
   display: none;
   width: 100%;
   height: 80px;

@@ -209,6 +209,12 @@ export default {
     text-align: center;
 }
 
+.tech-title,
+.stats-title,
+.bio-title {
+    font-size: 22px;
+}
+
 @keyframes favorite-slide {
     from {
         transform: translateX(0);

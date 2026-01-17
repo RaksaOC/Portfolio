@@ -294,7 +294,7 @@ path,
 
   .hero-text-1,
   .hero-text-2 {
-    font-size: var(--M);
+    font-size: 32px;
   }
 
   .button p {
