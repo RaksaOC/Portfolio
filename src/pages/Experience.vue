@@ -9,15 +9,15 @@
                 <div v-for="(exp, index) in experiences" :key="index" class="experience-row">
                     <!-- Card on left for even indices -->
                     <ExpCard v-if="index % 2 === 0" :place="exp.place" :role="exp.role" :desc="exp.desc"
-                        :duration="exp.duration" data-aos="zoom-in-right" data-aos-delay="500" data-aos-offset="800" />
+                        :duration="exp.duration" :offset="1200" aos="fade-right" />
 
                     <!-- Circular emblem (always in middle) -->
                     <div v-if="index % 2 === 1" class="spacer"></div>
-                    <div class="emblem" data-aos="zoom-in" data-aos-delay="500" data-aos-offset="800"></div>
+                    <div class="emblem" data-aos="zoom-in" data-aos-offset="1200"></div>
 
                     <!-- Card on right for odd indices -->
-                    <ExpCard v-if="index % 2 === 1" :place="exp.place" :role="exp.role" :desc="exp.desc"
-                        :duration="exp.duration" data-aos="zoom-in-left" data-aos-delay="500" data-aos-offset="800" />
+                    <ExpCard v-if="index % 2 === 1" :place="exp.place" :role="exp.role" :desc="exp.desc" :offset="1200"
+                        :duration="exp.duration" aos="fade-left" />
                 </div>
             </div>
         </div>
@@ -27,9 +27,9 @@
             <div class="mobile-timeline-bar"></div>
             <div class="mobile-experience-content">
                 <div v-for="(exp, index) in experiences" :key="index" class="mobile-experience-row">
-                    <div class="mobile-emblem" data-aos="zoom-in" data-aos-delay="500" data-aos-offset="800"></div>
-                    <ExpCard :place="exp.place" :role="exp.role" :desc="exp.desc" :duration="exp.duration"
-                        data-aos="fade-in-left" data-aos-delay="500" data-aos-offset="800" />
+                    <div class="mobile-emblem" data-aos="zoom-in" data-aos-offset="200"></div>
+                    <ExpCard :place="exp.place" :role="exp.role" :desc="exp.desc" :duration="exp.duration" :offset="200"
+                        aos="fade-left" />
                 </div>
             </div>
         </div>
@@ -83,6 +83,7 @@ const experiences = [
     align-items: center;
     z-index: 1;
     padding: 50px 0;
+    scroll-margin-top: -800px;
 }
 
 .experience-wrapper {

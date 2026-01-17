@@ -305,6 +305,7 @@ const projects = [
   justify-content: center;
   align-items: center;
   z-index: 1;
+  scroll-margin-top: -800px;
 
 }
 

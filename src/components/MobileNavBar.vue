@@ -31,6 +31,9 @@
           <a href="#projects" @click="hideContent">
             <li>Projects</li>
           </a>
+          <a href="#experience" @click="hideContent">
+            <li>Experience</li>
+          </a>
           <a href="#contact" @click="hideContent">
             <li>Contact</li>
           </a>

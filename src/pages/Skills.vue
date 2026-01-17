@@ -150,6 +150,7 @@ export default {
   align-items: center;
   z-index: 1;
   gap: 20px;
+  scroll-margin-top: -800px;
 }
 
 /* .skills-content {

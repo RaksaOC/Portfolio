@@ -158,6 +158,7 @@ export default {
   justify-content: center;
   align-items: center;
   z-index: 1;
+  scroll-margin-top: 800px;
   gap: 20px;
 }
 
@@ -475,6 +476,8 @@ path,
     transform: translate(-50%, -45%);
   }
 }
+
+
 </style>
 
 

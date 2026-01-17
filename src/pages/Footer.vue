@@ -2,7 +2,7 @@
     <footer class="footer" data-aos="fade-down">
         <div class="footer-content">
             <div class="footer-left">
-                <span class="logo">ChanRaksa</span>
+                <a href="#welcome" class="logo">ChanRaksa</a>
                 <!-- <span class="copyright"></span> -->
             </div>
             <nav class="footer-nav">
@@ -10,6 +10,7 @@
                 <a href="#about">About</a>
                 <a href="#skills">Skills</a>
                 <a href="#projects">Projects</a>
+                <a href="#experience">Experience</a>
                 <a href="#contact">Contact</a>
             </nav>
         </div>
@@ -51,6 +52,7 @@ export default {
     font-size: var(--L);
     font-family: var(--poppins);
     color: var(--light);
+    text-decoration: none;
 }
 
 .copyright {
@@ -69,25 +71,25 @@ export default {
 }
 
 .footer-nav a {
-  position: relative;
+    position: relative;
     text-decoration: none;
     color: var(--light);
 }
 
 .footer-nav a:before {
-  content: "";
-  position: absolute;
-  bottom: -5px;
-  height: 2px;
-  width: 100%;
-  background: var(--gray-light);
-  border-radius: 50px;
-  transform: scaleX(0);
-  transition: transform 0.2s linear;
+    content: "";
+    position: absolute;
+    bottom: -5px;
+    height: 2px;
+    width: 100%;
+    background: var(--gray-light);
+    border-radius: 50px;
+    transform: scaleX(0);
+    transition: transform 0.2s linear;
 }
 
 .footer-nav a:hover::before {
-  transform: scaleX(1);
+    transform: scaleX(1);
 }
 
 @media screen and (max-width: 1000px) {
@@ -96,11 +98,11 @@ export default {
         text-align: center;
     }
 
-  .footer-nav{
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-  }
+    .footer-nav {
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+    }
 }
 
 @media screen and (max-width: 638px) {

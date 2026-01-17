@@ -1,5 +1,5 @@
 <template>
-    <div class="exp-card">
+    <div class="exp-card" :data-aos="aos" :data-aos-offset="offset">
         <div class="place">{{ place }}</div>
         <div class="role-duration">
             <div class="role">{{ role }}</div>
@@ -14,8 +14,10 @@ defineProps({
     place: String,
     role: String,
     desc: String,
-    duration: String
-});
+    duration: String,
+    offset: Number,
+    aos: String
+})
 </script>
 
 <style scoped>
