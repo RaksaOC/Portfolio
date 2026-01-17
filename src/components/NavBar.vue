@@ -1,7 +1,7 @@
 <template>
     <ul class="nav-bar" ref="navBar">
         <div class="logo">
-            <p class="logo-text">ChanRaksa</p>
+            <a href="#welcome" class="logo-text">ChanRaksa</a>
         </div>
         <div class="links-theme">
             <div class="links">
@@ -9,6 +9,7 @@
                 <a href="#about" class="nav-link">About</a>
                 <a href="#skills" class="nav-link">Skills</a>
                 <a href="#projects" class="nav-link">Projects</a>
+                <a href="#experience" class="nav-link">Experience</a>
                 <a href="#contact" class="nav-link">Contact</a>
             </div>
             <div class="theme">
@@ -150,7 +151,7 @@ onMounted(() => {
     color: var(--light);
     font-size: var(--M);
     font-family: var(--poppins);
-    user-select: none;
+    text-decoration: none;;
 }
 
 .theme img {

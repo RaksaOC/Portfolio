@@ -1,5 +1,5 @@
 <template>
-  <div class="skill" data-aos="zoom-in-up" data-aos-delay="100" data-aos-offset="100">
+  <div class="skill" data-aos="flip-up" data-aos-delay="100" data-aos-offset="100">
     <img :src="image" alt="skill-img" data-aos="zoom-in-up" data-aos-delay="100" data-aos-offset="100">
     <p data-aos="zoom-in-up" data-aos-delay="100" data-aos-offset="100" data-aos-duration="1000">{{ name }}</p>
   </div>

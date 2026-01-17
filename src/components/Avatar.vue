@@ -55,8 +55,8 @@ onMounted(() => {
         if (isDragging) {
             return;
         }
-        cube.rotation.x += 0.002;
-        cube.rotation.y -= 0.002;
+        cube.rotation.x -= 0.002;
+        cube.rotation.y += 0.002;
     }
 
     let isDragging = false;
@@ -82,22 +82,21 @@ onMounted(() => {
         isDragging = false;
     });
 
+    const ROTATION_SPEED = 0.005;
+
     canvas.addEventListener('mousemove', (event) => {
         if (!isDragging) return;
 
         const deltaX = event.clientX - lastMouse.x;
         const deltaY = event.clientY - lastMouse.y;
 
-        currentRotation.x += deltaY * 0.005;
-        currentRotation.y += deltaX * 0.005;
+        currentRotation.y += deltaX * ROTATION_SPEED;
+        currentRotation.x += deltaY * ROTATION_SPEED;
 
-        avatar.rotation.x = currentRotation.x;
-        avatar.rotation.y = currentRotation.y;
+        avatar.rotation.set(currentRotation.x, currentRotation.y, 0);
 
-        lastMouse = {
-            x: event.clientX,
-            y: event.clientY,
-        };
+        lastMouse.x = event.clientX;
+        lastMouse.y = event.clientY;
     });
 
     // Touch events (mobile)
@@ -122,11 +121,10 @@ onMounted(() => {
         const deltaX = touch.clientX - lastMouse.x;
         const deltaY = touch.clientY - lastMouse.y;
 
-        currentRotation.x += deltaY * 0.005;
-        currentRotation.y += deltaX * 0.005;
+        currentRotation.x += deltaY * ROTATION_SPEED;
+        currentRotation.y += deltaX * ROTATION_SPEED;
 
-        avatar.rotation.x = currentRotation.x;
-        avatar.rotation.y = currentRotation.y;
+        avatar.rotation.set(currentRotation.x, currentRotation.y, 0);
 
         lastMouse = {
             x: touch.clientX,

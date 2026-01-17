@@ -30,6 +30,7 @@ provide('toggleTheme', toggleTheme);
 
 // Slow down scrolling
 import Lenis from 'lenis'
+import Experience from './pages/Experience.vue'
 
 const lenis = new Lenis({
   duration: 1.5, // Slows down scroll
@@ -55,6 +56,7 @@ requestAnimationFrame(raf)
     <About />
     <Skills />
     <Projects />
+    <Experience />
     <Contact />
     <Footer />
   </div>

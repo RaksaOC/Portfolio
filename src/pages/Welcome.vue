@@ -1,5 +1,5 @@
 <template>
-  <div class="welcome">
+  <div class="welcome" id="welcome">
     <div class="name-wrapper">
       <p class="name lName">Ory</p>
       <p class="name fName">Chanraksa</p>

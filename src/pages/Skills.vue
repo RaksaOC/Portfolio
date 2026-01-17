@@ -1,5 +1,5 @@
 <template>
-  <div class="skills">
+  <div class="skills" id="skills">
     <Avatar :imagePath="'/skills-img/skills-avatar.png'" />
     <!-- <div class="skills-content" ref="skillContentRef" id="skills" > -->
     <!-- <p class="skill-head">Techstack</p> -->
