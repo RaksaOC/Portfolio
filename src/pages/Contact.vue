@@ -456,7 +456,7 @@ path,
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
   opacity: 0;
   animation: fadeInOut 3s ease-in-out forwards;
-  z-index: 9999;
+  z-index: 1000;
   font-weight: 500;
 }
 

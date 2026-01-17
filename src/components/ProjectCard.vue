@@ -16,7 +16,8 @@
             </div>
             <div class="project-img-year ">
                 <div class="project-img-link">
-                    <img :src="project.mainImage" alt="" ref="projectImageRef" class="project-image">
+                    <img v-if="project.mainImage" :src="project.mainImage" alt="" ref="projectImageRef"
+                        :class="['project-image', { 'project-image-vertical': project.isVertical }]">
                 </div>
                 <p class="year">{{ project.year }}</p>
             </div>
@@ -25,44 +26,58 @@
             <img src="/arrow-down.png" alt="see more arrow">
         </div>
         <div class="bottom" ref="bottomRef">
-            <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-inner">
-                    <div class="carousel-item active" data-bs-interval="2000">
-                        <img :src="project.image[0]" class="d-block w-100" alt="...">
-                    </div>
-                    <div class="carousel-item" data-bs-interval="2000">
-                        <img :src="project.image[1]" class="d-block w-100" alt="...">
-                    </div>
-                    <div class="carousel-item" data-bs-interval="2000">
-                        <img :src="project.image[2]" class=" d-block w-100" alt="...">
-                    </div>
-                    <div class="carousel-item" data-bs-interval="2000">
-                        <img :src="project.image[3]" class="d-block w-100" alt="...">
-                    </div>
-                    <div class="carousel-item" data-bs-interval="2000">
-                        <img :src="project.image[4]" class="d-block w-100" alt="...">
+            <!-- Video display if videoSrc exists -->
+            <div v-if="project.videoSrc" class="media-container">
+                <video :src="project.videoSrc"
+                    :class="['project-video', { 'project-video-vertical': project.isVertical }]" autoplay muted loop
+                    :controls="false"></video>
+            </div>
+
+            <!-- Carousel display if no videoSrc but images exist -->
+            <template v-else-if="Array.isArray(project.image) && project.image.length > 0">
+                <div class="media-container">
+                    <div id="carouselExampleInterval"
+                        :class="['carousel', 'slide', { 'carousel-vertical': project.isVertical }]"
+                        data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active " data-bs-interval="2000" v-if="project.image[0]">
+                                <img :src="project.image[0]" class="d-block w-100" alt="...">
+                            </div>
+                            <div class="carousel-item" data-bs-interval="2000" v-if="project.image[1]">
+                                <img :src="project.image[1]" class="d-block w-100" alt="...">
+                            </div>
+                            <div class="carousel-item" data-bs-interval="2000" v-if="project.image[2]">
+                                <img :src="project.image[2]" class="d-block w-100" alt="...">
+                            </div>
+                            <div class="carousel-item" data-bs-interval="2000" v-if="project.image[3]">
+                                <img :src="project.image[3]" class="d-block w-100" alt="...">
+                            </div>
+                            <div class="carousel-item" data-bs-interval="2000" v-if="project.image[4]">
+                                <img :src="project.image[4]" class="d-block w-100" alt="...">
+                            </div>
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval"
+                            data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true" @click="notifyClick"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval"
+                            data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true" @click="notifyClick"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
                     </div>
                 </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval"
-                    data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true" @click="notifyClick"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval"
-                    data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true" @click="notifyClick"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
-            </div>
+            </template>
             <div class="description">
                 <p>{{ project.description }}</p>
             </div>
             <div class="project-links" ref="projectLinksRef">
-                <a :href="project.githubLink" target="_blank">
+                <a v-if="project.githubLink" :href="project.githubLink" target="_blank">
                     <img src="/contact-img/github.png" alt="">
                     GitHub
                 </a>
-                <a :href="project.ytLink" target="_blank">
+                <a v-if="project.ytLink" :href="project.ytLink" target="_blank">
                     <img src="/contact-img/yt.png" alt="">
                     Demo
                 </a>
@@ -97,7 +112,7 @@ onMounted(() => {
     const arrow = arrowRef.value;
     const bottom = bottomRef.value;
 
-    if (!card || !projectImage || !num) {
+    if (!card || !num) {
         console.log("Ref is not found!");
         return;
     }
@@ -113,17 +128,21 @@ onMounted(() => {
     };
     card.addEventListener("mousemove", handleOnMouseMove);
 
-    // Show image on hover
+    // Show image on hover (only if image exists)
     const showImage = () => {
-        projectImage.style.opacity = "0.7";
-        projectImage.style.transform = "translateY(-5px)";
-        projectImage.style.visibility = "visible";;
+        if (projectImage) {
+            projectImage.style.opacity = "0.7";
+            projectImage.style.transform = "translateY(-5px)";
+            projectImage.style.visibility = "visible";
+        }
     };
 
     const hideImage = () => {
-        projectImage.style.opacity = "0";
-        projectImage.style.transform = "translateY(10px)";
-        projectImage.style.visibility = "hidden";
+        if (projectImage) {
+            projectImage.style.opacity = "0";
+            projectImage.style.transform = "translateY(10px)";
+            projectImage.style.visibility = "hidden";
+        }
     };
 
     const showNum = () => {
@@ -136,8 +155,14 @@ onMounted(() => {
 
     const hideNum = () => {
         if (window.innerWidth > 638) {
+            // Calculate the exact offset based on number width + gap
+            const numWidth = num.offsetWidth;
+            const textWrapper = card.querySelector('.text-wrapper');
+            const gap = textWrapper ? parseInt(getComputedStyle(textWrapper).gap) || 5 : 5;
+            const offset = -(numWidth + gap) + 10;
+
             num.style.transform = "translateX(-100%)";  // Move it out to the left
-            desc.style.transform = "translateX(calc(-15%))"
+            desc.style.transform = `translateX(${offset}px)`;  // Move by fixed pixels
             num.classList.add('hidden');
         }
 
@@ -159,8 +184,11 @@ onMounted(() => {
     });
 
 
-    card.addEventListener("mouseenter", showImage);
-    card.addEventListener("mouseleave", hideImage);
+    // Only add image hover listeners if image exists
+    if (projectImage) {
+        card.addEventListener("mouseenter", showImage);
+        card.addEventListener("mouseleave", hideImage);
+    }
 
     card.addEventListener("mouseenter", hideNum);
     card.addEventListener("mouseleave", showNum);
@@ -242,6 +270,7 @@ onMounted(() => {
     justify-content: start;
     align-items: center;
     gap: 10px;
+    flex-wrap: wrap;
 }
 
 .desc {
@@ -278,13 +307,19 @@ onMounted(() => {
 }
 
 .project-image {
-    width:55%;
-    aspect-ratio: 16/9;
+    width: 65%;
+    aspect-ratio: 16/10;
     opacity: 0;
     visibility: hidden;
     transition: all 0.3s ease-in-out;
-    border-radius: 10px;
     transform: translateY(10px);
+    object-fit: cover;
+}
+
+.project-image-vertical {
+    aspect-ratio: 9/17;
+    /* Maintain same height as landscape: landscape height = 55% * 9/16, vertical width = (55% * 9/16) / (16/9) */
+    width: calc(65% * 81 / 256);
 }
 
 .project-image:hover {
@@ -324,10 +359,11 @@ onMounted(() => {
 
 .project-links {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     width: 50%;
     transition: all 0.3s ease-in-out;
+    gap: 20px;
 }
 
 .project-links a {
@@ -399,14 +435,44 @@ onMounted(() => {
 }
 
 .carousel {
-    border-radius: 10px;
     width: 300px;
     overflow-x: hidden;
+    position: relative;
 }
 
 .carousel-item img {
     width: 300px !important;
+    aspect-ratio: 16/10;
+    object-fit: cover;
+}
+
+.carousel-vertical {
+    aspect-ratio: 9/17;
+    /* Maintain same height as landscape: landscape height = 300 * 9/16, vertical width = (300 * 9/16) / (16/9) */
+    width: calc(500px * 81 / 256);
+}
+
+.carousel-vertical .carousel-item img {
+    width: 100% !important;
+    aspect-ratio: 9/17;
+    object-fit: cover;
+}
+
+.media-container {
+    position: relative;
+    display: inline-block;
+}
+
+.project-video {
+    width: 300px;
     aspect-ratio: 16/9;
+    object-fit: cover;
+}
+
+.project-video-vertical {
+    aspect-ratio: 9/17;
+    /* Maintain same height as landscape: landscape height = 300 * 9/16, vertical width = (300 * 9/16) / (16/9) */
+    width: calc(500px * 81 / 256);
 }
 
 .carousel-control-prev-icon {
@@ -458,11 +524,11 @@ onMounted(() => {
         gap: 20px;
     }
 
-  .tech-stack {
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-  }
+    .tech-stack {
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+    }
 
     .bottom {
         max-width: 100%;
@@ -473,6 +539,10 @@ onMounted(() => {
         gap: 0;
     }
 
+    .title{
+        font-size: var(--M);
+    }
+
     .desc {
         display: flex;
         flex-direction: column;
@@ -480,8 +550,8 @@ onMounted(() => {
         align-items: center;
     }
 
-    .description{
-      font-size: var(--XS);
+    .description {
+        font-size: var(--XS);
     }
 
     .num {

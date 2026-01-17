@@ -123,7 +123,7 @@ onMounted(() => {
   display: none;
   width: 100%;
   height: 80px;
-  z-index: 70;
+  z-index: 999;
 }
 
 .mobile-nav-wrapper {
@@ -149,7 +149,7 @@ onMounted(() => {
 }
 
 .menu img {
-  width: 30px;
+  width: 25px;
   filter: invert(100);
 }
 

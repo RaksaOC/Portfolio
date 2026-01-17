@@ -43,7 +43,6 @@ export default {
     }
   }
 }
-
 </script>
 
 <style scoped>
@@ -112,7 +111,6 @@ span {
   border-radius: 50%;
   filter: invert(100);
   cursor: pointer;
-
 }
 
 .links a {
@@ -288,6 +286,19 @@ path,
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
+    gap: 10px;
+  }
+}
+
+@media screen and (max-width: 398px) {
+
+  .hero-text-1,
+  .hero-text-2 {
+    font-size: var(--M);
+  }
+
+  .button p {
+    font-size: var(--XS);
   }
 }
 </style>

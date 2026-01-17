@@ -92,7 +92,7 @@ defineProps({
 
 @media screen and (max-width: 398px) {
   .name-wrapper {
-    font-size: var(--XL);
+    font-size: var(--L);
   }
 }
 </style>
