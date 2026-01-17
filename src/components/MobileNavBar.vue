@@ -49,7 +49,7 @@
 </template>
 
 <script setup>
-import {onMounted, ref} from 'vue';
+import { onMounted, ref } from 'vue';
 
 const mobileNavRef = ref(null);
 const menuRef = ref(null);
@@ -137,8 +137,8 @@ onMounted(() => {
   -webkit-backdrop-filter: blur(5px);
   border: 1px solid rgba(255, 255, 255, 0.2);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  padding: 25px;
-  margin: 5px;
+  padding: 20px;
+  margin: 10px 20px;
 }
 
 .logo-text {
@@ -172,7 +172,7 @@ onMounted(() => {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(146, 146, 146, 0.6);
+  background: rgba(59, 59, 59, 0.6);
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(100px);
   padding: 20px;
@@ -203,7 +203,8 @@ onMounted(() => {
 
 .nav-links li {
   cursor: pointer;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.3); ;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  ;
   padding: 10px;
 }
 
@@ -265,14 +266,14 @@ onMounted(() => {
   border: 5px solid var(--dark);
 }
 
-#checkboxInput:checked + .toggleSwitch::after {
+#checkboxInput:checked+.toggleSwitch::after {
   transform: translateX(160%);
   transition-duration: .2s;
   background-color: var(--light);
 }
 
 /* Switch background change */
-#checkboxInput:checked + .toggleSwitch {
+#checkboxInput:checked+.toggleSwitch {
   background-color: var(--light);
   transition-duration: .2s;
 }

@@ -3,7 +3,7 @@
     <p class="based-in">Based in Phnom Penh, Cambodia</p>
     <div class="hero-text">
       <p class="hero-text-1">Hello, I'm Raksa a <span></span> </p>
-      <p class="hero-text-2">  <span>software engineer</span> </p>
+      <p class="hero-text-2"> <span>software engineer</span> </p>
     </div>
     <p class="hero-desc">Innovating creative solutions through code</p>
     <div class="links">
@@ -56,7 +56,7 @@ export default {
   align-items: center;
   width: 100%;
   height: 100vh;
-  padding: 10px;
+  padding: 20px;
 }
 
 .hero-text {
@@ -262,7 +262,9 @@ path,
 }
 
 @media screen and (max-width: 968px) {
-  .hero-text-1, .hero-text-2 {
+
+  .hero-text-1,
+  .hero-text-2 {
     font-size: var(--L);
   }
 
@@ -272,7 +274,9 @@ path,
 }
 
 @media screen and (max-width: 638px) {
-  .hero-text-1, .hero-text-2 {
+
+  .hero-text-1,
+  .hero-text-2 {
     font-size: var(--L);
   }
 
