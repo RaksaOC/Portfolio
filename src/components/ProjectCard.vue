@@ -28,9 +28,11 @@
         <div class="bottom" ref="bottomRef">
             <!-- Video display if videoSrc exists -->
             <div v-if="project.videoSrc" class="media-container">
-                <video :src="project.videoSrc"
-                    :class="['project-video', { 'project-video-vertical': project.isVertical }]" autoplay muted loop
-                    :controls="false"></video>
+                <a :href="project.ytLink" target="_blank">
+                    <video :src="project.videoSrc"
+                        :class="['project-video', { 'project-video-vertical': project.isVertical }]" autoplay muted loop
+                        playsinline playsInline :controls="false" style="cursor: pointer;"></video>
+                </a>
             </div>
 
             <!-- Carousel display if no videoSrc but images exist -->
@@ -101,6 +103,7 @@ const bottomRef = ref(null);
 const notifyClick = () => {
     console.log("is pressed");
 }
+
 
 const isExtraVisible = ref(true);
 
@@ -285,7 +288,6 @@ onMounted(() => {
     border-radius: 40px;
     border: 1px solid rgba(255, 255, 255, 0.2);
     padding: 5px 12px;
-    user-select: none;
     transition: all 0.3s ease-in-out;
 }
 
@@ -539,7 +541,7 @@ onMounted(() => {
         gap: 0;
     }
 
-    .title{
+    .title {
         font-size: var(--M);
     }
 

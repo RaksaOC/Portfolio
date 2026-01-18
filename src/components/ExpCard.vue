@@ -58,7 +58,6 @@ defineProps({
 .desc {
     font-size: var(--XS);
     color: var(--light);
-    line-height: 1.6;
 }
 
 @media screen and (max-width: 768px) {
@@ -66,6 +65,10 @@ defineProps({
         flex-direction: column;
         align-items: flex-start;
         gap: 10px;
+    }
+
+    .desc {
+        font-size: var(--XS);
     }
 }
 </style>
