@@ -28,7 +28,7 @@
         <div class="bottom" ref="bottomRef">
             <!-- Video display if videoSrc exists -->
             <div v-if="project.videoSrc" class="media-container">
-                <a :href="project.ytLink" target="_blank">
+                <a :href="project.ytLink ? project.ytLink : project.githubLink" target="_blank">
                     <video :src="project.videoSrc"
                         :class="['project-video', { 'project-video-vertical': project.isVertical }]" autoplay muted loop
                         playsinline playsInline :controls="false" style="cursor: pointer;"></video>
@@ -37,39 +37,41 @@
 
             <!-- Carousel display if no videoSrc but images exist -->
             <template v-else-if="Array.isArray(project.image) && project.image.length > 0">
-                <div class="media-container">
-                    <div id="carouselExampleInterval"
-                        :class="['carousel', 'slide', { 'carousel-vertical': project.isVertical }]"
-                        data-bs-ride="carousel">
-                        <div class="carousel-inner">
-                            <div class="carousel-item active " data-bs-interval="2000" v-if="project.image[0]">
-                                <img :src="project.image[0]" class="d-block w-100" alt="...">
+                <a :href="project.ytLink ? project.ytLink : project.githubLink" target="_blank">
+                    <div class="media-container">
+                        <div id="carouselExampleInterval"
+                            :class="['carousel', 'slide', { 'carousel-vertical': project.isVertical }]"
+                            data-bs-ride="carousel">
+                            <div class="carousel-inner">
+                                <div class="carousel-item active " data-bs-interval="2000" v-if="project.image[0]">
+                                    <img :src="project.image[0]" class="d-block w-100" alt="...">
+                                </div>
+                                <div class="carousel-item" data-bs-interval="2000" v-if="project.image[1]">
+                                    <img :src="project.image[1]" class="d-block w-100" alt="...">
+                                </div>
+                                <div class="carousel-item" data-bs-interval="2000" v-if="project.image[2]">
+                                    <img :src="project.image[2]" class="d-block w-100" alt="...">
+                                </div>
+                                <div class="carousel-item" data-bs-interval="2000" v-if="project.image[3]">
+                                    <img :src="project.image[3]" class="d-block w-100" alt="...">
+                                </div>
+                                <div class="carousel-item" data-bs-interval="2000" v-if="project.image[4]">
+                                    <img :src="project.image[4]" class="d-block w-100" alt="...">
+                                </div>
                             </div>
-                            <div class="carousel-item" data-bs-interval="2000" v-if="project.image[1]">
-                                <img :src="project.image[1]" class="d-block w-100" alt="...">
-                            </div>
-                            <div class="carousel-item" data-bs-interval="2000" v-if="project.image[2]">
-                                <img :src="project.image[2]" class="d-block w-100" alt="...">
-                            </div>
-                            <div class="carousel-item" data-bs-interval="2000" v-if="project.image[3]">
-                                <img :src="project.image[3]" class="d-block w-100" alt="...">
-                            </div>
-                            <div class="carousel-item" data-bs-interval="2000" v-if="project.image[4]">
-                                <img :src="project.image[4]" class="d-block w-100" alt="...">
-                            </div>
+                            <button class="carousel-control-prev" type="button"
+                                data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true" @click="notifyClick"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button"
+                                data-bs-target="#carouselExampleInterval" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true" @click="notifyClick"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
                         </div>
-                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval"
-                            data-bs-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true" @click="notifyClick"></span>
-                            <span class="visually-hidden">Previous</span>
-                        </button>
-                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval"
-                            data-bs-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true" @click="notifyClick"></span>
-                            <span class="visually-hidden">Next</span>
-                        </button>
                     </div>
-                </div>
+                </a>
             </template>
             <div class="description">
                 <p>{{ project.description }}</p>
