@@ -1,15 +1,33 @@
 <template>
   <div class="projects" data-aos-delay="500">
     <Avatar :imagePath="'/projects-img/projects-avatar.png'" />
+
+    <!-- Tab Navigation -->
+    <div class="tab-container">
+      <div class="tab-wrapper">
+        <div class="tab-indicator" :style="tabIndicatorStyle"></div>
+        <button class="tab-button" :class="{ active: activeTab === 'featured' }" @click="activeTab = 'featured'">
+          Featured
+        </button>
+        <button class="tab-button" :class="{ active: activeTab === 'all' }" @click="activeTab = 'all'">
+          All
+        </button>
+      </div>
+    </div>
+
     <div class="projects-wrapper" id="projects">
-      <ProjectCard v-for="project in projects" :project="project" :key="project.number" />
+      <ProjectCard v-for="(project, index) in displayedProjects" :project="project" :displayNumber="index + 1"
+        :key="project.number" />
     </div>
   </div>
 </template>
 
 <script setup>
+import { ref, computed } from 'vue';
 import Avatar from '../components/Avatar.vue';
 import ProjectCard from '../components/ProjectCard.vue';
+
+const activeTab = ref('featured');
 
 
 const projects = [
@@ -287,12 +305,26 @@ const projects = [
       "/projects-img/3dPort/4.png",
       "/projects-img/3dPort/5.png"
     ],
-    techStack: ["Three.js", "Next.js", "Tailwind"],
-    description: "A visually stunning 3D web portfolio built using Three.js and Next.js to showcase projects interactively.",
+    techStack: ["Three.js", "Vue.js", "Bootstrap"],
+    description: "A visually stunning 3D web portfolio built using Three.js and Vue.js to showcase myself, skills, projects and experience.",
     githubLink: "https://github.com/RaksaOC/Portfolio",
     ytLink: "https://www.chanraksa.com",
   },
 ];
+
+// Featured projects: first 8 + Quizzy (10) + 3D Portfolio (16)
+const featuredProjectNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 10, 16];
+
+const displayedProjects = computed(() => {
+  if (activeTab.value === 'featured') {
+    return projects.filter(project => featuredProjectNumbers.includes(project.number));
+  }
+  return projects;
+});
+
+const tabIndicatorStyle = computed(() => ({
+  transform: activeTab.value === 'featured' ? 'translateX(0)' : 'translateX(calc(100% + 4px))',
+}));
 
 </script>
 
@@ -306,7 +338,74 @@ const projects = [
   align-items: center;
   z-index: 1;
   scroll-margin-top: -800px;
+  position: relative;
+}
 
+.tab-container {
+  /* Sticky only within the Projects section (unsticks when Projects ends) */
+  position: sticky;
+  top: 100px;
+  z-index: 100;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 30px;
+  margin-top: 20px;
+}
+
+.tab-wrapper {
+  position: relative;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 50px;
+  padding: 4px;
+  display: flex;
+  gap: 4px;
+  overflow: hidden;
+}
+
+.tab-indicator {
+  position: absolute;
+  top: 4px;
+  bottom: 4px;
+  left: 4px;
+  width: calc(50% - 6px);
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 50px;
+  transition: transform 0.25s ease;
+  z-index: 0;
+}
+
+.tab-button {
+  min-width: 180px;
+  padding: 10px 30px;
+  border: none;
+  background: transparent;
+  color: var(--light);
+  font-family: var(--poppins);
+  font-size: var(--S);
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+  border-radius: 50px;
+  position: relative;
+  z-index: 1;
+  flex: 1;
+}
+
+.tab-button:not(.active) {
+  opacity: 0.7;
+}
+
+.tab-button:hover {
+  opacity: 1;
 }
 
 .projects-wrapper {
@@ -323,6 +422,12 @@ const projects = [
 @media screen and (max-width: 1000px) {
   .projects-wrapper {
     width: 90vw;
+  }
+
+  .tab-button {
+    padding: 8px 20px;
+    font-size: var(--XS);
+    min-width: 140px;
   }
 }
 </style>

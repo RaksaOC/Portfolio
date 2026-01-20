@@ -37,8 +37,8 @@ export default {
   methods: {
     downloadResume() {
       const link = document.createElement('a');
-      link.href = '/resume.pdf';
-      link.download = 'OryChanraksa-Resume.pdf';
+      link.href = '/ORY-CHANRAKSA-RESUME.pdf';
+      link.download = 'ORY-CHANRAKSA-RESUME.pdf';
       link.click();
     }
   }

@@ -1,8 +1,9 @@
 <template>
   <div class="contact" data-aos-delay="500">
-    <Avatar :imagePath="'/contact-img/contact-avatar.png'"/>
+    <Avatar :imagePath="'/contact-img/contact-avatar.png'" />
     <div class="form-social" id="contact">
-      <form class="form" ref="formRef" id="form" data-aos="fade-right" action="https://formspree.io/f/xqaqpjpn" method="POST">
+      <form class="form" ref="formRef" id="form" data-aos="fade-right" action="https://formspree.io/f/xqaqpjpn"
+        method="POST">
         <div class="email">
           <p class="email-label">Email</p>
           <input type="email" name="email" id="email" required>
@@ -18,7 +19,7 @@
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
                   <path fill="none" d="M0 0h24v24H0z"></path>
                   <path fill="currentColor"
-                        d="M1.946 9.315c-.522-.174-.527-.455.01-.634l19.087-6.362c.529-.176.832.12.684.638l-5.454 19.086c-.15.529-.455.547-.679.045L12 14l6-8-8 6-8.054-2.685z">
+                    d="M1.946 9.315c-.522-.174-.527-.455.01-.634l19.087-6.362c.529-.176.832.12.684.638l-5.454 19.086c-.15.529-.455.547-.679.045L12 14l6-8-8 6-8.054-2.685z">
                   </path>
                 </svg>
               </div>
@@ -29,18 +30,16 @@
       </form>
 
       <div class="social" ref="socialRef" data-aos="fade-left">
-        <a href="https://github.com/RaksaOC" target="_blank"><img src="/contact-img/github.png"
-                                                                  alt="social-pic"></a>
+        <a href="https://github.com/RaksaOC" target="_blank"><img src="/contact-img/github.png" alt="social-pic"></a>
         <a href="https://www.linkedin.com/in/ory-chanraksa-1702b6263/" target="_blank"><img
             src="/contact-img/linkedin.png" alt="social-pic"></a>
         <a href="https://www.upwork.com/freelancers/~0193c96741cd57f0f1?mp_source=share" target="_blank"><img
             src="/contact-img/upwork.png" alt="social-pic"></a>
         <a href="https://www.facebook.com/ory.chanraksa/" target="_blank"><img src="/contact-img/facebook.png"
-                                                                               alt="social-pic"></a>
+            alt="social-pic"></a>
         <a href="https://www.youtube.com/@raksa7276" target="_blank"><img src="/contact-img/yt.png"
-                                                                          alt="social-pic"></a>
-        <a href="https://t.me/chanraksaOry" target="_blank"><img src="/contact-img/telegram.png"
-                                                                 alt="social-pic"></a>
+            alt="social-pic"></a>
+        <a href="https://t.me/chanraksaOry" target="_blank"><img src="/contact-img/telegram.png" alt="social-pic"></a>
       </div>
     </div>
     <div class="download-cv" ref="cvRef" @click="downloadResume">
@@ -51,10 +50,10 @@
         <div class="svg">
           <svg xmlns="http://www.w3.org/2000/svg" fill="white" class="bi bi-download" viewBox="0 0 16 16">
             <path
-                d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z">
+              d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z">
             </path>
             <path
-                d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z">
+              d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z">
             </path>
           </svg>
         </div>
@@ -137,8 +136,8 @@ export default {
   methods: {
     downloadResume() {
       const link = document.createElement('a');
-      link.href = '/resume.pdf';
-      link.download = 'OryChanraksa-Resume.pdf';
+      link.href = '/ORY-CHANRAKSA-RESUME.pdf';
+      link.download = 'ORY-CHANRAKSA-RESUME.pdf';
       link.click();
     }
   }
@@ -195,8 +194,8 @@ export default {
 .form::before,
 .social::before {
   background: radial-gradient(800px circle at var(--mouse-x) var(--mouse-y),
-  rgba(255, 255, 255, 0.1),
-  transparent 40%);
+      rgba(255, 255, 255, 0.1),
+      transparent 40%);
   content: "";
   height: 100%;
   width: 100%;
@@ -404,7 +403,7 @@ path,
   scale: 0.97;
 }
 
-.text{
+.text {
   margin-top: 1px;
 }
 
@@ -450,7 +449,8 @@ path,
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: #a6e3a1; /* Softer green */
+  background-color: #a6e3a1;
+  /* Softer green */
   color: #1a3e1a;
   padding: 16px 24px;
   border-radius: 10px;
@@ -467,17 +467,16 @@ path,
     opacity: 0;
     transform: translate(-50%, -55%);
   }
-  10%, 90% {
+
+  10%,
+  90% {
     opacity: 1;
     transform: translate(-50%, -50%);
   }
+
   100% {
     opacity: 0;
     transform: translate(-50%, -45%);
   }
 }
-
-
 </style>
-
-

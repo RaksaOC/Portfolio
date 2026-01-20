@@ -6,8 +6,19 @@
           ChanRaksa
         </p>
       </div>
-      <div class="menu" ref="menuRef">
-        <img src="/menu.svg" alt="">
+      <!-- Theme switcher moved here -->
+      <div class="theme-bar-wrapper">
+        <div class="theme-bar">
+          <img src="../assets/dark-icon.png" alt="darkTheme">
+          <div class="switch">
+            <input type="checkbox" id="checkboxInput" @click="toggleTheme">
+            <span class="toggleSwitch"></span>
+          </div>
+          <img src="../assets/light-icon.png" alt="lightTheme">
+        </div>
+        <div class="menu" ref="menuRef">
+          <img src="/menu.svg" alt="">
+        </div>
       </div>
     </div>
     <div class="mobile-nav-content" ref="contentRef">
@@ -37,14 +48,7 @@
           <a href="#contact" @click="hideContent">
             <li>Contact</li>
           </a>
-          <div class="theme">
-            <img src="../assets/dark-icon.png" alt="darkTheme">
-            <div class="switch">
-              <input type="checkbox" id="checkboxInput" @click="toggleTheme">
-              <span class="toggleSwitch"></span>
-            </div>
-            <img src="../assets/light-icon.png" alt="lightTheme">
-          </div>
+          <!-- Theme switcher removed from here -->
         </ul>
       </div>
     </div>
@@ -151,6 +155,20 @@ onMounted(() => {
   color: var(--light);
 }
 
+/* New: Adjust bar theme switcher on bar */
+.theme-bar-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.theme-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
 .menu img {
   width: 25px;
   filter: invert(100);
@@ -216,15 +234,9 @@ onMounted(() => {
   text-decoration: none;
 }
 
-.theme {
-  display: flex;
-  justify-content: space-between;
-  gap: 10px;
-  margin-top: 10px;
-}
 
-.theme img {
-  width: 30px;
+.theme-bar img {
+  width: 15px;
 }
 
 /* From Uiverse.io by vinodjangid07 */
@@ -248,8 +260,8 @@ onMounted(() => {
   align-items: center;
   justify-content: center;
   position: relative;
-  width: 50px;
-  height: 30px;
+  width: 35px;
+  height: 20px;
   background-color: rgb(82, 82, 82);
   border-radius: 20px;
   cursor: pointer;
@@ -259,8 +271,8 @@ onMounted(() => {
 .toggleSwitch::after {
   content: "";
   position: absolute;
-  height: 15px;
-  width: 15px;
+  height: 13px;
+  width: 13px;
   left: 5px;
   background-color: transparent;
   border-radius: 50%;
@@ -270,7 +282,7 @@ onMounted(() => {
 }
 
 #checkboxInput:checked+.toggleSwitch::after {
-  transform: translateX(160%);
+  transform: translateX(95%);
   transition-duration: .2s;
   background-color: var(--light);
 }
