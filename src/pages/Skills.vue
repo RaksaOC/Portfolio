@@ -4,7 +4,8 @@
     <!-- <div class="skills-content" ref="skillContentRef" id="skills" > -->
     <!-- <p class="skill-head">Techstack</p> -->
     <div class="skill-img-wrapper">
-      <Skill v-for="(value, key) in skillsMap" :key="key" :image="value" :name="key" />
+      <Skill v-for="(skill, index) in skills" :key="skill.name" :image="skill.image" :name="skill.name"
+        :isEven="index % 2 === 0" :index="index" />
     </div>
     <!-- </div> -->
     <!-- <div class="learning" ref="learningRef" data-aos="zoom-out-up">
@@ -22,7 +23,6 @@
 </template>
 
 <script>
-
 import Skill from '../components/Skill.vue';
 import Avatar from '../components/Avatar.vue';
 import { ref, onMounted } from 'vue';
@@ -34,62 +34,62 @@ export default {
     Avatar
   },
   setup() {
-    // Declare skillsMap here
-    const skillsMap = {
+    // Change skillsMap to skills array
+    const skills = [
       // Core Languages
-      "Java": "/skills-img/java.png",
-      "C++": "/skills-img/c++.png",
-      "Python": "/skills-img/python.png",
-      "JavaScript": "/skills-img/javascript.png",
-      "TypeScript": "/skills-img/typescript.png",
-      "Dart": "/skills-img/dart.png",
-      "C#": "/skills-img/csharp.png",
+      { name: "Java", image: "/skills-img/java.png" },
+      { name: "C++", image: "/skills-img/c++.png" },
+      { name: "Python", image: "/skills-img/python.png" },
+      { name: "JavaScript", image: "/skills-img/javascript.png" },
+      { name: "TypeScript", image: "/skills-img/typescript.png" },
+      { name: "Dart", image: "/skills-img/dart.png" },
+      { name: "C#", image: "/skills-img/csharp.png" },
 
       // Web Fundamentals
-      "HTML": "/skills-img/html.png",
-      "CSS": "/skills-img/css.png",
-      "Tailwind CSS": "/skills-img/tailwind.png",
-      "Bootstrap": "/skills-img/bootstrap.png",
+      { name: "HTML", image: "/skills-img/html.png" },
+      { name: "CSS", image: "/skills-img/css.png" },
+      { name: "Tailwind CSS", image: "/skills-img/tailwind.png" },
+      { name: "Bootstrap", image: "/skills-img/bootstrap.png" },
 
       // Frontend Frameworks/Libraries & Engines
-      "React": "/skills-img/react.png",
-      "Next.js": "/skills-img/nextjs.png",
-      "Vue": "/skills-img/vue.svg",
-      "Three.js": "/skills-img/threejs.png",
-      "Flutter": "/skills-img/flutter.png",
-      "Expo": "/skills-img/expo.png", // Expo (commonly used with React Native)
-      "JavaFX": "/skills-img/javafx.png",
-      "Unity": "/skills-img/unity.png", // Moved Unity here, with frameworks/engines
-      
+      { name: "React", image: "/skills-img/react.png" },
+      { name: "Next.js", image: "/skills-img/nextjs.png" },
+      { name: "Vue", image: "/skills-img/vue.svg" },
+      { name: "Three.js", image: "/skills-img/threejs.png" },
+      { name: "Flutter", image: "/skills-img/flutter.png" },
+      { name: "Expo", image: "/skills-img/expo.png" }, // Expo (commonly used with React Native)
+      { name: "JavaFX", image: "/skills-img/javafx.png" },
+      { name: "Unity", image: "/skills-img/unity.png" }, // Moved Unity here, with frameworks/engines
+
       // Backend Frameworks/Platforms
-      "Node.js": "/skills-img/nodejs.png",
-      "Express.js": "/skills-img/express.png",
-      "FastAPI": "/skills-img/fastapi.png", // Added FastAPI
-      "Spring Boot": "/skills-img/spring.png", // added as "Spring Boot" (use your spring.png if available)
-      
+      { name: "Node.js", image: "/skills-img/nodejs.png" },
+      { name: "Express.js", image: "/skills-img/express.png" },
+      { name: "FastAPI", image: "/skills-img/fastapi.png" }, // Added FastAPI
+      { name: "Spring Boot", image: "/skills-img/spring.png" }, // added as "Spring Boot"
+
       // Databases & Cloud
-      "MySQL": "/skills-img/mysql.png",
-      "PostgreSQL": "/skills-img/postgre.png",
-      "MongoDB": "/skills-img/mongodb.svg",
-      "Redis": "/skills-img/redis.png",
-      "Firebase": "/skills-img/firebase.png",
-      
+      { name: "MySQL", image: "/skills-img/mysql.png" },
+      { name: "PostgreSQL", image: "/skills-img/postgre.png" },
+      { name: "MongoDB", image: "/skills-img/mongodb.svg" },
+      { name: "Redis", image: "/skills-img/redis.png" },
+      { name: "Firebase", image: "/skills-img/firebase.png" },
+
       // Analytics
-      
+
       // DevOps & Deployment
-      "Cloudflare": "/skills-img/cloudflare.png", // Added Cloudflare
-      "Vercel": "/skills-img/vercel.png",
-      "Railway": "/skills-img/railway.png",
-      "Docker": "/skills-img/docker.png",
-      "Linux": "/skills-img/linux.png",
-      "Google Analytics": "/skills-img/ga.png", // Added Google Analytics
-      
+      { name: "Cloudflare", image: "/skills-img/cloudflare.png" }, // Added Cloudflare
+      { name: "Vercel", image: "/skills-img/vercel.png" },
+      { name: "Railway", image: "/skills-img/railway.png" },
+      { name: "Docker", image: "/skills-img/docker.png" },
+      { name: "Linux", image: "/skills-img/linux.png" },
+      { name: "Google Analytics", image: "/skills-img/ga.png" }, // Added Google Analytics
+
       // Collaboration & Tools
-      "Git": "/skills-img/git.png",
-      "Postman": "/skills-img/postman.png",
-      "Figma": "/skills-img/figma.png",
-      "Spline": "/skills-img/spline.png", // Added Spline
-    };
+      { name: "Git", image: "/skills-img/git.png" },
+      { name: "Postman", image: "/skills-img/postman.png" },
+      { name: "Figma", image: "/skills-img/figma.png" },
+      { name: "Spline", image: "/skills-img/spline.png" }, // Added Spline
+    ];
     // const learnings = {
     //   "Kotlin": "/skills-img/kotlin.png",
     //   "Angular": "/skills-img/angular.png",
@@ -97,7 +97,6 @@ export default {
     //   "Laravel": "skills-img/laravel.png",
     //   ".NET": "/skills-img/dotnet.svg"
     // };
-
 
     const skillContentRef = ref(null);
     const learningRef = ref(null);
@@ -126,9 +125,9 @@ export default {
       learning.addEventListener("mousemove", handleOnMouseMove);
     });
 
-    // Return both skillsMap and skillContentRef so they can be used in the template
+    // Return skills array and refs so they can be used in the template
     return {
-      skillsMap,
+      skills,
       skillContentRef,
       // learnings,
       learningRef

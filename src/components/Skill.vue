@@ -1,15 +1,18 @@
 <template>
-  <div class="skill" data-aos="flip-up" data-aos-delay="100" data-aos-offset="100">
-    <img :src="image" alt="skill-img" data-aos="zoom-in-up" data-aos-delay="100" data-aos-offset="100">
-    <p data-aos="zoom-in-up" data-aos-delay="100" data-aos-offset="100" data-aos-duration="1000">{{ name }}</p>
+  <div class="skill" data-aos="flip-up" data-aos-offset="100">
+    <img :src="image" alt="skill-img" data-aos="zoom-in-up" data-aos-offset="100">
+    <p data-aos="zoom-in-up" data-aos-offset="100" data-aos-duration="1000">{{ name }}</p>
   </div>
 </template>
 
 <script setup>
+import { bool } from 'three/tsl';
+
 defineProps(
   {
     image: String,
-    name: String
+    name: String,
+    isEven: Boolean,
   }
 )
 </script>
@@ -19,12 +22,13 @@ defineProps(
   flex-direction: column;
   align-items: center;
   font-size: var(--S);
-  transition: 0.2s all ease;
-  gap: 10px;
+  transition: 0.1s all ease;
   margin: 20px;
+  gap: 10px;
   width: 100px;
   height: 100px;
 }
+
 
 img {
   width: 75%;
@@ -36,10 +40,6 @@ p {
   font-size: var(--S);
   font-family: var(--poppins);
   text-align: center;
-}
-
-.skill:hover {
-  transform: scale(1.2);
 }
 
 /* @media screen and (max-width: 968px){
