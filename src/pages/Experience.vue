@@ -41,12 +41,12 @@ import Avatar from '../components/Avatar.vue';
 import ExpCard from '../components/ExpCard.vue';
 
 const experiences = [
-    // {
-    //     place: "Quicknews",
-    //     role: "Full stack developer & Technical operations intern",
-    //     desc: "Served as the technical bridge to an external agency, supporting product decisions, maintaining system architecture knowledge, overseeing infrastructure, and contributing hands-on full-stack work and experimental features as needed.",
-    //     duration: "Jan. 2026-Present"
-    // },
+    {
+        place: "Quicknews",
+        role: "Full stack developer & Technical operations intern",
+        desc: "Served as the technical bridge to an external agency, supporting product decisions, maintaining system architecture knowledge, overseeing infrastructure, and contributing hands-on full-stack work and experimental features as needed.",
+        duration: "Jan. 2026-Present"
+    },
     {
         place: "Freelance",
         role: "Full-Stack Developer",

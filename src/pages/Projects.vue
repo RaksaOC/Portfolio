@@ -3,7 +3,7 @@
     <Avatar :imagePath="'/projects-img/projects-avatar.png'" />
 
     <!-- Tab Navigation -->
-    <div class="tab-container">
+    <div class="tab-container" data-aos="zoom-in-down">
       <div class="tab-wrapper">
         <div class="tab-indicator" :style="tabIndicatorStyle"></div>
         <button class="tab-button" :class="{ active: activeTab === 'featured' }" @click="activeTab = 'featured'">
