@@ -3,7 +3,7 @@
         <div class="top">
             <div class="text-wrapper">
                 <div class="num" ref="numRef">
-                    <p>{{ project.number }}</p>
+                    <p>{{ project.displayNumber ?? project.number }}</p>
                 </div>
                 <div class="desc" ref="descRef">
                     <p class="title">{{ project.title }}</p>
@@ -94,7 +94,8 @@
 import { onMounted, ref } from 'vue';
 
 defineProps({
-    project: Object
+    project: Object,
+    displayNumber: Number
 });
 const numRef = ref(null);
 const cardRef = ref(null);
