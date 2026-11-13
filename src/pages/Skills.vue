@@ -1,6 +1,6 @@
 <template>
   <div class="skills" id="skills">
-    <Avatar :imagePath="'/skills-img/skills-avatar.png'" />
+    <SectionIcon icon="skills" :title="$t('nav.skills')" />
     <!-- <div class="skills-content" ref="skillContentRef" id="skills" > -->
     <!-- <p class="skill-head">Techstack</p> -->
     <div class="skill-img-wrapper">
@@ -24,14 +24,14 @@
 
 <script>
 import Skill from '../components/Skill.vue';
-import Avatar from '../components/Avatar.vue';
+import SectionIcon from '../components/SectionIcon.vue';
 import { ref, onMounted } from 'vue';
 
 export default {
   name: "skills",
   components: {
     Skill,
-    Avatar
+    SectionIcon
   },
   setup() {
     // Change skillsMap to skills array
@@ -54,6 +54,7 @@ export default {
       // Frontend Frameworks/Libraries & Engines
       { name: "React", image: "/skills-img/react.png" },
       { name: "Next.js", image: "/skills-img/nextjs.png" },
+      { name: "Angular", image: "/skills-img/angular.png" },
       { name: "Vue", image: "/skills-img/vue.svg" },
       { name: "Three.js", image: "/skills-img/threejs.png" },
       { name: "Flutter", image: "/skills-img/flutter.png" },
@@ -63,7 +64,9 @@ export default {
 
       // Backend Frameworks/Platforms
       { name: "Node.js", image: "/skills-img/nodejs.png" },
+      { name: "NestJS", image: "/skills-img/nestjs.svg" },
       { name: "Express.js", image: "/skills-img/express.png" },
+      { name: "Socket.IO", image: "/skills-img/socketio.svg" },
       { name: "FastAPI", image: "/skills-img/fastapi.png" }, // Added FastAPI
       { name: "Spring Boot", image: "/skills-img/spring.png" }, // added as "Spring Boot"
 
@@ -71,6 +74,7 @@ export default {
       { name: "MySQL", image: "/skills-img/mysql.png" },
       { name: "PostgreSQL", image: "/skills-img/postgre.png" },
       { name: "MongoDB", image: "/skills-img/mongodb.svg" },
+      { name: "Sequelize", image: "/skills-img/sequelize.svg" },
       { name: "Redis", image: "/skills-img/redis.png" },
       { name: "Firebase", image: "/skills-img/firebase.png" },
 
@@ -82,13 +86,15 @@ export default {
       { name: "Railway", image: "/skills-img/railway.png" },
       { name: "Docker", image: "/skills-img/docker.png" },
       { name: "Linux", image: "/skills-img/linux.png" },
+      { name: "GitLab CI/CD", image: "/skills-img/gitlab.svg" },
+      { name: "Ansible", image: "/skills-img/ansible.svg" },
+      { name: "Raspberry Pi", image: "/skills-img/raspberrypi.svg" },
       { name: "Google Analytics", image: "/skills-img/ga.png" }, // Added Google Analytics
 
       // Collaboration & Tools
       { name: "Git", image: "/skills-img/git.png" },
       { name: "Postman", image: "/skills-img/postman.png" },
       { name: "Figma", image: "/skills-img/figma.png" },
-      { name: "Spline", image: "/skills-img/spline.png" }, // Added Spline
     ];
     // const learnings = {
     //   "Kotlin": "/skills-img/kotlin.png",

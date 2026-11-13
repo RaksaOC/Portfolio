@@ -1,297 +1,327 @@
 <template>
-  <canvas id="canvas"></canvas>
+  <div id="bg-root" ref="rootRef">
+    <canvas id="canvas" ref="canvasRef"></canvas>
+  </div>
 </template>
 
 <script setup>
 import * as THREE from 'three'
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted, watch } from 'vue'
+import { prefs, intro } from '../prefs'
+import { findLook } from '../themes/looks'
+import { gfxActive } from '../gfx'
+import { chat } from '../chat/chat'
 
-const theme = ref(localStorage.getItem("theme") || "dark");
+const rootRef = ref(null)
+const canvasRef = ref(null)
 
-// Store references for cleanup
-let themeObserver = null;
-let themeCheckInterval = null;
-let storageEventListener = null;
+let cleanup = () => {}
 
-// Helper function to get wireframe color based on theme
-function getWireframeColor(currentTheme) {
-  return currentTheme === "dark" ? 0xf9f1f1 : 0x000000; // White for dark theme, black for light theme
-}
-
-// Function to update theme colors for all wireframe objects
-function updateThemeColors(currentTheme, sphereInCubes, planes) {
-  const wireframeColor = getWireframeColor(currentTheme);
-
-  // Update sphere and cube materials
-  sphereInCubes.forEach(({ sphere, cube }) => {
-    if (sphere.material) {
-      sphere.material.color.set(wireframeColor);
-    }
-    if (cube.material) {
-      cube.material.color.set(wireframeColor);
-    }
-  });
-
-  // Update plane materials
-  planes.forEach(plane => {
-    if (plane.material) {
-      plane.material.color.set(wireframeColor);
-    }
-  });
-}
+const isDark = () => (document.documentElement.getAttribute('data-theme') || localStorage.getItem('theme') || 'dark') === 'dark'
+const NO_GLOBE = ['nature', 'greek', 'angkor', 'volcano', 'atomic', 'japan', 'desert', 'night-session']
+const cssColor = (name) => getComputedStyle(document.documentElement).getPropertyValue(name).trim() || '#0e0e0e'
 
 onMounted(() => {
+  const canvas = canvasRef.value
+  const mobile = window.innerWidth < 978
+
   // Setup ------------------------------------------------------------------------------------------------
-  const canvas = document.getElementById('canvas');
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-  const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(90, window.innerWidth / window.innerHeight, 0.1, 1000);
-  camera.position.z = 5;
-  const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true });
-  renderer.setSize(window.innerWidth, window.innerHeight);
-  renderer.setPixelRatio(window.devicePixelRatio);
-  renderer.setClearColor(0x000000, 0)
-  // Setup ------------------------------------------------------------------------------------------------
+  const scene = new THREE.Scene()
+  const camera = new THREE.PerspectiveCamera(90, window.innerWidth / window.innerHeight, 0.1, 1000)
+  camera.position.z = 5
+  const renderer = new THREE.WebGLRenderer({
+    canvas,
+    alpha: true,
+    antialias: true,
+  })
+  // Always fills the window. When the AI chat is docked the scene keeps running under the glass panel, but
+  // its centre (vanishing point) moves to the middle of the page that's left: the camera frames the page
+  // strip exactly as if the window were that narrow, and the view is extended to the right under the panel
+  const root = rootRef.value
+  const boxW = () => root.clientWidth || window.innerWidth
+  const boxH = () => root.clientHeight || window.innerHeight
+  let dockNow = 0 // eased panel width the projection is currently built for
+  const project = () => {
+    const w = boxW(), h = boxH()
+    const page = Math.max(1, w - dockNow)
+    camera.aspect = page / h
+    if (dockNow > 0.5) camera.setViewOffset(page, h, 0, 0, w, h)
+    else camera.clearViewOffset()
+    camera.updateProjectionMatrix()
+  }
+  project()
+  renderer.setSize(boxW(), boxH())
+  // Graphics setting caps the pixel ratio (render resolution)
+  const applyResolution = () => renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, gfxActive.value.resolution))
+  applyResolution()
 
-  window.addEventListener("resize", () => {
-    // Update camera aspect ratio and projection matrix
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
+  const onResize = () => {
+    project()
+    renderer.setSize(boxW(), boxH())
+  }
+  window.addEventListener('resize', onResize)
+  const boxObserver = new ResizeObserver(onResize)
+  boxObserver.observe(root)
 
-    // Resize the renderer
-    renderer.setSize(window.innerWidth, window.innerHeight);
-
-    // You can also trigger a re-render immediately after resizing, if needed
-    renderer.render(scene, camera);
-  });
-
-  // Rotation ------------------------------------------------------------------------------------------------
-
-  function rotateSphere(sphere) {
-    sphere.rotation.y -= 0.005;
-    sphere.rotation.z -= 0.005;
-    return sphere;
+  // Base objects -----------------------------------------------------------------------------------------
+  const wireMaterials = []
+  const wireMat = () => {
+    const m = new THREE.MeshBasicMaterial({ wireframe: true, transparent: true, opacity: 0.1 })
+    wireMaterials.push(m)
+    return m
   }
 
-  function rotateCube(cube) {
-    cube.rotation.x += 0.005;
-    cube.rotation.y += 0.005;
-    return cube;
-  }
-  // Rotation ------------------------------------------------------------------------------------------------
-
-  // Objects ------------------------------------------------------------------------------------------------
-
-  let sphereInCubes = [];
-  let planes = [];
-
-  function infiniteGroundGrid() {
-    const PLANE_WIDTH = 600;
-    const PLANE_LENGTH = 600;
-    const SEGMENTS = 40;
-    const SPEED = 0.2;
-
-    const geometry = new THREE.PlaneGeometry(
-      PLANE_WIDTH,
-      PLANE_LENGTH,
-      SEGMENTS,
-      SEGMENTS
-    );
-
-    const wireframeColor = getWireframeColor(theme.value);
-    const material = new THREE.MeshBasicMaterial({
-      color: wireframeColor,
-      wireframe: true,
-      transparent: true,
-      opacity: 0.1,
-    });
-
-    const plane1 = new THREE.Mesh(geometry, material);
-    const plane2 = new THREE.Mesh(geometry, material);
-
-    // orientation
-    plane1.rotation.x = -Math.PI / 2;
-    plane2.rotation.x = -Math.PI / 2;
-
-    // vertical placement
-    plane1.position.y = -40;
-    plane2.position.y = -40;
-
-    // depth spacing
-    plane1.position.z = 0;
-    plane2.position.z = -PLANE_LENGTH;
-
-    scene.add(plane1, plane2);
-    planes.push(plane1, plane2);
-
-    // Update fog based on theme
-    scene.fog = new THREE.Fog(theme.value === "dark" ? 0x0e0e0e : 0xafafaf, 100, 300);
-
-
-    function animate() {
-      requestAnimationFrame(animate);
-
-      plane1.position.z += SPEED;
-      plane2.position.z += SPEED;
-
-      // 🔁 leapfrog logic
-      if (plane1.position.z > PLANE_LENGTH) {
-        plane1.position.z = plane2.position.z - PLANE_LENGTH;
-      }
-
-      if (plane2.position.z > PLANE_LENGTH) {
-        plane2.position.z = plane1.position.z - PLANE_LENGTH;
-      }
-
-      renderer.render(scene, camera);
-    }
-
-    animate();
-  }
-
-
-
-  function sphereInCube(x, y, z) {
-    let sizeFactor = window.innerWidth < 978 ? 7 : 10; // Smaller sizes for small screens
-    let sphereSize = sizeFactor / 2; // Keep the sphere proportional
-
-    const wireframeColor = getWireframeColor(theme.value);
-    const cubeGeo = new THREE.BoxGeometry(sizeFactor, sizeFactor, sizeFactor);
-    const cubeMat = new THREE.MeshBasicMaterial({
-      color: wireframeColor,
-      wireframe: true,
-      transparent: true,
-      opacity: 0.1
-    });
-
-    const cube = new THREE.Mesh(cubeGeo, cubeMat);
-    cube.position.set(x, y, z);
-    scene.add(cube);
-
-    const sphereGeo = new THREE.SphereGeometry(sphereSize);
-    const sphereMat = new THREE.MeshBasicMaterial({
-      color: wireframeColor,
-      wireframe: true,
-      transparent: true,
-      opacity: 0.1
-    });
-
-    const sphere = new THREE.Mesh(sphereGeo, sphereMat);
-    sphere.position.set(x, y, z);
-    scene.add(sphere);
-
-    animate();
-    sphereInCubes.push({ sphere: sphere, cube: cube });
-  }
-
-  // Objects ------------------------------------------------------------------------------------------------
-
-  // Animation  ------------------------------------------------------------------------------------------------
-
-  function animate() {
-    requestAnimationFrame(animate);
-    sphereInCubes.forEach(({ sphere, cube }) => {
-      rotateSphere(sphere);
-      rotateCube(cube);
-    });
-    renderer.render(scene, camera);
-  }
-
-  // Animations------------------------------------------------------------------------------------------------
-
-  // Camera move back on scroll -------------------------------------------------------------------------------
-  window.addEventListener("scroll", () => {
-    let scrollPosition = window.scrollY;
-    if (scrollPosition < 300) {
-      camera.position.z = 5 + scrollPosition * 0.09;  // Example adjustment based on scroll
-    }
-    // else{
-    //   // camera.position.y =  -1 * (scrollPosition * 0.05);  // Example adjustment based on scroll
-    //   camera.position.y =  -1 * (scrollPosition * 0.05);  // Example adjustment based on scroll
-    //   const leftObj = sphereInCubes[1];
-    //   const rightObj = sphereInCubes[2];
-    //   leftObj.cube.position.y += camera.position.y;
-    //   leftObj.sphere.position.y += camera.position.y;
-    //   rightObj.cube.position.y += camera.position.y;
-    //   rightObj.sphere.position.y += camera.position.y;
-
-    // }
-    // sphereInCubes = sphereInCubes.filter(({ sphere }) => camera.position.z - sphere.position.z <= 20);
+  // Infinite ground grid: two planes leapfrogging toward the camera
+  const PLANE = 600
+  const gridGeo = new THREE.PlaneGeometry(PLANE, PLANE, 40, 40)
+  const gridMat = wireMat()
+  // While the reload intro is picking a theme only the globe shows; the grid fades in with the theme
+  const gridTarget = () => (intro.running && !look.id ? 0 : look.scene.gridOpacity)
+  const planes = [0, -PLANE].map((z) => {
+    const p = new THREE.Mesh(gridGeo, gridMat)
+    p.rotation.x = -Math.PI / 2
+    p.position.set(0, -40, z)
+    scene.add(p)
+    return p
   })
 
-  // Object Placement ------------------------------------------------------------------------------------------
+  // Wireframe sphere-in-cube props
+  const props = []
+  function sphereInCube(x, y, z) {
+    const size = mobile ? 7 : 10
+    const cube = new THREE.Mesh(new THREE.BoxGeometry(size, size, size), wireMat())
+    const sphere = new THREE.Mesh(new THREE.SphereGeometry(size / 2), wireMat())
+    cube.position.set(x, y, z)
+    sphere.position.set(x, y, z)
+    scene.add(cube, sphere)
+    props.push({ cube, sphere })
+  }
+  sphereInCube(0, 0, -20) // welcome screen
+  sphereInCube(40, 25, 0) // hero
+  sphereInCube(-40, 25, 0)
 
-  // Welcome Screen
-  sphereInCube(0, 0, -20);
+  // Night sky for the reload intro: while the reel is picking a theme the background goes pitch black and
+  // a field of twinkling stars fades in around the camera; it fades away again as the theme is revealed.
+  const STARS = mobile ? 900 : 2200
+  const starPos = new Float32Array(STARS * 3)
+  const starSize = new Float32Array(STARS)
+  const starPhase = new Float32Array(STARS)
+  for (let i = 0; i < STARS; i++) {
+    // uniform over the whole sphere around the camera, so the sky is full edge to edge
+    const u = Math.random() * 2 - 1
+    const a = Math.random() * Math.PI * 2
+    const r = 200 + Math.random() * 180
+    const s = Math.sqrt(1 - u * u)
+    starPos.set([Math.cos(a) * s * r, u * r, Math.sin(a) * s * r], i * 3)
+    starSize[i] = Math.random() < 0.08 ? 3 + Math.random() * 1.5 : 1 + Math.random() * 1.6
+    starPhase[i] = Math.random() * Math.PI * 2
+  }
+  const starGeo = new THREE.BufferGeometry()
+  starGeo.setAttribute('position', new THREE.BufferAttribute(starPos, 3))
+  starGeo.setAttribute('size', new THREE.BufferAttribute(starSize, 1))
+  starGeo.setAttribute('phase', new THREE.BufferAttribute(starPhase, 1))
+  const starMat = new THREE.ShaderMaterial({
+    transparent: true,
+    depthWrite: false,
+    blending: THREE.AdditiveBlending,
+    uniforms: { uTime: { value: 0 }, uOpacity: { value: 0 }, uPx: { value: renderer.getPixelRatio() } },
+    vertexShader: `
+      attribute float size; attribute float phase; uniform float uTime; uniform float uPx; varying float vTw;
+      void main() {
+        vTw = 0.55 + 0.45 * sin(uTime * (1.2 + fract(phase * 3.7) * 2.2) + phase);
+        gl_PointSize = size * uPx * (0.8 + 0.4 * vTw);
+        gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+      }`,
+    fragmentShader: `
+      uniform float uOpacity; varying float vTw;
+      void main() {
+        float d = length(gl_PointCoord - 0.5);
+        float a = smoothstep(0.5, 0.0, d);
+        gl_FragColor = vec4(vec3(0.85, 0.9, 1.0) + 0.15 * a, a * a * vTw * uOpacity);
+      }`,
+  })
+  const stars = new THREE.Points(starGeo, starMat)
+  stars.renderOrder = -1
+  stars.frustumCulled = false
+  stars.visible = false
+  scene.add(stars)
+  const BLACK = new THREE.Color(0x000000)
 
-  // Hero
-  sphereInCube(40, 25, 0);
-  sphereInCube(-40, 25, 0);
-  infiniteGroundGrid();
-  // sphereInCube(-75, -5, 20);
+  // Look / theme --------------------------------------------------------------------------------------------
+  let look = findLook(prefs.look)
 
-  // Listen for theme changes
-  function handleThemeChange() {
-    const newTheme = localStorage.getItem("theme") || "dark";
-    if (newTheme !== theme.value) {
-      theme.value = newTheme;
-      updateThemeColors(theme.value, sphereInCubes, planes);
+  // Colours actually on screen; the intro reel eases these toward the theme it's passing
+  const curBg = new THREE.Color()
+  const curWire = new THREE.Color()
+  const tmp = new THREE.Color()
+  let darkNow = true
 
-      // Update fog color
-      scene.fog = new THREE.Fog(theme.value === "dark" ? 0x0e0e0e : 0xcacaca, 100, 300);
+  function paint() {
+    look = findLook(prefs.look)
+    const dark = isDark()
+    darkNow = dark
+    const bg = new THREE.Color(cssColor('--dark'))
+    curBg.copy(bg)
+    curWire.setHex(look.scene.wire[dark ? 'dark' : 'light'])
+    wireMaterials.forEach((m) => m.color.setHex(look.scene.wire[dark ? 'dark' : 'light']))
+    // Themes with their own centrepiece (forest, temples, volcano) hide the centre globe
+    props[0].cube.visible = props[0].sphere.visible = !NO_GLOBE.includes(look.id)
+    scene.fog = new THREE.Fog(bg, 100, 300)
+    renderer.setClearColor(bg, 1)
+  }
+
+  // Theme decor (lights, particles, models) --------------------------------------------------------------
+  let decor = null
+  let decorToken = 0
+  async function setDecor() {
+    const token = ++decorToken
+    decor?.dispose()
+    decor = null
+    if (!look.id) return
+    const { buildDecor } = await import('../themes/scenes.js')
+    const built = await buildDecor(look.id, {
+      scene,
+      renderer,
+      isDark: isDark(),
+      mobile: mobile || gfxActive.value.lite,
+      models: gfxActive.value.models,
+      speed: () => look.scene.speed,
+      look,
+      cancelled: () => token !== decorToken,
+    })
+    if (token !== decorToken) return built?.dispose()
+    decor = built
+  }
+
+  window.__bgStats = () => ({ decor: !!decor, look: look.id || 'monochrome' })
+
+  // Re-style when the look or light/dark theme changes
+  const refresh = () => requestAnimationFrame(() => { paint(); setDecor() }) // wait for CSS vars to update
+  const themeObserver = new MutationObserver(refresh)
+  themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme', 'data-look'] })
+  const onStorage = (e) => { if (e.key === 'theme') refresh() }
+  window.addEventListener('storage', onStorage)
+
+
+  // The intro painted the sky black; when it ends, put the look's own background back (needed for Monochrome,
+  // which doesn't change data-look so nothing else repaints it)
+  const stopIntro = watch(() => intro.running, (running) => { if (!running) requestAnimationFrame(paint) })
+
+  // Graphics changes: resolution applies live, models / lite rebuild the theme decor
+  const stopGfx = watch(gfxActive, (g, old) => {
+    applyResolution()
+    if (!old || g.models !== old.models || g.lite !== old.lite) setDecor()
+  })
+
+  paint()
+  gridMat.opacity = gridTarget()
+  setDecor()
+
+  // Camera eases back as the hero scrolls away
+  const onScroll = () => {
+    const y = window.scrollY
+    camera.position.z = 5 + Math.min(y, 300) * 0.09
+  }
+  window.addEventListener('scroll', onScroll, { passive: true })
+
+  // Single render loop ------------------------------------------------------------------------------------
+  const clock = new THREE.Clock()
+  let raf = 0
+  let pending = 0 // time since the last rendered frame, for the fps cap
+  function animate() {
+    raf = requestAnimationFrame(animate)
+    const cap = gfxActive.value.fps
+    pending += clock.getDelta()
+    if (cap && pending < 1 / cap - 0.002) return
+    const dt = Math.min(pending, 0.1)
+    pending = 0
+    const t = clock.elapsedTime
+    const speed = look.scene.speed * 60 * dt
+
+    // follow the docked chat panel (eased like its slide-in; instant-ish while its edge is dragged)
+    const dockTarget = document.documentElement.classList.contains('chat-docked') ? chat.dockWidth : 0
+    if (Math.abs(dockTarget - dockNow) > 0.5) {
+      dockNow += (dockTarget - dockNow) * Math.min(1, dt * 14)
+      project()
+    } else if (dockNow !== dockTarget) {
+      dockNow = dockTarget
+      project()
     }
+
+    gridMat.opacity += (gridTarget() - gridMat.opacity) * Math.min(1, dt * 2.5)
+    // Reload intro: pitch-black starry sky while the reel spins, the globe tinted to the theme on the payline
+    const night = intro.running && !look.id
+    if (night) {
+      const k = Math.min(1, dt * 3)
+      curBg.lerp(BLACK, k)
+      renderer.setClearColor(curBg, 1)
+      scene.fog.color.copy(curBg)
+      if (intro.preview != null) {
+        const pv = findLook(intro.preview)
+        curWire.lerp(tmp.setHex(pv.scene.wire[darkNow ? 'dark' : 'light']), Math.min(1, dt * 7))
+        wireMaterials.forEach((m) => m.color.copy(curWire))
+      }
+    }
+    const so = starMat.uniforms.uOpacity
+    so.value += ((night ? 1 : 0) - so.value) * Math.min(1, dt * (night ? 1.5 : 2.5))
+    stars.visible = so.value > 0.01
+    if (stars.visible) {
+      starMat.uniforms.uTime.value = t
+      starMat.uniforms.uPx.value = renderer.getPixelRatio()
+      stars.rotation.y = t * 0.006
+    }
+    planes.forEach((p) => { p.position.z += speed })
+    planes.forEach((p, i) => {
+      if (p.position.z > PLANE) p.position.z = planes[1 - i].position.z - PLANE
+    })
+    props.forEach(({ sphere, cube }) => {
+      sphere.rotation.y -= 0.3 * dt
+      sphere.rotation.z -= 0.3 * dt
+      cube.rotation.x += 0.3 * dt
+      cube.rotation.y += 0.3 * dt
+    })
+    decor?.update(dt, t)
+    renderer.render(scene, camera)
   }
+  animate()
 
-  // Listen for storage events (when theme changes in other tabs/windows)
-  storageEventListener = handleThemeChange;
-  window.addEventListener("storage", storageEventListener);
-
-  // Also listen for custom events or check periodically (for same-tab changes)
-  // Since localStorage.setItem in the same tab doesn't trigger storage event,
-  // we'll use a MutationObserver on the data-theme attribute
-  themeObserver = new MutationObserver(() => {
-    handleThemeChange();
-  });
-
-  themeObserver.observe(document.documentElement, {
-    attributes: true,
-    attributeFilter: ['data-theme']
-  });
-
-  // Also check on interval as a fallback (for same-tab localStorage changes)
-  themeCheckInterval = setInterval(() => {
-    handleThemeChange();
-  }, 100);
+  cleanup = () => {
+    cancelAnimationFrame(raf)
+    stopGfx()
+    stopIntro()
+    window.removeEventListener('resize', onResize)
+    boxObserver.disconnect()
+    window.removeEventListener('scroll', onScroll)
+    window.removeEventListener('storage', onStorage)
+    themeObserver.disconnect()
+    decor?.dispose()
+    starGeo.dispose()
+    starMat.dispose()
+    renderer.dispose()
+  }
 })
 
-onUnmounted(() => {
-  // Clean up event listeners
-  if (storageEventListener) {
-    window.removeEventListener("storage", storageEventListener);
-  }
-  if (themeObserver) {
-    themeObserver.disconnect();
-  }
-  if (themeCheckInterval) {
-    clearInterval(themeCheckInterval);
-  }
-})
-
+onUnmounted(() => cleanup())
 </script>
 
 <style>
-#canvas {
-  background: var(--dark);
+#bg-root {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
+  inset: 0;
   height: 100vh;
   z-index: -1;
+  overflow: hidden;
+  background: var(--dark);
+}
+
+
+#canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
   animation: fade-background 0.2s ease forwards;
   opacity: 0;
-  overflow: hidden;
 }
 
 @keyframes fade-background {

@@ -1,9 +1,17 @@
 <template>
-    <div class="project-card" ref="cardRef" data-aos="zoom-in-down">
+    <!-- The whole card (list row or grid tile) opens the project in the full-screen viewer: cover + details,
+         then the screenshots. No expand-in-place. -->
+    <div class="project-card" :class="{ grid }" ref="cardRef" data-aos="zoom-in-down" role="button" tabindex="0"
+        :aria-label="project.title" @click="openTile" @keydown.enter.self="openTile"
+        @keydown.space.self.prevent="openTile">
+        <div v-if="grid && cover" class="grid-cover">
+            <img ref="coverRef" :src="cover" alt="" loading="lazy" class="grid-cover-img">
+            <span class="grid-num">{{ displayNumber ?? project.number }}</span>
+        </div>
         <div class="top">
             <div class="text-wrapper">
                 <div class="num" ref="numRef">
-                    <p>{{ project.displayNumber ?? project.number }}</p>
+                    <p>{{ displayNumber ?? project.number }}</p>
                 </div>
                 <div class="desc" ref="descRef">
                     <p class="title">{{ project.title }}</p>
@@ -22,196 +30,228 @@
                 <p class="year">{{ project.year }}</p>
             </div>
         </div>
-        <div class="arrow" ref="arrowRef">
-            <img src="/arrow-down.png" alt="see more arrow">
-        </div>
-        <div class="bottom" ref="bottomRef">
-            <!-- Video display if videoSrc exists -->
-            <div v-if="project.videoSrc" class="media-container">
-                <a :href="project.ytLink ? project.ytLink : project.githubLink" target="_blank">
-                    <video :src="project.videoSrc"
-                        :class="['project-video', { 'project-video-vertical': project.isVertical }]" autoplay muted loop
-                        playsinline playsInline :controls="false" style="cursor: pointer;"></video>
-                </a>
-            </div>
-
-            <!-- Carousel display if no videoSrc but images exist -->
-            <template v-else-if="Array.isArray(project.image) && project.image.length > 0">
-                <a :href="project.ytLink ? project.ytLink : project.githubLink" target="_blank">
-                    <div class="media-container">
-                        <div id="carouselExampleInterval"
-                            :class="['carousel', 'slide', { 'carousel-vertical': project.isVertical }]"
-                            data-bs-ride="carousel">
-                            <div class="carousel-inner">
-                                <div class="carousel-item active " data-bs-interval="2000" v-if="project.image[0]">
-                                    <img :src="project.image[0]" class="d-block w-100" alt="...">
-                                </div>
-                                <div class="carousel-item" data-bs-interval="2000" v-if="project.image[1]">
-                                    <img :src="project.image[1]" class="d-block w-100" alt="...">
-                                </div>
-                                <div class="carousel-item" data-bs-interval="2000" v-if="project.image[2]">
-                                    <img :src="project.image[2]" class="d-block w-100" alt="...">
-                                </div>
-                                <div class="carousel-item" data-bs-interval="2000" v-if="project.image[3]">
-                                    <img :src="project.image[3]" class="d-block w-100" alt="...">
-                                </div>
-                                <div class="carousel-item" data-bs-interval="2000" v-if="project.image[4]">
-                                    <img :src="project.image[4]" class="d-block w-100" alt="...">
-                                </div>
-                            </div>
-                            <button class="carousel-control-prev" type="button"
-                                data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
-                                <span class="carousel-control-prev-icon" aria-hidden="true" @click="notifyClick"></span>
-                                <span class="visually-hidden">Previous</span>
-                            </button>
-                            <button class="carousel-control-next" type="button"
-                                data-bs-target="#carouselExampleInterval" data-bs-slide="next">
-                                <span class="carousel-control-next-icon" aria-hidden="true" @click="notifyClick"></span>
-                                <span class="visually-hidden">Next</span>
-                            </button>
-                        </div>
-                    </div>
-                </a>
-            </template>
-            <div class="description">
-                <p>{{ project.description }}</p>
-            </div>
-            <div class="project-links" ref="projectLinksRef">
-                <a v-if="project.githubLink" :href="project.githubLink" target="_blank">
-                    <img src="/contact-img/github.png" alt="">
-                    GitHub
-                </a>
-                <a v-if="project.ytLink" :href="project.ytLink" target="_blank">
-                    <img src="/contact-img/yt.png" alt="">
-                    Demo
-                </a>
-            </div>
-        </div>
     </div>
 </template>
 
 <script setup>
-import { onMounted, ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
+import { openProject } from '../lightbox';
 
-defineProps({
+const props = defineProps({
     project: Object,
-    displayNumber: Number
+    displayNumber: Number,
+    grid: Boolean, // grid view tile (Projects.vue list / grid switch)
 });
+const cover = computed(() => props.project.mainImage || (Array.isArray(props.project.image) ? props.project.image[0] : null));
 const numRef = ref(null);
 const cardRef = ref(null);
 const descRef = ref(null);
 const projectImageRef = ref(null);
-const arrowRef = ref(null);
-const bottomRef = ref(null);
-const notifyClick = () => {
-    console.log("is pressed");
-}
+const coverRef = ref(null);
 
-
-const isExtraVisible = ref(true);
+// the viewer pours out of the picture the visitor sees: the grid cover, the list row's hover preview,
+// or else the card itself
+const openTile = () => {
+    const img = props.grid ? coverRef.value : projectImageRef.value;
+    const visible = img && getComputedStyle(img).visibility !== 'hidden' && img.offsetWidth > 0;
+    openProject(props.project, visible ? img : cardRef.value);
+};
 
 onMounted(() => {
     const card = cardRef.value;
     const num = numRef.value;
     const desc = descRef.value;
     const projectImage = projectImageRef.value;
-    const arrow = arrowRef.value;
-    const bottom = bottomRef.value;
+    if (!card || !num) return;
 
-    if (!card || !num) {
-        console.log("Ref is not found!");
-        return;
-    }
-
-    const handleOnMouseMove = (e) => {
-        const { currentTarget: target } = e;
-        const rect = target.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-
-        target.style.setProperty("--mouse-x", `${x}px`);
-        target.style.setProperty("--mouse-y", `${y}px`);
-    };
-    card.addEventListener("mousemove", handleOnMouseMove);
-
-    // Show image on hover (only if image exists)
-    const showImage = () => {
-        if (projectImage) {
-            projectImage.style.opacity = "0.7";
-            projectImage.style.transform = "translateY(-5px)";
-            projectImage.style.visibility = "visible";
-        }
-    };
-
-    const hideImage = () => {
-        if (projectImage) {
-            projectImage.style.opacity = "0";
-            projectImage.style.transform = "translateY(10px)";
-            projectImage.style.visibility = "hidden";
-        }
-    };
-
-    const showNum = () => {
-        if (window.innerWidth > 638) {
-            num.style.transform = "translateX(0)";  // Reset to original position
-            desc.style.transform = "translateX(0)"
-            num.classList.remove('hidden');
-        }
-    };
-
-    const hideNum = () => {
-        if (window.innerWidth > 638) {
-            // Calculate the exact offset based on number width + gap
-            const numWidth = num.offsetWidth;
-            const textWrapper = card.querySelector('.text-wrapper');
-            const gap = textWrapper ? parseInt(getComputedStyle(textWrapper).gap) || 5 : 5;
-            const offset = -(numWidth + gap) + 10;
-
-            num.style.transform = "translateX(-100%)";  // Move it out to the left
-            desc.style.transform = `translateX(${offset}px)`;  // Move by fixed pixels
-            num.classList.add('hidden');
-        }
-
-    };
-
-    // Toggle description
-    arrow.addEventListener("click", () => {
-        isExtraVisible.value = !isExtraVisible.value;
-
-        if (isExtraVisible.value) {
-            bottom.classList.remove("show");
-            bottom.style.display = "none"
-            arrow.style.transform = "rotate(0deg)";
-        } else {
-            bottom.classList.add("show");
-            bottom.style.display = "flex"
-            arrow.style.transform = "rotate(180deg)";
-        }
+    // the light that follows the pointer (::before)
+    card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        card.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
+        card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
     });
 
-
-    // Only add image hover listeners if image exists
-    if (projectImage) {
-        card.addEventListener("mouseenter", showImage);
-        card.addEventListener("mouseleave", hideImage);
-    }
-
-    card.addEventListener("mouseenter", hideNum);
-    card.addEventListener("mouseleave", showNum);
-
-    card.addEventListener("mouseenter", () => {
-        arrow.style.opacity = "0.7"
-    })
-
-    card.addEventListener("mouseleave", () => {
-        if (isExtraVisible.value) {
-            arrow.style.opacity = "0"
-        }
-    })
+    // list view: the cover peeks in on hover and the number slides away
+    const showImage = () => {
+        if (!projectImage || props.grid) return;
+        projectImage.style.opacity = '0.7';
+        projectImage.style.transform = 'translateY(-5px)';
+        projectImage.style.visibility = 'visible';
+    };
+    const hideImage = () => {
+        if (!projectImage) return;
+        projectImage.style.opacity = '0';
+        projectImage.style.transform = 'translateY(10px)';
+        projectImage.style.visibility = 'hidden';
+    };
+    const showNum = () => {
+        if (window.innerWidth <= 638) return;
+        num.style.transform = 'translateX(0)';
+        desc.style.transform = 'translateX(0)';
+        num.classList.remove('hidden');
+    };
+    const hideNum = () => {
+        if (window.innerWidth <= 638 || props.grid) return;
+        const gap = parseInt(getComputedStyle(card.querySelector('.text-wrapper')).gap) || 5;
+        num.style.transform = 'translateX(-100%)';
+        desc.style.transform = `translateX(${-(num.offsetWidth + gap) + 10}px)`;
+        num.classList.add('hidden');
+    };
+    card.addEventListener('mouseenter', () => { showImage(); hideNum(); });
+    card.addEventListener('mouseleave', () => { hideImage(); showNum(); });
 });
 </script>
 
 <style scoped>
+/* ---------- Grid view tile ---------- */
+.project-card.grid {
+    justify-content: flex-start;
+    align-items: stretch;
+    flex-wrap: nowrap;
+    padding: 14px;
+    gap: 14px;
+    height: 100%;
+}
+
+.grid-cover {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    border-radius: 12px;
+    flex: none;
+}
+
+.grid-cover-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+    cursor: zoom-in;
+    transition: scale 0.6s cubic-bezier(0.2, 0.7, 0.3, 1) !important;
+}
+
+.project-card.grid:hover .grid-cover-img {
+    scale: 1.04;
+}
+
+.grid-num {
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    min-width: 28px;
+    height: 28px;
+    padding: 0 8px;
+    display: grid;
+    place-items: center;
+    border-radius: 14px;
+    font-size: var(--XS);
+    color: var(--light);
+    background: color-mix(in srgb, var(--dark) 55%, transparent);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+    border: 1px solid color-mix(in srgb, white 18%, transparent);
+    pointer-events: none;
+}
+
+.project-card.grid .top {
+    flex-wrap: nowrap;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.project-card.grid .text-wrapper {
+    max-width: none;
+    flex: 1;
+    min-width: 0;
+}
+
+/* the list view's hover slide (inline styles from the script) is off in the grid */
+.project-card.grid :is(.num, .desc) {
+    transform: none !important;
+}
+
+.project-card.grid .num,
+.project-card.grid .project-img-link {
+    display: none;
+}
+
+.project-card.grid .desc {
+    gap: 12px;
+}
+
+.project-card.grid .title {
+    font-size: var(--S);
+    font-weight: 600;
+    line-height: 1.35;
+}
+
+.project-card.grid .tech-stack {
+    gap: 6px;
+}
+
+.project-card.grid .stack-item {
+    padding: 3px 10px;
+    font-size: var(--XXS);
+}
+
+.project-card.grid .project-img-year {
+    max-width: none;
+    margin-right: 0;
+    flex: none;
+}
+
+.project-card.grid .year {
+    font-size: var(--XS);
+    color: var(--gray-light);
+}
+
+.project-card {
+    cursor: pointer;
+}
+
+.project-card:focus-visible {
+    outline: 2px solid var(--accent, white);
+    outline-offset: 3px;
+}
+
+@media screen and (max-width: 638px) {
+    .project-card.grid {
+        padding: 10px;
+        gap: 10px;
+    }
+
+    .project-card.grid .top {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+    }
+
+    .project-card.grid .desc {
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+    .project-card.grid .title {
+        text-align: left;
+        font-size: var(--XS);
+    }
+
+    .project-card.grid .tech-stack {
+        justify-content: flex-start;
+        gap: 4px;
+    }
+
+    .project-card.grid .stack-item {
+        padding: 2px 7px;
+        font-size: 0.625rem;
+    }
+
+    .project-card.grid .year {
+        font-size: var(--XXS);
+    }
+}
+
 .project-card {
     border-radius: 0px;
     background: rgba(255, 255, 255, 0.1);
@@ -362,38 +402,6 @@ onMounted(() => {
     gap: 20px;
 }
 
-.project-links {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 50%;
-    transition: all 0.3s ease-in-out;
-    gap: 20px;
-}
-
-.project-links a {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    color: var(--light);
-    border-radius: 30px;
-    padding: 10px;
-    text-decoration: none;
-    font-size: var(--XS);
-    cursor: pointer;
-    gap: 10px;
-}
-
-.project-links>a>img {
-    width: 20px;
-    filter: invert();
-}
-
-.project-links a:hover {
-    background: rgba(255, 255, 255, 0.05);
-}
-
 .top {
     display: flex;
     justify-content: space-between;
@@ -402,99 +410,6 @@ onMounted(() => {
     width: 100%;
 }
 
-.bottom {
-    max-width: 80%;
-    max-height: 0;
-    opacity: 0;
-    display: none;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-    transition: max-height 0.5s ease-in-out, opacity 0.3s ease
-}
-
-.bottom.show {
-    max-height: 600px;
-    opacity: 1;
-    /* Adjust this value based on content */
-}
-
-.arrow {
-    transition: all 0.3s ease;
-    opacity: 0;
-}
-
-.arrow img {
-    width: 30px;
-    cursor: pointer;
-    transition: all 0.5s ease;
-}
-
-.arrow img:hover {
-    transform: scale(1.1);
-}
-
-.bottom p {
-    text-align: center;
-}
-
-.carousel {
-    width: 300px;
-    overflow-x: hidden;
-    position: relative;
-}
-
-.carousel-item img {
-    width: 300px !important;
-    aspect-ratio: 16/10;
-    object-fit: cover;
-}
-
-.carousel-vertical {
-    aspect-ratio: 9/17;
-    /* Maintain same height as landscape: landscape height = 300 * 9/16, vertical width = (300 * 9/16) / (16/9) */
-    width: calc(500px * 81 / 256);
-}
-
-.carousel-vertical .carousel-item img {
-    width: 100% !important;
-    aspect-ratio: 9/17;
-    object-fit: cover;
-}
-
-.media-container {
-    position: relative;
-    display: inline-block;
-}
-
-.project-video {
-    width: 300px;
-    aspect-ratio: 16/9;
-    object-fit: cover;
-}
-
-.project-video-vertical {
-    aspect-ratio: 9/17;
-    /* Maintain same height as landscape: landscape height = 300 * 9/16, vertical width = (300 * 9/16) / (16/9) */
-    width: calc(500px * 81 / 256);
-}
-
-.carousel-control-prev-icon {
-    margin-right: 50%;
-}
-
-.carousel-control-next-icon {
-    margin-left: 50%;
-}
-
-
-.carousel-control-prev-icon,
-.carousel-control-next-icon {
-    display: none;
-    filter: invert();
-    cursor: pointer;
-}
 
 @media screen and (max-width: 1000px) {
 
@@ -504,16 +419,6 @@ onMounted(() => {
 
     .project-img-link img {
         display: none;
-    }
-
-    .arrow {
-        opacity: 1 !important;
-    }
-
-    .project-links {
-        width: 100%;
-        justify-content: center;
-        gap: 20px;
     }
 
     /* .num {
@@ -535,10 +440,6 @@ onMounted(() => {
         align-items: center;
     }
 
-    .bottom {
-        max-width: 100%;
-    }
-
     .text-wrapper {
         max-width: 100%;
         gap: 0;
@@ -553,10 +454,6 @@ onMounted(() => {
         flex-direction: column;
         justify-content: center;
         align-items: center;
-    }
-
-    .description {
-        font-size: var(--XS);
     }
 
     .num {

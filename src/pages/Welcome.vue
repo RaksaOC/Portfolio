@@ -1,13 +1,33 @@
 <template>
   <div class="welcome" id="welcome">
     <div class="name-wrapper">
-      <p class="name lName">Ory</p>
-      <p class="name fName">Chanraksa</p>
+      <p class="name lName" :style="{ fontFamily: spinFont }">{{ $t('name.last') }}</p>
+      <p class="name fName" :style="{ fontFamily: spinFont }">{{ $t('name.first') }}</p>
     </div>
+    <ThemeIntro />
   </div>
 </template>
 
 <script setup>
+import { computed } from 'vue'
+import { useI18n } from 'vue-i18n'
+import ThemeIntro from '../components/ThemeIntro.vue'
+import { intro, KM_FONTS } from '../prefs'
+import { findLook, displayFontCss } from '../themes/looks'
+
+// While the intro reel spins, the name tries on each passing theme's heading font (jackpot style):
+// the Latin display face in English, the theme's Khmer display face in Khmer. Afterwards the theme's
+// own CSS takes over. (Set on the lines themselves: the Khmer heading rule targets .name directly.)
+const { locale } = useI18n()
+const spinFont = computed(() => {
+  if (!intro.running || intro.preview == null) return null
+  const look = findLook(intro.preview)
+  if (locale.value === 'km') {
+    const km = (KM_FONTS[look.id] || KM_FONTS['']).display
+    return `"${km}", var(--km-body), sans-serif`
+  }
+  return displayFontCss(look) || 'var(--poppins)'
+})
 defineProps({
   lName: String,
   fName: String

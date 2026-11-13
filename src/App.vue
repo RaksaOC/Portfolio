@@ -1,5 +1,5 @@
 <script setup>
-import { ref, provide, onMounted } from 'vue'
+import { provide, watchEffect } from 'vue'
 import Background from './components/Background.vue'
 import Welcome from './pages/Welcome.vue'
 import NavBar from './components/NavBar.vue'
@@ -7,47 +7,34 @@ import Hero from './pages/Hero.vue'
 import About from './pages/About.vue'
 import Skills from './pages/Skills.vue'
 import Projects from './pages/Projects.vue'
+import Experience from './pages/Experience.vue'
 import Contact from './pages/Contact.vue'
 import Footer from './pages/Footer.vue'
+import SettingsOverlay from './components/SettingsOverlay.vue'
+import BackToTop from './components/BackToTop.vue'
+import ImageLightbox from './components/ImageLightbox.vue'
+import ChatBot from './components/ChatBot.vue'
+import MusicToggle from './components/MusicToggle.vue'
+import CornerDock from './components/CornerDock.vue'
+import GlassFilter from './components/GlassFilter.vue'
+import './lenis.js' // smooth scrolling
+import './music.js' // theme music
+import { theme, setTheme, prefs, applyKmFont } from './prefs'
+import { dockDesktop } from './corner'
 
-const theme = ref(localStorage.getItem('theme') || 'dark'); // Default to dark theme
-
-const toggleTheme = () => {
-  theme.value = theme.value === 'dark' ? 'light' : 'dark';
-  document.documentElement.setAttribute('data-theme', theme.value);
-  localStorage.setItem('theme', theme.value);
-};
-
-// Apply theme when app loads
-onMounted(() => {
-  document.documentElement.setAttribute('data-theme', theme.value);
-});
-
-// Provide theme and toggle function to all components
+// Light / dark mode lives in prefs.js (toggled from Settings)
 provide('theme', theme);
-provide('toggleTheme', toggleTheme);
+provide('toggleTheme', () => setTheme(theme.value === 'dark' ? 'light' : 'dark'));
 
+// Khmer fonts follow the active theme
+watchEffect(() => applyKmFont(prefs.look));
 
-// Slow down scrolling
-import Lenis from 'lenis'
-import Experience from './pages/Experience.vue'
-
-const lenis = new Lenis({
-  duration: 1.5, // Slows down scroll
-  smooth: true,
-})
-
-function raf(time) {
-  lenis.raf(time)
-  requestAnimationFrame(raf)
-}
-
-requestAnimationFrame(raf)
-
-
+// Liquid glass on the UI panels
+document.documentElement.setAttribute('data-glass', '');
 </script>
 
 <template>
+  <GlassFilter />
   <Background />
   <Welcome lName="Ory" fName="Chanraksa" />
   <NavBar />
@@ -60,6 +47,13 @@ requestAnimationFrame(raf)
     <Contact />
     <Footer />
   </div>
+  <!-- desktop: AI, volume and back-to-top share the corner dock; smaller screens keep separate buttons -->
+  <BackToTop v-if="!dockDesktop" />
+  <ImageLightbox />
+  <ChatBot />
+  <MusicToggle v-if="!dockDesktop" />
+  <CornerDock />
+  <SettingsOverlay />
 </template>
 
 <style scoped>
@@ -71,6 +65,6 @@ requestAnimationFrame(raf)
   align-items: center;
   flex-direction: column;
   min-height: 50vh;
-  overflow: hidden;
+  overflow: clip;
 }
 </style>

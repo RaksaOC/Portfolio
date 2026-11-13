@@ -1,48 +1,23 @@
 <template>
   <div class="hero" id="home" data-aos="fade-up" data-aos-delay="30" data-aos-anchor-placement="center-bottom">
-    <p class="based-in">Based in Phnom Penh, Cambodia</p>
+    <p class="based-in">{{ $t('hero.basedIn') }}</p>
     <div class="hero-text">
-      <p class="hero-text-1">Hello, I'm Raksa a <span></span> </p>
-      <p class="hero-text-2"> <span>software engineer</span> </p>
+      <p class="hero-text-1">{{ $t('hero.hello') }} <span></span> </p>
+      <p class="hero-text-2"> <span>{{ $t('hero.role') }}</span> </p>
     </div>
-    <p class="hero-desc">Innovating creative solutions through code</p>
+    <p class="hero-desc">{{ $t('hero.desc') }}</p>
     <div class="links">
-      <a href="https://github.com/RaksaOC" target="_blank"><img src="/contact-img/github.png" alt=""></a>
-      <a href="https://www.linkedin.com/in/ory-chanraksa-1702b6263/" target="_blank"><img
+      <a href="https://github.com/RaksaOC" data-tip="GitHub" aria-label="GitHub" target="_blank"><img src="/contact-img/github.png" alt=""></a>
+      <a href="https://www.linkedin.com/in/ory-chanraksa-1702b6263/" data-tip="LinkedIn" aria-label="LinkedIn" target="_blank"><img
           src="/contact-img/linkedin.png" alt=""></a>
-      <div class="download-cv" ref="cvRef" @click="downloadResume">
-        <button class="button">
-          <p class="text">
-            Download Resume
-          </p>
-          <div class="svg">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="white" class="bi bi-download" viewBox="0 0 16 16">
-              <path
-                d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z">
-              </path>
-              <path
-                d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z">
-              </path>
-            </svg>
-          </div>
-        </button>
-      </div>
+      <RequestCV />
 
     </div>
   </div>
 </template>
 
-<script>
-export default {
-  methods: {
-    downloadResume() {
-      const link = document.createElement('a');
-      link.href = '/ORY-CHANRAKSA-RESUME.pdf';
-      link.download = 'ORY-CHANRAKSA-RESUME.pdf';
-      link.click();
-    }
-  }
-}
+<script setup>
+import RequestCV from '../components/RequestCV.vue';
 </script>
 
 <style scoped>
@@ -287,6 +262,11 @@ path,
     justify-content: center;
     align-items: center;
     gap: 10px;
+  }
+
+  /* Request CV gets its own centred row so its email panel stays on screen */
+  .links :deep(.request-cv) {
+    flex-basis: 100%;
   }
 }
 

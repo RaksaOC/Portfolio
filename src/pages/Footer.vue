@@ -2,25 +2,23 @@
     <footer class="footer" data-aos="fade-down">
         <div class="footer-content">
             <div class="footer-left">
-                <a href="#welcome" class="logo">ChanRaksa</a>
+                <a href="#welcome" class="logo footer-logo">{{ $t('nav.brand') }}</a>
                 <!-- <span class="copyright"></span> -->
             </div>
             <nav class="footer-nav">
-                <a href="#home">Home</a>
-                <a href="#about">About</a>
-                <a href="#skills">Skills</a>
-                <a href="#projects">Projects</a>
-                <a href="#experience">Experience</a>
-                <a href="#contact">Contact</a>
+                <a href="#home">{{ $t('nav.home') }}</a>
+                <a href="#about">{{ $t('nav.about') }}</a>
+                <a href="#skills">{{ $t('nav.skills') }}</a>
+                <a href="#projects">{{ $t('nav.projects') }}</a>
+                <a href="#experience">{{ $t('nav.experience') }}</a>
+                <a href="#contact">{{ $t('nav.contact') }}</a>
             </nav>
         </div>
     </footer>
 </template>
 
-<script>
-export default {
-    name: 'Footer',
-};
+<script setup>
+defineOptions({ name: 'Footer' });
 </script>
 
 <style scoped>

@@ -1,43 +1,39 @@
 <template>
     <div class="about-section">
-        <Avatar :imagePath="'/MY_PIC2.png'" />
+        <SectionIcon icon="about" image="/my_picture-cutout.png" />
         <div class="about-layout" id="about">
             <div class="bio-card" ref="aboutMeCard" data-aos="fade-right">
-                <p class="bio-title">About Me</p>
+                <p class="bio-title">{{ $t('about.title') }}</p>
                 <br>
                 <div class="bio-details">
-                    <p><span>1</span> Hey! I’m a software engineer. I love to solve problems and turn ideas
-                        into reality.</p>
-                    <p><span>2</span> Experienced in full-stack and mobile development using modern, production-ready
-                        technologies.</p>
-                    <p><span>3</span> With many sophisticated projects under my belt, I value thoughtful system design,
-                        performance and clean
-                        architecture. </p>
+                    <p><span>1</span> {{ $t('about.p1') }}</p>
+                    <p><span>2</span> {{ $t('about.p2') }}</p>
+                    <p><span>3</span> {{ $t('about.p3') }}</p>
                 </div>
             </div>
 
             <div class="side-cards-wrapper">
 
                 <div class="stats-card" ref="accoladesCard" data-aos="fade-left">
-                    <p class="stats-title">Statistics</p>
+                    <p class="stats-title">{{ $t('about.statsTitle') }}</p>
                     <br>
                     <div class="stats-content">
                         <div class="stat-commits">
-                            <p class="stat-label">Contributions</p>
-                            <p class="stat-number">3.3K+</p>
+                            <p class="stat-label">{{ $t('about.contributions') }}</p>
+                            <p class="stat-number">5K+</p>
                         </div>
                         <div class="stat-projects">
-                            <p class="stat-label">Projects</p>
-                            <p class="stat-number">15+</p>
+                            <p class="stat-label">{{ $t('about.projects') }}</p>
+                            <p class="stat-number">20+</p>
                         </div>
                         <div class="stat-experience">
-                            <p class="stat-label">Y.O.Exp</p>
+                            <p class="stat-label">{{ $t('about.yoe') }}</p>
                             <p class="stat-number">3+</p>
                         </div>
                     </div>
                 </div>
                 <div class="tech-card" ref="favoriteTechCard" data-aos="fade-up">
-                    <p class="tech-title">Primary Technologies</p>
+                    <p class="tech-title">{{ $t('about.techTitle') }}</p>
                     <br>
                     <div class="tech-slider-wrapper">
                         <div class="tech-slider">
@@ -60,12 +56,12 @@
 
 <script>
 import { ref, onMounted } from 'vue';
-import Avatar from '../components/Avatar.vue';
+import SectionIcon from '../components/SectionIcon.vue';
 
 export default {
     name: 'About',
     components: {
-        Avatar
+        SectionIcon
     },
     setup() {
         const aboutMeCard = ref(null);
@@ -197,9 +193,21 @@ export default {
 }
 
 .tech-slider-item img {
-    width: 48px;
-    height: 48px;
+    width: 64px;
+    height: 64px;
+    padding: 15px;
+    box-sizing: border-box;
     object-fit: contain;
+    /* glass circle */
+    border-radius: 50%;
+    background:
+        radial-gradient(circle at 30% 25%, color-mix(in srgb, white 22%, transparent), transparent 55%),
+        color-mix(in srgb, var(--light) 7%, transparent);
+    border: 1px solid color-mix(in srgb, white 22%, transparent);
+    box-shadow:
+        inset 0 1px 0 color-mix(in srgb, white 40%, transparent),
+        inset 0 -5px 12px color-mix(in srgb, var(--dark) 25%, transparent),
+        0 6px 16px rgba(0, 0, 0, 0.2);
 }
 
 .tech-slider-item p {

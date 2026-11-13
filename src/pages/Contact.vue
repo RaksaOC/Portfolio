@@ -1,15 +1,15 @@
 <template>
   <div class="contact" data-aos-delay="500">
-    <Avatar :imagePath="'/contact-img/contact-avatar.png'" />
+    <SectionIcon icon="contact" :title="$t('nav.contact')" />
     <div class="form-social" id="contact">
       <form class="form" ref="formRef" id="form" data-aos="fade-right" action="https://formspree.io/f/xqaqpjpn"
         method="POST">
         <div class="email">
-          <p class="email-label">Email</p>
+          <p class="email-label">{{ $t('contact.email') }}</p>
           <input type="email" name="email" id="email" required>
         </div>
         <div class="message">
-          <p class="message-label">Message</p>
+          <p class="message-label">{{ $t('contact.message') }}</p>
           <textarea name="message" id="message" required></textarea>
         </div>
         <div class="send">
@@ -24,54 +24,40 @@
                 </svg>
               </div>
             </div>
-            <span>Send</span>
+            <span>{{ $t('contact.send') }}</span>
           </button>
         </div>
       </form>
 
       <div class="social" ref="socialRef" data-aos="fade-left">
-        <a href="https://github.com/RaksaOC" target="_blank"><img src="/contact-img/github.png" alt="social-pic"></a>
-        <a href="https://www.linkedin.com/in/ory-chanraksa-1702b6263/" target="_blank"><img
+        <a href="https://github.com/RaksaOC" data-tip="GitHub" aria-label="GitHub" target="_blank"><img src="/contact-img/github.png" alt="social-pic"></a>
+        <a href="https://www.linkedin.com/in/ory-chanraksa-1702b6263/" data-tip="LinkedIn" aria-label="LinkedIn" target="_blank"><img
             src="/contact-img/linkedin.png" alt="social-pic"></a>
-        <a href="https://www.upwork.com/freelancers/~0193c96741cd57f0f1?mp_source=share" target="_blank"><img
+        <a href="https://www.upwork.com/freelancers/~0193c96741cd57f0f1?mp_source=share" data-tip="Upwork" aria-label="Upwork" target="_blank"><img
             src="/contact-img/upwork.png" alt="social-pic"></a>
-        <a href="https://www.facebook.com/ory.chanraksa/" target="_blank"><img src="/contact-img/facebook.png"
+        <a href="https://www.facebook.com/ory.chanraksa/" data-tip="Facebook" aria-label="Facebook" target="_blank"><img src="/contact-img/facebook.png"
             alt="social-pic"></a>
-        <a href="https://www.youtube.com/@raksa7276" target="_blank"><img src="/contact-img/yt.png"
+        <a href="https://www.youtube.com/@raksa7276" data-tip="YouTube" aria-label="YouTube" target="_blank"><img src="/contact-img/yt.png"
             alt="social-pic"></a>
-        <a href="https://t.me/chanraksaOry" target="_blank"><img src="/contact-img/telegram.png" alt="social-pic"></a>
+        <a href="https://t.me/chanraksaOry" data-tip="Telegram" aria-label="Telegram" target="_blank"><img src="/contact-img/telegram.png" alt="social-pic"></a>
       </div>
     </div>
-    <div class="download-cv" ref="cvRef" @click="downloadResume">
-      <button class="button">
-        <p class="text">
-          Download Resume
-        </p>
-        <div class="svg">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="white" class="bi bi-download" viewBox="0 0 16 16">
-            <path
-              d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z">
-            </path>
-            <path
-              d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z">
-            </path>
-          </svg>
-        </div>
-      </button>
-    </div>
+    <RequestCV />
   </div>
-  <div v-show="showPopup" class="popup">Message sent successfully!</div>
+  <div v-show="showPopup" class="popup">{{ $t('contact.sent') }}</div>
 </template>
 
 <script>
 
-import Avatar from '../components/Avatar.vue';
+import SectionIcon from '../components/SectionIcon.vue';
+import RequestCV from '../components/RequestCV.vue';
 import { ref, onMounted } from 'vue';
 
 export default {
   name: "skills",
   components: {
-    Avatar
+    SectionIcon,
+    RequestCV
   },
   setup() {
     const formRef = ref(null);
@@ -132,14 +118,6 @@ export default {
       socialRef,
       showPopup
     };
-  },
-  methods: {
-    downloadResume() {
-      const link = document.createElement('a');
-      link.href = '/ORY-CHANRAKSA-RESUME.pdf';
-      link.download = 'ORY-CHANRAKSA-RESUME.pdf';
-      link.click();
-    }
   }
 };
 

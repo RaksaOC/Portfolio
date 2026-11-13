@@ -1,0 +1,801 @@
+/* Themes (looks). Each look re-maps the site's existing tokens:
+   --dark (page background), --light (text), --gray-light / --gray-dark (muted), --poppins (font), --accent.
+   Dark mode is the default; [data-theme="light"] gives each look a daytime variant. */
+
+:root {
+  --accent: var(--light);
+  --glow: none;
+}
+
+/* ---------- Nature: forest dusk ---------- */
+:root[data-look="nature"] {
+  --dark: #0b1a12;
+  --light: #e8f3e6;
+  --gray-light: #9db8a0;
+  --gray-dark: #24402d;
+  --accent: #7bd389;
+  --poppins: "Fraunces", var(--km-body), Georgia, serif;
+}
+:root[data-look="nature"][data-theme="light"] {
+  --dark: #e6efdc;
+  --light: #12301c;
+  --gray-light: #3f5f47;
+  --gray-dark: #b9cdb0;
+  --accent: #2f8f4e;
+}
+
+/* ---------- Cyberpunk: neon city ---------- */
+:root[data-look="cyberpunk"] {
+  --dark: #0a0612;
+  --light: #f5e9ff;
+  --gray-light: #b59bd6;
+  --gray-dark: #2a1840;
+  --accent: #ff2bd6;
+  --glow: 0 0 18px rgba(255, 43, 214, 0.55);
+  --poppins: "Chakra Petch", var(--km-body), ui-monospace, sans-serif;
+}
+:root[data-look="cyberpunk"][data-theme="light"] {
+  --dark: #f3ecff;
+  --light: #1b0b2e;
+  --gray-light: #5b3f7a;
+  --gray-dark: #d9c8f0;
+  --accent: #b3008f;
+  --glow: none;
+}
+
+/* ---------- Futuristic: HUD / sci-fi ---------- */
+:root[data-look="futuristic"] {
+  --dark: #05090d;
+  --light: #e0fbff;
+  --gray-light: #7fb3c2;
+  --gray-dark: #16323f;
+  --accent: #00e5ff;
+  --glow: 0 0 16px rgba(0, 229, 255, 0.45);
+  --poppins: "IBM Plex Mono", var(--km-body), ui-monospace, monospace;
+}
+:root[data-look="futuristic"][data-theme="light"] {
+  --dark: #eef5f8;
+  --light: #06202b;
+  --gray-light: #40636f;
+  --gray-dark: #c3dae3;
+  --accent: #007c99;
+  --glow: none;
+}
+
+/* ---------- Retro: synthwave ---------- */
+:root[data-look="retro"] {
+  --dark: #14002e;
+  --light: #ffe9f9;
+  --gray-light: #d39be0;
+  --gray-dark: #3a1460;
+  --accent: #ff4fd8;
+  --glow: 0 0 14px rgba(255, 79, 216, 0.6), 0 0 32px rgba(255, 209, 102, 0.25);
+  --poppins: "Space Mono", var(--km-body), ui-monospace, monospace;
+}
+:root[data-look="retro"][data-theme="light"] {
+  --dark: #ffe9f6;
+  --light: #2a0638;
+  --gray-light: #7a3d86;
+  --gray-dark: #f1c6e4;
+  --accent: #c2187a;
+  --glow: none;
+}
+
+/* Shared accents: headline glow and accent-coloured highlights while a look is active */
+:root[data-look] .hero-text-2 span,
+:root[data-look] .logo-text {
+  color: var(--accent);
+  text-shadow: var(--glow);
+}
+
+:root[data-look] .nav-link:hover,
+:root[data-look] .footer-nav a:hover {
+  color: var(--accent);
+}
+
+/* Glass cards pick up a hint of the accent colour */
+:root[data-look] .project-card,
+:root[data-look] .bio-card,
+:root[data-look] .stats-card,
+:root[data-look] .tech-card,
+:root[data-look] .card-wrap,
+:root[data-look] .form,
+:root[data-look] .social,
+:root[data-look] .chat-panel {
+  border-color: color-mix(in srgb, var(--accent) 35%, transparent) !important;
+}
+
+/* ---------- Buttons & highlights follow the look's accent ---------- */
+:root[data-look] .request-cv .button,
+:root[data-look] .send-btn,
+:root[data-look] .cv-send {
+  background: var(--accent) !important;
+  border: 1px solid color-mix(in srgb, var(--accent) 70%, white) !important;
+  color: var(--dark) !important;
+  box-shadow: var(--glow), 0 6px 18px color-mix(in srgb, var(--accent) 30%, transparent) !important;
+}
+:root[data-look] .request-cv .button .text,
+:root[data-look] .request-cv .button svg {
+  color: var(--dark) !important;
+  fill: currentColor;
+  font-weight: 600;
+}
+:root[data-look] .request-cv .button:hover,
+:root[data-look] .send-btn:hover,
+:root[data-look] .cv-send:hover {
+  filter: brightness(1.08) saturate(1.1);
+}
+
+:root[data-look] .tab-indicator {
+  background: color-mix(in srgb, var(--accent) 22%, transparent) !important;
+  border-color: var(--accent) !important;
+  box-shadow: var(--glow) !important;
+}
+:root[data-look] .stack-item {
+  border-color: color-mix(in srgb, var(--accent) 45%, transparent) !important;
+}
+:root[data-look] .stack-item:hover {
+  background: color-mix(in srgb, var(--accent) 18%, transparent) !important;
+}
+:root[data-look] .tl-progress-fill {
+  background: var(--accent) !important;
+  box-shadow: var(--glow);
+}
+:root[data-look] .stop.visible .emblem {
+  border-color: var(--accent) !important;
+  box-shadow: var(--glow), 0 0 0 4px color-mix(in srgb, var(--accent) 18%, transparent) !important;
+}
+:root[data-look] .bubble,
+:root[data-look] .bubble::before {
+  border-color: color-mix(in srgb, var(--accent) 45%, transparent) !important;
+}
+:root[data-look] .settings-gear:hover,
+:root[data-look] .nav-links a:hover {
+  color: var(--accent);
+}
+
+/* ---------- Liquid glass on the UI panels ----------
+   backdrop-filter: var(--lg-url, url(#liquid-glass)) runs the SVG filter from GlassFilter.vue on whatever is
+   behind each panel (the 3D background), so the grid / models visibly bend through the glass.
+   Chromium only; Safari / Firefox ignore the url() and keep the frosted blur. */
+:root[data-glass] :is(.nav-bar, .nav-drip, .tab-drip, .m-glass, .project-card, .bio-card, .stats-card, .tech-card,
+  .card-wrap, .form, .social, .tab-wrapper, .bubble, .request-cv .button, .send-btn, .emblem, .to-top, .music-ctl,
+  .chat-panel) {
+  background: color-mix(in srgb, var(--light) 4%, transparent) !important;
+  /* -webkit- first: Chrome treats it as an alias, so the url() version below must win */
+  -webkit-backdrop-filter: blur(var(--glass-blur, 2px)) saturate(170%) !important;
+  backdrop-filter: var(--lg-url, url(#liquid-glass)) blur(var(--glass-blur, 2px)) saturate(170%) brightness(1.06) !important;
+  border: 1px solid color-mix(in srgb, white calc(var(--glass-edge, 0.12) * 220%), transparent) !important;
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, white calc(var(--glass-edge, 0.12) * 500%), transparent),
+    inset 0 -1px 0 color-mix(in srgb, white calc(var(--glass-edge, 0.12) * 150%), transparent),
+    inset 0 0 24px color-mix(in srgb, white calc(var(--glass-edge, 0.12) * 60%), transparent),
+    0 10px 30px rgba(0, 0, 0, 0.25) !important;
+}
+/* Desktop navbar: its border is drawn by .nav-bar::after (so the settings drip can open a gap in it) and
+   no bottom inset line; the drip itself has no box edges, its outline is an SVG path (NavBar.vue) */
+:root[data-glass][data-theme] .nav-bar {
+  border-color: transparent !important;
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, white calc(var(--glass-edge, 0.12) * 500%), transparent),
+    inset 0 0 24px color-mix(in srgb, white calc(var(--glass-edge, 0.12) * 60%), transparent),
+    0 10px 30px rgba(0, 0, 0, 0.25) !important;
+}
+:root[data-glass][data-theme] .nav-drip {
+  border: 0 !important;
+  box-shadow: none !important;
+}
+/* keep accent buttons readable on glass */
+:root[data-glass][data-look] :is(.request-cv .button, .send-btn) {
+  background: color-mix(in srgb, var(--accent) 55%, transparent) !important;
+}
+:root[data-glass] .bubble::before {
+  background: transparent !important;
+}
+
+/* ---------- Cyberpunk: two neon-yellow ribbons across the bottom-right corner of cards ---------- */
+:root[data-look="cyberpunk"] {
+  --ribbon: #f6ff3b;
+  --ribbon-glow: rgba(246, 255, 59, 0.75);
+}
+:root[data-look="cyberpunk"][data-theme="light"] {
+  --ribbon: #d4c400;
+  --ribbon-glow: rgba(212, 196, 0, 0.45);
+}
+:root[data-look="cyberpunk"] :is(.project-card, .bio-card, .stats-card, .tech-card, .form, .social, .s-look, .s-row) {
+  position: relative;
+}
+:root[data-look="cyberpunk"] :is(.project-card, .bio-card, .stats-card, .tech-card, .card-wrap, .form, .social, .s-look, .s-row)::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 58px;
+  height: 58px;
+  border-bottom-right-radius: inherit;
+  pointer-events: none;
+  z-index: 2;
+  background: linear-gradient(135deg,
+      transparent 0 48%,
+      var(--ribbon) 48% 58%,
+      transparent 58% 68%,
+      var(--ribbon) 68% 78%,
+      transparent 78%);
+  filter: drop-shadow(0 0 5px var(--ribbon-glow));
+}
+:root[data-look="cyberpunk"] :is(.s-row, .s-look)::after {
+  width: 40px;
+  height: 40px;
+}
+/* keep the ribbons clear of the switch labels */
+:root[data-look="cyberpunk"] .s-row {
+  padding-right: 52px;
+}
+
+/* =====================================================================================
+   Themes ported from study-hub (palettes from its themes.css; its light/dark mapped to ours:
+   dark is our default, [data-theme="light"] the day variant).
+   ===================================================================================== */
+:root[data-look="reading-room"] {
+  --dark: #181715;
+  --light: #faf9f5;
+  --gray-light: #a09d96;
+  --gray-dark: #252320;
+  --accent: #cc785c;
+  --glow: none;
+  --poppins: "Inter", var(--km-body), system-ui, sans-serif;
+  --look-display: "Cormorant Garamond", Georgia, var(--km-display), var(--km-body), sans-serif;
+}
+:root[data-look="reading-room"][data-theme="light"] {
+  --dark: #faf9f5;
+  --light: #141413;
+  --gray-light: #65635d;
+  --gray-dark: #efe9de;
+  --accent: #a9583e;
+  --glow: none;
+}
+:root[data-look="gallery"] {
+  --dark: #000000;
+  --light: #ffffff;
+  --gray-light: #cccccc;
+  --gray-dark: #272729;
+  --accent: #2997ff;
+  --glow: none;
+  --poppins: "Inter", var(--km-body), system-ui, sans-serif;
+  --look-display: "Inter", var(--km-display), var(--km-body), sans-serif;
+}
+:root[data-look="gallery"][data-theme="light"] {
+  --dark: #ffffff;
+  --light: #1d1d1f;
+  --gray-light: #6a6a6f;
+  --gray-dark: #f5f5f7;
+  --accent: #0066cc;
+  --glow: none;
+}
+:root[data-look="open-house"] {
+  --dark: #181818;
+  --light: #f7f7f7;
+  --gray-light: #a8a8a8;
+  --gray-dark: #2b2b2b;
+  --accent: #ff385c;
+  --glow: none;
+  --poppins: "Inter", var(--km-body), system-ui, sans-serif;
+  --look-display: "Inter", var(--km-display), var(--km-body), sans-serif;
+}
+:root[data-look="open-house"][data-theme="light"] {
+  --dark: #ffffff;
+  --light: #222222;
+  --gray-light: #6a6a6a;
+  --gray-dark: #f7f7f7;
+  --accent: #e00b41;
+  --glow: none;
+}
+:root[data-look="machined"] {
+  --dark: #1a2129;
+  --light: #ffffff;
+  --gray-light: #bbbbbb;
+  --gray-dark: #262e38;
+  --accent: #5a96ea;
+  --glow: none;
+  --poppins: "Inter", var(--km-body), system-ui, sans-serif;
+  --look-display: "Inter", var(--km-display), var(--km-body), sans-serif;
+}
+:root[data-look="machined"][data-theme="light"] {
+  --dark: #ffffff;
+  --light: #262626;
+  --gray-light: #6b6b6b;
+  --gray-dark: #f7f7f7;
+  --accent: #1c69d4;
+  --glow: none;
+}
+:root[data-look="deep-lab"] {
+  --dark: #00211c;
+  --light: #ffffff;
+  --gray-light: #a7bfb8;
+  --gray-dark: #003c33;
+  --accent: #ff7759;
+  --glow: none;
+  --poppins: "Inter", var(--km-body), system-ui, sans-serif;
+  --look-display: "Space Grotesk", var(--km-display), var(--km-body), sans-serif;
+}
+:root[data-look="deep-lab"][data-theme="light"] {
+  --dark: #ffffff;
+  --light: #000000;
+  --gray-light: #63637a;
+  --gray-dark: #eeece7;
+  --accent: #e0553a;
+  --glow: none;
+}
+:root[data-look="neon-poster"] {
+  --dark: #090909;
+  --light: #ffffff;
+  --gray-light: #999999;
+  --gray-dark: #1c1c1c;
+  --accent: #0099ff;
+  --glow: 0 0 18px rgba(0, 153, 255, 0.5);
+  --poppins: "Inter", var(--km-body), system-ui, sans-serif;
+  --look-display: "Geist", var(--km-display), var(--km-body), sans-serif;
+}
+:root[data-look="neon-poster"][data-theme="light"] {
+  --dark: #ffffff;
+  --light: #090909;
+  --gray-light: #5e5e5e;
+  --gray-dark: #efefef;
+  --accent: #0088e6;
+  --glow: none;
+}
+:root[data-look="orbit"] {
+  --dark: #141413;
+  --light: #f3f0ee;
+  --gray-light: #a8a39d;
+  --gray-dark: #262627;
+  --accent: #f37338;
+  --glow: none;
+  --poppins: "Sofia Sans", var(--km-body), system-ui, sans-serif;
+  --look-display: "Sofia Sans", var(--km-display), var(--km-body), sans-serif;
+}
+:root[data-look="orbit"][data-theme="light"] {
+  --dark: #f3f0ee;
+  --light: #141413;
+  --gray-light: #5f5f5f;
+  --gray-dark: #ebe6e1;
+  --accent: #cf4500;
+  --glow: none;
+}
+:root[data-look="night-session"] {
+  --dark: #121212;
+  --light: #ffffff;
+  --gray-light: #b3b3b3;
+  --gray-dark: #1f1f1f;
+  --accent: #1ed760;
+  --glow: 0 0 16px rgba(30, 215, 96, 0.4);
+  --poppins: "Figtree", var(--km-body), system-ui, sans-serif;
+  --look-display: "Figtree", var(--km-display), var(--km-body), sans-serif;
+}
+:root[data-look="night-session"][data-theme="light"] {
+  --dark: #ffffff;
+  --light: #121212;
+  --gray-light: #5a5a5a;
+  --gray-dark: #eeeeee;
+  --accent: #1aa34a;
+  --glow: none;
+}
+:root[data-look="frosted"] {
+  --dark: #000000;
+  --light: #ffffff;
+  --gray-light: #a1a1a8;
+  --gray-dark: #2c2c2e;
+  --accent: #0a84ff;
+  --glow: none;
+  --poppins: "Inter", var(--km-body), system-ui, sans-serif;
+  --look-display: "Inter", var(--km-display), var(--km-body), sans-serif;
+}
+:root[data-look="frosted"][data-theme="light"] {
+  --dark: #f2f2f7;
+  --light: #000000;
+  --gray-light: #636369;
+  --gray-dark: #ececf1;
+  --accent: #0071e3;
+  --glow: none;
+}
+:root[data-look="clay"] {
+  --dark: #1f1b2a;
+  --light: #f6f2ff;
+  --gray-light: #b2a9c8;
+  --gray-dark: #332c43;
+  --accent: #ffb4a9;
+  --glow: none;
+  --poppins: "Inter", var(--km-body), system-ui, sans-serif;
+  --look-display: "Inter", var(--km-display), var(--km-body), sans-serif;
+}
+:root[data-look="clay"][data-theme="light"] {
+  --dark: #f1edfb;
+  --light: #2e2a3a;
+  --gray-light: #615a71;
+  --gray-dark: #f7eef3;
+  --accent: #d9796c;
+  --glow: none;
+}
+:root[data-look="pop-block"] {
+  --dark: #121214;
+  --light: #f7f7f7;
+  --gray-light: #b5b5b5;
+  --gray-dark: #26262b;
+  --accent: #ff6b6b;
+  --glow: none;
+  --poppins: "Inter", var(--km-body), system-ui, sans-serif;
+  --look-display: "Inter", var(--km-display), var(--km-body), sans-serif;
+}
+:root[data-look="pop-block"][data-theme="light"] {
+  --dark: #fffbea;
+  --light: #111111;
+  --gray-light: #4a4a4a;
+  --gray-dark: #fff3c4;
+  --accent: #ff5252;
+  --glow: none;
+}
+:root[data-look="neon-terminal"] {
+  --dark: #0d0d0d;
+  --light: #e6ffe6;
+  --gray-light: #8fb08f;
+  --gray-dark: #161b16;
+  --accent: #33ff66;
+  --glow: 0 0 14px rgba(51, 255, 102, 0.5);
+  --poppins: "JetBrains Mono", var(--km-body), system-ui, sans-serif;
+  --look-display: "JetBrains Mono", var(--km-display), var(--km-body), sans-serif;
+}
+:root[data-look="neon-terminal"][data-theme="light"] {
+  --dark: #f2f4ef;
+  --light: #0d1a0d;
+  --gray-light: #4a5b4a;
+  --gray-dark: #e8ece3;
+  --accent: #118a3a;
+  --glow: none;
+}
+/* Signature card / button shapes (out-rank the general glass rule) */
+:root[data-look="reading-room"][data-glass][data-theme] :is(.project-card, .bio-card, .stats-card, .tech-card, .card-wrap, .form, .social, .chat-panel) { border-radius: 14px !important; }
+:root[data-look="gallery"][data-glass][data-theme] :is(.project-card, .bio-card, .stats-card, .tech-card, .card-wrap, .form, .social, .chat-panel) { border-radius: 20px !important; }
+:root[data-look="open-house"][data-glass][data-theme] :is(.project-card, .bio-card, .stats-card, .tech-card, .card-wrap, .form, .social, .chat-panel) { border-radius: 20px !important; }
+:root[data-look="machined"][data-glass][data-theme] :is(.project-card, .bio-card, .stats-card, .tech-card, .card-wrap, .form, .social, .chat-panel) { border-radius: 0 !important; border-top: 3px solid var(--accent) !important; }
+:root[data-look="machined"][data-glass][data-theme] :is(.request-cv .button, .send-btn, .cv-send) { border-radius: 0 !important; }
+:root[data-look="deep-lab"][data-glass][data-theme] :is(.project-card, .bio-card, .stats-card, .tech-card, .card-wrap, .form, .social, .chat-panel) { border-radius: 20px !important; }
+:root[data-look="neon-poster"][data-glass][data-theme] :is(.project-card, .bio-card, .stats-card, .tech-card, .card-wrap, .form, .social, .chat-panel) { border-radius: 20px !important; border-color: color-mix(in srgb, var(--accent) 60%, transparent) !important; box-shadow: 0 0 40px color-mix(in srgb, var(--accent) 22%, transparent), inset 0 1px 0 color-mix(in srgb, white 20%, transparent) !important; }
+:root[data-look="orbit"][data-glass][data-theme] :is(.project-card, .bio-card, .stats-card, .tech-card, .card-wrap, .form, .social, .chat-panel) { border-radius: 30px !important; }
+:root[data-look="night-session"][data-glass][data-theme] :is(.project-card, .bio-card, .stats-card, .tech-card, .card-wrap, .form, .social, .chat-panel) { border-radius: 20px !important; }
+:root[data-look="frosted"][data-glass][data-theme] :is(.project-card, .bio-card, .stats-card, .tech-card, .card-wrap, .form, .social, .chat-panel) { border-radius: 22px !important; background: linear-gradient(160deg, color-mix(in srgb, white 14%, transparent), color-mix(in srgb, white 3%, transparent)) !important; }
+:root[data-look="clay"][data-glass][data-theme] :is(.project-card, .bio-card, .stats-card, .tech-card, .card-wrap, .form, .social, .chat-panel) { border-radius: 28px !important; border: none !important; background: color-mix(in srgb, var(--gray-dark) 80%, transparent) !important; box-shadow: inset 3px 3px 6px color-mix(in srgb, white 35%, transparent), inset -4px -4px 8px color-mix(in srgb, black 22%, transparent), 8px 12px 24px color-mix(in srgb, black 25%, transparent) !important; }
+:root[data-look="clay"][data-glass][data-theme] :is(.request-cv .button, .send-btn, .cv-send) { box-shadow: inset 2px 2px 4px color-mix(in srgb, white 45%, transparent), inset -3px -3px 6px color-mix(in srgb, black 20%, transparent), 4px 6px 12px color-mix(in srgb, black 22%, transparent) !important; }
+:root[data-look="pop-block"][data-glass][data-theme] :is(.project-card, .bio-card, .stats-card, .tech-card, .card-wrap, .form, .social, .chat-panel) { border-radius: 10px !important; border: 3px solid var(--light) !important; background: var(--gray-dark) !important; box-shadow: 6px 6px 0 var(--light) !important; }
+:root[data-look="pop-block"][data-glass][data-theme] :is(.request-cv .button, .send-btn, .cv-send) { border: 3px solid var(--light) !important; box-shadow: 4px 4px 0 var(--light) !important; }
+:root[data-look="neon-terminal"][data-glass][data-theme] :is(.project-card, .bio-card, .stats-card, .tech-card, .card-wrap, .form, .social, .chat-panel) { border-radius: 6px !important; border: 1px solid color-mix(in srgb, var(--accent) 55%, transparent) !important; box-shadow: 0 0 0 1px color-mix(in srgb, var(--accent) 20%, transparent), 0 0 22px color-mix(in srgb, var(--accent) 22%, transparent) !important; }
+:root[data-look="neon-terminal"] :is(.hero-text-1, .section-label, .bio-title, .stats-title, .tech-title) { text-transform: uppercase; letter-spacing: 0.04em; }
+:root[data-look="brass-works"] {
+  --dark: #1a100a;
+  --light: #f5deb3;
+  --gray-light: #c2a274;
+  --gray-dark: #2e1d11;
+  --accent: #d4893f;
+  --glow: 0 0 14px rgba(212, 137, 63, 0.45);
+  --poppins: "IM Fell English", var(--km-body), system-ui, sans-serif;
+  --look-display: "IM Fell English SC", "IM Fell English", var(--km-display), var(--km-body), sans-serif;
+}
+:root[data-look="brass-works"][data-theme="light"] {
+  --dark: #f3e2bd;
+  --light: #2b1a0e;
+  --gray-light: #664628;
+  --gray-dark: #f0dcb0;
+  --accent: #a85f22;
+  --glow: none;
+}
+:root[data-look="greek"] {
+  --dark: #0b1422;
+  --light: #f2efe6;
+  --gray-light: #a9b4c4;
+  --gray-dark: #14213a;
+  --accent: #5aa0e6;
+  --glow: 0 0 14px rgba(90, 160, 230, 0.35);
+  --poppins: "Cormorant Garamond", var(--km-body), system-ui, sans-serif;
+  --look-display: "Cinzel", var(--km-display), var(--km-body), sans-serif;
+}
+:root[data-look="greek"][data-theme="light"] {
+  --dark: #f4f1e8;
+  --light: #13233f;
+  --gray-light: #5a6b85;
+  --gray-dark: #e9e4d6;
+  --accent: #1f5fae;
+  --glow: none;
+}
+:root[data-look="angkor"] {
+  --dark: #0c1414;
+  --light: #f4e9d4;
+  --gray-light: #b7a98c;
+  --gray-dark: #162222;
+  --accent: #e9b44c;
+  --glow: 0 0 16px rgba(233, 180, 76, 0.45);
+  --poppins: "Marcellus", var(--km-body), system-ui, sans-serif;
+  --look-display: "Marcellus SC", "Marcellus", var(--km-display), var(--km-body), sans-serif;
+}
+:root[data-look="angkor"][data-theme="light"] {
+  --dark: #f3ead8;
+  --light: #1f2a26;
+  --gray-light: #5d6a5f;
+  --gray-dark: #e8dcc4;
+  --accent: #a8731a;
+  --glow: none;
+}
+:root[data-look="deep-ocean"] {
+  --dark: #020c18;
+  --light: #d9f3ff;
+  --gray-light: #7fa6bd;
+  --gray-dark: #08192b;
+  --accent: #2fd3e0;
+  --glow: 0 0 18px rgba(47, 211, 224, 0.5);
+  --poppins: "Lexend", var(--km-body), system-ui, sans-serif;
+  --look-display: "Lexend", var(--km-display), var(--km-body), sans-serif;
+}
+:root[data-look="deep-ocean"][data-theme="light"] {
+  --dark: #e4f4fa;
+  --light: #062436;
+  --gray-light: #3d6478;
+  --gray-dark: #d3ebf4;
+  --accent: #0b7f9a;
+  --glow: none;
+}
+:root[data-look="volcano"] {
+  --dark: #120604;
+  --light: #ffe9dc;
+  --gray-light: #c79a86;
+  --gray-dark: #22100b;
+  --accent: #ff5a1f;
+  --glow: 0 0 18px rgba(255, 90, 31, 0.55);
+  --poppins: "Rubik", var(--km-body), system-ui, sans-serif;
+  --look-display: "Bebas Neue", "Rubik", var(--km-display), var(--km-body), sans-serif;
+}
+:root[data-look="volcano"][data-theme="light"] {
+  --dark: #f7e7dc;
+  --light: #2a0f07;
+  --gray-light: #7a4a38;
+  --gray-dark: #efd8c9;
+  --accent: #c2410c;
+  --glow: none;
+}
+:root[data-look="atomic"] {
+  --dark: #0a0b1e;
+  --light: #e6e9ff;
+  --gray-light: #9aa0d0;
+  --gray-dark: #141638;
+  --accent: #8b7bff;
+  --glow: 0 0 16px rgba(139, 123, 255, 0.55);
+  --poppins: "Exo 2", var(--km-body), system-ui, sans-serif;
+  --look-display: "Orbitron", "Exo 2", var(--km-display), var(--km-body), sans-serif;
+}
+:root[data-look="atomic"][data-theme="light"] {
+  --dark: #eef0ff;
+  --light: #14163a;
+  --gray-light: #4a4f80;
+  --gray-dark: #e2e5fb;
+  --accent: #4b3fd6;
+  --glow: none;
+}
+:root[data-look="japan"] {
+  --dark: #140f26;
+  --light: #f7eaf3;
+  --gray-light: #b9a6c6;
+  --gray-dark: #1e1736;
+  --accent: #ff5d73;
+  --glow: 0 0 16px rgba(255, 93, 115, 0.45);
+  --poppins: "Zen Kaku Gothic New", var(--km-body), system-ui, sans-serif;
+  --look-display: "Shippori Mincho", "Zen Kaku Gothic New", var(--km-display), var(--km-body), serif;
+}
+:root[data-look="japan"][data-theme="light"] {
+  --dark: #f8eef3;
+  --light: #2a1733;
+  --gray-light: #6e5a78;
+  --gray-dark: #efe0ea;
+  --accent: #c62f45;
+  --glow: none;
+}
+:root[data-look="desert"] {
+  --dark: #1b100b;
+  --light: #fbe8cf;
+  --gray-light: #c9a685;
+  --gray-dark: #2a1a11;
+  --accent: #f59a4a;
+  --glow: 0 0 16px rgba(245, 154, 74, 0.45);
+  --poppins: "Arvo", var(--km-body), system-ui, serif;
+  --look-display: "Rye", "Arvo", var(--km-display), var(--km-body), serif;
+}
+:root[data-look="desert"][data-theme="light"] {
+  --dark: #f7e4c3;
+  --light: #3b2213;
+  --gray-light: #7d5a3e;
+  --gray-dark: #efd6ad;
+  --accent: #c4571b;
+  --glow: none;
+}
+/* Signature shapes for the restored / new themes */
+:root[data-look="brass-works"][data-glass][data-theme] :is(.project-card, .bio-card, .stats-card, .tech-card, .card-wrap, .form, .social, .chat-panel) { border-radius: 8px !important; border: 2px solid color-mix(in srgb, var(--accent) 70%, transparent) !important; box-shadow: inset 0 0 0 3px var(--dark), inset 0 0 0 4px color-mix(in srgb, var(--accent) 55%, transparent), 0 2px 14px rgba(60, 30, 10, 0.35) !important; }
+/* Greek: square-cut marble slabs with a frieze line top and bottom */
+:root[data-look="greek"][data-glass][data-theme] :is(.project-card, .bio-card, .stats-card, .tech-card, .card-wrap, .form, .social, .chat-panel) { border-radius: 3px !important; border-top: 3px double color-mix(in srgb, var(--accent) 80%, transparent) !important; border-bottom: 3px double color-mix(in srgb, var(--accent) 80%, transparent) !important; }
+:root[data-look="greek"][data-glass][data-theme] :is(.request-cv .button, .send-btn, .cv-send) { border-radius: 3px !important; }
+:root[data-look="greek"] :is(.hero-text-1, .section-label, .bio-title, .stats-title, .tech-title) { letter-spacing: 0.06em; }
+/* Angkor: leaf / lotus-petal corners in temple gold */
+:root[data-look="angkor"][data-glass][data-theme] :is(.project-card, .bio-card, .stats-card, .tech-card, .card-wrap, .form, .social, .chat-panel) { border-radius: 28px 6px 28px 6px !important; border: 1px solid color-mix(in srgb, var(--accent) 45%, transparent) !important; }
+:root[data-look="angkor"][data-glass][data-theme] :is(.request-cv .button, .send-btn, .cv-send) { border-radius: 18px 4px 18px 4px !important; }
+/* Deep Ocean: soft pebble shapes glowing from inside */
+:root[data-look="deep-ocean"][data-glass][data-theme] :is(.project-card, .bio-card, .stats-card, .tech-card, .card-wrap, .form, .social, .chat-panel) { border-radius: 28px !important; box-shadow: inset 0 0 34px color-mix(in srgb, var(--accent) 12%, transparent), inset 0 1px 0 color-mix(in srgb, white 20%, transparent), 0 10px 30px rgba(0, 0, 0, 0.3) !important; }
+/* Volcano: hard slabs lit from below by lava */
+:root[data-look="volcano"][data-glass][data-theme] :is(.project-card, .bio-card, .stats-card, .tech-card, .card-wrap, .form, .social, .chat-panel) { border-radius: 8px !important; border-bottom: 2px solid var(--accent) !important; box-shadow: 0 14px 30px -14px color-mix(in srgb, var(--accent) 75%, transparent), inset 0 -18px 30px -24px color-mix(in srgb, var(--accent) 60%, transparent), inset 0 1px 0 color-mix(in srgb, white 14%, transparent) !important; }
+:root[data-look="volcano"] :is(.hero-text-1, .section-label, .bio-title, .stats-title, .tech-title) { letter-spacing: 0.03em; }
+/* Japan: a torii across the top of each card (kasagi beam + the thinner nuki under it), square-cut corners */
+:root[data-look="japan"][data-glass][data-theme] :is(.project-card, .bio-card, .stats-card, .tech-card, .card-wrap, .form, .chat-panel) {
+  border-radius: 3px !important;
+  background:
+    linear-gradient(var(--accent), var(--accent)) top / 100% 4px no-repeat,
+    linear-gradient(color-mix(in srgb, var(--accent) 70%, transparent), color-mix(in srgb, var(--accent) 70%, transparent)) 0 9px / 100% 1.5px no-repeat,
+    color-mix(in srgb, var(--light) 4%, transparent) !important;
+}
+:root[data-look="japan"][data-glass][data-theme] :is(.request-cv .button, .send-btn, .cv-send) { border-radius: 3px !important; }
+/* Desert: weathered sandstone, uneven rounded corners and a band of rock strata along the bottom */
+:root[data-look="desert"][data-glass][data-theme] :is(.project-card, .bio-card, .stats-card, .tech-card, .card-wrap, .form, .chat-panel) {
+  border-radius: 12px 26px 10px 22px !important;
+  background:
+    linear-gradient(color-mix(in srgb, var(--accent) 55%, transparent), color-mix(in srgb, var(--accent) 55%, transparent)) bottom / 100% 3px no-repeat,
+    linear-gradient(color-mix(in srgb, var(--accent) 25%, transparent), color-mix(in srgb, var(--accent) 25%, transparent)) 0 calc(100% - 6px) / 100% 2px no-repeat,
+    color-mix(in srgb, var(--light) 4%, transparent) !important;
+}
+:root[data-look="desert"][data-glass][data-theme] :is(.request-cv .button, .send-btn, .cv-send) { border-radius: 8px 16px 8px 14px !important; }
+:root[data-look="desert"] :is(.hero-text-1, .section-label, .bio-title, .stats-title, .tech-title) { letter-spacing: 0.02em; }
+/* ---------- Edge details per theme (cut corners, brackets, rivets ...) ---------- */
+/* Cyberpunk: straight chamfers on two corners (tooltips on .social would be clipped, so it keeps its shape).
+   The clip cuts the border off along the diagonals, so each cut gets its own line: a thin band painted just
+   inside the clip edge, in the same colour as the glass border */
+:root[data-look="cyberpunk"][data-glass][data-theme] :is(.project-card, .bio-card, .stats-card, .tech-card, .card-wrap, .form, .chat-panel) {
+  --cut-edge: color-mix(in srgb, white calc(var(--glass-edge, 0.12) * 220%), transparent);
+  border-radius: 0 !important;
+  clip-path: polygon(18px 0, 100% 0, 100% calc(100% - 18px), calc(100% - 18px) 100%, 0 100%, 0 18px);
+  background:
+    linear-gradient(135deg, transparent 50%, var(--cut-edge) 0 calc(50% + 1.4px), transparent 0) top left / 18px 18px no-repeat border-box,
+    linear-gradient(135deg, transparent calc(50% - 1.4px), var(--cut-edge) 0 50%, transparent 0) bottom right / 18px 18px no-repeat border-box,
+    color-mix(in srgb, var(--light) 4%, transparent) !important;
+}
+/* Futuristic + Terminal: HUD corner brackets */
+:root:is([data-look="futuristic"], [data-look="neon-terminal"])[data-glass][data-theme] :is(.project-card, .bio-card, .stats-card, .tech-card, .card-wrap, .form, .chat-panel) {
+  border-radius: 4px !important;
+  background:
+    linear-gradient(var(--accent), var(--accent)) top left / 18px 2px no-repeat,
+    linear-gradient(var(--accent), var(--accent)) top left / 2px 18px no-repeat,
+    linear-gradient(var(--accent), var(--accent)) top right / 18px 2px no-repeat,
+    linear-gradient(var(--accent), var(--accent)) top right / 2px 18px no-repeat,
+    linear-gradient(var(--accent), var(--accent)) bottom left / 18px 2px no-repeat,
+    linear-gradient(var(--accent), var(--accent)) bottom left / 2px 18px no-repeat,
+    linear-gradient(var(--accent), var(--accent)) bottom right / 18px 2px no-repeat,
+    linear-gradient(var(--accent), var(--accent)) bottom right / 2px 18px no-repeat,
+    color-mix(in srgb, var(--light) 4%, transparent) !important;
+}
+/* Brass Works: rivets in the corners */
+:root[data-look="brass-works"][data-glass][data-theme] :is(.project-card, .bio-card, .stats-card, .tech-card, .card-wrap, .form, .chat-panel) {
+  background:
+    radial-gradient(circle at 12px 12px, color-mix(in srgb, var(--accent) 90%, white) 0 2.5px, color-mix(in srgb, var(--accent) 50%, transparent) 3px, transparent 4px),
+    radial-gradient(circle at calc(100% - 12px) 12px, color-mix(in srgb, var(--accent) 90%, white) 0 2.5px, color-mix(in srgb, var(--accent) 50%, transparent) 3px, transparent 4px),
+    radial-gradient(circle at 12px calc(100% - 12px), color-mix(in srgb, var(--accent) 90%, white) 0 2.5px, color-mix(in srgb, var(--accent) 50%, transparent) 3px, transparent 4px),
+    radial-gradient(circle at calc(100% - 12px) calc(100% - 12px), color-mix(in srgb, var(--accent) 90%, white) 0 2.5px, color-mix(in srgb, var(--accent) 50%, transparent) 3px, transparent 4px),
+    color-mix(in srgb, var(--light) 4%, transparent) !important;
+}
+/* Nature: leaf corners (mirror of Angkor's petals) */
+:root[data-look="nature"][data-glass][data-theme] :is(.project-card, .bio-card, .stats-card, .tech-card, .card-wrap, .form, .chat-panel) { border-radius: 6px 34px 6px 34px !important; }
+:root[data-look="nature"][data-glass][data-theme] :is(.request-cv .button, .send-btn, .cv-send) { border-radius: 4px 18px 4px 18px !important; }
+/* Retro: sunset stripe along the top edge */
+:root[data-look="retro"][data-glass][data-theme] :is(.project-card, .bio-card, .stats-card, .tech-card, .card-wrap, .form, .chat-panel) {
+  border-radius: 4px !important;
+  background:
+    linear-gradient(90deg, #ff4fd8, #ff8a3d, #ffd166) top / 100% 3px no-repeat,
+    color-mix(in srgb, var(--light) 4%, transparent) !important;
+}
+/* Atomic: a tiny atom orbiting in the top-right corner */
+:root[data-look="atomic"][data-glass][data-theme] :is(.project-card, .bio-card, .stats-card, .tech-card, .card-wrap, .form, .chat-panel) {
+  border-radius: 22px !important;
+  background:
+    radial-gradient(circle at calc(100% - 26px) 20px, var(--accent) 0 2.5px, transparent 3px),
+    radial-gradient(ellipse 15px 6px at calc(100% - 26px) 20px, transparent 0 78%, color-mix(in srgb, var(--accent) 80%, transparent) 82% 94%, transparent 100%),
+    radial-gradient(ellipse 6px 15px at calc(100% - 26px) 20px, transparent 0 78%, color-mix(in srgb, var(--accent) 55%, transparent) 82% 94%, transparent 100%),
+    color-mix(in srgb, var(--light) 4%, transparent) !important;
+}
+/* Display font for headings in the ported themes (falls back to the Khmer display face for Khmer text) */
+:root:is([data-look="reading-room"], [data-look="gallery"], [data-look="open-house"], [data-look="machined"], [data-look="deep-lab"], [data-look="neon-poster"], [data-look="orbit"], [data-look="night-session"], [data-look="frosted"], [data-look="clay"], [data-look="pop-block"], [data-look="neon-terminal"], [data-look="brass-works"], [data-look="greek"], [data-look="angkor"], [data-look="deep-ocean"], [data-look="volcano"], [data-look="atomic"], [data-look="japan"], [data-look="desert"]) :is(.hero-text-1, .hero-text-2, .section-label, .bio-title, .stats-title, .tech-title, .project-card .title, .place, .s-head h2, .welcome .name, .logo-text, .footer-logo) {
+  font-family: var(--look-display, var(--poppins));
+}
+
+
+/* ---------- Chat panel: the theme's card shape, adjusted per layout ----------
+   The shape rules above put .chat-panel next to the cards. The side layouts (dock / drawer) sit against the
+   right edge of the screen, so only their left corners take the theme's shape and the right edge stays flat */
+:root[data-look][data-glass][data-theme] .chat-panel:is(.mode-dock, .mode-overlay) {
+  border-top-right-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+  border-right: 0 !important;
+}
+/* Cyberpunk's chamfers: the clip leaves room outside the left edge for what hangs out there (the drawer's
+   close tab, the history drop beside the header) */
+:root[data-look="cyberpunk"][data-glass][data-theme] .chat-panel.mode-floating {
+  clip-path: polygon(18px 0, 100% 0, 100% calc(100% - 18px), calc(100% - 18px) 100%, 0 100%, 0 64px, -56px 64px, -56px 0, 0 0, 0 18px);
+}
+:root[data-look="cyberpunk"][data-glass][data-theme] .chat-panel:is(.mode-dock, .mode-overlay) {
+  clip-path: polygon(18px 0, 100% 0, 100% 100%, 18px 100%, 0 calc(100% - 18px), 0 calc(50% + 34px), -30px calc(50% + 34px), -30px calc(50% - 34px), 0 calc(50% - 34px), 0 64px, -56px 64px, -56px 0, 0 0, 0 18px);
+  background:
+    linear-gradient(135deg, transparent 50%, var(--cut-edge) 0 calc(50% + 1.4px), transparent 0) top left / 18px 18px no-repeat border-box,
+    linear-gradient(45deg, transparent 50%, var(--cut-edge) 0 calc(50% + 1.4px), transparent 0) bottom left / 18px 18px no-repeat border-box,
+    color-mix(in srgb, var(--light) 4%, transparent) !important;
+}
+/* Cyberpunk + Terminal chat: a terminal-style header rule in the accent */
+:root:is([data-look="cyberpunk"], [data-look="neon-terminal"], [data-look="futuristic"])[data-glass][data-theme] .chat-panel .chat-head {
+  border-bottom: 1px solid color-mix(in srgb, var(--accent) 45%, transparent);
+}
+:root[data-look="neon-terminal"] .chat-panel .chat-head-text h2::before {
+  content: "> ";
+  color: var(--accent);
+}
+/* Cyberpunk chat: the cards' neon ribbons, smaller so they stay clear of the send button */
+:root[data-look="cyberpunk"] .chat-panel::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 36px;
+  height: 36px;
+  pointer-events: none;
+  z-index: 6;
+  background: linear-gradient(135deg,
+      transparent 0 48%,
+      var(--ribbon) 48% 58%,
+      transparent 58% 68%,
+      var(--ribbon) 68% 78%,
+      transparent 78%);
+  filter: drop-shadow(0 0 5px var(--ribbon-glow));
+}
+/* Chat glass stays the same glass as the cards, but a long read sits on it: a soft tint in the theme's
+   own background colour and a little more blur behind the text keep it legible over bright scenes
+   (sakura, sunsets). Drawn as a layer under the content, so each theme's edges / corner marks stay crisp */
+:root[data-glass] .chat-panel.chat-panel {
+  -webkit-backdrop-filter: blur(calc(var(--glass-blur, 2px) + 8px)) saturate(170%) !important;
+  backdrop-filter: var(--lg-url, url(#liquid-glass)) blur(calc(var(--glass-blur, 2px) + 6px)) saturate(170%) brightness(1.04) !important;
+}
+:root[data-glass] .chat-panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  pointer-events: none;
+  background: color-mix(in srgb, var(--dark) 34%, transparent);
+}
+
+/* Phone bottom sheet: the theme's shape on the top corners only (the bottom sits on the screen edge), easing
+   to square as the sheet is dragged to full screen (--p, set by ChatBot.vue) */
+:root[data-look][data-glass][data-theme] .chat-panel.mode-sheet {
+  border-bottom-left-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+  border-bottom: 0 !important;
+  /* the corners follow the drag (--p); only the settle glide animates */
+  border-top-left-radius: calc(var(--sheet-r, 26px) * (1 - var(--p, 0))) !important;
+  border-top-right-radius: calc(var(--sheet-r, 26px) * (1 - var(--p, 0))) !important;
+}
+:root[data-look][data-glass][data-theme] .chat-panel.mode-sheet.settling {
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1) !important;
+}
+:root[data-look][data-glass][data-theme] .chat-panel.mode-sheet.sheet-full {
+  clip-path: none !important;
+}
+:root[data-look="cyberpunk"][data-glass][data-theme] .chat-panel.mode-sheet:not(.sheet-full) {
+  clip-path: polygon(18px 0, calc(100% - 18px) 0, 100% 18px, 100% 100%, 0 100%, 0 18px);
+}
+:root[data-look="cyberpunk"][data-glass][data-theme] .chat-panel.mode-sheet {
+  background: color-mix(in srgb, var(--light) 4%, transparent) !important;
+}
+/* the sheet's top corners per theme, matching each theme's card shape */
+:root:is([data-look="machined"], [data-look="cyberpunk"]) { --sheet-r: 0px; }
+:root:is([data-look="japan"], [data-look="greek"]) { --sheet-r: 3px; }
+:root:is([data-look="neon-terminal"], [data-look="futuristic"], [data-look="retro"]) { --sheet-r: 6px; }
+:root:is([data-look="volcano"], [data-look="brass-works"], [data-look="pop-block"]) { --sheet-r: 10px; }
+:root:is([data-look="reading-room"], [data-look="desert"]) { --sheet-r: 16px; }
+:root:is([data-look="orbit"], [data-look="clay"], [data-look="deep-ocean"], [data-look="angkor"], [data-look="nature"]) { --sheet-r: 30px; }
