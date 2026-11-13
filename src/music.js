@@ -33,7 +33,7 @@ export const TRACKS = {
   'neon-terminal': 'Brain Dance',
   'brass-works': 'Industrial Revolution',
   greek: 'Teller of the Tales',
-  angkor: 'Khmer Krong Pkar',
+  angkor: 'Khmer Traditional Music',
   'deep-ocean': 'Jellyfish in Space',
   volcano: 'Volatile Reaction',
   atomic: 'Mesmerizing Galaxy',
@@ -42,8 +42,9 @@ export const TRACKS = {
 }
 
 // Who made each track, for the line under the volume slider. Default: Kevin MacLeod, CC BY 4.0.
-// angkor: "ភ្លេងពិណពាទ្យ - ខ្មែរក្រងផ្កា" (Khmer Krong Pkar, pinpeat ensemble), supplied by the site owner;
-// performer / licence not recorded yet: fill in artist (and href / note) here once known.
+// angkor: a Khmer traditional piece supplied by the site owner (the downloaded file's name lost its Khmer vowel
+// signs, so the exact title isn't recorded yet: set it in TRACKS); performer / licence not recorded yet either:
+// fill in artist (and href / note) here once known.
 const KEVIN = { artist: 'Kevin MacLeod', href: 'https://incompetech.com', note: 'Kevin MacLeod (incompetech.com) · CC BY 4.0' }
 const CREDITS = {
   angkor: { artist: '', href: '', note: '' },
