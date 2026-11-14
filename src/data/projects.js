@@ -1,5 +1,5 @@
-// Every project on the site. Used by the Projects section (src/pages/Projects.vue) and by the AI assistant's
-// knowledge base (api/_context.js), so both always describe the same work.
+// Every project on the site. Used by the Projects section (src/sections/Projects.vue) and by the AI assistant's
+// knowledge base (src/api/context.js), so both always describe the same work.
 
 // Translation key for each project's description (src/i18n/*.js → projects.items.<key>)
 export const descKeys = {
@@ -15,13 +15,13 @@ export const projects = [
     number: 17,
     title: "MLMUPC HRM",
     year: 2026,
-    mainImage: "/projects-img/mlmupc-hrm/1.jpg",
+    mainImage: "/images/projects/mlmupc-hrm/1.jpg",
     image: [
-      "/projects-img/mlmupc-hrm/1.jpg",
-      "/projects-img/mlmupc-hrm/2.jpg",
-      "/projects-img/mlmupc-hrm/3.jpg",
-      "/projects-img/mlmupc-hrm/4.jpg",
-      "/projects-img/mlmupc-hrm/5.jpg"
+      "/images/projects/mlmupc-hrm/1.jpg",
+      "/images/projects/mlmupc-hrm/2.jpg",
+      "/images/projects/mlmupc-hrm/3.jpg",
+      "/images/projects/mlmupc-hrm/4.jpg",
+      "/images/projects/mlmupc-hrm/5.jpg"
     ],
     techStack: ["Angular", "NestJS", "Flutter", "PostgreSQL", "Redis", "Socket.IO", "Docker"],
     description: "A ministry-wide human resource management platform for the Ministry of Land Management, Urban Planning and Construction, digitising attendance, leave, requests and civil servant records for nearly 3,000 officers across web and mobile. Full-stack developer and project technical lead.",
@@ -31,11 +31,11 @@ export const projects = [
     number: 18,
     title: "NIS HRM",
     year: 2026,
-    mainImage: "/projects-img/nis-hrm/1.jpg",
+    mainImage: "/images/projects/nis-hrm/1.jpg",
     image: [
-      "/projects-img/nis-hrm/1.jpg",
-      "/projects-img/nis-hrm/2.jpg",
-      "/projects-img/nis-hrm/3.jpg"
+      "/images/projects/nis-hrm/1.jpg",
+      "/images/projects/nis-hrm/2.jpg",
+      "/images/projects/nis-hrm/3.jpg"
     ],
     techStack: ["Angular", "NestJS", "Flutter", "PostgreSQL", "Socket.IO", "Python", "Raspberry Pi"],
     description: "A government HR platform for the National Institute of Statistics under the Ministry of Planning, serving 500+ officers with attendance, leave and personnel records, plus a face scanner integration that pairs on-site biometric terminals with the cloud for real-time check-ins. Full-stack developer and project technical lead."
@@ -44,11 +44,11 @@ export const projects = [
     number: 19,
     title: "CCN",
     year: 2026,
-    mainImage: "/projects-img/ccn/1.jpg",
+    mainImage: "/images/projects/ccn/1.jpg",
     image: [
-      "/projects-img/ccn/1.jpg",
-      "/projects-img/ccn/2.jpg",
-      "/projects-img/ccn/3.jpg"
+      "/images/projects/ccn/1.jpg",
+      "/images/projects/ccn/2.jpg",
+      "/images/projects/ccn/3.jpg"
     ],
     techStack: ["Flutter", "Dart", "Firebase", "App Store", "Google Play"],
     description: "The national registration and licensing platform of the Cambodian Council of Nurses, letting nurses nationwide register, apply for membership, licences and CPD, and receive QR-verifiable certificates through multi-step approval workflows. Mobile developer, building the Flutter app and owning its iOS and Android releases to the App Store and Google Play."
@@ -57,13 +57,13 @@ export const projects = [
     number: 20,
     title: "PhumiYerng",
     year: 2026,
-    mainImage: "/projects-img/phumiyerng/1.jpg",
+    mainImage: "/images/projects/phumiyerng/1.jpg",
     image: [
-      "/projects-img/phumiyerng/1.jpg",
-      "/projects-img/phumiyerng/2.jpg",
-      "/projects-img/phumiyerng/3.jpg",
-      "/projects-img/phumiyerng/4.jpg",
-      "/projects-img/phumiyerng/5.jpg"
+      "/images/projects/phumiyerng/1.jpg",
+      "/images/projects/phumiyerng/2.jpg",
+      "/images/projects/phumiyerng/3.jpg",
+      "/images/projects/phumiyerng/4.jpg",
+      "/images/projects/phumiyerng/5.jpg"
     ],
     techStack: ["Flutter", "Angular", "NestJS", "PostgreSQL", "Redis", "Firebase", "Socket.IO"],
     description: "A community tourism and marketplace app supporting LASED III, a Royal Government of Cambodia land programme backed by the World Bank, bringing 19 rural communities onto one platform to promote their trips, homestays and farm-fresh products.",
@@ -75,13 +75,13 @@ export const projects = [
     number: 1,
     title: "KOMPLEX",
     year: 2025,
-    mainImage: "/projects-img/komplex/1.png",
+    mainImage: "/images/projects/komplex/1.png",
     image: [
-      "/projects-img/komplex/1.png",
-      "/projects-img/komplex/2.png",
-      "/projects-img/komplex/3.png",
-      "/projects-img/komplex/4.png",
-      "/projects-img/komplex/5.png"
+      "/images/projects/komplex/1.png",
+      "/images/projects/komplex/2.png",
+      "/images/projects/komplex/3.png",
+      "/images/projects/komplex/4.png",
+      "/images/projects/komplex/5.png"
     ],
     techStack: ["Next.js", "Expo", "Tailwind", "Express.js", "FastAPI", "PostgreSQL", "Redis"],
     description: "A web and mobile application educational platform for khmer students with curriculum aligned interactive lessons, utilities, tutor AI and community features.",
@@ -94,13 +94,13 @@ export const projects = [
     number: 2,
     title: "Quicknews",
     year: 2025,
-    mainImage: "/projects-img/quicknews/1.JPG",
+    mainImage: "/images/projects/quicknews/1.JPG",
     image: [
-      "/projects-img/quicknews/1.JPG",
-      "/projects-img/quicknews/2.png",
-      "/projects-img/quicknews/3.png",
-      "/projects-img/quicknews/4.png",
-      "/projects-img/quicknews/5.png"
+      "/images/projects/quicknews/1.JPG",
+      "/images/projects/quicknews/2.png",
+      "/images/projects/quicknews/3.png",
+      "/images/projects/quicknews/4.png",
+      "/images/projects/quicknews/5.png"
     ],
     techStack: ["Next.Js", "Tailwind", "Express.Js", "PostgreSQL", "Redis", "Cloudflare"],
     description: "An engaging news application delivering credible news by verified creators.",
@@ -112,13 +112,13 @@ export const projects = [
     number: 3,
     title: "Grand Cineplex",
     year: 2026,
-    mainImage: "/projects-img/grand-cineplex/2.png",
+    mainImage: "/images/projects/grand-cineplex/2.png",
     image: [
-      "/projects-img/grand-cineplex/1.png",
-      "/projects-img/grand-cineplex/2.png",
-      "/projects-img/grand-cineplex/3.png",
-      "/projects-img/grand-cineplex/4.png",
-      "/projects-img/grand-cineplex/5.png"
+      "/images/projects/grand-cineplex/1.png",
+      "/images/projects/grand-cineplex/2.png",
+      "/images/projects/grand-cineplex/3.png",
+      "/images/projects/grand-cineplex/4.png",
+      "/images/projects/grand-cineplex/5.png"
     ],
     techStack: ["React", "Express.js", "PostgreSQL", "ABA payway"],
     description: "A web application for managing cinema operations, featuring multi-role interfaces for customers to browse and reserve tickets, cashiers to manage payments and managers to manage the cinema.",
@@ -131,8 +131,8 @@ export const projects = [
     number: 4,
     title: "Grand Cineplex DBA",
     year: 2026,
-    mainImage: "/projects-img/grand-cineplex-dba/1.png",
-    videoSrc: "/project-videos/grand-cineplex-dba.mp4",
+    mainImage: "/images/projects/grand-cineplex-dba/1.png",
+    videoSrc: "/videos/projects/grand-cineplex-dba.mp4",
     techStack: ["Next.Js", "PostgreSQL"],
     description: "A custom database management tool for managing Grand Cineplex's database with dashboard, roles, permissions, console and schema visualization.",
     githubLink: "https://github.com/RaksaOC/Grand-Cineplex-DBA",
@@ -144,13 +144,13 @@ export const projects = [
     number: 5,
     title: "V-Menu",
     year: 2026,
-    mainImage: "/projects-img/v-menu/1.png",
+    mainImage: "/images/projects/v-menu/1.png",
     image: [
-      "/projects-img/v-menu/1.png",
-      "/projects-img/v-menu/2.png",
-      "/projects-img/v-menu/3.png",
-      "/projects-img/v-menu/4.png",
-      "/projects-img/v-menu/5.png"
+      "/images/projects/v-menu/1.png",
+      "/images/projects/v-menu/2.png",
+      "/images/projects/v-menu/3.png",
+      "/images/projects/v-menu/4.png",
+      "/images/projects/v-menu/5.png"
     ],
     techStack: ["Next.js", "Tailwind", "MongoDB"],
     description: "A digital restaurant ordering and management system where users are able to scan QR code and place food orders, chefs receive orders, cashier manage payments and owners can manage multiple restaurants.",
@@ -162,13 +162,13 @@ export const projects = [
     number: 6,
     title: "Jou Em",
     year: 2025,
-    mainImage: "/projects-img/jou-em/5.png",
+    mainImage: "/images/projects/jou-em/5.png",
     image: [
-      "/projects-img/jou-em/5.png",
-      "/projects-img/jou-em/4.png",
-      "/projects-img/jou-em/3.png",
-      "/projects-img/jou-em/2.png",
-      "/projects-img/jou-em/1.png"
+      "/images/projects/jou-em/5.png",
+      "/images/projects/jou-em/4.png",
+      "/images/projects/jou-em/3.png",
+      "/images/projects/jou-em/2.png",
+      "/images/projects/jou-em/1.png"
     ],
     techStack: ["Unity", "C#", "Express.js", "MongoDB"],
     description: "A captivating fruit merging puzzle game inspired by the rich culture and landscapes of Cambodia, featuring traditional Khmer fruits in an ancient temple setting.",
@@ -182,13 +182,13 @@ export const projects = [
     number: 7,
     title: "Learning Management System",
     year: 2025,
-    mainImage: "/projects-img/lms/2.png",
+    mainImage: "/images/projects/lms/2.png",
     image: [
-      "/projects-img/lms/1.png",
-      "/projects-img/lms/2.png",
-      "/projects-img/lms/3.png",
-      "/projects-img/lms/4.png",
-      "/projects-img/lms/5.png"
+      "/images/projects/lms/1.png",
+      "/images/projects/lms/2.png",
+      "/images/projects/lms/3.png",
+      "/images/projects/lms/4.png",
+      "/images/projects/lms/5.png"
     ],
     techStack: ["Java", "JavaFX", "MySQL"],
     description: "A feature-rich Learning Management System (LMS) for managing courses, student enrollments, and teacher assignments. Built with Java and JavaFX for a desktop interface, and MySQL as the backend for data management. The admin app controls all core features, while teacher and student apps focus on classroom interactions.",
@@ -201,8 +201,8 @@ export const projects = [
     number: 8,
     title: "Dak Louk",
     year: 2026,
-    mainImage: "/projects-img/dak-louk/1.png",
-    videoSrc: "/project-videos/dak-louk.mp4",
+    mainImage: "/images/projects/dak-louk/1.png",
+    videoSrc: "/videos/projects/dak-louk.mp4",
     techStack: ["Flutter", "SQLite"],
     description: "An offline marketplace flutter mobile application for merchants and buyers with product listing, ordering, live streams and posts system.",
     githubLink: "https://github.com/salxz696969/dak-louk.git",
@@ -215,13 +215,13 @@ export const projects = [
     number: 9,
     title: "NoteDown",
     year: 2025,
-    mainImage: "/projects-img/note-down/1.png",
+    mainImage: "/images/projects/note-down/1.png",
     image: [
-      "/projects-img/note-down/1.png",
-      "/projects-img/note-down/2.png",
-      "/projects-img/note-down/1.png",
-      "/projects-img/note-down/2.png",
-      "/projects-img/note-down/1.png"
+      "/images/projects/note-down/1.png",
+      "/images/projects/note-down/2.png",
+      "/images/projects/note-down/1.png",
+      "/images/projects/note-down/2.png",
+      "/images/projects/note-down/1.png"
     ],
     techStack: ["HTML", "CSS", "JS", "Spring Boot"],
     description: "A full-stack web application for taking and organizing notes. Built with Spring Boot for the backend and JavaScript, HTML, and CSS for the frontend. Created to explore full-stack development, REST APIs, and client-server communication.",
@@ -233,13 +233,13 @@ export const projects = [
     number: 10,
     title: "Quizzy",
     year: 2025,
-    mainImage: "/projects-img/quizzy/1.png",
+    mainImage: "/images/projects/quizzy/1.png",
     image: [
-      "/projects-img/quizzy/5.png",
-      "/projects-img/quizzy/4.png",
-      "/projects-img/quizzy/3.png",
-      "/projects-img/quizzy/2.png",
-      "/projects-img/quizzy/1.png"
+      "/images/projects/quizzy/5.png",
+      "/images/projects/quizzy/4.png",
+      "/images/projects/quizzy/3.png",
+      "/images/projects/quizzy/2.png",
+      "/images/projects/quizzy/1.png"
     ],
     techStack: ["Next.js", "Tailwind", "Framer Motion"],
     description: "A beautiful, interactive web application built with Next.js featuring educational games and quizzes designed specifically for kids! This app provides an engaging learning experience with colorful animations, fun sound effects, and kid-friendly content.",
@@ -252,13 +252,13 @@ export const projects = [
     number: 11,
     title: "KeebsForKeebs",
     year: 2025,
-    mainImage: "/projects-img/keebs-for-keebs/1.png",
+    mainImage: "/images/projects/keebs-for-keebs/1.png",
     image: [
-      "/projects-img/keebs-for-keebs/1.png",
-      "/projects-img/keebs-for-keebs/2.png",
-      "/projects-img/keebs-for-keebs/3.png",
-      "/projects-img/keebs-for-keebs/4.png",
-      "/projects-img/keebs-for-keebs/5.png"
+      "/images/projects/keebs-for-keebs/1.png",
+      "/images/projects/keebs-for-keebs/2.png",
+      "/images/projects/keebs-for-keebs/3.png",
+      "/images/projects/keebs-for-keebs/4.png",
+      "/images/projects/keebs-for-keebs/5.png"
     ],
     techStack: ["React", "Tailwind", "CSS"],
     description: "An interactive web platform for browsing, testing, and purchasing mechanical keyboards. Features include a 3D viewer, live sound tests, and a fully functional cart and checkout system, all built with a modern and responsive UI.",
@@ -270,11 +270,11 @@ export const projects = [
     number: 12,
     title: "BestWay",
     year: 2025,
-    mainImage: "/projects-img/best-way/1.png",
+    mainImage: "/images/projects/best-way/1.png",
     image: [
-      "/projects-img/best-way/1.png",
-      "/projects-img/best-way/2.png",
-      "/projects-img/best-way/3.png",
+      "/images/projects/best-way/1.png",
+      "/images/projects/best-way/2.png",
+      "/images/projects/best-way/3.png",
     ],
     techStack: ["Next.Js", "Tailwind"],
     description: "A website for bestway a logistics company in Cambodia, for displaying information about the company and their services.",
@@ -286,13 +286,13 @@ export const projects = [
     number: 13,
     title: "McDonald's Clone",
     year: 2024,
-    mainImage: "/projects-img/mcdonald/1.jpg",
+    mainImage: "/images/projects/mcdonald/1.jpg",
     image: [
-      "/projects-img/mcdonald/1.jpg",
-      "/projects-img/mcdonald/2.jpg",
-      "/projects-img/mcdonald/3.jpg",
-      "/projects-img/mcdonald/4.jpg",
-      "/projects-img/mcdonald/5.jpg"
+      "/images/projects/mcdonald/1.jpg",
+      "/images/projects/mcdonald/2.jpg",
+      "/images/projects/mcdonald/3.jpg",
+      "/images/projects/mcdonald/4.jpg",
+      "/images/projects/mcdonald/5.jpg"
     ],
     techStack: ["HTML", "CSS", "Bootstrap"],
     description: "A front-end replica of the official McDonald's website. Built using HTML, CSS, and Bootstrap, the project demonstrates the ability to recreate a professional website layout and responsive UI using fundamental web technologies.",
@@ -305,9 +305,9 @@ export const projects = [
     number: 14,
     title: "Dart Clinic",
     year: 2026,
-    mainImage: "/projects-img/dart-clinic/1.png",
+    mainImage: "/images/projects/dart-clinic/1.png",
     techStack: ["Dart", "JSON"],
-    videoSrc: "/project-videos/dart-clinic.mp4",
+    videoSrc: "/videos/projects/dart-clinic.mp4",
     description: "A CLI hospital management system for managing patients, doctors, appointments, rooms, and other hospital operations.",
     githubLink: "https://github.com/RaksaOC/Dart-Clinic",
     ytLink: "https://youtu.be/gT9WJ3ogHp8",
@@ -318,13 +318,13 @@ export const projects = [
     number: 15,
     title: "Bus Management System",
     year: 2024,
-    mainImage: "/projects-img/bus-reserve/1.png",
+    mainImage: "/images/projects/bus-reserve/1.png",
     image: [
-      "/projects-img/bus-reserve/1.png",
-      "/projects-img/bus-reserve/2.png",
-      "/projects-img/bus-reserve/3.png",
-      "/projects-img/bus-reserve/4.png",
-      "/projects-img/bus-reserve/5.png"
+      "/images/projects/bus-reserve/1.png",
+      "/images/projects/bus-reserve/2.png",
+      "/images/projects/bus-reserve/3.png",
+      "/images/projects/bus-reserve/4.png",
+      "/images/projects/bus-reserve/5.png"
     ],
     techStack: ["C++", "JSON"],
     description: "A command-line bus reservation system developed in C++. Users can book and refund seats, while admins manage buses and admin accounts. JSON is used for data storage, making the system lightweight and portable.",
@@ -336,13 +336,13 @@ export const projects = [
     number: 16,
     title: "3D Portfolio",
     year: 2024,
-    mainImage: "/projects-img/3dPort/2.png",
+    mainImage: "/images/projects/3dPort/2.png",
     image: [
-      "/projects-img/3dPort/1.png",
-      "/projects-img/3dPort/2.png",
-      "/projects-img/3dPort/3.png",
-      "/projects-img/3dPort/4.png",
-      "/projects-img/3dPort/5.png"
+      "/images/projects/3dPort/1.png",
+      "/images/projects/3dPort/2.png",
+      "/images/projects/3dPort/3.png",
+      "/images/projects/3dPort/4.png",
+      "/images/projects/3dPort/5.png"
     ],
     techStack: ["Three.js", "Vue.js", "Bootstrap"],
     description: "A visually stunning 3D web portfolio built using Three.js and Vue.js to showcase myself, skills, projects and experience.",

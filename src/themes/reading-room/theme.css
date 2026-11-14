@@ -1,0 +1,22 @@
+/* Reading Room: Warm paper, clay and serif headlines. Palette (dark default, [data-theme="light"] day variant) and card / button shapes. */
+
+:root[data-look="reading-room"] {
+  --dark: #181715;
+  --light: #faf9f5;
+  --gray-light: #a09d96;
+  --gray-dark: #252320;
+  --accent: #cc785c;
+  --glow: none;
+  --poppins: "Inter", var(--km-body), system-ui, sans-serif;
+  --look-display: "Cormorant Garamond", Georgia, var(--km-display), var(--km-body), sans-serif;
+}
+:root[data-look="reading-room"][data-theme="light"] {
+  --dark: #faf9f5;
+  --light: #141413;
+  --gray-light: #65635d;
+  --gray-dark: #efe9de;
+  --accent: #a9583e;
+  --glow: none;
+}
+:root[data-look="reading-room"][data-glass][data-theme] :is(.project-card, .bio-card, .stats-card, .tech-card, .card-wrap, .form, .social, .chat-panel) { border-radius: 14px !important; }
+:root[data-look="reading-room"] { --sheet-r: 16px; }

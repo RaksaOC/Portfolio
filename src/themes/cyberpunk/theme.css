@@ -1,0 +1,111 @@
+/* Cyberpunk: Neon rain, a wireframe skyline and flying traffic. Palette (dark default, [data-theme="light"] day variant) and card / button shapes. */
+
+/* ---------- Cyberpunk: neon city ---------- */
+:root[data-look="cyberpunk"] {
+  --dark: #0a0612;
+  --light: #f5e9ff;
+  --gray-light: #b59bd6;
+  --gray-dark: #2a1840;
+  --accent: #ff2bd6;
+  --glow: 0 0 18px rgba(255, 43, 214, 0.55);
+  --poppins: "Chakra Petch", var(--km-body), ui-monospace, sans-serif;
+}
+:root[data-look="cyberpunk"][data-theme="light"] {
+  --dark: #f3ecff;
+  --light: #1b0b2e;
+  --gray-light: #5b3f7a;
+  --gray-dark: #d9c8f0;
+  --accent: #b3008f;
+  --glow: none;
+}
+/* ---------- Cyberpunk: two neon-yellow ribbons across the bottom-right corner of cards ---------- */
+:root[data-look="cyberpunk"] {
+  --ribbon: #f6ff3b;
+  --ribbon-glow: rgba(246, 255, 59, 0.75);
+}
+:root[data-look="cyberpunk"][data-theme="light"] {
+  --ribbon: #d4c400;
+  --ribbon-glow: rgba(212, 196, 0, 0.45);
+}
+:root[data-look="cyberpunk"] :is(.project-card, .bio-card, .stats-card, .tech-card, .form, .social, .s-look, .s-row) {
+  position: relative;
+}
+:root[data-look="cyberpunk"] :is(.project-card, .bio-card, .stats-card, .tech-card, .card-wrap, .form, .social, .s-look, .s-row)::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 58px;
+  height: 58px;
+  border-bottom-right-radius: inherit;
+  pointer-events: none;
+  z-index: 2;
+  background: linear-gradient(135deg,
+      transparent 0 48%,
+      var(--ribbon) 48% 58%,
+      transparent 58% 68%,
+      var(--ribbon) 68% 78%,
+      transparent 78%);
+  filter: drop-shadow(0 0 5px var(--ribbon-glow));
+}
+:root[data-look="cyberpunk"] :is(.s-row, .s-look)::after {
+  width: 40px;
+  height: 40px;
+}
+/* keep the ribbons clear of the switch labels */
+:root[data-look="cyberpunk"] .s-row {
+  padding-right: 52px;
+}
+/* Cyberpunk: straight chamfers on two corners (tooltips on .social would be clipped, so it keeps its shape).
+   The clip cuts the border off along the diagonals, so each cut gets its own line: a thin band painted just
+   inside the clip edge, in the same colour as the glass border */
+:root[data-look="cyberpunk"][data-glass][data-theme] :is(.project-card, .bio-card, .stats-card, .tech-card, .card-wrap, .form, .chat-panel) {
+  --cut-edge: color-mix(in srgb, white calc(var(--glass-edge, 0.12) * 220%), transparent);
+  border-radius: 0 !important;
+  clip-path: polygon(18px 0, 100% 0, 100% calc(100% - 18px), calc(100% - 18px) 100%, 0 100%, 0 18px);
+  background:
+    linear-gradient(135deg, transparent 50%, var(--cut-edge) 0 calc(50% + 1.4px), transparent 0) top left / 18px 18px no-repeat border-box,
+    linear-gradient(135deg, transparent calc(50% - 1.4px), var(--cut-edge) 0 50%, transparent 0) bottom right / 18px 18px no-repeat border-box,
+    color-mix(in srgb, var(--light) 4%, transparent) !important;
+}
+/* Cyberpunk's chamfers: the clip leaves room outside the left edge for what hangs out there (the drawer's
+   close tab, the history drop beside the header) */
+:root[data-look="cyberpunk"][data-glass][data-theme] .chat-panel.mode-floating {
+  clip-path: polygon(18px 0, 100% 0, 100% calc(100% - 18px), calc(100% - 18px) 100%, 0 100%, 0 64px, -56px 64px, -56px 0, 0 0, 0 18px);
+}
+:root[data-look="cyberpunk"][data-glass][data-theme] .chat-panel:is(.mode-dock, .mode-overlay) {
+  clip-path: polygon(18px 0, 100% 0, 100% 100%, 18px 100%, 0 calc(100% - 18px), 0 calc(50% + 34px), -30px calc(50% + 34px), -30px calc(50% - 34px), 0 calc(50% - 34px), 0 64px, -56px 64px, -56px 0, 0 0, 0 18px);
+  background:
+    linear-gradient(135deg, transparent 50%, var(--cut-edge) 0 calc(50% + 1.4px), transparent 0) top left / 18px 18px no-repeat border-box,
+    linear-gradient(45deg, transparent 50%, var(--cut-edge) 0 calc(50% + 1.4px), transparent 0) bottom left / 18px 18px no-repeat border-box,
+    color-mix(in srgb, var(--light) 4%, transparent) !important;
+}
+/* Cyberpunk + Terminal chat: a terminal-style header rule in the accent */
+:root[data-look="cyberpunk"][data-glass][data-theme] .chat-panel .chat-head {
+  border-bottom: 1px solid color-mix(in srgb, var(--accent) 45%, transparent);
+}
+/* Cyberpunk chat: the cards' neon ribbons, smaller so they stay clear of the send button */
+:root[data-look="cyberpunk"] .chat-panel::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 36px;
+  height: 36px;
+  pointer-events: none;
+  z-index: 6;
+  background: linear-gradient(135deg,
+      transparent 0 48%,
+      var(--ribbon) 48% 58%,
+      transparent 58% 68%,
+      var(--ribbon) 68% 78%,
+      transparent 78%);
+  filter: drop-shadow(0 0 5px var(--ribbon-glow));
+}
+:root[data-look="cyberpunk"][data-glass][data-theme] .chat-panel.mode-sheet:not(.sheet-full) {
+  clip-path: polygon(18px 0, calc(100% - 18px) 0, 100% 18px, 100% 100%, 0 100%, 0 18px);
+}
+:root[data-look="cyberpunk"][data-glass][data-theme] .chat-panel.mode-sheet {
+  background: color-mix(in srgb, var(--light) 4%, transparent) !important;
+}
+:root[data-look="cyberpunk"] { --sheet-r: 0px; }

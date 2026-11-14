@@ -1,0 +1,24 @@
+/* Volcano: Charcoal, ash and a mountain spitting lava. Palette (dark default, [data-theme="light"] day variant) and card / button shapes. */
+
+:root[data-look="volcano"] {
+  --dark: #120604;
+  --light: #ffe9dc;
+  --gray-light: #c79a86;
+  --gray-dark: #22100b;
+  --accent: #ff5a1f;
+  --glow: 0 0 18px rgba(255, 90, 31, 0.55);
+  --poppins: "Rubik", var(--km-body), system-ui, sans-serif;
+  --look-display: "Bebas Neue", "Rubik", var(--km-display), var(--km-body), sans-serif;
+}
+:root[data-look="volcano"][data-theme="light"] {
+  --dark: #f7e7dc;
+  --light: #2a0f07;
+  --gray-light: #7a4a38;
+  --gray-dark: #efd8c9;
+  --accent: #c2410c;
+  --glow: none;
+}
+/* Volcano: hard slabs lit from below by lava */
+:root[data-look="volcano"][data-glass][data-theme] :is(.project-card, .bio-card, .stats-card, .tech-card, .card-wrap, .form, .social, .chat-panel) { border-radius: 8px !important; border-bottom: 2px solid var(--accent) !important; box-shadow: 0 14px 30px -14px color-mix(in srgb, var(--accent) 75%, transparent), inset 0 -18px 30px -24px color-mix(in srgb, var(--accent) 60%, transparent), inset 0 1px 0 color-mix(in srgb, white 14%, transparent) !important; }
+:root[data-look="volcano"] :is(.hero-text-1, .section-label, .bio-title, .stats-title, .tech-title) { letter-spacing: 0.03em; }
+:root[data-look="volcano"] { --sheet-r: 10px; }

@@ -1,0 +1,361 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&family=Keania+One&family=Lexend+Giga:wght@100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Kantumruy+Pro:wght@300;400;500;600;700&display=swap');
+
+
+:root {
+  /* Fonts */
+  /* Latin text keeps Poppins; Khmer glyphs fall through to the chosen Khmer pairing
+     (--km-body / --km-display are set from Settings → Khmer font, see src/themes/fonts.js) */
+  --km-body: "Kantumruy Pro";
+  --km-display: "Kantumruy Pro";
+  --poppins: "Poppins", var(--km-body), "Kantumruy Pro", sans-serif;
+
+  /* Font Sizes */
+  --XXXL: 8rem;
+  --XXL: 6rem;
+  --XL: 4rem;
+  --L: 2.5rem;
+  --M: 1.5rem;
+  --S: 1rem;
+  --XS: 0.875rem;
+  --XXS: 0.75rem;
+
+  /* floating corner buttons (chat, back to top, music) match the compact navbar pill's height */
+  --fab: 70px;
+
+  /* Light Mode Colors (Default) */
+  --gray-dark: #303030;
+  --gray-light: #a0a0a0;
+  --light: #ffffff;
+  --dark: #0e0e0e;
+}
+
+/* Light Theme */
+[data-theme="light"] {
+  --gray-dark: #a0a0a0;  /* Inverted to light gray */
+  --gray-light: #303030; /* Inverted to dark gray */
+  --light: #0e0e0e;      /* Inverted to dark */
+  
+/**  
+  /* Gradients */
+  /* --dark: linear-gradient(45deg, #008080, #2e8b57, #00ffff);  Cosmic Dream */
+  /* --dark: linear-gradient(180deg, #0a0a0a, #e5e5e5);  Deep Space Fade */
+  /* --dark: linear-gradient(90deg, #ff007f, #ff4500);    Nebula Burst */
+  /* --dark: linear-gradient(135deg, #1e3a8a, #4b0082);    Galactic Horizon */
+  /* --dark: #ffd700;    Supernova Yellow - Inverted: #0028ff */
+  /* --dark: #2e8b57;    Interstellar Green - Inverted: #d174a8 */
+  /* --dark: #008080;    Nebula Teal - Inverted: #ff7f7f */
+  /* --dark: #ff4500;    Meteor Orange - Inverted: #00baff */
+  /* --dark: #e5e5e5;    Starlight White - Inverted: #1a1a1a */
+  /* --dark: #0a0a0a;    Void Black - Inverted: #f5f5f5 */
+  /* --dark: #ff007f;    Galaxy Pink - Inverted: #00ff80 */
+  /* --dark: #3151a9;    Cosmic Blue - Inverted: #e1c575 */
+  /* --dark: #4b0082;    Deep Space Purple - Inverted: #b4ff7d */
+  /* --dark: #00ffff;    Astral Cyan - Inverted: #ff0000 */
+  /* --dark: linear-gradient(90deg, #4b0082, #ff007f);   Cosmic Flare - Deep Purple to Bright Pink */
+  /* --dark: linear-gradient(45deg, #1e3a8a, #00ffff);   Interstellar Drift - Deep Blue to Cyan */
+  /* --dark: linear-gradient(180deg, #0a0a0a, #e5e5e5); Event Horizon - Black to Starlight Gray */
+  /* --dark: linear-gradient(120deg, #00ffff, #ff007f, #ff4500); Galactic Storm - Cyan to Pink to Orange */
+  /* --dark: linear-gradient(200deg, #2e8b57, #1e3a8a, #4b0082); Deep Space Ocean - Green to Dark Blue */
+  /* --dark: linear-gradient(225deg, #008080, #2e8b57, #00ffff); Nebula Waves - Teal to Green to Cyan */
+  /* --dark: linear-gradient(135deg, #ff4500, #ffd700); Supernova Blast - Orange to Yellow */
+  /* --dark: linear-gradient(250deg, #6988cc, #4b0082, #ffffff); Cosmic Frost - Soft Blue to Purple to White */
+  /* --dark: linear-gradient(135deg, #6988cc, #e0eaff);   Celestial Glow - Fades from Blue to White 
+**/
+
+  --dark: #afafaf;       /* Inverted to light */
+}
+
+html{
+  scroll-behavior: smooth;
+  /* clip (not hidden): stops sideways overflow without creating a scroll container, so position: sticky still works */
+  overflow-x: clip;
+}
+
+/* Apply theme */
+body {
+  color: var(--light);
+  background-color: var(--dark);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  transition: all 0.05s ease;
+  scroll-behavior: smooth;
+  cursor: crosshair;
+  transition: background-color 0.5s ease;
+}
+
+::selection {
+  color: var(--dark);
+  background: var(--light);
+}
+
+html, body {
+  font-size: 16px;
+  z-index: 0;
+}
+
+p {
+  cursor: auto;
+  margin: 0;
+}
+
+a {
+  cursor: pointer;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  min-height: 100vh;
+  overflow-x: clip;
+}
+
+#app {
+  position: relative;
+  max-width: 1000px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* clip (not hidden) so position: sticky keeps working for the pinned experience timeline */
+  overflow-x: clip;
+}
+/* Khmer script needs a little more vertical room */
+:root[lang="km"] body {
+  line-height: 1.7;
+}
+
+/* Khmer headings use the display face of the pairing (Moul, Koulen, Bokor, ...) */
+:root[lang="km"] :is(h1, h2, h3, .hero-text-1, .hero-text-2, .bio-title, .stats-title, .tech-title,
+  .project-card .title, .place, .section-label, .welcome .name, .logo-text, .footer-logo) {
+  font-family: var(--km-display), var(--km-body), sans-serif;
+  letter-spacing: 0;
+}
+
+/* Social / link icons are black PNGs inverted to white for dark mode; keep them dark in light mode */
+:root[data-theme="light"] :is(.hero .links img, .social img, .project-links > a > img) {
+  filter: none !important;
+}
+
+/* Liquid-glass components animate themselves every frame; the site-wide colour transition would make them lag */
+:is(lg-switch, lg-switch *) {
+  transition: none !important;
+}
+
+/* Khmer name on the welcome screen: one line (អោយ ចន្ទ័រក្សា), sized to fit the width, with room for
+   stacked vowels */
+:root[lang="km"] .welcome .name-wrapper {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: baseline;
+  gap: 0.3em;
+  white-space: nowrap;
+  font-size: clamp(2rem, 11vw, 6rem);
+  line-height: 1.6;
+}
+
+/* ---------- Tooltips for icon links: <a data-tip="GitHub"> ----------
+   Glass bubble with a pointer that springs down below the icon on hover / keyboard focus. */
+[data-tip] {
+  position: relative;
+}
+[data-tip]::after,
+[data-tip]::before {
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  pointer-events: none;
+  opacity: 0;
+  translate: -50% -6px;
+  scale: 0.85;
+  transform-origin: 50% 0;
+  transition: opacity 0.18s ease, translate 0.45s cubic-bezier(0.34, 1.6, 0.5, 1), scale 0.45s cubic-bezier(0.34, 1.6, 0.5, 1) !important;
+  z-index: 50;
+}
+[data-tip]::after {
+  content: attr(data-tip);
+  margin-top: 12px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  white-space: nowrap;
+  font-family: var(--poppins);
+  font-size: var(--XS);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--light);
+  background: color-mix(in srgb, var(--dark) 55%, transparent);
+  -webkit-backdrop-filter: blur(10px) saturate(1.6);
+  backdrop-filter: blur(10px) saturate(1.6);
+  border: 1px solid color-mix(in srgb, var(--accent, white) 45%, transparent);
+  box-shadow: inset 0 1px 0 color-mix(in srgb, white 25%, transparent), 0 8px 20px rgba(0, 0, 0, 0.3), var(--glow, 0 0 0 transparent);
+}
+[data-tip]::before {
+  content: "";
+  margin-top: 7px;
+  width: 10px;
+  height: 10px;
+  background: color-mix(in srgb, var(--dark) 55%, transparent);
+  border-left: 1px solid color-mix(in srgb, var(--accent, white) 45%, transparent);
+  border-top: 1px solid color-mix(in srgb, var(--accent, white) 45%, transparent);
+  rotate: 45deg;
+}
+[data-tip]:hover::after,
+[data-tip]:hover::before,
+[data-tip]:focus-visible::after,
+[data-tip]:focus-visible::before {
+  opacity: 1;
+  translate: -50% 0;
+  scale: 1;
+}
+
+/* Side tooltips for the floating corner buttons (a tip below them would leave the screen):
+   data-tip-side="left" opens to the left of the button, "right" to the right. */
+[data-tip-side]::after,
+[data-tip-side]::before {
+  top: 50%;
+  left: auto;
+  right: auto;
+  margin-top: 0;
+}
+[data-tip-side="left"]::after,
+[data-tip-side="left"]::before {
+  right: 100%;
+  transform-origin: 100% 50%;
+  translate: 6px -50%;
+}
+[data-tip-side="left"]::after { margin-right: 12px; }
+[data-tip-side="left"]::before {
+  margin-right: 7px;
+  border: 0;
+  border-right: 1px solid color-mix(in srgb, var(--accent, white) 45%, transparent);
+  border-top: 1px solid color-mix(in srgb, var(--accent, white) 45%, transparent);
+}
+[data-tip-side="right"]::after,
+[data-tip-side="right"]::before {
+  left: 100%;
+  transform-origin: 0 50%;
+  translate: -6px -50%;
+}
+[data-tip-side="right"]::after { margin-left: 12px; }
+[data-tip-side="right"]::before {
+  margin-left: 7px;
+  border: 0;
+  border-left: 1px solid color-mix(in srgb, var(--accent, white) 45%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, var(--accent, white) 45%, transparent);
+}
+[data-tip-side]:hover::after,
+[data-tip-side]:hover::before,
+[data-tip-side]:focus-visible::after,
+[data-tip-side]:focus-visible::before {
+  translate: 0 -50%;
+}
+
+/* Reload intro (ThemeIntro.vue): no scrolling until the theme has been revealed */
+html.intro-lock,
+html.intro-lock body {
+  overflow: hidden !important;
+  overscroll-behavior: none;
+}
+
+/* Theme sweep: the new page is revealed by a clip-path animation started from JS, so turn off the
+   default cross-fade and keep the old page fully visible underneath */
+:root.look-reveal::view-transition-old(root),
+:root.look-reveal::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+/* Intro reveal ripple (ThemeIntro.vue): a glowing rim on the edge of the expanding reveal circle, with two
+   softer ripples trailing inside it. Scaled from 0 to 1 in step with the circle. */
+.reveal-rings {
+  position: fixed;
+  z-index: 99999;
+  border-radius: 50%;
+  pointer-events: none;
+  box-shadow:
+    inset 0 0 0 3px color-mix(in srgb, var(--accent, white) 85%, white),
+    inset 0 0 34px 10px color-mix(in srgb, var(--accent, white) 80%, transparent),
+    inset 0 0 160px 30px color-mix(in srgb, var(--accent, white) 30%, transparent);
+  transition: none !important;
+}
+
+.reveal-rings::before,
+.reveal-rings::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  border: 2px solid color-mix(in srgb, var(--accent, white) 70%, transparent);
+  box-shadow: 0 0 22px color-mix(in srgb, var(--accent, white) 45%, transparent), inset 0 0 22px color-mix(in srgb, var(--accent, white) 30%, transparent);
+  transition: none !important;
+}
+
+.reveal-rings::before {
+  inset: 8%;
+  opacity: 0.75;
+}
+
+.reveal-rings::after {
+  inset: 17%;
+  opacity: 0.4;
+}
+
+/* Tap ripple on glass surfaces (src/glassTap.js) */
+.g-tap {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  border-radius: inherit;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.g-tap i {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  margin: -6px 0 0 -6px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.16) 0 40%, transparent 70%);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.22);
+  animation: g-tap 0.7s cubic-bezier(0.2, 0.7, 0.3, 1) forwards;
+  transition: none !important;
+}
+
+@keyframes g-tap {
+  from {
+    transform: scale(0);
+    opacity: 0.6;
+  }
+
+  to {
+    transform: scale(var(--s, 20));
+    opacity: 0;
+  }
+}
+
+/* ---------- Themed cursors (src/core/cursors.js draws them from the look's palette) ----------
+   Arrow everywhere, the look's "clickable" cursor on anything interactive, and the normal text caret in
+   text fields. Dragging / resizing cursors set by components (grab, ew-resize ...) are left alone. */
+:root[data-cursor],
+:root[data-cursor] body,
+:root[data-cursor] * {
+  cursor: var(--cur), auto;
+}
+
+:root[data-cursor] :is(a, button, [role="button"], label, select, summary, lg-switch, .zoomable, .project-image,
+  .grid-cover-img, .project-card, .lb-thumb, .tab-button, .view-btn, .s-look, .s-level, .nav-link,
+  .logo-text, .bubble, .orb, .social, .arrow-btn, .to-top, .chat-fab, .music-toggle, .nav-bar.compact, .m-pill, .gear),
+:root[data-cursor] :is(a, button, [role="button"], label) * {
+  cursor: var(--cur-pointer), pointer !important;
+}
+
+:root[data-cursor] :is(input:not([type="checkbox"], [type="radio"], [type="range"], [type="button"], [type="submit"]), textarea, [contenteditable="true"]) {
+  cursor: text !important;
+}

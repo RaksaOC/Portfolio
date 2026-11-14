@@ -1,0 +1,21 @@
+/* Neon Poster: Huge tight type and glowing colour cards. Palette (dark default, [data-theme="light"] day variant) and card / button shapes. */
+
+:root[data-look="neon-poster"] {
+  --dark: #090909;
+  --light: #ffffff;
+  --gray-light: #999999;
+  --gray-dark: #1c1c1c;
+  --accent: #0099ff;
+  --glow: 0 0 18px rgba(0, 153, 255, 0.5);
+  --poppins: "Inter", var(--km-body), system-ui, sans-serif;
+  --look-display: "Geist", var(--km-display), var(--km-body), sans-serif;
+}
+:root[data-look="neon-poster"][data-theme="light"] {
+  --dark: #ffffff;
+  --light: #090909;
+  --gray-light: #5e5e5e;
+  --gray-dark: #efefef;
+  --accent: #0088e6;
+  --glow: none;
+}
+:root[data-look="neon-poster"][data-glass][data-theme] :is(.project-card, .bio-card, .stats-card, .tech-card, .card-wrap, .form, .social, .chat-panel) { border-radius: 20px !important; border-color: color-mix(in srgb, var(--accent) 60%, transparent) !important; box-shadow: 0 0 40px color-mix(in srgb, var(--accent) 22%, transparent), inset 0 1px 0 color-mix(in srgb, white 20%, transparent) !important; }

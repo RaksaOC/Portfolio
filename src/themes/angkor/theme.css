@@ -1,0 +1,24 @@
+/* Angkor: Temple gold at dawn over a jungle moat. Palette (dark default, [data-theme="light"] day variant) and card / button shapes. */
+
+:root[data-look="angkor"] {
+  --dark: #0c1414;
+  --light: #f4e9d4;
+  --gray-light: #b7a98c;
+  --gray-dark: #162222;
+  --accent: #e9b44c;
+  --glow: 0 0 16px rgba(233, 180, 76, 0.45);
+  --poppins: "Marcellus", var(--km-body), system-ui, sans-serif;
+  --look-display: "Marcellus SC", "Marcellus", var(--km-display), var(--km-body), sans-serif;
+}
+:root[data-look="angkor"][data-theme="light"] {
+  --dark: #f3ead8;
+  --light: #1f2a26;
+  --gray-light: #5d6a5f;
+  --gray-dark: #e8dcc4;
+  --accent: #a8731a;
+  --glow: none;
+}
+/* Angkor: leaf / lotus-petal corners in temple gold */
+:root[data-look="angkor"][data-glass][data-theme] :is(.project-card, .bio-card, .stats-card, .tech-card, .card-wrap, .form, .social, .chat-panel) { border-radius: 28px 6px 28px 6px !important; border: 1px solid color-mix(in srgb, var(--accent) 45%, transparent) !important; }
+:root[data-look="angkor"][data-glass][data-theme] :is(.request-cv .button, .send-btn, .cv-send) { border-radius: 18px 4px 18px 4px !important; }
+:root[data-look="angkor"] { --sheet-r: 30px; }

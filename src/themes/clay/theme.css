@@ -1,0 +1,23 @@
+/* Clay Play: Pastel, puffy and soft like modelling clay. Palette (dark default, [data-theme="light"] day variant) and card / button shapes. */
+
+:root[data-look="clay"] {
+  --dark: #1f1b2a;
+  --light: #f6f2ff;
+  --gray-light: #b2a9c8;
+  --gray-dark: #332c43;
+  --accent: #ffb4a9;
+  --glow: none;
+  --poppins: "Inter", var(--km-body), system-ui, sans-serif;
+  --look-display: "Inter", var(--km-display), var(--km-body), sans-serif;
+}
+:root[data-look="clay"][data-theme="light"] {
+  --dark: #f1edfb;
+  --light: #2e2a3a;
+  --gray-light: #615a71;
+  --gray-dark: #f7eef3;
+  --accent: #d9796c;
+  --glow: none;
+}
+:root[data-look="clay"][data-glass][data-theme] :is(.project-card, .bio-card, .stats-card, .tech-card, .card-wrap, .form, .social, .chat-panel) { border-radius: 28px !important; border: none !important; background: color-mix(in srgb, var(--gray-dark) 80%, transparent) !important; box-shadow: inset 3px 3px 6px color-mix(in srgb, white 35%, transparent), inset -4px -4px 8px color-mix(in srgb, black 22%, transparent), 8px 12px 24px color-mix(in srgb, black 25%, transparent) !important; }
+:root[data-look="clay"][data-glass][data-theme] :is(.request-cv .button, .send-btn, .cv-send) { box-shadow: inset 2px 2px 4px color-mix(in srgb, white 45%, transparent), inset -3px -3px 6px color-mix(in srgb, black 20%, transparent), 4px 6px 12px color-mix(in srgb, black 22%, transparent) !important; }
+:root[data-look="clay"] { --sheet-r: 30px; }

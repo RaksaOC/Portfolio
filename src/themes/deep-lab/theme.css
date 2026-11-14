@@ -1,0 +1,21 @@
+/* Deep Lab: Austere research, forest dark and coral. Palette (dark default, [data-theme="light"] day variant) and card / button shapes. */
+
+:root[data-look="deep-lab"] {
+  --dark: #00211c;
+  --light: #ffffff;
+  --gray-light: #a7bfb8;
+  --gray-dark: #003c33;
+  --accent: #ff7759;
+  --glow: none;
+  --poppins: "Inter", var(--km-body), system-ui, sans-serif;
+  --look-display: "Space Grotesk", var(--km-display), var(--km-body), sans-serif;
+}
+:root[data-look="deep-lab"][data-theme="light"] {
+  --dark: #ffffff;
+  --light: #000000;
+  --gray-light: #63637a;
+  --gray-dark: #eeece7;
+  --accent: #e0553a;
+  --glow: none;
+}
+:root[data-look="deep-lab"][data-glass][data-theme] :is(.project-card, .bio-card, .stats-card, .tech-card, .card-wrap, .form, .social, .chat-panel) { border-radius: 20px !important; }

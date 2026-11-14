@@ -1,3 +1,6 @@
 {
+  "redirects": [
+    { "source": "/ORY-CHANRAKSA-RESUME.pdf", "destination": "/documents/ORY-CHANRAKSA-RESUME.pdf", "permanent": true }
+  ],
   "rewrites": [{ "source": "/((?!api/).*)", "destination": "/index.html" }]
 }

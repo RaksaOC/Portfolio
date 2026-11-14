@@ -1,0 +1,44 @@
+/* Display font for headings in the ported themes (falls back to the Khmer display face for Khmer text) */
+:root:is([data-look="reading-room"], [data-look="gallery"], [data-look="open-house"], [data-look="machined"], [data-look="deep-lab"], [data-look="neon-poster"], [data-look="orbit"], [data-look="night-session"], [data-look="frosted"], [data-look="clay"], [data-look="pop-block"], [data-look="neon-terminal"], [data-look="brass-works"], [data-look="greek"], [data-look="angkor"], [data-look="deep-ocean"], [data-look="volcano"], [data-look="atomic"], [data-look="japan"], [data-look="desert"]) :is(.hero-text-1, .hero-text-2, .section-label, .bio-title, .stats-title, .tech-title, .project-card .title, .place, .s-head h2, .welcome .name, .logo-text, .footer-logo) {
+  font-family: var(--look-display, var(--poppins));
+}
+/* ---------- Chat panel: the theme's card shape, adjusted per layout ----------
+   The shape rules above put .chat-panel next to the cards. The side layouts (dock / drawer) sit against the
+   right edge of the screen, so only their left corners take the theme's shape and the right edge stays flat */
+:root[data-look][data-glass][data-theme] .chat-panel:is(.mode-dock, .mode-overlay) {
+  border-top-right-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+  border-right: 0 !important;
+}
+/* Chat glass stays the same glass as the cards, but a long read sits on it: a soft tint in the theme's
+   own background colour and a little more blur behind the text keep it legible over bright scenes
+   (sakura, sunsets). Drawn as a layer under the content, so each theme's edges / corner marks stay crisp */
+:root[data-glass] .chat-panel.chat-panel {
+  -webkit-backdrop-filter: blur(calc(var(--glass-blur, 2px) + 8px)) saturate(170%) !important;
+  backdrop-filter: var(--lg-url, url(#liquid-glass)) blur(calc(var(--glass-blur, 2px) + 6px)) saturate(170%) brightness(1.04) !important;
+}
+:root[data-glass] .chat-panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  pointer-events: none;
+  background: color-mix(in srgb, var(--dark) 34%, transparent);
+}
+/* Phone bottom sheet: the theme's shape on the top corners only (the bottom sits on the screen edge), easing
+   to square as the sheet is dragged to full screen (--p, set by ChatBot.vue) */
+:root[data-look][data-glass][data-theme] .chat-panel.mode-sheet {
+  border-bottom-left-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+  border-bottom: 0 !important;
+  /* the corners follow the drag (--p); only the settle glide animates */
+  border-top-left-radius: calc(var(--sheet-r, 26px) * (1 - var(--p, 0))) !important;
+  border-top-right-radius: calc(var(--sheet-r, 26px) * (1 - var(--p, 0))) !important;
+}
+:root[data-look][data-glass][data-theme] .chat-panel.mode-sheet.settling {
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1) !important;
+}
+:root[data-look][data-glass][data-theme] .chat-panel.mode-sheet.sheet-full {
+  clip-path: none !important;
+}

@@ -1,13 +1,13 @@
 import { createApp } from "vue";
-import "./global.css";
-import "./looks.css";
+import "./styles/global.css";
+import "./themes"; // every theme's CSS (palettes, card shapes), after the global styles
 import App from "./App.vue";
 import AOS from "aos";
 import "aos/dist/aos.css"; // Import AOS CSS
 import { i18n } from "./i18n";
 import "./vendor/liquidglass/components.js"; // registers <lg-switch> etc.
-import "./gfx"; // graphics settings -> glass CSS variables
-import { initGlassTap } from "./glassTap";
+import "./core/gfx"; // graphics settings -> glass CSS variables
+import { initGlassTap } from "./core/glassTap";
 
 const app = createApp(App);
 app.use(i18n);

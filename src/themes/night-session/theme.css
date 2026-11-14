@@ -1,0 +1,21 @@
+/* Night Session: Dark room, green glow and pill buttons. Palette (dark default, [data-theme="light"] day variant) and card / button shapes. */
+
+:root[data-look="night-session"] {
+  --dark: #121212;
+  --light: #ffffff;
+  --gray-light: #b3b3b3;
+  --gray-dark: #1f1f1f;
+  --accent: #1ed760;
+  --glow: 0 0 16px rgba(30, 215, 96, 0.4);
+  --poppins: "Figtree", var(--km-body), system-ui, sans-serif;
+  --look-display: "Figtree", var(--km-display), var(--km-body), sans-serif;
+}
+:root[data-look="night-session"][data-theme="light"] {
+  --dark: #ffffff;
+  --light: #121212;
+  --gray-light: #5a5a5a;
+  --gray-dark: #eeeeee;
+  --accent: #1aa34a;
+  --glow: none;
+}
+:root[data-look="night-session"][data-glass][data-theme] :is(.project-card, .bio-card, .stats-card, .tech-card, .card-wrap, .form, .social, .chat-panel) { border-radius: 20px !important; }

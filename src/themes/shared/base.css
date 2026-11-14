@@ -1,0 +1,113 @@
+/* Themes (looks). Each look re-maps the site's existing tokens:
+   --dark (page background), --light (text), --gray-light / --gray-dark (muted), --poppins (font), --accent.
+   Dark mode is the default; [data-theme="light"] gives each look a daytime variant. */
+:root {
+  --accent: var(--light);
+  --glow: none;
+}
+/* Shared accents: headline glow and accent-coloured highlights while a look is active */
+:root[data-look] .hero-text-2 span,
+:root[data-look] .logo-text {
+  color: var(--accent);
+  text-shadow: var(--glow);
+}
+:root[data-look] .nav-link:hover,
+:root[data-look] .footer-nav a:hover {
+  color: var(--accent);
+}
+/* Glass cards pick up a hint of the accent colour */
+:root[data-look] .project-card,
+:root[data-look] .bio-card,
+:root[data-look] .stats-card,
+:root[data-look] .tech-card,
+:root[data-look] .card-wrap,
+:root[data-look] .form,
+:root[data-look] .social,
+:root[data-look] .chat-panel {
+  border-color: color-mix(in srgb, var(--accent) 35%, transparent) !important;
+}
+/* ---------- Buttons & highlights follow the look's accent ---------- */
+:root[data-look] .request-cv .button,
+:root[data-look] .send-btn,
+:root[data-look] .cv-send {
+  background: var(--accent) !important;
+  border: 1px solid color-mix(in srgb, var(--accent) 70%, white) !important;
+  color: var(--dark) !important;
+  box-shadow: var(--glow), 0 6px 18px color-mix(in srgb, var(--accent) 30%, transparent) !important;
+}
+:root[data-look] .request-cv .button .text,
+:root[data-look] .request-cv .button svg {
+  color: var(--dark) !important;
+  fill: currentColor;
+  font-weight: 600;
+}
+:root[data-look] .request-cv .button:hover,
+:root[data-look] .send-btn:hover,
+:root[data-look] .cv-send:hover {
+  filter: brightness(1.08) saturate(1.1);
+}
+:root[data-look] .tab-indicator {
+  background: color-mix(in srgb, var(--accent) 22%, transparent) !important;
+  border-color: var(--accent) !important;
+  box-shadow: var(--glow) !important;
+}
+:root[data-look] .stack-item {
+  border-color: color-mix(in srgb, var(--accent) 45%, transparent) !important;
+}
+:root[data-look] .stack-item:hover {
+  background: color-mix(in srgb, var(--accent) 18%, transparent) !important;
+}
+:root[data-look] .tl-progress-fill {
+  background: var(--accent) !important;
+  box-shadow: var(--glow);
+}
+:root[data-look] .stop.visible .emblem {
+  border-color: var(--accent) !important;
+  box-shadow: var(--glow), 0 0 0 4px color-mix(in srgb, var(--accent) 18%, transparent) !important;
+}
+:root[data-look] .bubble,
+:root[data-look] .bubble::before {
+  border-color: color-mix(in srgb, var(--accent) 45%, transparent) !important;
+}
+:root[data-look] .settings-gear:hover,
+:root[data-look] .nav-links a:hover {
+  color: var(--accent);
+}
+/* ---------- Liquid glass on the UI panels ----------
+   backdrop-filter: var(--lg-url, url(#liquid-glass)) runs the SVG filter from GlassFilter.vue on whatever is
+   behind each panel (the 3D background), so the grid / models visibly bend through the glass.
+   Chromium only; Safari / Firefox ignore the url() and keep the frosted blur. */
+:root[data-glass] :is(.nav-bar, .nav-drip, .tab-drip, .m-glass, .project-card, .bio-card, .stats-card, .tech-card,
+  .card-wrap, .form, .social, .tab-wrapper, .bubble, .request-cv .button, .send-btn, .emblem, .to-top, .music-ctl,
+  .chat-panel) {
+  background: color-mix(in srgb, var(--light) 4%, transparent) !important;
+  /* -webkit- first: Chrome treats it as an alias, so the url() version below must win */
+  -webkit-backdrop-filter: blur(var(--glass-blur, 2px)) saturate(170%) !important;
+  backdrop-filter: var(--lg-url, url(#liquid-glass)) blur(var(--glass-blur, 2px)) saturate(170%) brightness(1.06) !important;
+  border: 1px solid color-mix(in srgb, white calc(var(--glass-edge, 0.12) * 220%), transparent) !important;
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, white calc(var(--glass-edge, 0.12) * 500%), transparent),
+    inset 0 -1px 0 color-mix(in srgb, white calc(var(--glass-edge, 0.12) * 150%), transparent),
+    inset 0 0 24px color-mix(in srgb, white calc(var(--glass-edge, 0.12) * 60%), transparent),
+    0 10px 30px rgba(0, 0, 0, 0.25) !important;
+}
+/* Desktop navbar: its border is drawn by .nav-bar::after (so the settings drip can open a gap in it) and
+   no bottom inset line; the drip itself has no box edges, its outline is an SVG path (NavBar.vue) */
+:root[data-glass][data-theme] .nav-bar {
+  border-color: transparent !important;
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, white calc(var(--glass-edge, 0.12) * 500%), transparent),
+    inset 0 0 24px color-mix(in srgb, white calc(var(--glass-edge, 0.12) * 60%), transparent),
+    0 10px 30px rgba(0, 0, 0, 0.25) !important;
+}
+:root[data-glass][data-theme] .nav-drip {
+  border: 0 !important;
+  box-shadow: none !important;
+}
+/* keep accent buttons readable on glass */
+:root[data-glass][data-look] :is(.request-cv .button, .send-btn) {
+  background: color-mix(in srgb, var(--accent) 55%, transparent) !important;
+}
+:root[data-glass] .bubble::before {
+  background: transparent !important;
+}

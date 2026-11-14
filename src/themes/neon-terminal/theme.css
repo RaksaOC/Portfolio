@@ -1,0 +1,45 @@
+/* Terminal: Monospace, neon green and a scanline glow. Palette (dark default, [data-theme="light"] day variant) and card / button shapes. */
+
+:root[data-look="neon-terminal"] {
+  --dark: #0d0d0d;
+  --light: #e6ffe6;
+  --gray-light: #8fb08f;
+  --gray-dark: #161b16;
+  --accent: #33ff66;
+  --glow: 0 0 14px rgba(51, 255, 102, 0.5);
+  --poppins: "JetBrains Mono", var(--km-body), system-ui, sans-serif;
+  --look-display: "JetBrains Mono", var(--km-display), var(--km-body), sans-serif;
+}
+:root[data-look="neon-terminal"][data-theme="light"] {
+  --dark: #f2f4ef;
+  --light: #0d1a0d;
+  --gray-light: #4a5b4a;
+  --gray-dark: #e8ece3;
+  --accent: #118a3a;
+  --glow: none;
+}
+:root[data-look="neon-terminal"][data-glass][data-theme] :is(.project-card, .bio-card, .stats-card, .tech-card, .card-wrap, .form, .social, .chat-panel) { border-radius: 6px !important; border: 1px solid color-mix(in srgb, var(--accent) 55%, transparent) !important; box-shadow: 0 0 0 1px color-mix(in srgb, var(--accent) 20%, transparent), 0 0 22px color-mix(in srgb, var(--accent) 22%, transparent) !important; }
+:root[data-look="neon-terminal"] :is(.hero-text-1, .section-label, .bio-title, .stats-title, .tech-title) { text-transform: uppercase; letter-spacing: 0.04em; }
+/* Futuristic + Terminal: HUD corner brackets */
+:root[data-look="neon-terminal"][data-glass][data-theme] :is(.project-card, .bio-card, .stats-card, .tech-card, .card-wrap, .form, .chat-panel) {
+  border-radius: 4px !important;
+  background:
+    linear-gradient(var(--accent), var(--accent)) top left / 18px 2px no-repeat,
+    linear-gradient(var(--accent), var(--accent)) top left / 2px 18px no-repeat,
+    linear-gradient(var(--accent), var(--accent)) top right / 18px 2px no-repeat,
+    linear-gradient(var(--accent), var(--accent)) top right / 2px 18px no-repeat,
+    linear-gradient(var(--accent), var(--accent)) bottom left / 18px 2px no-repeat,
+    linear-gradient(var(--accent), var(--accent)) bottom left / 2px 18px no-repeat,
+    linear-gradient(var(--accent), var(--accent)) bottom right / 18px 2px no-repeat,
+    linear-gradient(var(--accent), var(--accent)) bottom right / 2px 18px no-repeat,
+    color-mix(in srgb, var(--light) 4%, transparent) !important;
+}
+/* Cyberpunk + Terminal chat: a terminal-style header rule in the accent */
+:root[data-look="neon-terminal"][data-glass][data-theme] .chat-panel .chat-head {
+  border-bottom: 1px solid color-mix(in srgb, var(--accent) 45%, transparent);
+}
+:root[data-look="neon-terminal"] .chat-panel .chat-head-text h2::before {
+  content: "> ";
+  color: var(--accent);
+}
+:root[data-look="neon-terminal"] { --sheet-r: 6px; }

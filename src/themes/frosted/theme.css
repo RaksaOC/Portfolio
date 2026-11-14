@@ -1,0 +1,21 @@
+/* Frosted Glass: Soft gradients, frosted cards and glossy buttons. Palette (dark default, [data-theme="light"] day variant) and card / button shapes. */
+
+:root[data-look="frosted"] {
+  --dark: #000000;
+  --light: #ffffff;
+  --gray-light: #a1a1a8;
+  --gray-dark: #2c2c2e;
+  --accent: #0a84ff;
+  --glow: none;
+  --poppins: "Inter", var(--km-body), system-ui, sans-serif;
+  --look-display: "Inter", var(--km-display), var(--km-body), sans-serif;
+}
+:root[data-look="frosted"][data-theme="light"] {
+  --dark: #f2f2f7;
+  --light: #000000;
+  --gray-light: #636369;
+  --gray-dark: #ececf1;
+  --accent: #0071e3;
+  --glow: none;
+}
+:root[data-look="frosted"][data-glass][data-theme] :is(.project-card, .bio-card, .stats-card, .tech-card, .card-wrap, .form, .social, .chat-panel) { border-radius: 22px !important; background: linear-gradient(160deg, color-mix(in srgb, white 14%, transparent), color-mix(in srgb, white 3%, transparent)) !important; }

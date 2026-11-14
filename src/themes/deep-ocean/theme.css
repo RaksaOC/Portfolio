@@ -1,0 +1,23 @@
+/* Deep Ocean: Abyss blue, light shafts and glowing jellyfish. Palette (dark default, [data-theme="light"] day variant) and card / button shapes. */
+
+:root[data-look="deep-ocean"] {
+  --dark: #020c18;
+  --light: #d9f3ff;
+  --gray-light: #7fa6bd;
+  --gray-dark: #08192b;
+  --accent: #2fd3e0;
+  --glow: 0 0 18px rgba(47, 211, 224, 0.5);
+  --poppins: "Lexend", var(--km-body), system-ui, sans-serif;
+  --look-display: "Lexend", var(--km-display), var(--km-body), sans-serif;
+}
+:root[data-look="deep-ocean"][data-theme="light"] {
+  --dark: #e4f4fa;
+  --light: #062436;
+  --gray-light: #3d6478;
+  --gray-dark: #d3ebf4;
+  --accent: #0b7f9a;
+  --glow: none;
+}
+/* Deep Ocean: soft pebble shapes glowing from inside */
+:root[data-look="deep-ocean"][data-glass][data-theme] :is(.project-card, .bio-card, .stats-card, .tech-card, .card-wrap, .form, .social, .chat-panel) { border-radius: 28px !important; box-shadow: inset 0 0 34px color-mix(in srgb, var(--accent) 12%, transparent), inset 0 1px 0 color-mix(in srgb, white 20%, transparent), 0 10px 30px rgba(0, 0, 0, 0.3) !important; }
+:root[data-look="deep-ocean"] { --sheet-r: 30px; }

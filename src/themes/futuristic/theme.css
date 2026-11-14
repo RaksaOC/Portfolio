@@ -1,0 +1,39 @@
+/* Futuristic: Cyan HUD rings and a holographic robot. Palette (dark default, [data-theme="light"] day variant) and card / button shapes. */
+
+/* ---------- Futuristic: HUD / sci-fi ---------- */
+:root[data-look="futuristic"] {
+  --dark: #05090d;
+  --light: #e0fbff;
+  --gray-light: #7fb3c2;
+  --gray-dark: #16323f;
+  --accent: #00e5ff;
+  --glow: 0 0 16px rgba(0, 229, 255, 0.45);
+  --poppins: "IBM Plex Mono", var(--km-body), ui-monospace, monospace;
+}
+:root[data-look="futuristic"][data-theme="light"] {
+  --dark: #eef5f8;
+  --light: #06202b;
+  --gray-light: #40636f;
+  --gray-dark: #c3dae3;
+  --accent: #007c99;
+  --glow: none;
+}
+/* Futuristic + Terminal: HUD corner brackets */
+:root[data-look="futuristic"][data-glass][data-theme] :is(.project-card, .bio-card, .stats-card, .tech-card, .card-wrap, .form, .chat-panel) {
+  border-radius: 4px !important;
+  background:
+    linear-gradient(var(--accent), var(--accent)) top left / 18px 2px no-repeat,
+    linear-gradient(var(--accent), var(--accent)) top left / 2px 18px no-repeat,
+    linear-gradient(var(--accent), var(--accent)) top right / 18px 2px no-repeat,
+    linear-gradient(var(--accent), var(--accent)) top right / 2px 18px no-repeat,
+    linear-gradient(var(--accent), var(--accent)) bottom left / 18px 2px no-repeat,
+    linear-gradient(var(--accent), var(--accent)) bottom left / 2px 18px no-repeat,
+    linear-gradient(var(--accent), var(--accent)) bottom right / 18px 2px no-repeat,
+    linear-gradient(var(--accent), var(--accent)) bottom right / 2px 18px no-repeat,
+    color-mix(in srgb, var(--light) 4%, transparent) !important;
+}
+/* Cyberpunk + Terminal chat: a terminal-style header rule in the accent */
+:root[data-look="futuristic"][data-glass][data-theme] .chat-panel .chat-head {
+  border-bottom: 1px solid color-mix(in srgb, var(--accent) 45%, transparent);
+}
+:root[data-look="futuristic"] { --sheet-r: 6px; }

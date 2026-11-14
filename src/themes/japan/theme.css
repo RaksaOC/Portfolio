@@ -1,0 +1,30 @@
+/* Japan: Dusk over Mount Fuji, a torii gate and falling sakura. Palette (dark default, [data-theme="light"] day variant) and card / button shapes. */
+
+:root[data-look="japan"] {
+  --dark: #140f26;
+  --light: #f7eaf3;
+  --gray-light: #b9a6c6;
+  --gray-dark: #1e1736;
+  --accent: #ff5d73;
+  --glow: 0 0 16px rgba(255, 93, 115, 0.45);
+  --poppins: "Zen Kaku Gothic New", var(--km-body), system-ui, sans-serif;
+  --look-display: "Shippori Mincho", "Zen Kaku Gothic New", var(--km-display), var(--km-body), serif;
+}
+:root[data-look="japan"][data-theme="light"] {
+  --dark: #f8eef3;
+  --light: #2a1733;
+  --gray-light: #6e5a78;
+  --gray-dark: #efe0ea;
+  --accent: #c62f45;
+  --glow: none;
+}
+/* Japan: a torii across the top of each card (kasagi beam + the thinner nuki under it), square-cut corners */
+:root[data-look="japan"][data-glass][data-theme] :is(.project-card, .bio-card, .stats-card, .tech-card, .card-wrap, .form, .chat-panel) {
+  border-radius: 3px !important;
+  background:
+    linear-gradient(var(--accent), var(--accent)) top / 100% 4px no-repeat,
+    linear-gradient(color-mix(in srgb, var(--accent) 70%, transparent), color-mix(in srgb, var(--accent) 70%, transparent)) 0 9px / 100% 1.5px no-repeat,
+    color-mix(in srgb, var(--light) 4%, transparent) !important;
+}
+:root[data-look="japan"][data-glass][data-theme] :is(.request-cv .button, .send-btn, .cv-send) { border-radius: 3px !important; }
+:root[data-look="japan"] { --sheet-r: 3px; }

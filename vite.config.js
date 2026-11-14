@@ -3,7 +3,7 @@ import vue from '@vitejs/plugin-vue'
 import { pathToFileURL } from 'node:url'
 import { resolve } from 'node:path'
 
-// Serves the Vercel functions in /api during `npm run dev` and `vite preview`, so the "Request CV" form and
+// Serves the API handlers in src/api during `npm run dev` and `vite preview`, so the "Request CV" form and
 // the AI chat work locally with the settings from .env.local.
 const API_ROUTES = ['request-cv', 'chat']
 function localApi(env) {
@@ -13,7 +13,7 @@ function localApi(env) {
       Object.assign(process.env, env)
       for (const name of API_ROUTES) {
         server.middlewares.use(`/api/${name}`, async (req, res) => {
-          const { default: handler } = await server.ssrLoadModule(`/api/${name}.js`)
+          const { default: handler } = await server.ssrLoadModule(`/src/api/${name}.js`)
           return handler(req, res)
         })
       }
@@ -22,7 +22,7 @@ function localApi(env) {
       Object.assign(process.env, env)
       for (const name of API_ROUTES) {
         server.middlewares.use(`/api/${name}`, async (req, res) => {
-          const { default: handler } = await import(pathToFileURL(resolve(`api/${name}.js`)).href)
+          const { default: handler } = await import(pathToFileURL(resolve(`src/api/${name}.js`)).href)
           return handler(req, res)
         })
       }

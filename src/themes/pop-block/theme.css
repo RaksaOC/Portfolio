@@ -1,0 +1,23 @@
+/* Pop Block: Thick outlines, candy colours and hard shadows. Palette (dark default, [data-theme="light"] day variant) and card / button shapes. */
+
+:root[data-look="pop-block"] {
+  --dark: #121214;
+  --light: #f7f7f7;
+  --gray-light: #b5b5b5;
+  --gray-dark: #26262b;
+  --accent: #ff6b6b;
+  --glow: none;
+  --poppins: "Inter", var(--km-body), system-ui, sans-serif;
+  --look-display: "Inter", var(--km-display), var(--km-body), sans-serif;
+}
+:root[data-look="pop-block"][data-theme="light"] {
+  --dark: #fffbea;
+  --light: #111111;
+  --gray-light: #4a4a4a;
+  --gray-dark: #fff3c4;
+  --accent: #ff5252;
+  --glow: none;
+}
+:root[data-look="pop-block"][data-glass][data-theme] :is(.project-card, .bio-card, .stats-card, .tech-card, .card-wrap, .form, .social, .chat-panel) { border-radius: 10px !important; border: 3px solid var(--light) !important; background: var(--gray-dark) !important; box-shadow: 6px 6px 0 var(--light) !important; }
+:root[data-look="pop-block"][data-glass][data-theme] :is(.request-cv .button, .send-btn, .cv-send) { border: 3px solid var(--light) !important; box-shadow: 4px 4px 0 var(--light) !important; }
+:root[data-look="pop-block"] { --sheet-r: 10px; }

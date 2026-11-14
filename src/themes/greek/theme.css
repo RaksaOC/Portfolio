@@ -1,0 +1,25 @@
+/* Greek: Marble, Aegean blue and a temple on the hill. Palette (dark default, [data-theme="light"] day variant) and card / button shapes. */
+
+:root[data-look="greek"] {
+  --dark: #0b1422;
+  --light: #f2efe6;
+  --gray-light: #a9b4c4;
+  --gray-dark: #14213a;
+  --accent: #5aa0e6;
+  --glow: 0 0 14px rgba(90, 160, 230, 0.35);
+  --poppins: "Cormorant Garamond", var(--km-body), system-ui, sans-serif;
+  --look-display: "Cinzel", var(--km-display), var(--km-body), sans-serif;
+}
+:root[data-look="greek"][data-theme="light"] {
+  --dark: #f4f1e8;
+  --light: #13233f;
+  --gray-light: #5a6b85;
+  --gray-dark: #e9e4d6;
+  --accent: #1f5fae;
+  --glow: none;
+}
+/* Greek: square-cut marble slabs with a frieze line top and bottom */
+:root[data-look="greek"][data-glass][data-theme] :is(.project-card, .bio-card, .stats-card, .tech-card, .card-wrap, .form, .social, .chat-panel) { border-radius: 3px !important; border-top: 3px double color-mix(in srgb, var(--accent) 80%, transparent) !important; border-bottom: 3px double color-mix(in srgb, var(--accent) 80%, transparent) !important; }
+:root[data-look="greek"][data-glass][data-theme] :is(.request-cv .button, .send-btn, .cv-send) { border-radius: 3px !important; }
+:root[data-look="greek"] :is(.hero-text-1, .section-label, .bio-title, .stats-title, .tech-title) { letter-spacing: 0.06em; }
+:root[data-look="greek"] { --sheet-r: 3px; }

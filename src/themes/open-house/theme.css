@@ -1,0 +1,21 @@
+/* Open House: Friendly, rounded and a rosy welcome. Palette (dark default, [data-theme="light"] day variant) and card / button shapes. */
+
+:root[data-look="open-house"] {
+  --dark: #181818;
+  --light: #f7f7f7;
+  --gray-light: #a8a8a8;
+  --gray-dark: #2b2b2b;
+  --accent: #ff385c;
+  --glow: none;
+  --poppins: "Inter", var(--km-body), system-ui, sans-serif;
+  --look-display: "Inter", var(--km-display), var(--km-body), sans-serif;
+}
+:root[data-look="open-house"][data-theme="light"] {
+  --dark: #ffffff;
+  --light: #222222;
+  --gray-light: #6a6a6a;
+  --gray-dark: #f7f7f7;
+  --accent: #e00b41;
+  --glow: none;
+}
+:root[data-look="open-house"][data-glass][data-theme] :is(.project-card, .bio-card, .stats-card, .tech-card, .card-wrap, .form, .social, .chat-panel) { border-radius: 20px !important; }

@@ -1,0 +1,28 @@
+/* Retro: Synthwave sunset with traffic racing down the grid. Palette (dark default, [data-theme="light"] day variant) and card / button shapes. */
+
+/* ---------- Retro: synthwave ---------- */
+:root[data-look="retro"] {
+  --dark: #14002e;
+  --light: #ffe9f9;
+  --gray-light: #d39be0;
+  --gray-dark: #3a1460;
+  --accent: #ff4fd8;
+  --glow: 0 0 14px rgba(255, 79, 216, 0.6), 0 0 32px rgba(255, 209, 102, 0.25);
+  --poppins: "Space Mono", var(--km-body), ui-monospace, monospace;
+}
+:root[data-look="retro"][data-theme="light"] {
+  --dark: #ffe9f6;
+  --light: #2a0638;
+  --gray-light: #7a3d86;
+  --gray-dark: #f1c6e4;
+  --accent: #c2187a;
+  --glow: none;
+}
+/* Retro: sunset stripe along the top edge */
+:root[data-look="retro"][data-glass][data-theme] :is(.project-card, .bio-card, .stats-card, .tech-card, .card-wrap, .form, .chat-panel) {
+  border-radius: 4px !important;
+  background:
+    linear-gradient(90deg, #ff4fd8, #ff8a3d, #ffd166) top / 100% 3px no-repeat,
+    color-mix(in srgb, var(--light) 4%, transparent) !important;
+}
+:root[data-look="retro"] { --sheet-r: 6px; }

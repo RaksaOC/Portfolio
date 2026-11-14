@@ -1,0 +1,31 @@
+/* Desert: Canyon rock, saguaro cacti and tumbleweeds on the sand. Palette (dark default, [data-theme="light"] day variant) and card / button shapes. */
+
+:root[data-look="desert"] {
+  --dark: #1b100b;
+  --light: #fbe8cf;
+  --gray-light: #c9a685;
+  --gray-dark: #2a1a11;
+  --accent: #f59a4a;
+  --glow: 0 0 16px rgba(245, 154, 74, 0.45);
+  --poppins: "Arvo", var(--km-body), system-ui, serif;
+  --look-display: "Rye", "Arvo", var(--km-display), var(--km-body), serif;
+}
+:root[data-look="desert"][data-theme="light"] {
+  --dark: #f7e4c3;
+  --light: #3b2213;
+  --gray-light: #7d5a3e;
+  --gray-dark: #efd6ad;
+  --accent: #c4571b;
+  --glow: none;
+}
+/* Desert: weathered sandstone, uneven rounded corners and a band of rock strata along the bottom */
+:root[data-look="desert"][data-glass][data-theme] :is(.project-card, .bio-card, .stats-card, .tech-card, .card-wrap, .form, .chat-panel) {
+  border-radius: 12px 26px 10px 22px !important;
+  background:
+    linear-gradient(color-mix(in srgb, var(--accent) 55%, transparent), color-mix(in srgb, var(--accent) 55%, transparent)) bottom / 100% 3px no-repeat,
+    linear-gradient(color-mix(in srgb, var(--accent) 25%, transparent), color-mix(in srgb, var(--accent) 25%, transparent)) 0 calc(100% - 6px) / 100% 2px no-repeat,
+    color-mix(in srgb, var(--light) 4%, transparent) !important;
+}
+:root[data-look="desert"][data-glass][data-theme] :is(.request-cv .button, .send-btn, .cv-send) { border-radius: 8px 16px 8px 14px !important; }
+:root[data-look="desert"] :is(.hero-text-1, .section-label, .bio-title, .stats-title, .tech-title) { letter-spacing: 0.02em; }
+:root[data-look="desert"] { --sheet-r: 16px; }

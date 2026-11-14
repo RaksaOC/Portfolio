@@ -1,0 +1,119 @@
+<template>
+  <div class="welcome" id="welcome">
+    <div class="name-wrapper">
+      <p class="name lName" :style="{ fontFamily: spinFont }">{{ $t('name.last') }}</p>
+      <p class="name fName" :style="{ fontFamily: spinFont }">{{ $t('name.first') }}</p>
+    </div>
+    <ThemeIntro />
+  </div>
+</template>
+
+<script setup>
+import { computed } from 'vue'
+import { useI18n } from 'vue-i18n'
+import ThemeIntro from '../components/settings/ThemeIntro.vue'
+import { intro } from '../core/prefs'
+import { findLook } from '../themes'
+import { displayFontCss } from '../themes/fonts'
+
+// While the intro reel spins, the name tries on each passing theme's heading font (jackpot style):
+// the Latin display face in English, the theme's Khmer display face in Khmer. Afterwards the theme's
+// own CSS takes over. (Set on the lines themselves: the Khmer heading rule targets .name directly.)
+const { locale } = useI18n()
+const spinFont = computed(() => {
+  if (!intro.running || intro.preview == null) return null
+  const look = findLook(intro.preview)
+  if (locale.value === 'km') {
+    const km = look.kmFonts.display
+    return `"${km}", var(--km-body), sans-serif`
+  }
+  return displayFontCss(look) || 'var(--poppins)'
+})
+defineProps({
+  lName: String,
+  fName: String
+})
+</script>
+
+<style scoped>
+.welcome {
+  width: 100%;
+  height: 100vh;
+  background-color: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: left;
+  position: relative;
+  overflow: hidden;
+  z-index: 10;
+  transition: all 0.2s ease-in-out;
+}
+
+.name-wrapper {
+  background-color: transparent;
+  position: relative;
+  font-size: var(--XXXL);
+  font-family: var(--poppins);
+  color: var(--light);
+  user-select: none;
+  opacity: 1; /* Ensure it's visible */
+  padding: 20px;
+}
+
+.name {
+  background: transparent !important;
+  transform: translate3d(0, 0, 0); /* Improve animation performance */
+}
+
+.lName {
+  animation: slide-in-from-left 1.5s ease-out forwards;
+}
+
+.fName {
+  animation: slide-in-from-right 1.5s ease-out forwards;
+}
+
+@keyframes slide-in-from-left {
+  from {
+    opacity: 0;
+    transform: translateX(-100vw);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-in-from-right {
+  from {
+    opacity: 0;
+    transform: translateX(100vw);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+
+
+@media screen and (max-width: 968px) {
+  .name-wrapper {
+    font-size: var(--XXL);
+  }
+}
+
+@media screen and (max-width: 638px) {
+  .name-wrapper {
+    font-size: var(--XL);
+  }
+}
+
+@media screen and (max-width: 398px) {
+  .name-wrapper {
+    font-size: 56px;
+  }
+}
+</style>

@@ -1,0 +1,31 @@
+/* Brass Works: Parchment, brass rivets and gaslight glow. Palette (dark default, [data-theme="light"] day variant) and card / button shapes. */
+
+:root[data-look="brass-works"] {
+  --dark: #1a100a;
+  --light: #f5deb3;
+  --gray-light: #c2a274;
+  --gray-dark: #2e1d11;
+  --accent: #d4893f;
+  --glow: 0 0 14px rgba(212, 137, 63, 0.45);
+  --poppins: "IM Fell English", var(--km-body), system-ui, sans-serif;
+  --look-display: "IM Fell English SC", "IM Fell English", var(--km-display), var(--km-body), sans-serif;
+}
+:root[data-look="brass-works"][data-theme="light"] {
+  --dark: #f3e2bd;
+  --light: #2b1a0e;
+  --gray-light: #664628;
+  --gray-dark: #f0dcb0;
+  --accent: #a85f22;
+  --glow: none;
+}
+:root[data-look="brass-works"][data-glass][data-theme] :is(.project-card, .bio-card, .stats-card, .tech-card, .card-wrap, .form, .social, .chat-panel) { border-radius: 8px !important; border: 2px solid color-mix(in srgb, var(--accent) 70%, transparent) !important; box-shadow: inset 0 0 0 3px var(--dark), inset 0 0 0 4px color-mix(in srgb, var(--accent) 55%, transparent), 0 2px 14px rgba(60, 30, 10, 0.35) !important; }
+/* Brass Works: rivets in the corners */
+:root[data-look="brass-works"][data-glass][data-theme] :is(.project-card, .bio-card, .stats-card, .tech-card, .card-wrap, .form, .chat-panel) {
+  background:
+    radial-gradient(circle at 12px 12px, color-mix(in srgb, var(--accent) 90%, white) 0 2.5px, color-mix(in srgb, var(--accent) 50%, transparent) 3px, transparent 4px),
+    radial-gradient(circle at calc(100% - 12px) 12px, color-mix(in srgb, var(--accent) 90%, white) 0 2.5px, color-mix(in srgb, var(--accent) 50%, transparent) 3px, transparent 4px),
+    radial-gradient(circle at 12px calc(100% - 12px), color-mix(in srgb, var(--accent) 90%, white) 0 2.5px, color-mix(in srgb, var(--accent) 50%, transparent) 3px, transparent 4px),
+    radial-gradient(circle at calc(100% - 12px) calc(100% - 12px), color-mix(in srgb, var(--accent) 90%, white) 0 2.5px, color-mix(in srgb, var(--accent) 50%, transparent) 3px, transparent 4px),
+    color-mix(in srgb, var(--light) 4%, transparent) !important;
+}
+:root[data-look="brass-works"] { --sheet-r: 10px; }

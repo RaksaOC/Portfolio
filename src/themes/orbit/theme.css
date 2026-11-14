@@ -1,0 +1,22 @@
+/* Orbit: Warm stone, big curves and orange arcs. Palette (dark default, [data-theme="light"] day variant) and card / button shapes. */
+
+:root[data-look="orbit"] {
+  --dark: #141413;
+  --light: #f3f0ee;
+  --gray-light: #a8a39d;
+  --gray-dark: #262627;
+  --accent: #f37338;
+  --glow: none;
+  --poppins: "Sofia Sans", var(--km-body), system-ui, sans-serif;
+  --look-display: "Sofia Sans", var(--km-display), var(--km-body), sans-serif;
+}
+:root[data-look="orbit"][data-theme="light"] {
+  --dark: #f3f0ee;
+  --light: #141413;
+  --gray-light: #5f5f5f;
+  --gray-dark: #ebe6e1;
+  --accent: #cf4500;
+  --glow: none;
+}
+:root[data-look="orbit"][data-glass][data-theme] :is(.project-card, .bio-card, .stats-card, .tech-card, .card-wrap, .form, .social, .chat-panel) { border-radius: 30px !important; }
+:root[data-look="orbit"] { --sheet-r: 30px; }

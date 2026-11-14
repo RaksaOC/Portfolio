@@ -1,0 +1,29 @@
+/* Atomic: Electric violet, orbiting electrons and drifting molecules. Palette (dark default, [data-theme="light"] day variant) and card / button shapes. */
+
+:root[data-look="atomic"] {
+  --dark: #0a0b1e;
+  --light: #e6e9ff;
+  --gray-light: #9aa0d0;
+  --gray-dark: #141638;
+  --accent: #8b7bff;
+  --glow: 0 0 16px rgba(139, 123, 255, 0.55);
+  --poppins: "Exo 2", var(--km-body), system-ui, sans-serif;
+  --look-display: "Orbitron", "Exo 2", var(--km-display), var(--km-body), sans-serif;
+}
+:root[data-look="atomic"][data-theme="light"] {
+  --dark: #eef0ff;
+  --light: #14163a;
+  --gray-light: #4a4f80;
+  --gray-dark: #e2e5fb;
+  --accent: #4b3fd6;
+  --glow: none;
+}
+/* Atomic: a tiny atom orbiting in the top-right corner */
+:root[data-look="atomic"][data-glass][data-theme] :is(.project-card, .bio-card, .stats-card, .tech-card, .card-wrap, .form, .chat-panel) {
+  border-radius: 22px !important;
+  background:
+    radial-gradient(circle at calc(100% - 26px) 20px, var(--accent) 0 2.5px, transparent 3px),
+    radial-gradient(ellipse 15px 6px at calc(100% - 26px) 20px, transparent 0 78%, color-mix(in srgb, var(--accent) 80%, transparent) 82% 94%, transparent 100%),
+    radial-gradient(ellipse 6px 15px at calc(100% - 26px) 20px, transparent 0 78%, color-mix(in srgb, var(--accent) 55%, transparent) 82% 94%, transparent 100%),
+    color-mix(in srgb, var(--light) 4%, transparent) !important;
+}

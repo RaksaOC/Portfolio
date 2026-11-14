@@ -1,0 +1,21 @@
+/* Quiet Gallery: Calm space, soft greys and one blue. Palette (dark default, [data-theme="light"] day variant) and card / button shapes. */
+
+:root[data-look="gallery"] {
+  --dark: #000000;
+  --light: #ffffff;
+  --gray-light: #cccccc;
+  --gray-dark: #272729;
+  --accent: #2997ff;
+  --glow: none;
+  --poppins: "Inter", var(--km-body), system-ui, sans-serif;
+  --look-display: "Inter", var(--km-display), var(--km-body), sans-serif;
+}
+:root[data-look="gallery"][data-theme="light"] {
+  --dark: #ffffff;
+  --light: #1d1d1f;
+  --gray-light: #6a6a6f;
+  --gray-dark: #f5f5f7;
+  --accent: #0066cc;
+  --glow: none;
+}
+:root[data-look="gallery"][data-glass][data-theme] :is(.project-card, .bio-card, .stats-card, .tech-card, .card-wrap, .form, .social, .chat-panel) { border-radius: 20px !important; }
