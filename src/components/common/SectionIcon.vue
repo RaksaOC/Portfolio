@@ -15,7 +15,7 @@ import * as THREE from 'three';
 const props = defineProps({
     icon: { type: String, required: true }, // about | skills | projects | experience | contact
     title: { type: String, default: '' },
-    image: { type: String, default: '' }, // about: photo on the card
+    image: { type: [String, Array], default: '' }, // about: photo(s) on the card; several take turns
 });
 
 const wrapRef = ref(null);
@@ -196,14 +196,29 @@ const BUILDERS = {
         // in the active theme's colours (repainted when the theme / look changes, see paint() below): the
         // theme's background tinted with its accent, a soft light behind the head and shoulders, a vignette,
         // and a soft shadow under the portrait to lift it off the backdrop.
-        if (img) {
+        // Several photos: every SWAP_EVERY seconds (while on screen) the card turns edge-on, swaps to a random
+        // different one and turns back. Only the current and the next picture are ever loaded.
+        const list = [].concat(img || []).filter(Boolean);
+        let swap = null; // () => true once the next picture is shown, false while it's still loading
+        let nextReady = () => false;
+        if (list.length) {
             const S = 768;
             const canvas = document.createElement('canvas');
             canvas.width = canvas.height = S;
             const tex = new THREE.CanvasTexture(canvas);
             tex.colorSpace = THREE.SRGBColorSpace;
-            const pic = new Image();
-            pic.decoding = 'async';
+            const load = (src) => {
+                const im = new Image();
+                im.decoding = 'async';
+                im.src = src;
+                return im;
+            };
+            // a random index other than i
+            const other = (i) => (list.length < 2 ? i : (i + 1 + Math.floor(Math.random() * (list.length - 1))) % list.length);
+            let idx = Math.floor(Math.random() * list.length);
+            let pic = load(list[idx]);
+            let nextIdx = other(idx);
+            let nextPic = null;
             let colors = null;
             const rgba = (c, a) => `rgba(${Math.round(c.r * 255)}, ${Math.round(c.g * 255)}, ${Math.round(c.b * 255)}, ${a})`;
             const draw = () => {
@@ -250,8 +265,18 @@ const BUILDERS = {
                 mats.photo.map = tex;
                 mats.photo.needsUpdate = true;
                 draw();
+                if (list.length > 1) nextPic = load(list[nextIdx]);
             };
-            pic.src = img;
+            nextReady = () => !!nextPic?.complete && nextPic.naturalWidth > 0;
+            swap = () => {
+                if (!nextReady()) return false;
+                pic = nextPic;
+                idx = nextIdx;
+                draw();
+                nextIdx = other(idx);
+                nextPic = load(list[nextIdx]);
+                return true;
+            };
             mats.photoPaint = (c) => { colors = c; draw(); };
         }
         const frame = part(extrude(roundedRect(new THREE.Shape(), -1.45, -1.45, 2.9, 2.9, 0.4), 0.12, 0.04), 25);
@@ -274,10 +299,53 @@ const BUILDERS = {
             return o;
         });
         group.add(card, ...orbits);
+        const SWAP_EVERY = 10; // s
+        const PHOTO_OPACITY = mats.photo.opacity;
+        const FLIP = 0.9; // s for the whole turn
+        const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        let lastSwap = null;
+        let flipAt = null;
+        let swapped = false;
         return {
             group,
             update(t) {
-                card.rotation.y = Math.sin(t * 0.6) * 0.35;
+                // real time for the photo timer (t runs slower with reduced motion)
+                const now = performance.now() / 1000;
+                if (lastSwap === null) lastSwap = now;
+                const sway = Math.sin(t * 0.6) * 0.35;
+                let turn = sway;
+                if (swap && flipAt === null && now - lastSwap >= SWAP_EVERY && nextReady()) {
+                    if (reduce) {
+                        swap();
+                        lastSwap = now;
+                    } else {
+                        flipAt = now;
+                        swapped = false;
+                    }
+                }
+                if (flipAt !== null) {
+                    // turn to exactly edge-on (±90°), swap the photo there, come back round from the other side;
+                    // the photo fades softly out as it turns away and back in with the new one
+                    const p = Math.min(1, (now - flipAt) / FLIP);
+                    let fade;
+                    if (p < 0.5) {
+                        const e = (p * 2) ** 2;
+                        turn = sway + (Math.PI / 2 - sway) * e;
+                        fade = 1 - 0.75 * e;
+                    } else {
+                        if (!swapped) swapped = swap() || true;
+                        const e = 1 - (1 - (p - 0.5) * 2) ** 2;
+                        turn = -Math.PI / 2 + (sway + Math.PI / 2) * e;
+                        fade = 0.25 + 0.75 * e;
+                    }
+                    if (p >= 1) {
+                        flipAt = null;
+                        lastSwap = now;
+                        fade = 1;
+                    }
+                    mats.photo.opacity = PHOTO_OPACITY * fade;
+                }
+                card.rotation.y = turn;
                 orbits.forEach((o, i) => {
                     const a = t * (0.8 + i * 0.35) + i * 2;
                     o.userData.bead.position.set(Math.cos(a) * o.userData.r, Math.sin(a) * o.userData.r, 0);

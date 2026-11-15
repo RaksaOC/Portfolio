@@ -60,15 +60,31 @@ defineProps({
     color: var(--light);
 }
 
+/* phones: compact, so a card fits above or below the timeline (Experience.vue zigzag) */
 @media screen and (max-width: 768px) {
+    .exp-card {
+        gap: 6px;
+    }
+
+    .place {
+        font-size: 1.1rem;
+        line-height: 1.3;
+    }
+
     .role-duration {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 10px;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        gap: 0 10px;
+    }
+
+    .role,
+    .duration {
+        font-size: 0.82rem;
     }
 
     .desc {
-        font-size: var(--XS);
+        font-size: 0.8rem;
+        line-height: 1.45;
     }
 }
 </style>

@@ -159,10 +159,6 @@ export default {
     fpsMax: 'អតិបរមា',
     models: 'ម៉ូដែល 3D',
     lite: 'បន្ថយភាគល្អិត',
-    scrollStyle: 'រចនាប័ទ្មរំកិល',
-    scroll_flat: 'រាបស្មើ',
-    scroll_curved: 'កោង',
-    scroll_ribbon: 'ខ្សែបូ',
   },
   music: {
     play: 'ចាក់តន្ត្រី',

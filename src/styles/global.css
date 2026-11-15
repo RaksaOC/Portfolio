@@ -368,13 +368,12 @@ html.intro-lock body {
 }
 
 /* Soft fade where a pinned horizontal track (Skills, Experience) meets the edges of its viewport.
-   src/core/pinScroll.js adds .fading near an edge and sets --fade-l / --fade-r: where the viewport's
+   src/core/pinScroll.js adds .fading near an edge and sets --edge (fade width) and --fade-l / --fade-r: where the viewport's
    left / right edges fall, in the element's own coordinates. Glass surfaces can't be masked (Chrome drops
    the mask when there's a backdrop-filter): they use .edge-shell and fade via --edge-o in their own CSS. */
 .edge-fade.fading {
-  --edge: 72px; /* keep in sync with EDGE in pinScroll.js */
-  -webkit-mask-image: linear-gradient(90deg, transparent var(--fade-l), #000 calc(var(--fade-l) + var(--edge)), #000 calc(var(--fade-r) - var(--edge)), transparent var(--fade-r));
-  mask-image: linear-gradient(90deg, transparent var(--fade-l), #000 calc(var(--fade-l) + var(--edge)), #000 calc(var(--fade-r) - var(--edge)), transparent var(--fade-r));
+  -webkit-mask-image: linear-gradient(90deg, transparent var(--fade-l), #000 calc(var(--fade-l) + var(--edge, 72px)), #000 calc(var(--fade-r) - var(--edge, 72px)), transparent var(--fade-r));
+  mask-image: linear-gradient(90deg, transparent var(--fade-l), #000 calc(var(--fade-l) + var(--edge, 72px)), #000 calc(var(--fade-r) - var(--edge, 72px)), transparent var(--fade-r));
 }
 
 /* Glass shells in a pinned track curve away near the edges (values from src/core/pinScroll.js).

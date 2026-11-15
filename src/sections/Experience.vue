@@ -65,7 +65,7 @@ const reveal = (travelled, rect) => {
 // The timeline runs the full screen width. Cards are sharp inside the page's 1000px column and turn
 // ghostly and soft-focus the further they drift out of it, then fade off at the screen edge.
 const { outerRef, stickyRef, viewportRef, trackRef, outerHeight, translate } =
-    usePinnedScroll({ onUpdate: reveal, curve: () => false, focus: 1000 });
+    usePinnedScroll({ onUpdate: reveal, focus: 1000 });
 
 
 
@@ -251,40 +251,44 @@ const onCardMove = (e) => {
     }
 }
 
-/* Mobile: one card per screen, all cards below the line */
+/* Mobile: the same zigzag as desktop. Cards nearly fill the screen width, so neighbours overlap sideways
+   (one above the line, the next below it): each step along the line is about half a card */
 @media screen and (max-width: 768px) {
     .pin-sticky {
         gap: 16px;
-        padding-top: 80px;
+        padding-top: 72px;
     }
 
     .track {
-        gap: 24px;
-        height: min(520px, calc(100svh - 150px));
-    }
-
-    .timeline-line {
-        top: 40px;
+        gap: 0;
+        padding: 0 11vw;
+        height: calc(100svh - 96px);
     }
 
     .stop {
-        width: 80vw;
+        width: 78vw;
     }
 
-
-
-    .emblem {
-        top: 40px;
+    .stop + .stop {
+        margin-left: -34vw;
     }
 
-    .stop.up .card-wrap,
+    .stop.up .card-wrap {
+        bottom: calc(50% + 22px);
+    }
+
     .stop.down .card-wrap {
-        top: 74px;
-        bottom: auto;
+        top: calc(50% + 22px);
     }
 
     .card-wrap {
-        padding: 16px;
+        padding: 14px 16px;
+    }
+
+    .emblem {
+        left: 16px;
+        width: 16px;
+        height: 16px;
     }
 }
 

@@ -2,8 +2,7 @@
   <div class="skills" id="skills">
     <SectionIcon icon="skills" :title="$t('nav.skills')" />
 
-    <!-- Pinned scroll (same mechanics as Experience). Settings → Scroll style (src/core/scrollStyle.js):
-         flat / curved = a sideways track of glass panels; ribbon = a flexing 3D glass loop that turns. -->
+    <!-- Pinned scroll (same mechanics as Experience): a flexing 3D glass loop that turns as the page scrolls -->
     <div class="pin-outer" ref="outerRef" :style="{ height: outerHeight + 'px' }">
       <div class="pin-sticky" ref="stickyRef" :class="{ 'is-ribbon': ribbon }">
 
@@ -15,7 +14,7 @@
           </div>
         </div>
 
-        <!-- Flat / curved -->
+        <!-- Fallback without WebGL: a sideways track of glass panels -->
         <div v-else class="track-viewport" ref="viewportRef">
           <div class="track" ref="trackRef" :style="{ transform: `translate3d(${-translate}px, 0, 0)` }">
             <section v-for="(group, index) in skillGroups" :key="group.key" class="group skill-card edge-shell"
@@ -38,17 +37,16 @@ import SkillGroup from '../components/cards/SkillGroup.vue';
 import SkillRibbon from '../components/cards/SkillRibbon.vue';
 import SectionIcon from '../components/common/SectionIcon.vue';
 import { usePinnedScroll } from '../core/pinScroll';
-import { scrollStyle } from '../core/scrollStyle';
 import { skillGroups } from '../data/skills';
 
 // the list lives in src/data/skills.js, group titles in src/i18n/*.js → skills.groups
 
 const N = skillGroups.length;
 const noWebGL = ref(false);
-const ribbon = computed(() => scrollStyle.value === 'ribbon' && !noWebGL.value);
+const ribbon = computed(() => !noWebGL.value);
 const STEP = 420; // ribbon: px of scrolling per group
 
-/* ---------- Flat / curved: panels fade in as they arrive ---------- */
+/* ---------- Fallback track: panels fade in as they arrive ---------- */
 const groupRefs = [];
 const visible = reactive(skillGroups.map((_, i) => i === 0));
 
@@ -66,7 +64,6 @@ const reveal = (travelled, rect) => {
 const { outerRef, stickyRef, viewportRef, trackRef, outerHeight, translate, progress, seek, measure } =
   usePinnedScroll({
     onUpdate: reveal,
-    curve: () => scrollStyle.value === 'curved',
     getDistance: () => (ribbon.value ? (N - 1) * STEP : null),
   });
 
@@ -113,7 +110,7 @@ const onPanelMove = (e) => {
   overflow: hidden;
 }
 
-/* ================= Flat / curved ================= */
+/* ================= Fallback track ================= */
 
 .track-viewport {
   position: relative;

@@ -1,6 +1,6 @@
 <template>
     <div class="about-section">
-        <SectionIcon icon="about" image="/images/profile/portrait-cutout.png" />
+        <SectionIcon icon="about" :image="PORTRAITS" />
         <div class="about-layout" id="about">
             <div class="bio-card" ref="aboutMeCard" data-aos="fade-right">
                 <p class="bio-title">{{ $t('about.title') }}</p>
@@ -59,6 +59,10 @@ import { ref, onMounted } from 'vue';
 import SectionIcon from '../components/common/SectionIcon.vue';
 import { favoriteTech } from '../data/skills';
 
+// Background-removed portraits for the photo card; it shows a random one and swaps every 10 s (SectionIcon.vue)
+const PORTRAITS = ['02', '03', '04', '05', '06', '09', '10', '11', '12', '13']
+    .map((n) => `/images/profile/portraits/portrait-${n}.png`);
+
 export default {
     name: 'About',
     components: {
@@ -95,6 +99,7 @@ export default {
             favoriteTechCard,
             accoladesCard,
             favoriteTech,
+            PORTRAITS,
         };
     }
 };

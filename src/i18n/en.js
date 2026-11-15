@@ -159,10 +159,6 @@ export default {
     fpsMax: 'Max',
     models: '3D models',
     lite: 'Fewer particles',
-    scrollStyle: 'Scroll style',
-    scroll_flat: 'Flat',
-    scroll_curved: 'Curved',
-    scroll_ribbon: 'Ribbon',
   },
   music: {
     play: 'Play music',
