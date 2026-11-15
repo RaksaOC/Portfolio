@@ -103,6 +103,17 @@
                         <lg-switch :checked="randomLook" :aria-label="$t('settings.random')"
                             @change="setRandomLook($event.target.checked)"></lg-switch>
                     </div>
+                    <!-- how the Skills section scrolls (src/core/scrollStyle.js) -->
+                    <div class="s-row s-gfx s-row-gap">
+                        <span class="s-row-label">{{ $t('settings.scrollStyle') }}</span>
+                        <lg-slider class="s-slider" min="0" max="2" step="1"
+                            :value="SCROLL_STYLES.indexOf(scrollStyle)" :aria-label="$t('settings.scrollStyle')"
+                            @input="setScrollStyle(SCROLL_STYLES[Number($event.target.value)])"></lg-slider>
+                        <div class="s-levels">
+                            <button v-for="st in SCROLL_STYLES" :key="st" type="button" class="s-level"
+                                :aria-pressed="scrollStyle === st" @click="setScrollStyle(st)">{{ $t(`settings.scroll_${st}`) }}</button>
+                        </div>
+                    </div>
                     <!-- theme music on/off (src/core/music.js); the only way back once it's switched off -->
                     <div class="s-row s-row-gap">
                         <span class="s-row-label">{{ $t('music.play') }}</span>
@@ -191,6 +202,7 @@ import { setLocale } from '../../i18n';
 import { prefs, ui, theme, setTheme, randomLook, setRandomLook } from '../../core/prefs';
 import { gfx, LEVELS, setAdvanced, canRefract } from '../../core/gfx';
 import { music, setEnabled } from '../../core/music';
+import { scrollStyle, SCROLL_STYLES, setScrollStyle } from '../../core/scrollStyle';
 import { lenis } from '../../core/lenis';
 import { LOOKS, FEATURED_LOOKS, OTHER_LOOKS, lookName } from '../../themes';
 import { loadDisplayFonts, loadKhmerDisplayFonts, nameFontCss } from '../../themes/fonts';

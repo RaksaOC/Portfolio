@@ -19,7 +19,7 @@
   --glow: none;
 }
 /* Greek: square-cut marble slabs with a frieze line top and bottom */
-:root[data-look="greek"][data-glass][data-theme] :is(.project-card, .bio-card, .stats-card, .tech-card, .card-wrap, .form, .social, .chat-panel) { border-radius: 3px !important; border-top: 3px double color-mix(in srgb, var(--accent) 80%, transparent) !important; border-bottom: 3px double color-mix(in srgb, var(--accent) 80%, transparent) !important; }
+:root[data-look="greek"][data-glass][data-theme] :is(.project-card, .bio-card, .stats-card, .tech-card, .card-wrap, .skill-card, .form, .social, .chat-panel) { border-radius: 3px !important; border-top: 3px double color-mix(in srgb, var(--accent) 80%, transparent) !important; border-bottom: 3px double color-mix(in srgb, var(--accent) 80%, transparent) !important; }
 :root[data-look="greek"][data-glass][data-theme] :is(.request-cv .button, .send-btn, .cv-send) { border-radius: 3px !important; }
 :root[data-look="greek"] :is(.hero-text-1, .section-label, .bio-title, .stats-title, .tech-title) { letter-spacing: 0.06em; }
 :root[data-look="greek"] { --sheet-r: 3px; }

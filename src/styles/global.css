@@ -127,6 +127,13 @@ body {
   /* clip (not hidden) so position: sticky keeps working for the pinned experience timeline */
   overflow-x: clip;
 }
+/* the Skills ribbon (SkillRibbon.vue) and the Experience timeline span the whole viewport: let them out
+   of the 1000px column and App.vue's .content wrapper
+   (html still clips sideways overflow, so no horizontal scroll) */
+#app:has(.pin-sticky.is-ribbon, #experience),
+.content:has(.pin-sticky.is-ribbon, #experience) {
+  overflow-x: visible;
+}
 /* Khmer script needs a little more vertical room */
 :root[lang="km"] body {
   line-height: 1.7;
@@ -358,4 +365,24 @@ html.intro-lock body {
 
 :root[data-cursor] :is(input:not([type="checkbox"], [type="radio"], [type="range"], [type="button"], [type="submit"]), textarea, [contenteditable="true"]) {
   cursor: text !important;
+}
+
+/* Soft fade where a pinned horizontal track (Skills, Experience) meets the edges of its viewport.
+   src/core/pinScroll.js adds .fading near an edge and sets --fade-l / --fade-r: where the viewport's
+   left / right edges fall, in the element's own coordinates. Glass surfaces can't be masked (Chrome drops
+   the mask when there's a backdrop-filter): they use .edge-shell and fade via --edge-o in their own CSS. */
+.edge-fade.fading {
+  --edge: 72px; /* keep in sync with EDGE in pinScroll.js */
+  -webkit-mask-image: linear-gradient(90deg, transparent var(--fade-l), #000 calc(var(--fade-l) + var(--edge)), #000 calc(var(--fade-r) - var(--edge)), transparent var(--fade-r));
+  mask-image: linear-gradient(90deg, transparent var(--fade-l), #000 calc(var(--fade-l) + var(--edge)), #000 calc(var(--fade-r) - var(--edge)), transparent var(--fade-r));
+}
+
+/* Glass shells in a pinned track curve away near the edges (values from src/core/pinScroll.js).
+   Sections must not set `transform` on these (use `translate` for their own movement). */
+.edge-shell {
+  transform: perspective(1100px) rotateY(var(--edge-r, 0deg)) scale(var(--edge-s, 1));
+  transform-origin: var(--edge-origin, center);
+}
+@media (prefers-reduced-motion: reduce) {
+  .edge-shell { transform: none; }
 }

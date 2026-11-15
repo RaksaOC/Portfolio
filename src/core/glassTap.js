@@ -3,13 +3,13 @@
 // touch-scrolling across cards doesn't set them off.
 
 // Glass surfaces (see the glass rule in themes/shared/base.css, plus the other frosted bits).
-// The desktop navbar and the Experience progress pill have their own ripple.
+// The desktop navbar has its own ripple.
 const GLASS = [
-  '.m-pill', '.project-card', '.bio-card', '.stats-card', '.tech-card', '.card-wrap', '.form', '.social',
+  '.m-pill', '.project-card', '.bio-card', '.stats-card', '.tech-card', '.card-wrap', '.skill-card', '.form', '.social',
   '.tab-wrapper button', '.tab-wrapper', '.bubble', '.request-cv .button', '.send-btn', '.emblem', '.orb',
   '.s-look', '.s-row', '.s-close', '.s-level', '.nav-links li', '.close-btn', '.arrow-btn', '.to-top', '.lb-btn', '.lb-thumb, .view-btn, .chat-fab, .chat-chip, .chat-send, .chat-pill',
 ].join(',')
-const SKIP = 'input, textarea, select, lg-switch, lg-slider, .nav-bar, .pin-footer, .zoomable, .project-image'
+const SKIP = 'input, textarea, select, lg-switch, lg-slider, .nav-bar, .zoomable, .project-image'
 
 const reduce = (() => {
   try { return window.matchMedia('(prefers-reduced-motion: reduce)') } catch { return { matches: false } }

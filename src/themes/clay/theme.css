@@ -18,6 +18,6 @@
   --accent: #d9796c;
   --glow: none;
 }
-:root[data-look="clay"][data-glass][data-theme] :is(.project-card, .bio-card, .stats-card, .tech-card, .card-wrap, .form, .social, .chat-panel) { border-radius: 28px !important; border: none !important; background: color-mix(in srgb, var(--gray-dark) 80%, transparent) !important; box-shadow: inset 3px 3px 6px color-mix(in srgb, white 35%, transparent), inset -4px -4px 8px color-mix(in srgb, black 22%, transparent), 8px 12px 24px color-mix(in srgb, black 25%, transparent) !important; }
+:root[data-look="clay"][data-glass][data-theme] :is(.project-card, .bio-card, .stats-card, .tech-card, .card-wrap, .skill-card, .form, .social, .chat-panel) { border-radius: 28px !important; border: none !important; background: color-mix(in srgb, var(--gray-dark) 80%, transparent) !important; box-shadow: inset 3px 3px 6px color-mix(in srgb, white 35%, transparent), inset -4px -4px 8px color-mix(in srgb, black 22%, transparent), 8px 12px 24px color-mix(in srgb, black 25%, transparent) !important; }
 :root[data-look="clay"][data-glass][data-theme] :is(.request-cv .button, .send-btn, .cv-send) { box-shadow: inset 2px 2px 4px color-mix(in srgb, white 45%, transparent), inset -3px -3px 6px color-mix(in srgb, black 20%, transparent), 4px 6px 12px color-mix(in srgb, black 22%, transparent) !important; }
 :root[data-look="clay"] { --sheet-r: 30px; }

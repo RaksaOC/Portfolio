@@ -355,6 +355,9 @@ let uid = 0;
  *   sync: true      apply updates immediately instead of on the next animation frame
  *   hidden: true    no lens at all (filter removed; with clip, the element is clipped away).
  *                   Toggle with update({ hidden }) — e.g. a magnifier when the pointer leaves
+ *   onFilter: fn    (local addition) receives the filter reference, e.g. 'url(#lg3-v7)' ('' when there
+ *                   is none), instead of it being written to target.style — so the caller can combine
+ *                   it with other filters
  *
  * Lens coordinates are CSS px relative to target's border box; they are converted to fractions of
  * that box internally, and the filter output is clipped to it.
@@ -367,6 +370,12 @@ export function createGlass(target, options = {}) {
   const flags = { fit: !!options.fit, clip: !!options.clip, sync: !!options.sync, hidden: !!options.hidden };
   const useBackdropURL = mode === 'backdrop' && engine === 'blink';
   const active = mode !== 'backdrop' || useBackdropURL;
+  const onFilter = typeof options.onFilter === 'function' ? options.onFilter : null;
+  const applyFilter = (ref) => {
+    if (onFilter) onFilter(ref);
+    else if (useBackdropURL) target.style.backdropFilter = ref;
+    else target.style.filter = ref;
+  };
 
   if (!active) {
     target.style.backdropFilter = fallback;
@@ -425,8 +434,7 @@ export function createGlass(target, options = {}) {
     frame = 0;
     if (destroyed || !active) return;
     if (flags.hidden) {
-      if (useBackdropURL) target.style.backdropFilter = '';
-      else target.style.filter = '';
+      applyFilter('');
       if (flags.clip) target.style.clipPath = 'inset(50%)';
       return;
     }
@@ -490,9 +498,7 @@ export function createGlass(target, options = {}) {
     // WebKit caches filter output per filter id and keeps serving it after the graph changes;
     // a fresh id on every update forces it to re-read.
     filter.id = `${base}-v${++version}`;
-    const ref = `url(#${filter.id})`;
-    if (useBackdropURL) target.style.backdropFilter = ref;
-    else target.style.filter = ref;
+    applyFilter(`url(#${filter.id})`);
   }
 
   function schedule() {
@@ -530,9 +536,12 @@ export function createGlass(target, options = {}) {
       settleTimers.forEach(clearTimeout);
       observer?.disconnect();
       filter.remove();
-      target.style.filter = '';
-      target.style.backdropFilter = '';
-      target.style.webkitBackdropFilter = '';
+      if (onFilter) onFilter('');
+      else {
+        target.style.filter = '';
+        target.style.backdropFilter = '';
+        target.style.webkitBackdropFilter = '';
+      }
       if (flags.clip) target.style.clipPath = '';
     },
   };

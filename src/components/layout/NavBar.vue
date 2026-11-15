@@ -119,9 +119,30 @@ const onScroll = () => {
     if (expanded.value && Math.abs(y - expandedAt) > 260) expanded.value = false;
 };
 
+// Springy bounce on a tap of the full bar (the compact pill already wobbles as it grows back).
+// Same rubber-band as the glass cards (src/core/glassTap.js), scaled down for the wide bar.
+const reduceMotion = typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)');
+const bounce = () => {
+    const el = navRef.value;
+    if (!el || reduceMotion?.matches) return;
+    const r = el.getBoundingClientRect();
+    const a = Math.min(0.06, 24 / Math.max(r.width, r.height, 1));
+    el.animate(
+        [
+            { scale: '1 1' },
+            { scale: `${1 + a} ${1 - a * 1.6}`, offset: 0.22 },
+            { scale: `${1 - a * 0.6} ${1 + a * 1.1}`, offset: 0.42 },
+            { scale: `${1 + a * 0.3} ${1 - a * 0.35}`, offset: 0.62 },
+            { scale: '1 1' },
+        ],
+        { duration: 750, easing: 'ease-out' },
+    );
+};
+
 // the whole compact pill (not just the name) grows the bar back
 const onNavClick = (e) => {
     addRipple(e);
+    if (!isCompact.value) bounce();
     if (isCompact.value) {
         e.preventDefault();
         expanded.value = true;
@@ -238,6 +259,11 @@ onBeforeUnmount(() => {
 
 .nav-bar.compact:active {
     scale: 0.96;
+}
+
+/* full bar: a slight press-in while held, springing back on release */
+.nav-bar.shown:not(.compact):active {
+    scale: 0.985;
 }
 
 /* Rubber-band wobble when the bar grows / shrinks */

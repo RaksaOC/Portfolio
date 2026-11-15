@@ -18,4 +18,4 @@
   --accent: #1aa34a;
   --glow: none;
 }
-:root[data-look="night-session"][data-glass][data-theme] :is(.project-card, .bio-card, .stats-card, .tech-card, .card-wrap, .form, .social, .chat-panel) { border-radius: 20px !important; }
+:root[data-look="night-session"][data-glass][data-theme] :is(.project-card, .bio-card, .stats-card, .tech-card, .card-wrap, .skill-card, .form, .social, .chat-panel) { border-radius: 20px !important; }

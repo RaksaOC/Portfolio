@@ -18,5 +18,5 @@
   --accent: #cf4500;
   --glow: none;
 }
-:root[data-look="orbit"][data-glass][data-theme] :is(.project-card, .bio-card, .stats-card, .tech-card, .card-wrap, .form, .social, .chat-panel) { border-radius: 30px !important; }
+:root[data-look="orbit"][data-glass][data-theme] :is(.project-card, .bio-card, .stats-card, .tech-card, .card-wrap, .skill-card, .form, .social, .chat-panel) { border-radius: 30px !important; }
 :root[data-look="orbit"] { --sheet-r: 30px; }

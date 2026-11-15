@@ -18,10 +18,10 @@
   --accent: #118a3a;
   --glow: none;
 }
-:root[data-look="neon-terminal"][data-glass][data-theme] :is(.project-card, .bio-card, .stats-card, .tech-card, .card-wrap, .form, .social, .chat-panel) { border-radius: 6px !important; border: 1px solid color-mix(in srgb, var(--accent) 55%, transparent) !important; box-shadow: 0 0 0 1px color-mix(in srgb, var(--accent) 20%, transparent), 0 0 22px color-mix(in srgb, var(--accent) 22%, transparent) !important; }
+:root[data-look="neon-terminal"][data-glass][data-theme] :is(.project-card, .bio-card, .stats-card, .tech-card, .card-wrap, .skill-card, .form, .social, .chat-panel) { border-radius: 6px !important; border: 1px solid color-mix(in srgb, var(--accent) 55%, transparent) !important; box-shadow: 0 0 0 1px color-mix(in srgb, var(--accent) 20%, transparent), 0 0 22px color-mix(in srgb, var(--accent) 22%, transparent) !important; }
 :root[data-look="neon-terminal"] :is(.hero-text-1, .section-label, .bio-title, .stats-title, .tech-title) { text-transform: uppercase; letter-spacing: 0.04em; }
 /* Futuristic + Terminal: HUD corner brackets */
-:root[data-look="neon-terminal"][data-glass][data-theme] :is(.project-card, .bio-card, .stats-card, .tech-card, .card-wrap, .form, .chat-panel) {
+:root[data-look="neon-terminal"][data-glass][data-theme] :is(.project-card, .bio-card, .stats-card, .tech-card, .card-wrap, .skill-card, .form, .chat-panel) {
   border-radius: 4px !important;
   background:
     linear-gradient(var(--accent), var(--accent)) top left / 18px 2px no-repeat,

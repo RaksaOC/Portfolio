@@ -30,7 +30,7 @@
 :root[data-look="cyberpunk"] :is(.project-card, .bio-card, .stats-card, .tech-card, .form, .social, .s-look, .s-row) {
   position: relative;
 }
-:root[data-look="cyberpunk"] :is(.project-card, .bio-card, .stats-card, .tech-card, .card-wrap, .form, .social, .s-look, .s-row)::after {
+:root[data-look="cyberpunk"] :is(.project-card, .bio-card, .stats-card, .tech-card, .card-wrap, .skill-card, .form, .social, .s-look, .s-row)::after {
   content: "";
   position: absolute;
   right: 0;
@@ -59,7 +59,7 @@
 /* Cyberpunk: straight chamfers on two corners (tooltips on .social would be clipped, so it keeps its shape).
    The clip cuts the border off along the diagonals, so each cut gets its own line: a thin band painted just
    inside the clip edge, in the same colour as the glass border */
-:root[data-look="cyberpunk"][data-glass][data-theme] :is(.project-card, .bio-card, .stats-card, .tech-card, .card-wrap, .form, .chat-panel) {
+:root[data-look="cyberpunk"][data-glass][data-theme] :is(.project-card, .bio-card, .stats-card, .tech-card, .card-wrap, .skill-card, .form, .chat-panel) {
   --cut-edge: color-mix(in srgb, white calc(var(--glass-edge, 0.12) * 220%), transparent);
   border-radius: 0 !important;
   clip-path: polygon(18px 0, 100% 0, 100% calc(100% - 18px), calc(100% - 18px) 100%, 0 100%, 0 18px);
@@ -67,6 +67,20 @@
     linear-gradient(135deg, transparent 50%, var(--cut-edge) 0 calc(50% + 1.4px), transparent 0) top left / 18px 18px no-repeat border-box,
     linear-gradient(135deg, transparent calc(50% - 1.4px), var(--cut-edge) 0 50%, transparent 0) bottom right / 18px 18px no-repeat border-box,
     color-mix(in srgb, var(--light) 4%, transparent) !important;
+}
+/* Project thumbnails get the same chamfers (smaller), with a line along each cut in the card's border colour */
+:root[data-look="cyberpunk"][data-glass][data-theme] :is(.grid-cover, .project-image) {
+  border-radius: 0 !important;
+  clip-path: polygon(11px 0, 100% 0, 100% calc(100% - 11px), calc(100% - 11px) 100%, 0 100%, 0 11px);
+}
+:root[data-look="cyberpunk"][data-glass][data-theme] .grid-cover::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(135deg, transparent calc(50% - 5px), var(--thumb-bc) 0 calc(50% - 5px + var(--thumb-bw, 1px) * 1.4), transparent 0) top left / 16px 16px no-repeat,
+    linear-gradient(135deg, transparent calc(50% + 5px - var(--thumb-bw, 1px) * 1.4), var(--thumb-bc) 0 calc(50% + 5px), transparent 0) bottom right / 16px 16px no-repeat;
 }
 /* Cyberpunk's chamfers: the clip leaves room outside the left edge for what hangs out there (the drawer's
    close tab, the history drop beside the header) */

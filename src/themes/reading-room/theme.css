@@ -18,5 +18,5 @@
   --accent: #a9583e;
   --glow: none;
 }
-:root[data-look="reading-room"][data-glass][data-theme] :is(.project-card, .bio-card, .stats-card, .tech-card, .card-wrap, .form, .social, .chat-panel) { border-radius: 14px !important; }
+:root[data-look="reading-room"][data-glass][data-theme] :is(.project-card, .bio-card, .stats-card, .tech-card, .card-wrap, .skill-card, .form, .social, .chat-panel) { border-radius: 14px !important; }
 :root[data-look="reading-room"] { --sheet-r: 16px; }

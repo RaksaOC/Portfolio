@@ -1,53 +1,21 @@
 <template>
-  <div class="skill" data-aos="flip-up" data-aos-offset="100">
-    <div class="orb" ref="orbRef" :class="{ real: realGlass }">
+  <div class="skill">
+    <div class="orb">
       <img :src="image" :alt="name" :class="{ 'white-logo': WHITE_LOGOS.includes(name) }">
     </div>
-    <p data-aos="zoom-in-up" data-aos-offset="100" data-aos-duration="1000">{{ name }}</p>
+    <p>{{ name }}</p>
   </div>
 </template>
 
 <script setup>
-import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue';
-import { createGlass } from '../../vendor/liquidglass/liquid-glass.js';
-import { gfx, canRefract } from '../../core/gfx';
-
-// Graphics "Quality" only, on desktop Chromium: a real liquid-glass lens bending the 3D background.
-// Everything else (Performance / Optimal / Advanced, phones, Safari, Firefox) keeps the faked glass below.
-const orbRef = ref(null);
-const realGlass = computed(() => canRefract && !gfx.advanced && gfx.level === 'quality');
-let glass = null;
-const setGlass = (on) => {
-  if (on && !glass && orbRef.value) {
-    glass = createGlass(orbRef.value, {
-      mode: 'backdrop',
-      fit: true,
-      radius: 999, // clamped to a circle
-      refraction: 18,
-      bezel: 0.55,
-      curvature: 3,
-      chroma: 0.12,
-      blur: 0,
-      specular: 0.6,
-      specularWidth: 1.5,
-      fallback: 'blur(6px) saturate(1.6)',
-    });
-  } else if (!on && glass) {
-    glass.destroy();
-    glass = null;
-  }
-};
-onMounted(() => setGlass(realGlass.value));
-watch(realGlass, setGlass);
-onBeforeUnmount(() => setGlass(false));
-
+// The orbs sit inside the glass group panels (Skills.vue), which are their own backdrop, so a real
+// liquid-glass lens here would have nothing to bend: they keep the faked glass below.
 // Logos drawn in white: darkened in light mode so they stay visible on the glass
-const WHITE_LOGOS = ['Next.js', 'Unity'];
+const WHITE_LOGOS = ['Next.js', 'Unity', 'Cursor', 'GitHub Copilot', 'AWS', 'IoT'];
 defineProps(
   {
     image: String,
     name: String,
-    isEven: Boolean,
   }
 )
 </script>
@@ -118,19 +86,6 @@ defineProps(
   rotate: 40deg;
 }
 
-/* Real lens: clear tint (the lens does the work) and no scale on hover, which would misalign it */
-.orb.real {
-  background:
-    radial-gradient(120% 90% at 30% 15%, color-mix(in srgb, white 14%, transparent), transparent 55%),
-    color-mix(in srgb, var(--light) 4%, transparent);
-  border-color: color-mix(in srgb, white 22%, transparent);
-  box-shadow: inset 0 1px 1px color-mix(in srgb, white 40%, transparent), 0 8px 20px rgba(0, 0, 0, 0.2);
-}
-
-.skill:hover .orb.real {
-  transform: translateY(-5px);
-}
-
 img {
   width: 56%;
   aspect-ratio: 1/1;
@@ -152,7 +107,8 @@ p {
 } */
 
 :root[data-theme="light"] .white-logo {
-  filter: invert(1);
+  /* hue-rotate back so coloured parts (the AWS smile) keep their colour */
+  filter: invert(1) hue-rotate(180deg);
 }
 
 @media screen and (max-width: 638px) {

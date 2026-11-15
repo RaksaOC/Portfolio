@@ -35,6 +35,19 @@ export default {
     yoe: 'Y.O.Exp',
     techTitle: 'Primary Technologies',
   },
+  skills: {
+    groups: {
+      languages: 'Languages',
+      frontend: 'Frontend & Mobile',
+      styling: 'Web & Styling',
+      backend: 'Backend',
+      databases: 'Databases',
+      devops: 'DevOps & Cloud',
+      iot: 'IoT & Hardware',
+      ai: 'AI Tools',
+      tools: 'Tools & Design',
+    },
+  },
   projects: {
     featured: 'Featured',
     all: 'All',
@@ -66,36 +79,35 @@ export default {
     },
   },
   experience: {
-    scroll: 'Scroll',
     items: {
       camcyber: {
         place: 'CamCyber Digital Tech Team',
         role: 'Full Stack Developer',
-        desc: 'Building national-scale platforms for government ministries and public institutions, from HR systems serving thousands of civil servants to a nurse licensing platform and a World Bank-backed community tourism app. Delivering across web, mobile and API, and serving as project technical lead on HR deliveries.',
+        desc: 'Building national-scale platforms for government ministries, from HR systems serving thousands of civil servants to nurse licensing and a World Bank-backed tourism app. Delivering web, mobile and API work as technical lead on HR projects.',
         duration: 'Apr. 2026 - Present',
       },
       quicknews: {
         place: 'Quicknews',
         role: 'Full stack developer & Technical operations intern',
-        desc: 'Served as the technical bridge to an external agency, supporting product decisions, maintaining system architecture knowledge, overseeing infrastructure, and contributing hands-on full-stack work and experimental features as needed.',
+        desc: 'Served as the technical bridge to an external agency, supporting product decisions, maintaining architecture knowledge, overseeing infrastructure, and contributing hands-on full-stack work and experimental features as needed.',
         duration: 'Jan. 2026 - Apr. 2026',
       },
       freelance: {
         place: 'Freelance',
         role: 'Full-Stack Developer',
-        desc: 'Delivered tech solutions for clients, from requirements and system design to implementation and deployment. Built scalable frontend and backend systems using modern technologies, with a focus on performance, maintainability, and real-world production needs.',
+        desc: 'Delivered tech solutions for clients, from requirements and system design to implementation and deployment. Built scalable frontend and backend systems with modern technologies, focused on performance and maintainability.',
         duration: 'May. 2025 - Present',
       },
       cadtTrainer: {
         place: 'Cambodia Academy of Digital Technology',
         role: 'Computer Science Trainer',
-        desc: 'Taught junior-level computer science fundamentals, covering JavaScript, database design, algorithms, and web design, combining theory with hands-on implementation.',
+        desc: 'Taught junior-level computer science fundamentals, covering JavaScript, database design, algorithms, and web design, combining clear theory with hands-on implementation so students could build real, working projects of their own.',
         duration: 'Aug. 2025 - Sep. 2025',
       },
       cadtStudent: {
         place: 'Cambodia Academy of Digital Technology',
         role: 'Computer Science Student',
-        desc: "Studied Computer Science at Cambodia Academy of Digital Technology (CADT) pursuing a Bachelor's degree in Computer Science specializing in Software Engineering.",
+        desc: "Studied Computer Science at Cambodia Academy of Digital Technology (CADT), pursuing a Bachelor's degree in Computer Science specializing in Software Engineering, with a strong foundation in algorithms and software system design.",
         duration: 'Feb. 2024 - Present',
       },
     },
@@ -147,6 +159,10 @@ export default {
     fpsMax: 'Max',
     models: '3D models',
     lite: 'Fewer particles',
+    scrollStyle: 'Scroll style',
+    scroll_flat: 'Flat',
+    scroll_curved: 'Curved',
+    scroll_ribbon: 'Ribbon',
   },
   music: {
     play: 'Play music',

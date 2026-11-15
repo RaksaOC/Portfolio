@@ -19,7 +19,7 @@
   --glow: none;
 }
 /* Japan: a torii across the top of each card (kasagi beam + the thinner nuki under it), square-cut corners */
-:root[data-look="japan"][data-glass][data-theme] :is(.project-card, .bio-card, .stats-card, .tech-card, .card-wrap, .form, .chat-panel) {
+:root[data-look="japan"][data-glass][data-theme] :is(.project-card, .bio-card, .stats-card, .tech-card, .card-wrap, .skill-card, .form, .chat-panel) {
   border-radius: 3px !important;
   background:
     linear-gradient(var(--accent), var(--accent)) top / 100% 4px no-repeat,

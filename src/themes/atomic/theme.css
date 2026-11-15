@@ -19,7 +19,7 @@
   --glow: none;
 }
 /* Atomic: a tiny atom orbiting in the top-right corner */
-:root[data-look="atomic"][data-glass][data-theme] :is(.project-card, .bio-card, .stats-card, .tech-card, .card-wrap, .form, .chat-panel) {
+:root[data-look="atomic"][data-glass][data-theme] :is(.project-card, .bio-card, .stats-card, .tech-card, .card-wrap, .skill-card, .form, .chat-panel) {
   border-radius: 22px !important;
   background:
     radial-gradient(circle at calc(100% - 26px) 20px, var(--accent) 0 2.5px, transparent 3px),

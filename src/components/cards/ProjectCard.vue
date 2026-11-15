@@ -34,7 +34,7 @@
 </template>
 
 <script setup>
-import { computed, onMounted, ref } from 'vue';
+import { computed, onMounted, onBeforeUnmount, ref } from 'vue';
 import { openProject } from '../../core/lightbox';
 
 const props = defineProps({
@@ -57,7 +57,32 @@ const openTile = () => {
     openProject(props.project, visible ? img : cardRef.value);
 };
 
+// The thumbnails take the card's look (src/themes): the same corners, made concentric (the card's radius
+// less its padding, so the gap between the two curves stays even), and the same border colour / weight.
+// Read from the computed style, so every theme (and glass on / off) is matched without per-theme rules.
+const syncShape = () => {
+    const card = cardRef.value;
+    if (!card) return;
+    const cs = getComputedStyle(card);
+    const pad = parseFloat(cs.paddingTop) || 0;
+    const corner = (v) => {
+        const r = parseFloat(v) || 0;
+        return `${Math.round(Math.max(r - pad, r * 0.45))}px`;
+    };
+    card.style.setProperty('--thumb-r',
+        [cs.borderTopLeftRadius, cs.borderTopRightRadius, cs.borderBottomRightRadius, cs.borderBottomLeftRadius].map(corner).join(' '));
+    // the side border: some themes put a heavier accent rule on top / bottom only
+    card.style.setProperty('--thumb-bw', `${Math.min(3, parseFloat(cs.borderRightWidth) || 0)}px`);
+    card.style.setProperty('--thumb-bc', cs.borderRightColor);
+};
+let themeObserver = null;
+onBeforeUnmount(() => themeObserver?.disconnect());
+
 onMounted(() => {
+    syncShape();
+    themeObserver = new MutationObserver(() => requestAnimationFrame(syncShape));
+    themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['data-look', 'data-theme', 'data-glass'] });
+
     const card = cardRef.value;
     const num = numRef.value;
     const desc = descRef.value;
@@ -118,7 +143,9 @@ onMounted(() => {
     width: 100%;
     aspect-ratio: 16 / 10;
     overflow: hidden;
-    border-radius: 12px;
+    /* the card's shape + border (--thumb-*, set by syncShape) */
+    border-radius: var(--thumb-r, 12px);
+    border: var(--thumb-bw, 1px) solid var(--thumb-bc, rgba(255, 255, 255, 0.2));
     flex: none;
 }
 
@@ -354,6 +381,8 @@ onMounted(() => {
 .project-image {
     width: 65%;
     aspect-ratio: 16/10;
+    border-radius: var(--thumb-r, 0);
+    border: var(--thumb-bw, 1px) solid var(--thumb-bc, rgba(255, 255, 255, 0.2));
     opacity: 0;
     visibility: hidden;
     transition: all 0.3s ease-in-out;

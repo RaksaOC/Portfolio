@@ -19,7 +19,7 @@
   --glow: none;
 }
 /* Desert: weathered sandstone, uneven rounded corners and a band of rock strata along the bottom */
-:root[data-look="desert"][data-glass][data-theme] :is(.project-card, .bio-card, .stats-card, .tech-card, .card-wrap, .form, .chat-panel) {
+:root[data-look="desert"][data-glass][data-theme] :is(.project-card, .bio-card, .stats-card, .tech-card, .card-wrap, .skill-card, .form, .chat-panel) {
   border-radius: 12px 26px 10px 22px !important;
   background:
     linear-gradient(color-mix(in srgb, var(--accent) 55%, transparent), color-mix(in srgb, var(--accent) 55%, transparent)) bottom / 100% 3px no-repeat,

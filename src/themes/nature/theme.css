@@ -17,6 +17,6 @@
   --accent: #2f8f4e;
 }
 /* Nature: leaf corners (mirror of Angkor's petals) */
-:root[data-look="nature"][data-glass][data-theme] :is(.project-card, .bio-card, .stats-card, .tech-card, .card-wrap, .form, .chat-panel) { border-radius: 6px 34px 6px 34px !important; }
+:root[data-look="nature"][data-glass][data-theme] :is(.project-card, .bio-card, .stats-card, .tech-card, .card-wrap, .skill-card, .form, .chat-panel) { border-radius: 6px 34px 6px 34px !important; }
 :root[data-look="nature"][data-glass][data-theme] :is(.request-cv .button, .send-btn, .cv-send) { border-radius: 4px 18px 4px 18px !important; }
 :root[data-look="nature"] { --sheet-r: 30px; }

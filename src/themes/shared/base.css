@@ -21,6 +21,7 @@
 :root[data-look] .stats-card,
 :root[data-look] .tech-card,
 :root[data-look] .card-wrap,
+:root[data-look] .skill-card,
 :root[data-look] .form,
 :root[data-look] .social,
 :root[data-look] .chat-panel {
@@ -78,7 +79,7 @@
    behind each panel (the 3D background), so the grid / models visibly bend through the glass.
    Chromium only; Safari / Firefox ignore the url() and keep the frosted blur. */
 :root[data-glass] :is(.nav-bar, .nav-drip, .tab-drip, .m-glass, .project-card, .bio-card, .stats-card, .tech-card,
-  .card-wrap, .form, .social, .tab-wrapper, .bubble, .request-cv .button, .send-btn, .emblem, .to-top, .music-ctl,
+  .card-wrap, .skill-card, .form, .social, .tab-wrapper, .bubble, .request-cv .button, .send-btn, .emblem, .to-top, .music-ctl,
   .chat-panel) {
   background: color-mix(in srgb, var(--light) 4%, transparent) !important;
   /* -webkit- first: Chrome treats it as an alias, so the url() version below must win */

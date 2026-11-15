@@ -123,7 +123,10 @@ onMounted(() => {
     transparent: true,
     depthWrite: false,
     blending: THREE.AdditiveBlending,
-    uniforms: { uTime: { value: 0 }, uOpacity: { value: 0 }, uPx: { value: renderer.getPixelRatio() } },
+    uniforms: {
+      uTime: { value: 0 }, uOpacity: { value: 0 }, uPx: { value: renderer.getPixelRatio() },
+      uColor: { value: new THREE.Color(0.85, 0.9, 1.0) }, // tint of the theme on the reel's payline
+    },
     vertexShader: `
       attribute float size; attribute float phase; uniform float uTime; uniform float uPx; varying float vTw;
       void main() {
@@ -132,11 +135,12 @@ onMounted(() => {
         gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
       }`,
     fragmentShader: `
-      uniform float uOpacity; varying float vTw;
+      uniform float uOpacity; uniform vec3 uColor; varying float vTw;
       void main() {
         float d = length(gl_PointCoord - 0.5);
         float a = smoothstep(0.5, 0.0, d);
-        gl_FragColor = vec4(vec3(0.85, 0.9, 1.0) + 0.15 * a, a * a * vTw * uOpacity);
+        // tinted glow, near-white core: still reads as starlight
+        gl_FragColor = vec4(mix(uColor, vec3(1.0), a * a * a * 0.35), a * a * vTw * uOpacity);
       }`,
   })
   const stars = new THREE.Points(starGeo, starMat)
@@ -268,6 +272,12 @@ onMounted(() => {
     if (stars.visible) {
       starMat.uniforms.uTime.value = t
       starMat.uniforms.uPx.value = renderer.getPixelRatio()
+      // stars take on the colour of the theme passing the payline (same eased colour as the globe),
+      // brightened to full value so dark theme colours still glow
+      const sc = starMat.uniforms.uColor.value.copy(curWire)
+      const m = Math.max(sc.r, sc.g, sc.b)
+      if (m > 0.001) sc.multiplyScalar(1 / m)
+      sc.lerp(tmp.setRGB(1, 1, 1), 0.08)
       stars.rotation.y = t * 0.006
     }
     planes.forEach((p) => { p.position.z += speed })
