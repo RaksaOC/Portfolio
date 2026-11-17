@@ -64,7 +64,7 @@ export default {
       quicknews: 'An engaging news application delivering credible news by verified creators.',
       grandCineplex: 'A web application for managing cinema operations, featuring multi-role interfaces for customers to browse and reserve tickets, cashiers to manage payments and managers to manage the cinema.',
       grandCineplexDba: "A custom database management tool for managing Grand Cineplex's database with dashboard, roles, permissions, console and schema visualization.",
-      vMenu: 'A digital restaurant ordering and management system where users are able to scan QR code and place food orders, chefs receive orders, cashier manage payments and owners can manage multiple restaurants.',
+      vMenu: 'QR-code restaurant ordering: customers order from their table, the kitchen sees the queue, cashiers close bills and owners run menus, tables and staff across restaurants. Rebuilt from one Next.js app into three microservices (restaurant, menu and order), each with its own MongoDB database, behind a Next.js frontend.',
       jouEm: 'A captivating fruit merging puzzle game inspired by the rich culture and landscapes of Cambodia, featuring traditional Khmer fruits in an ancient temple setting.',
       lms: 'A feature-rich Learning Management System (LMS) for managing courses, student enrollments, and teacher assignments. Built with Java and JavaFX for a desktop interface, and MySQL as the backend for data management. The admin app controls all core features, while teacher and student apps focus on classroom interactions.',
       dakLouk: 'An offline marketplace flutter mobile application for merchants and buyers with product listing, ordering, live streams and posts system.',
@@ -75,7 +75,7 @@ export default {
       mcdonald: "A front-end replica of the official McDonald's website. Built using HTML, CSS, and Bootstrap, the project demonstrates the ability to recreate a professional website layout and responsive UI using fundamental web technologies.",
       dartClinic: 'A CLI hospital management system for managing patients, doctors, appointments, rooms, and other hospital operations.',
       bus: 'A command-line bus reservation system developed in C++. Users can book and refund seats, while admins manage buses and admin accounts. JSON is used for data storage, making the system lightweight and portable.',
-      portfolio3d: 'A visually stunning 3D web portfolio built using Three.js and Vue.js to showcase myself, skills, projects and experience.',
+      portfolio3d: 'This site: my current portfolio, built with Vue 3 and Three.js. 25 switchable themes, each with its own 3D scene and look, liquid-glass UI, English and Khmer, a 3D skills ribbon, and an AI assistant that answers questions about my work.',
     },
   },
   experience: {

@@ -194,11 +194,11 @@ const onPanelMove = (e) => {
   }
 }
 
-/* phones: the ribbon stands upright (SkillRibbon.vue) and gets the whole screen height; the drum's ends
-   pass under the floating nav */
+/* phones: the ribbon stands upright (SkillRibbon.vue); a little room on top clears the floating nav
+   (the drum sizes itself to what's left) */
 @media screen and (max-width: 699px) {
   .pin-sticky.is-ribbon {
-    padding-top: 0;
+    padding-top: 64px;
   }
 }
 
