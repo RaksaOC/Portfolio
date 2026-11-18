@@ -61,11 +61,9 @@ export const projects = [
     year: 2026,
     mainImage: "/images/projects/phumiyerng/cover.jpg",
     image: [
-      "/images/projects/phumiyerng/1.jpg",
-      "/images/projects/phumiyerng/2.jpg",
-      "/images/projects/phumiyerng/3.jpg",
-      "/images/projects/phumiyerng/4.jpg",
-      "/images/projects/phumiyerng/5.jpg"
+      "/images/projects/phumiyerng/km-1.jpg",
+      "/images/projects/phumiyerng/km-2.jpg",
+      "/images/projects/phumiyerng/km-3.jpg"
     ],
     techStack: ["Flutter", "Angular", "NestJS", "PostgreSQL", "Redis", "Firebase", "Socket.IO"],
     description: "A community tourism and marketplace app supporting LASED III, a Royal Government of Cambodia land programme backed by the World Bank, bringing 19 rural communities onto one platform to promote their trips, homestays and farm-fresh products."
