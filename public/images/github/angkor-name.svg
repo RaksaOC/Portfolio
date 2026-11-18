@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 96" width="900" height="96" role="img" aria-label="Ory Chanraksa">
+  <defs>
+    <linearGradient id="t" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#fbe7b0"/><stop offset="1" stop-color="#d9a441"/></linearGradient>
+    <filter id="g" x="-10%" y="-40%" width="120%" height="180%"><feGaussianBlur stdDeviation="2.2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+  <text x="450" y="66" text-anchor="middle" font-family="Cinzel, 'Trajan Pro', 'Cormorant Garamond', Georgia, 'Times New Roman', serif" font-size="56" letter-spacing="10" fill="url(#t)" filter="url(#g)">ORY CHANRAKSA</text>
+</svg>

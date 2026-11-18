@@ -1,17 +1,25 @@
 <!-- GitHub profile README: copy into the RaksaOC/RaksaOC repo as README.md -->
 
 <p align="center">
-  <a href="https://www.chanraksa.com"><img src="https://raw.githubusercontent.com/RaksaOC/Portfolio/main/public/images/github/angkor-banner.svg" width="100%" alt="Ory Chanraksa, software engineer" /></a>
+  <a href="https://www.chanraksa.com"><img src="https://raw.githubusercontent.com/RaksaOC/Portfolio/main/public/images/github/angkor-banner.svg" width="100%" alt="" /></a>
 </p>
 
 <p align="center">
-  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=20&pause=1200&color=F0C674&center=true&vCenter=true&width=560&lines=Hey%2C+I'm+Raksa;Full-stack+software+engineer;Web%2C+mobile+and+3D;Turning+ideas+into+products+people+use" alt="Typing intro" />
+  <img src="https://raw.githubusercontent.com/RaksaOC/Portfolio/main/public/images/github/angkor-name.svg" width="520" alt="Ory Chanraksa" />
+</p>
+
+<p align="center">
+  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=19&pause=1200&color=F0C674&center=true&vCenter=true&width=560&lines=Full-stack+software+engineer;Web%2C+mobile+and+3D;Turning+ideas+into+products+people+use" alt="Full-stack software engineer" />
 </p>
 
 <p align="center">
   <a href="https://www.chanraksa.com"><img src="https://img.shields.io/badge/Portfolio-chanraksa.com-f0c674?style=for-the-badge&labelColor=0d1117" alt="Portfolio" /></a>
+</p>
+<p align="center">
   <img src="https://u8views.com/api/v1/github/profiles/123465277/views/total-count.svg" alt="Profile views" />
 </p>
+
+<div align="center">
 
 <h3 align="center">About me</h3>
 
@@ -21,13 +29,13 @@
 
 <h3 align="center">Tech stack</h3>
 
-<div align="center">
 <table>
   <tr><td align="center"><b>Languages</b></td><td align="center"><img src="https://skillicons.dev/icons?i=ts,js,dart,py,java,cs&theme=dark" height="40" /></td></tr>
   <tr><td align="center"><b>Frontend & Mobile</b></td><td align="center"><img src="https://skillicons.dev/icons?i=nextjs,react,angular,vue,flutter,threejs,unity,tailwind&theme=dark" height="40" /></td></tr>
   <tr><td align="center"><b>Backend & Data</b></td><td align="center"><img src="https://skillicons.dev/icons?i=nodejs,express,nestjs,fastapi,spring,postgres,redis,mongodb,firebase&theme=dark" height="40" /></td></tr>
   <tr><td align="center"><b>DevOps & Tools</b></td><td align="center"><img src="https://skillicons.dev/icons?i=docker,linux,nginx,aws,cloudflare,vercel,gitlab,ansible,git,figma&theme=dark" height="40" /></td></tr>
 </table>
+
 </div>
 
 <h3 align="center">Featured work</h3>
