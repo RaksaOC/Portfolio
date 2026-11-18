@@ -1,7 +1,7 @@
-<!-- GitHub profile README: copy into the RaksaOC/RaksaOC repo as README.md -->
+<!-- GitHub profile README (RaksaOC/RaksaOC): banner + footer SVGs live in that repo's assets/ folder -->
 
 <p align="center">
-  <a href="https://www.chanraksa.com"><img src="https://raw.githubusercontent.com/RaksaOC/Portfolio/main/public/images/github/angkor-banner.svg" width="100%" alt="Hey, I'm Raksa. Full-stack software engineer" /></a>
+  <a href="https://www.chanraksa.com"><img src="assets/angkor-banner.svg" width="100%" alt="Hey, I'm Raksa. Full-stack software engineer" /></a>
 </p>
 
 <p align="center">
@@ -16,7 +16,11 @@
 <h3 align="center">About me</h3>
 
 <p align="center">
-  I'm a full-stack software engineer and computer science student who enjoys turning ideas into products people actually use. I work across the whole stack, from web and mobile front ends to the APIs, databases and servers behind them, and I care about clean architecture, performance and the small details that make software feel good. When I'm not building, I'm usually learning something new or experimenting with 3D on the web.
+  I'm a full-stack software engineer and computer science student<br/>
+  who enjoys turning ideas into products people actually use.<br/>
+  I work across the whole stack, from web and mobile front ends<br/>
+  to the APIs, databases and servers behind them, and I care about<br/>
+  clean architecture, performance and the small details that make software feel good.
 </p>
 
 <h3 align="center">Tech stack</h3>
@@ -62,7 +66,7 @@
 <h3 align="center">Let's connect</h3>
 
 <p align="center">
-  <a href="https://www.linkedin.com/in/ory-chanraksa-1702b6263/"><img src="https://img.shields.io/badge/LinkedIn-0d1117?style=for-the-badge&logo=linkedin&logoColor=f0c674" /></a>
+  <a href="https://www.linkedin.com/in/ory-chanraksa-1702b6263/"><img src="https://img.shields.io/badge/LinkedIn-0d1117?style=for-the-badge&logo=data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI%2BPHBhdGggZmlsbD0iI2YwYzY3NCIgZD0iTTIwLjQ1IDIwLjQ1aC0zLjU2di01LjU3YzAtMS4zMy0uMDItMy4wNC0xLjg1LTMuMDQtMS44NiAwLTIuMTQgMS40NS0yLjE0IDIuOTR2NS42N0g5LjM1VjloMy40MXYxLjU2aC4wNWMuNDgtLjkgMS42NC0xLjg1IDMuMzctMS44NSAzLjYgMCA0LjI3IDIuMzcgNC4yNyA1LjQ2djYuMjh6TTUuMzQgNy40M2EyLjA2IDIuMDYgMCAxIDEgMC00LjEzIDIuMDYgMi4wNiAwIDAgMSAwIDQuMTN6TTcuMTIgMjAuNDVIMy41NlY5aDMuNTZ2MTEuNDV6TTIyLjIyIDBIMS43N0MuNzkgMCAwIC43NyAwIDEuNzN2MjAuNTRDMCAyMy4yMy43OSAyNCAxLjc3IDI0aDIwLjQ1Yy45OCAwIDEuNzgtLjc3IDEuNzgtMS43M1YxLjczQzI0IC43NyAyMy4yIDAgMjIuMjIgMHoiLz48L3N2Zz4%3D" /></a>
   <a href="https://www.upwork.com/freelancers/~0193c96741cd57f0f1"><img src="https://img.shields.io/badge/Upwork-0d1117?style=for-the-badge&logo=upwork&logoColor=f0c674" /></a>
   <a href="mailto:ocraksa@gmail.com"><img src="https://img.shields.io/badge/Email-0d1117?style=for-the-badge&logo=gmail&logoColor=f0c674" /></a>
   <a href="https://t.me/chanraksaOry"><img src="https://img.shields.io/badge/Telegram-0d1117?style=for-the-badge&logo=telegram&logoColor=f0c674" /></a>
@@ -71,5 +75,5 @@
 </p>
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/RaksaOC/Portfolio/main/public/images/github/angkor-footer.svg" width="100%" alt="" />
+  <img src="assets/angkor-footer.svg" width="100%" alt="" />
 </p>
