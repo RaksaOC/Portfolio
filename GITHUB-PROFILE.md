@@ -1,15 +1,7 @@
 <!-- GitHub profile README: copy into the RaksaOC/RaksaOC repo as README.md -->
 
 <p align="center">
-  <a href="https://www.chanraksa.com"><img src="https://raw.githubusercontent.com/RaksaOC/Portfolio/main/public/images/github/angkor-banner.svg" width="100%" alt="" /></a>
-</p>
-
-<p align="center">
-  <img src="https://raw.githubusercontent.com/RaksaOC/Portfolio/main/public/images/github/angkor-name.svg" width="520" alt="Ory Chanraksa" />
-</p>
-
-<p align="center">
-  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=19&pause=1200&color=F0C674&center=true&vCenter=true&width=560&lines=Full-stack+software+engineer;Web%2C+mobile+and+3D;Turning+ideas+into+products+people+use" alt="Full-stack software engineer" />
+  <a href="https://www.chanraksa.com"><img src="https://raw.githubusercontent.com/RaksaOC/Portfolio/main/public/images/github/angkor-banner.svg" width="100%" alt="Hey, I'm Raksa. Full-stack software engineer" /></a>
 </p>
 
 <p align="center">
