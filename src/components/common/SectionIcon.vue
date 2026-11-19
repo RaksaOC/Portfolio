@@ -11,6 +11,7 @@
 // look changes and only renders while on screen.
 import { onMounted, onBeforeUnmount, ref } from 'vue';
 import * as THREE from 'three';
+import { onFrame } from '../../core/ticker';
 
 const props = defineProps({
     icon: { type: String, required: true }, // about | skills | projects | experience | contact
@@ -468,12 +469,10 @@ onMounted(() => {
 
     // Only animate while visible
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    let visible = false, raf = 0, last = performance.now(), t = 0;
-    const loop = (now) => {
-        raf = 0;
-        if (!visible) return;
-        const dt = Math.min(0.05, (now - last) / 1000);
-        last = now;
+    // (core/ticker.js: drawn on the same frames as the 3D background, under the Graphics fps cap)
+    let stopFrames = null, t = 0;
+    const loop = (step) => {
+        const dt = Math.min(0.05, step);
         t += reduce ? dt * 0.25 : dt;
         tilt.x += (tilt.tx - tilt.x) * 0.08;
         tilt.y += (tilt.ty - tilt.y) * 0.08;
@@ -484,16 +483,15 @@ onMounted(() => {
         icon.update(t);
         renderer.render(scene, camera);
         dirty = false;
-        raf = requestAnimationFrame(loop);
     };
     const io = new IntersectionObserver(([entry]) => {
-        visible = entry.isIntersecting;
-        if (visible && !raf) { last = performance.now(); raf = requestAnimationFrame(loop); }
+        if (entry.isIntersecting) stopFrames ??= onFrame(loop);
+        else { stopFrames?.(); stopFrames = null; }
     }, { rootMargin: '100px' });
     io.observe(wrap);
 
     cleanup = () => {
-        cancelAnimationFrame(raf);
+        stopFrames?.();
         io.disconnect();
         ro.disconnect();
         themeObs.disconnect();

@@ -35,7 +35,7 @@
                 <div class="tech-card" ref="favoriteTechCard" data-aos="fade-up">
                     <p class="tech-title">{{ $t('about.techTitle') }}</p>
                     <br>
-                    <div class="tech-slider-wrapper">
+                    <div class="tech-slider-wrapper" ref="sliderRef" :class="{ offscreen: !sliderOnScreen }">
                         <div class="tech-slider">
                             <div v-for="item in favoriteTech" :key="item.name" class="tech-slider-item">
                                 <img :src="item.image" :alt="item.name" />
@@ -55,7 +55,7 @@
 </template>
 
 <script>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, onBeforeUnmount } from 'vue';
 import SectionIcon from '../components/common/SectionIcon.vue';
 import { favoriteTech } from '../data/skills';
 
@@ -72,9 +72,18 @@ export default {
         const aboutMeCard = ref(null);
         const favoriteTechCard = ref(null);
         const accoladesCard = ref(null);
-
+        // the marquee only runs while on screen: an endless animation keeps the page re-compositing
+        // (and every glass panel re-filtering) even when it's scrolled away
+        const sliderRef = ref(null);
+        const sliderOnScreen = ref(false);
+        let sliderIO = null;
+        onBeforeUnmount(() => sliderIO?.disconnect());
 
         onMounted(() => {
+            if (sliderRef.value) {
+                sliderIO = new IntersectionObserver(([e]) => { sliderOnScreen.value = e.isIntersecting; });
+                sliderIO.observe(sliderRef.value);
+            }
             const cards = [aboutMeCard.value, favoriteTechCard.value, accoladesCard.value];
 
             const handleOnMouseMove = (e) => {
@@ -100,6 +109,8 @@ export default {
             accoladesCard,
             favoriteTech,
             PORTRAITS,
+            sliderRef,
+            sliderOnScreen,
         };
     }
 };
@@ -174,6 +185,10 @@ export default {
     align-items: center;
     width: max-content;
     animation: favorite-slide 18s linear infinite;
+}
+
+.tech-slider-wrapper.offscreen .tech-slider {
+    animation-play-state: paused;
 }
 
 .tech-slider-item {

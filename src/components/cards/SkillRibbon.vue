@@ -26,6 +26,7 @@
 import { ref, watch, onMounted, onBeforeUnmount } from 'vue';
 import * as THREE from 'three';
 import { useI18n } from 'vue-i18n';
+import { onFrame } from '../../core/ticker';
 
 const props = defineProps({
     groups: { type: Array, required: true }, // skillGroups from src/data/skills.js
@@ -516,14 +517,13 @@ async function drawAtlas(canvas, bump, R, H, cols, el, stale) {
 let renderer, scene, camera, pivot, group, material, texture, atlas, bumpTexture, bumpAtlas;
 let meshes = []; // [far / inner side, near side]: same geometry, drawn in that order
 let builtFor = '';
-let raf = 0;
+let stopFrames = null; // core/ticker.js subscription while animating
 let visible = false;
 let io, ro, mo;
 let flex = 0;
 let lastRot = null;
 let phase = 0;
 let tapT = 9; // seconds since the last tap (large = no ripple)
-let lastTime = 0;
 
 const rotFor = (p) => -p * (N - 1) * GROUP_ANGLE;
 
@@ -634,10 +634,9 @@ function resize() {
     requestRender();
 }
 
-function frame(now) {
-    raf = 0;
-    const dt = lastTime ? Math.min(0.05, (now - lastTime) / 1000) : 0;
-    lastTime = now;
+// drawn through core/ticker.js: on the same frames as the 3D background, under the Graphics fps cap
+function frame(step) {
+    const dt = Math.min(0.05, step);
     if (!reduceMotion) phase += dt * 0.55;
     flex *= Math.pow(0.12, dt); // springs back in about a second
     if (flex < 0.02) flex = 0;
@@ -652,12 +651,11 @@ function frame(now) {
     if (refractRef.value && cssW) refractRef.value.style.clipPath = outline(u.uRot.value, phase, flex, cssW, cssH);
 
     // keep animating while on screen (the wave), otherwise only when something changes
-    if (visible && (!reduceMotion || flex > 0 || tapT < 1.2)) raf = requestAnimationFrame(frame);
-    else lastTime = 0;
+    if (!(visible && (!reduceMotion || flex > 0 || tapT < 1.2))) { stopFrames?.(); stopFrames = null; }
 }
 
 function requestRender() {
-    if (!raf && renderer) raf = requestAnimationFrame(frame);
+    if (renderer) stopFrames ??= onFrame(frame);
 }
 
 watch(() => props.progress, (p) => {
@@ -837,6 +835,7 @@ onMounted(() => {
 
     io = new IntersectionObserver(([entry]) => {
         visible = entry.isIntersecting;
+        wrapRef.value?.classList.toggle('offscreen', !visible); // pauses the float (it moves glass)
         if (visible) requestRender();
     });
     io.observe(wrapRef.value);
@@ -852,7 +851,7 @@ onMounted(() => {
 });
 
 onBeforeUnmount(() => {
-    cancelAnimationFrame(raf);
+    stopFrames?.();
     io?.disconnect();
     ro?.disconnect();
     window.removeEventListener('resize', resize);
@@ -880,6 +879,10 @@ onBeforeUnmount(() => {
     -webkit-user-select: none;
     /* the whole band floats a little */
     animation: ribbon-float 7s ease-in-out infinite;
+}
+
+.ribbon-wrap.offscreen {
+    animation-play-state: paused;
 }
 
 @keyframes ribbon-float {

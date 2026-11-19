@@ -11,6 +11,7 @@ import { prefs, intro } from '../../core/prefs'
 import { findLook } from '../../themes'
 import { gfxActive } from '../../core/gfx'
 import { chat } from '../../core/chat/chat'
+import { onFrame } from '../../core/ticker'
 
 const rootRef = ref(null)
 const canvasRef = ref(null)
@@ -229,17 +230,10 @@ onMounted(() => {
   window.addEventListener('scroll', onScroll, { passive: true })
 
   // Single render loop ------------------------------------------------------------------------------------
-  const clock = new THREE.Clock()
-  let raf = 0
-  let pending = 0 // time since the last rendered frame, for the fps cap
-  function animate() {
-    raf = requestAnimationFrame(animate)
-    const cap = gfxActive.value.fps
-    pending += clock.getDelta()
-    if (cap && pending < 1 / cap - 0.002) return
-    const dt = Math.min(pending, 0.1)
-    pending = 0
-    const t = clock.elapsedTime
+  // (core/ticker.js: drawn on the same frames as the other WebGL canvases, under the Graphics fps cap)
+  let t = 0
+  function animate(dt) {
+    t += dt
     const speed = look.scene.speed * 60 * dt
 
     // follow the docked chat panel (eased like its slide-in; instant-ish while its edge is dragged)
@@ -293,10 +287,10 @@ onMounted(() => {
     decor?.update(dt, t)
     renderer.render(scene, camera)
   }
-  animate()
+  const stopFrames = onFrame(animate)
 
   cleanup = () => {
-    cancelAnimationFrame(raf)
+    stopFrames()
     stopGfx()
     stopIntro()
     window.removeEventListener('resize', onResize)

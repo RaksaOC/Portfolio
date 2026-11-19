@@ -5,7 +5,7 @@
         :aria-label="project.title" @click="openTile" @keydown.enter.self="openTile"
         @keydown.space.self.prevent="openTile">
         <div v-if="grid && cover" class="grid-cover">
-            <img ref="coverRef" :src="cover" alt="" loading="lazy" class="grid-cover-img">
+            <img ref="coverRef" :src="cover" alt="" loading="lazy" decoding="async" class="grid-cover-img">
             <span class="grid-num">{{ displayNumber ?? project.number }}</span>
         </div>
         <div class="top">
@@ -24,7 +24,7 @@
             </div>
             <div class="project-img-year ">
                 <div class="project-img-link">
-                    <img v-if="project.mainImage" :src="project.mainImage" alt="" ref="projectImageRef"
+                    <img v-if="project.mainImage" :src="project.mainImage" alt="" ref="projectImageRef" loading="lazy" decoding="async"
                         :class="['project-image', { 'project-image-vertical': project.isVertical }]">
                 </div>
                 <p class="year">{{ project.year }}</p>
