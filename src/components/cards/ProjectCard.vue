@@ -86,7 +86,6 @@ onMounted(() => {
     const card = cardRef.value;
     const num = numRef.value;
     const desc = descRef.value;
-    const projectImage = projectImageRef.value;
     if (!card || !num) return;
 
     // the light that follows the pointer (::before)
@@ -96,19 +95,7 @@ onMounted(() => {
         card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
     });
 
-    // list view: the cover peeks in on hover and the number slides away
-    const showImage = () => {
-        if (!projectImage || props.grid) return;
-        projectImage.style.opacity = '0.7';
-        projectImage.style.transform = 'translateY(-5px)';
-        projectImage.style.visibility = 'visible';
-    };
-    const hideImage = () => {
-        if (!projectImage) return;
-        projectImage.style.opacity = '0';
-        projectImage.style.transform = 'translateY(10px)';
-        projectImage.style.visibility = 'hidden';
-    };
+    // list view: the number slides away on hover (the cover is always shown, brightening on hover in CSS)
     const showNum = () => {
         if (window.innerWidth <= 638) return;
         num.style.transform = 'translateX(0)';
@@ -122,8 +109,8 @@ onMounted(() => {
         desc.style.transform = `translateX(${-(num.offsetWidth + gap) + 10}px)`;
         num.classList.add('hidden');
     };
-    card.addEventListener('mouseenter', () => { showImage(); hideNum(); });
-    card.addEventListener('mouseleave', () => { hideImage(); showNum(); });
+    card.addEventListener('mouseenter', hideNum);
+    card.addEventListener('mouseleave', showNum);
 });
 </script>
 
@@ -383,11 +370,15 @@ onMounted(() => {
     aspect-ratio: 16/10;
     border-radius: var(--thumb-r, 0);
     border: var(--thumb-bw, 1px) solid var(--thumb-bc, rgba(255, 255, 255, 0.2));
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s ease-in-out;
-    transform: translateY(10px);
+    /* always shown in the list; hovering the row brightens it and scales it up a little */
+    opacity: 0.7;
+    transition: opacity 0.3s ease-in-out, transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
     object-fit: cover;
+}
+
+.project-card:hover .project-image {
+    opacity: 0.95;
+    transform: scale(1.05);
 }
 
 .project-image-vertical {
@@ -396,7 +387,7 @@ onMounted(() => {
     width: calc(65% * 81 / 256);
 }
 
-.project-image:hover {
+.project-card .project-image:hover {
     opacity: 1;
 }
 
