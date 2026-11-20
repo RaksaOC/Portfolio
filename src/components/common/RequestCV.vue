@@ -51,8 +51,17 @@
 <script setup>
 import { ref, nextTick } from 'vue';
 import { useI18n } from 'vue-i18n';
+import { prefs, theme } from '../../core/prefs';
+import { findLook } from '../../themes';
 
 const { t, locale } = useI18n();
+
+// the theme the visitor is on, so the confirmation email matches it (src/api/cv-email.js)
+const themePayload = () => {
+    const look = findLook(prefs.look);
+    const mode = theme.value === 'light' ? 'light' : 'dark';
+    return { name: look.name, km: look.km, mode, sw: look.sw?.[mode], fonts: look.fonts, kmFonts: look.kmFonts };
+};
 
 const open = ref(false);
 const email = ref('');
@@ -83,7 +92,7 @@ const submit = async () => {
         const res = await fetch('/api/request-cv', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email: email.value, company: company.value, lang: locale.value }),
+            body: JSON.stringify({ email: email.value, company: company.value, lang: locale.value, theme: themePayload() }),
         });
         const data = await res.json().catch(() => ({}));
         if (res.status === 400) throw new Error(t('cv.invalid'));

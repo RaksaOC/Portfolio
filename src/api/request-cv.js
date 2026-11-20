@@ -1,5 +1,6 @@
-// Vercel serverless function: POST /api/request-cv  { email }
-// Emails the resume PDF to the visitor and (optionally) notifies the owner.
+// Vercel serverless function: POST /api/request-cv  { email, lang, theme }
+// Emails the visitor a "request received, I'll send my resume shortly" note, styled after the theme they were
+// browsing (src/api/cv-email.js), and notifies the owner, who replies with the resume by hand.
 //
 // Required environment variables (set them in Vercel → Project → Settings → Environment Variables,
 // and in a local `.env.local` for `npm run dev`):
@@ -10,12 +11,11 @@
 //   SMTP_PORT      default 465
 //   CV_FROM_NAME   default "Ory Chanraksa"
 //   CV_NOTIFY_TO   address that gets a short "someone requested your CV" note (default SMTP_USER)
-//   CV_PUBLIC_URL  site origin used to fetch the PDF, e.g. https://chanraksa.com (default: request host)
+//   CV_PUBLIC_URL  site origin for the "View my portfolio" link, e.g. https://chanraksa.com (default: request host)
 
 import nodemailer from 'nodemailer';
+import { normalizeTheme, visitorEmail } from './cv-email.js';
 
-const RESUME_PATH = '/documents/ORY-CHANRAKSA-RESUME.pdf';
-const RESUME_FILENAME = 'ORY-CHANRAKSA-RESUME.pdf';
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
 // Best-effort throttle; serverless instances are short-lived, so this only stops rapid repeats.
@@ -35,73 +35,6 @@ async function readBody(req) {
   for await (const chunk of req) chunks.push(chunk);
   const raw = Buffer.concat(chunks).toString('utf8');
   return raw ? JSON.parse(raw) : {};
-}
-
-function escapeHtml(s) {
-  return String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-}
-
-const COPY = {
-  en: {
-    eyebrow: 'Resume request',
-    title: 'Thanks for stopping by 👋',
-    hi: 'Hi there,',
-    p1: 'Thank you for your interest in my work! As requested, my resume is attached to this email.',
-    p2: "I'm a full-stack software engineer based in Phnom Penh, building web and mobile platforms used by government ministries, public institutions and startups across Cambodia.",
-    p3: "If you'd like to talk about a role, a project or a collaboration, just reply to this email. I'd be glad to hear from you.",
-    cta: 'View my portfolio',
-    regards: 'Best regards,',
-    subject: (name) => `${name} | Resume`,
-  },
-  km: {
-    eyebrow: 'សំណើសុំប្រវត្តិរូប',
-    title: 'សូមអរគុណដែលបានចូលមើល 👋',
-    hi: 'សួស្តី,',
-    p1: 'សូមអរគុណចំពោះការចាប់អារម្មណ៍លើការងាររបស់ខ្ញុំ! តាមការស្នើសុំ ប្រវត្តិរូបរបស់ខ្ញុំត្រូវបានភ្ជាប់មកជាមួយអ៊ីមែលនេះ។',
-    p2: 'ខ្ញុំជាអ្នកអភិវឌ្ឍន៍កម្មវិធី Full-stack នៅរាជធានីភ្នំពេញ ដែលបង្កើតវេទិកាវេប និងកម្មវិធីទូរសព្ទ សម្រាប់ក្រសួង ស្ថាប័នសាធារណៈ និងក្រុមហ៊ុនបង្កើតថ្មីនៅទូទាំងប្រទេសកម្ពុជា។',
-    p3: 'ប្រសិនបើអ្នកចង់ពិភាក្សាអំពីការងារ គម្រោង ឬកិច្ចសហការ គ្រាន់តែឆ្លើយតបមកអ៊ីមែលនេះ។ ខ្ញុំរីករាយនឹងទទួលដំណឹងពីអ្នក។',
-    cta: 'មើលផលប័ត្ររបស់ខ្ញុំ',
-    regards: 'ដោយក្តីគោរព,',
-    signName: 'អោយ ចន្ទ័រក្សា', // full name in Khmer for the signature
-    subject: (name) => `${name} | ប្រវត្តិរូប`,
-  },
-};
-
-function visitorEmail(fromName, siteUrl, lang) {
-  const c = COPY[lang] || COPY.en;
-  const signName = c.signName || fromName;
-  const text = `${c.hi}
-
-${c.p1}
-
-${c.p2}
-
-${c.p3}
-
-Portfolio: ${siteUrl}
-LinkedIn: https://www.linkedin.com/in/ory-chanraksa-1702b6263/
-GitHub: https://github.com/RaksaOC
-
-${c.regards}
-${signName}`;
-
-  const html = `
-  <div style="background:#0e0e0e;padding:32px 16px;font-family:Poppins,'Kantumruy Pro',Segoe UI,Helvetica,Arial,sans-serif">
-    <div style="max-width:560px;margin:0 auto;background:#161616;border:1px solid #2a2a2a;border-radius:16px;padding:32px;color:#eaeaea">
-      <p style="margin:0 0 6px;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#a0a0a0">${c.eyebrow}</p>
-      <h1 style="margin:0 0 20px;font-size:24px;color:#ffffff">${c.title}</h1>
-      <p style="margin:0 0 14px;line-height:1.7">${c.p1}</p>
-      <p style="margin:0 0 14px;line-height:1.7">${c.p2}</p>
-      <p style="margin:0 0 24px;line-height:1.7">${c.p3}</p>
-      <a href="${escapeHtml(siteUrl)}" style="display:inline-block;background:#ffffff;color:#0e0e0e;text-decoration:none;padding:10px 20px;border-radius:999px;font-weight:600;font-size:14px">${c.cta}</a>
-      <p style="margin:28px 0 0;line-height:1.6">${c.regards}<br><strong style="color:#ffffff">${escapeHtml(signName)}</strong></p>
-      <p style="margin:18px 0 0;font-size:13px;color:#a0a0a0">
-        <a href="https://www.linkedin.com/in/ory-chanraksa-1702b6263/" style="color:#a0a0a0">LinkedIn</a> &nbsp;·&nbsp;
-        <a href="https://github.com/RaksaOC" style="color:#a0a0a0">GitHub</a>
-      </p>
-    </div>
-  </div>`;
-  return { text, html, subject: c.subject(fromName) };
 }
 
 export default async function handler(req, res) {
@@ -152,12 +85,9 @@ export default async function handler(req, res) {
   });
 
   try {
-    const pdf = await fetch(`${siteUrl}${RESUME_PATH}`);
-    if (!pdf.ok) throw new Error(`Resume fetch failed: ${pdf.status}`);
-    const pdfBuffer = Buffer.from(await pdf.arrayBuffer());
-
     const lang = body.lang === 'km' ? 'km' : 'en';
-    const { text, html, subject } = visitorEmail(fromName, siteUrl, lang);
+    const theme = normalizeTheme(body.theme);
+    const { text, html, subject } = visitorEmail({ fromName, siteUrl, lang, theme });
     await transporter.sendMail({
       from: `"${fromName}" <${SMTP_USER}>`,
       to: email,
@@ -165,20 +95,26 @@ export default async function handler(req, res) {
       subject,
       text,
       html,
-      attachments: [{ filename: RESUME_FILENAME, content: pdfBuffer, contentType: 'application/pdf' }],
     });
 
     recent.set(key, now);
 
-    // Let the owner know who asked (failure here should not fail the visitor's request).
-    // Awaited so the serverless instance isn't frozen before it is sent.
+    // Let the owner know who asked, so they can send the resume: replying to this note goes to the visitor.
+    // (Failure here should not fail the visitor's request. Awaited so the serverless instance isn't frozen
+    // before it is sent.)
     const notifyTo = process.env.CV_NOTIFY_TO || SMTP_USER;
     await transporter
       .sendMail({
         from: `"Portfolio" <${SMTP_USER}>`,
         to: notifyTo,
-        subject: `CV requested by ${email}`,
-        text: `${email} requested your resume from ${siteUrl} on ${new Date().toISOString()}.`,
+        replyTo: email,
+        subject: `CV requested by ${email}: send it to them`,
+        text: `${email} requested your resume from ${siteUrl} on ${new Date().toISOString()}.
+` +
+          `Language: ${lang === 'km' ? 'Khmer' : 'English'} · Theme: ${theme.name} (${theme.mode})
+
+` +
+          `They were told you'll send it shortly. Reply to this email with the PDF attached and it goes to them.`,
       })
       .catch((e) => console.error('[request-cv] notify failed', e.message));
 

@@ -121,13 +121,13 @@ export default {
   cv: {
     request: 'Request CV',
     close: 'Close',
-    prompt: "Enter your email and I'll send my resume straight to your inbox.",
+    prompt: "Enter your email and I'll send my resume to your inbox.",
     placeholder: "you{'@'}company.com",
     send: 'Send',
     sending: 'Sending',
     invalid: 'Please enter a valid email address.',
     error: 'Something went wrong. Please try again.',
-    success: 'Sent! Check {email} for my resume (and peek in spam just in case).',
+    success: "Got it! I'll send my resume to {email} shortly. A confirmation is on its way (peek in spam just in case).",
     ariaEmail: 'Your email',
   },
   settings: {

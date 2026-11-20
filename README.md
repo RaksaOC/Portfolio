@@ -44,7 +44,7 @@ src/
   themes/               one folder per theme (palette CSS, 3D scene, cursor, music, models), see src/themes/README.md
   styles/global.css     base tokens and site-wide styles (Monochrome palette)
   vendor/liquidglass/   third-party liquid-glass engine
-  api/                  server code: chat (Gemini assistant), request-cv (emails the resume), context (assistant knowledge)
+  api/                  server code: chat (Gemini assistant), request-cv (themed "request received" email; you send the resume by replying), cv-email (its template), context (assistant knowledge)
 api/                    Vercel entry points only: each file re-exports its handler from src/api/
 server.js               self-hosting server: serves dist/ and runs src/api/ (npm start)
 public/                 static files served as-is
