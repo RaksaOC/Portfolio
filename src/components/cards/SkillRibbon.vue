@@ -13,6 +13,8 @@
         <!-- the cards' liquid glass (backdrop-filter, themes/shared/base.css) behind the sheet, clipped to its
              outline every frame, so the 3D background bends through the ribbon like through the cards -->
         <div class="ribbon-refract" ref="refractRef" aria-hidden="true"></div>
+        <!-- light that follows the cursor (same as the cards), clipped to the sheet like the layer above -->
+        <div class="ribbon-glow" ref="glowRef" aria-hidden="true"></div>
         <canvas ref="canvasRef" class="ribbon-canvas" aria-hidden="true"></canvas>
         <ul class="sr-only">
             <li v-for="g in groups" :key="g.key">
@@ -38,6 +40,7 @@ const { t, locale } = useI18n();
 const wrapRef = ref(null);
 const canvasRef = ref(null);
 const refractRef = ref(null);
+const glowRef = ref(null);
 
 const N = props.groups.length;
 const GROUP_ANGLE = (Math.PI * 2) / N;
@@ -648,7 +651,11 @@ function frame(step) {
     u.uFlex.value = flex;
     u.uTapT.value = tapT;
     renderer.render(scene, camera);
-    if (refractRef.value && cssW) refractRef.value.style.clipPath = outline(u.uRot.value, phase, flex, cssW, cssH);
+    if (cssW && (refractRef.value || glowRef.value)) {
+        const clip = outline(u.uRot.value, phase, flex, cssW, cssH);
+        if (refractRef.value) refractRef.value.style.clipPath = clip;
+        if (glowRef.value) glowRef.value.style.clipPath = clip;
+    }
 
     // keep animating while on screen (the wave), otherwise only when something changes
     if (!(visible && (!reduceMotion || flex > 0 || tapT < 1.2))) { stopFrames?.(); stopFrames = null; }
@@ -727,6 +734,13 @@ function onDown(e) {
     drag = { id: e.pointerId, x: e.clientX, y: e.clientY, start: props.progress, moved: false };
 }
 function onMove(e) {
+    // cursor light position (relative to the ribbon, like the cards' --mouse-x / --mouse-y)
+    const wrap = wrapRef.value;
+    if (wrap) {
+        const r = wrap.getBoundingClientRect();
+        wrap.style.setProperty('--mouse-x', `${e.clientX - r.left}px`);
+        wrap.style.setProperty('--mouse-y', `${e.clientY - r.top}px`);
+    }
     if (!drag || e.pointerId !== drag.id) return;
     const dx = e.clientX - drag.x;
     // upright, the page scroll already spins the drum: any movement is a scroll, not a tap or a drag
@@ -899,6 +913,23 @@ onBeforeUnmount(() => {
     clip-path: polygon(0 0, 0 0, 0 0);
     -webkit-backdrop-filter: blur(var(--glass-blur, 2px)) saturate(170%);
     backdrop-filter: var(--lg-url, url(#liquid-glass)) blur(var(--glass-blur, 2px)) saturate(170%) brightness(1.06);
+}
+
+/* cursor light, as on the experience / project cards; behind the canvas so it glows through the glass */
+.ribbon-glow {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    clip-path: polygon(0 0, 0 0, 0 0);
+    background: radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 255, 255, 0.1), transparent 40%);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+@media (hover: hover) {
+    .ribbon-wrap:hover .ribbon-glow {
+        opacity: 1;
+    }
 }
 
 .ribbon-wrap.upright {
