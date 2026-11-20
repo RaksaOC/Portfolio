@@ -26,7 +26,7 @@
             </button>
         </div>
         <div class="dock-item" :class="{ gone: !showMusic }" style="--i: 1">
-            <MusicToggle v-if="showMusic" docked />
+            <!-- <MusicToggle v-if="showMusic" docked /> music disabled -->
         </div>
 
         <button type="button" class="chat-fab" :class="{ open: chat.open }"
@@ -57,7 +57,8 @@ import { dockDesktop } from '../../core/corner';
 // four-point sparkle star, centred on 12,12
 const STAR = 'M12 2.5C12.6 7.6 16.4 11.4 21.5 12 16.4 12.6 12.6 16.4 12 21.5 11.4 16.4 7.6 12.6 2.5 12 7.6 11.4 11.4 7.6 12 2.5z';
 
-const showMusic = computed(() => music.enabled && ui.navShown);
+// const showMusic = computed(() => music.enabled && ui.navShown);
+const showMusic = computed(() => false); // music disabled
 
 /* ---------- expand on hover / focus (a short grace period so crossing the gaps doesn't snap it shut) ---------- */
 const rootRef = ref(null);

@@ -14,11 +14,11 @@ import SettingsOverlay from './components/settings/SettingsOverlay.vue'
 import BackToTop from './components/layout/BackToTop.vue'
 import ImageLightbox from './components/media/ImageLightbox.vue'
 import ChatBot from './components/chat/ChatBot.vue'
-import MusicToggle from './components/media/MusicToggle.vue'
+// import MusicToggle from './components/media/MusicToggle.vue' // music disabled
 import CornerDock from './components/layout/CornerDock.vue'
 import GlassFilter from './components/background/GlassFilter.vue'
 import './core/lenis.js' // smooth scrolling
-import './core/music.js' // theme music
+// import './core/music.js' // theme music (disabled)
 import { theme, setTheme, prefs } from './core/prefs'
 import { findLook } from './themes'
 import { applyKmFont } from './themes/fonts'
@@ -53,7 +53,7 @@ document.documentElement.setAttribute('data-glass', '');
   <BackToTop v-if="!dockDesktop" />
   <ImageLightbox />
   <ChatBot />
-  <MusicToggle v-if="!dockDesktop" />
+  <!-- <MusicToggle v-if="!dockDesktop" /> music disabled -->
   <CornerDock />
   <SettingsOverlay />
 </template>

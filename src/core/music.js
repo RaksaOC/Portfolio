@@ -190,7 +190,7 @@ const unlock = () => {
   for (const ev of EVENTS) window.removeEventListener(ev, unlock, true)
 }
 const EVENTS = ['pointerdown', 'keydown', 'touchstart']
-for (const ev of EVENTS) window.addEventListener(ev, unlock, true)
+// for (const ev of EVENTS) window.addEventListener(ev, unlock, true) // music disabled
 
 // background tab: pause, resume on return
 document.addEventListener('visibilitychange', () => {
@@ -199,4 +199,4 @@ document.addEventListener('visibilitychange', () => {
   else sync()
 })
 
-watch(() => [prefs.look, intro.running], sync, { immediate: true })
+// watch(() => [prefs.look, intro.running], sync, { immediate: true }) // music disabled

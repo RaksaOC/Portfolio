@@ -104,11 +104,13 @@
                             @change="setRandomLook($event.target.checked)"></lg-switch>
                     </div>
                     <!-- theme music on/off (src/core/music.js); the only way back once it's switched off -->
+                    <!-- music disabled
                     <div class="s-row s-row-gap">
                         <span class="s-row-label">{{ $t('music.play') }}</span>
                         <lg-switch :checked="music.enabled" :aria-label="$t('music.play')"
                             @change="setEnabled($event.target.checked)"></lg-switch>
                     </div>
+                    -->
                 </section>
 
                 <!-- Graphics: 3-step preset, or Advanced for every knob -->
